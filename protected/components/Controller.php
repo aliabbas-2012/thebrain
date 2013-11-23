@@ -64,7 +64,7 @@ class Controller extends CController {
         /**
          * install configurations
          */
-        $this->installConfig();
+        //$this->installConfig();
 
         if (get_class($this->getModule()) == "WebModule") {
             
