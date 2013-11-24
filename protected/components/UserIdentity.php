@@ -11,7 +11,7 @@ class UserIdentity extends CUserIdentity {
 
     public function authenticate() {
         $criteria = new CDbCriteria();
-        $condition = 'LOWER(email)="' . strtolower($this->username) . '" OR username ="' . strtolower($this->username) . '"';
+        $condition = 'LOWER(user_email)="' . strtolower($this->username) . '" OR username ="' . strtolower($this->username) . '"';
         $criteria->addCondition($condition);
 
         $user = Users::model()->find($criteria);
@@ -19,16 +19,15 @@ class UserIdentity extends CUserIdentity {
         if ($user === null)
             $this->errorCode = self::ERROR_USERNAME_INVALID;
 
-        else if (!$user->validatePassword($this->password, $user->password))
+        else if ($user->password!=md5($this->password))
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
-        else if ($user->is_active != '1')
-            $this->errorCode = self::ERROR_PASSWORD_INVALID;
+       
         else {
 
 
             $this->id = $user->id;
             //$this->username=$user->user_name;
-            $this->setState('user_email', $user->email);
+            $this->setState('user_email', $user->user_email);
             $this->setState('name', $user->username);
             $this->setState('user_id', $user->id);
 
