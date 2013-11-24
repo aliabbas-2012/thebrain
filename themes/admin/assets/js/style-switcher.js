@@ -26,14 +26,14 @@ var styleSwitcher = {
 
         // Style Switcher CSS
         yepnope([
-            {load: 'assets/css/style-switcher.css'},
-            {load: 'assets/lib/colorpicker/css/colorpicker.css'},
-            {load: 'assets/lib/cssbeautify/cssbeautify.js'},
-            {load: 'assets/lib/colorpicker/js/bootstrap-colorpicker.js',
+            {load: base_theme_path+'/assets/css/style-switcher.css'},
+            {load: base_theme_path+'/assets/lib/colorpicker/css/colorpicker.css'},
+            {load: base_theme_path+'/assets/lib/cssbeautify/cssbeautify.js'},
+            {load: base_theme_path+'/assets/lib/colorpicker/js/bootstrap-colorpicker.js',
                 complete: function () {
                     yepnope([
-                        {load: 'less!assets/less/theme.less'},
-                        {load: 'assets/lib/less-1.5.1.min.js',
+                        //{load: base_theme_path+'/assets/less/theme.less'},
+                        {load: base_theme_path+'/assets/lib/less-1.5.1.min.js',
                             complete: function () {
 
 

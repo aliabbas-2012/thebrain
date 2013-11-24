@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Metis</title>
+        <script>
+            var base_theme_path = '<?php echo Yii::app()->theme->baseUrl ?>';
+        </script>
         <meta name="msapplication-TileColor" content="#5bc0de" />
         <meta name="msapplication-TileImage" content="assets/img/metis-tile.png" />
         <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/bootstrap/css/bootstrap.min.css">
@@ -10,6 +13,7 @@
         <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/Font-Awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/theme.css">
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/modernizr-build.min.js"></script>
+
     </head>
     <body>
         <div id="wrap">
@@ -65,23 +69,54 @@
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
 
                         <!-- .nav -->
-                        <ul class="nav navbar-nav">
-                            <li> <a href="dashboard.html">Dashboard</a> </li>
-                            <li> <a href="table.html">Tables</a> </li>
-                            <li> <a href="file.html">File Manager</a> </li>
-                            <li class='dropdown '>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    Form Elements
-                                    <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li> <a href="form-general.html">General</a> </li>
-                                    <li> <a href="form-validation.html">Validation</a> </li>
-                                    <li> <a href="form-wysiwyg.html">WYSIWYG</a> </li>
-                                    <li> <a href="form-wizard.html">Wizard &amp; File Upload</a> </li>
-                                </ul>
-                            </li>
-                        </ul><!-- /.nav -->
+                        <?php
+                        $items =
+                                array(
+                                    array('label' => 'User Admin <span class="caret"></span>',
+                                        'url' => '#', 'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
+                                        'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
+                                        'items' => array(
+                                            array('label' => 'Access Control', 'url' => array('/accessControl/index'), 'visible' => !Yii::app()->user->isGuest),
+                                        )),
+                                    array('label' => 'Maintenance Admin <span class="caret"></span>',
+                                        'url' => '#', 'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
+                                        'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
+                                        'items' => array(
+                                            array('label' => 'Maintenance Group', 'url' => array('/maintainceGroup/index'), 'visible' => !Yii::app()->user->isGuest),
+                                            array('label' => 'Maintenance Items', 'url' => array('/maintainceItems/index'), 'visible' => !Yii::app()->user->isGuest),
+                                        )),
+                                    array('label' => 'Maintenance  <span class="caret"></span>',
+                                        'url' => '#', 'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
+                                        'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
+                                        'items' => array(
+                                            array('label' => 'Maintenance Activity', 'url' => array('/maintenanceActivity/index'), 'visible' => !Yii::app()->user->isGuest),
+                                        )),
+                                    array('label' => 'Reports  <span class="caret"></span>',
+                                        'url' => '#', 'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
+                                        'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
+                                        'items' => array(
+                                            array('label' => 'Brand Efficiency', 'url' => array('/report/brand'), 'visible' => !Yii::app()->user->isGuest),
+                                            array('label' => 'Item Efficiency By search', 'url' => array('/report/itemEfficiency'), 'visible' => !Yii::app()->user->isGuest),
+                                        )),
+                                    array('label' => 'My Account <span class="caret"></span>', 
+                                        'url' => '#', 
+                                        'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"), 
+                                        'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
+                                        'items' => array(
+                                            array('label' => 'Change Password', 'url' => array('/users/changepass')),
+                                        )),
+                                
+                        );
+
+                        $this->widget('zii.widgets.CMenu', array(
+                            'htmlOptions' => array('class' => 'nav navbar-nav'),
+                            'submenuHtmlOptions' => array('class' => 'dropdown-menu'),
+                            'itemCssClass' => 'item-test',
+                            'encodeLabel' => false,
+                            'items' => $items,
+                        ));
+                        ?>
+                        <!-- /.nav -->
                     </div>
                 </nav><!-- /.navbar -->
 
@@ -296,7 +331,7 @@
             <div id="content">
                 <div class="outer">
                     <div class="inner">
-                        
+
                     </div>
 
                     <!-- end .outer -->
