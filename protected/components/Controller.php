@@ -65,12 +65,13 @@ class Controller extends CController {
          * install configurations
          */
         //$this->installConfig();
-
+        $this->layout = "//layouts/column2";
         if (get_class($this->getModule()) == "WebModule") {
             
             Yii::app()->theme = "resp_frontend";
             $this->layout = "//layouts/frontend";
         }
+        
 
         /**
          * Check if script is already loaded then not reload it.
