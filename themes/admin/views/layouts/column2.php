@@ -184,6 +184,11 @@
     </ul><!-- /#menu -->
 </div>
 <div id="content">
-    <?php echo $content; ?>
+    <div class="outer">
+        <div class="inner">
+            <?php echo $content; ?>
+        </div>
+    </div>
+
 </div><!-- content -->
 <?php $this->endContent(); ?>

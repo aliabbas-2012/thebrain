@@ -37,11 +37,17 @@
                     <i class="fa fa-question"></i>
                 </a>
             </div>
-            <div class="btn-group">
-                <a href="login.html" data-toggle="tooltip" data-original-title="Logout" data-placement="bottom" class="btn btn-metis-1 btn-sm">
-                    <i class="fa fa-power-off"></i>
-                </a>
-            </div>
+            <?php
+            if (!Yii::app()->user->isGuest):
+                ?>
+                <div class="btn-group">
+                    <a href="<?php echo $this->createUrl("/site/logout"); ?>" data-toggle="tooltip" data-original-title="Logout" data-placement="bottom" class="btn btn-metis-1 btn-sm">
+                        <i class="fa fa-power-off"></i>
+                    </a>
+                </div>
+                <?php
+            endif;
+            ?>
         </div>
     </div><!-- /.topnav -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -50,12 +56,13 @@
         <?php
         $items =
                 array(
-                    array('label' => 'User Admin <span class="caret"></span>',
+                    array('label' => 'Blog <span class="caret"></span>',
                         'url' => '#', 'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
                         'visible' => !Yii::app()->user->isGuest,
                         'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
                         'items' => array(
-                            array('label' => 'Access Control', 'url' => array('/accessControl/index'), 'visible' => !Yii::app()->user->isGuest),
+                            array('label' => 'Create', 'url' => array('/bspBlog/create'), 'visible' => !Yii::app()->user->isGuest),
+                            array('label' => 'List', 'url' => array('bspBlog/index'), 'visible' => !Yii::app()->user->isGuest),
                         )),
                     array('label' => 'Login <span class="caret"></span>',
                         'url' => '#',
@@ -63,6 +70,7 @@
                         'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
                         'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
                         'items' => array(
+                            array('label' => 'Login', 'url' => array('/site/login')),
                             array('label' => 'Forget Password', 'url' => array('/users/forget')),
                         )),
         );

@@ -42,7 +42,7 @@
                     <!-- ."main-bar -->
                     <div class="main-bar">
                         <h3>
-                            <i class="fa fa-home"></i>Metis</h3>
+                            <i class="fa fa-home"></i><?php echo Yii::app()->name ?></h3>
                     </div><!-- /.main-bar -->
                 </header>
 
