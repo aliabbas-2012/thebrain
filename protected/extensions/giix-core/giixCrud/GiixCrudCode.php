@@ -32,6 +32,7 @@ class GiixCrudCode extends CrudCode {
      * @var string The controller base class name.
      */
     public $baseControllerClass = 'Controller';
+    public $notavailableColumns = array("create_time", "create_user_id", "update_time", "update_user_id");
 
     /**
      * Adds the new model attributes (class properties) to the rules.
@@ -151,6 +152,7 @@ class GiixCrudCode extends CrudCode {
     public function generateInputField($modelClass, $column) {
         return 'echo ' . parent::generateInputField($modelClass, $column);
     }
+
     /**
      * 
      * @param type $modelClass

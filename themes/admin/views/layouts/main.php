@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Metis</title>
+
         <script>
             var base_theme_path = '<?php echo Yii::app()->theme->baseUrl ?>';
         </script>
@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/Font-Awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/theme.css">
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/modernizr-build.min.js"></script>
-
+        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
     <body>
         <div id="wrap">
@@ -48,7 +48,7 @@
 
                 <!-- end header.head -->
             </div><!-- /#top -->
-            
+
 
             <!-- /#left -->
             <?php echo $content ?>

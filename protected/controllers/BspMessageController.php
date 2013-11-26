@@ -1,13 +1,6 @@
 <?php
-/**
- * This is the template for generating a controller class file for CRUD feature.
- * The following variables are available in this template:
- * - $this: the CrudCode object
- */
-?>
-<?php echo "<?php\n"; ?>
 
-class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseControllerClass."\n"; ?>
+class BspMessageController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -61,16 +54,16 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 	 */
 	public function actionCreate()
 	{
-		$model=new <?php echo $this->modelClass; ?>;
+		$model=new BspMessage;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['<?php echo $this->modelClass; ?>']))
+		if(isset($_POST['BspMessage']))
 		{
-			$model->attributes=$_POST['<?php echo $this->modelClass; ?>'];
+			$model->attributes=$_POST['BspMessage'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model-><?php echo $this->tableSchema->primaryKey; ?>));
+				$this->redirect(array('view','id'=>$model->Id));
 		}
 
 		$this->render('create',array(
@@ -90,11 +83,11 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['<?php echo $this->modelClass; ?>']))
+		if(isset($_POST['BspMessage']))
 		{
-			$model->attributes=$_POST['<?php echo $this->modelClass; ?>'];
+			$model->attributes=$_POST['BspMessage'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model-><?php echo $this->tableSchema->primaryKey; ?>));
+				$this->redirect(array('view','id'=>$model->Id));
 		}
 
 		$this->render('update',array(
@@ -122,10 +115,10 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 	 */
 	public function actionIndex()
 	{
-		$model=new <?php echo $this->modelClass; ?>('search');
+		$model=new BspMessage('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['<?php echo $this->modelClass; ?>']))
-			$model->attributes=$_GET['<?php echo $this->modelClass; ?>'];
+		if(isset($_GET['BspMessage']))
+			$model->attributes=$_GET['BspMessage'];
 
 		$this->render('index',array(
 			'model'=>$model,
@@ -136,12 +129,12 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return <?php echo $this->modelClass; ?> the loaded model
+	 * @return BspMessage the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=<?php echo $this->modelClass; ?>::model()->findByPk($id);
+		$model=BspMessage::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -149,11 +142,11 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param <?php echo $this->modelClass; ?> $model the model to be validated
+	 * @param BspMessage $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='<?php echo $this->class2id($this->modelClass); ?>-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='bsp-message-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

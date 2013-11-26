@@ -25,8 +25,9 @@
 
     <?php echo "<?php echo \$form->errorSummary(\$model); ?>\n"; ?>
 
-    <?php foreach ($this->tableSchema->columns as $column): ?>
-        <?php if (!$column->autoIncrement): ?>
+    <?php foreach ($this->tableSchema->columns as $column):  ?>
+        <?php if ((!$column->autoIncrement) && !in_array($column->name,$this->notavailableColumns)){ ?>  
+            
             <div class="form-group">
                 <?php echo "<?php echo " . $this->generateActiveLabel($this->modelClass, $column) . "; ?>\n"; ?>
                 <div class="col-lg-4">
@@ -35,7 +36,7 @@
                 </div>
 
             </div><!-- group -->
-        <?php endif; ?>
+        <?php } ?>
     <?php endforeach; ?>
 
 
