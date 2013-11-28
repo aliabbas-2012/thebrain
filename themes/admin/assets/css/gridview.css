@@ -2,7 +2,7 @@
 
 .grid-view-loading
 {
-    background:url(loading.gif) no-repeat;
+    background:url(../img/loading.gif) no-repeat;
 }
 
 .grid-view{
@@ -43,20 +43,28 @@
     color: #595959;
 }
 
+.grid-view table.items th a
+{
+    background:url(../img/sort_both.png) right center no-repeat;
+    padding-right: 25px;
+}
 .grid-view table.items th a.asc
 {
-    background:url(../images/up.gif) right center no-repeat;
-    padding-right: 10px;
+    background:url(../img/up.png) right center no-repeat;
+    padding-right: 25px;
 }
 
 .grid-view table.items th a.desc
 {
-    background:url(../images/down.gif) right center no-repeat;
-    padding-right: 10px;
+    background:url(../img/down.png) right center no-repeat;
+    padding-right: 25px;
 }
 
 .grid-view table.items tr.even {
-    background: #E4E3E3;
+    background: #F9F9F9;
+}
+.grid-view table.items tr td {
+   border: 1px solid #DDDDDD
 }
 
 
@@ -146,7 +154,7 @@
     margin-left: 15px;
 }
 
--------- print button per project 
+/*-------- print button per project */
 .per-project 
 {
     width: 80%;
@@ -172,7 +180,7 @@
     float: left;
 }
 
-footer row of grid
+/*footer row of grid*/
 
 .grid-view table.items tfoot tr
 {
@@ -182,35 +190,16 @@ footer row of grid
     font-weight: bold;
 }
 
-use for Pgrid countcolumn 
+/*use for Pgrid countcolumn */
 .pointerlabel label
 {
     cursor: pointer;
 }
 
-used in the css of status Report grid if location is not empty
+/*used in the css of status Report grid if location is not empty*/
 .nested_projects
 {
     margin-left: 10px;
 }
 
 
-* ----------- extra css used for media wike ******
-#content div div table.items td a
-{
-    float:left;
-    clear:both;
-    color:#333;
-    font-size:11px;
-    text-decoration:underline;
-}
-input.error
-{
-    background: #F95E5E;
-}
-a.enable{
-    color: green;
-}
-.button-column a {
-    float: none !important;
-}
