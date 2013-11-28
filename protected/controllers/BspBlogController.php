@@ -57,8 +57,19 @@ class BspBlogController extends Controller {
 
         if (isset($_POST['BspBlog'])) {
             $model->attributes = $_POST['BspBlog'];
-            if ($model->save())
+
+            //making instance of the uploaded image 
+            $img_file = DTUploadedFile::getInstance($model, 'img');
+            $model->img = $img_file;
+            if ($model->save()) {
+
+                $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("blog", $model->id));
+                if (!empty($img_file)) {
+                    $img_file->saveAs($upload_path . $img_file->name);
+                }
+
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(
@@ -73,14 +84,30 @@ class BspBlogController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
+        $old_image = $model->img;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['BspBlog'])) {
             $model->attributes = $_POST['BspBlog'];
-            if ($model->save())
+            //making instance of the uploaded image 
+            $img_file = DTUploadedFile::getInstance($model, 'img');
+            if (!empty($img_file)) {
+                $model->img = $img_file;
+            }
+            else {
+                $model->img = $old_image;
+            }
+            if ($model->save()) {
+
+                $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("blog", $model->id));
+                if (!empty($img_file)) {
+                    $img_file->saveAs($upload_path . $img_file->name);
+                }
+
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(

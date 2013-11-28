@@ -6,7 +6,8 @@
         'id' => 'bsp-blog-form',
         'enableAjaxValidation' => false,
         'htmlOptions' => array(
-            'class' => 'form-horizontal'
+            'class' => 'form-horizontal',
+            'enctype' => 'multipart/form-data'
         )
     ));
     ?>
@@ -20,7 +21,8 @@
     <div class="form-group">
         <?php echo $form->labelEx($model, 'user_id', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
-            <?php echo $form->textField($model, 'user_id', array('class' => 'form-control', 'maxlength' => 45)); ?>
+
+            <?php echo $form->dropDownList($model, 'user_id', Users::model()->getUsersArray(), array('class' => 'form-control', 'maxlength' => 45)); ?>
             <?php echo $form->error($model, 'user_id'); ?>
 
         </div>
@@ -38,7 +40,8 @@
     <div class="form-group">
         <?php echo $form->labelEx($model, 'img', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
-            <?php echo $form->textField($model, 'img', array('class' => 'form-control', 'maxlength' => 255)); ?>
+            <?php echo $form->fileField($model, 'img', array('class' => '')); ?>
+            <?php echo zHtml::imageLink($model, 'img', "blog"); ?>
             <?php echo $form->error($model, 'img'); ?>
 
         </div>

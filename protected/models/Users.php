@@ -188,4 +188,15 @@ class Users extends DtActiveRecord {
         return parent::model($className);
     }
 
+    /**
+     * get User data in array
+     * in CHtml form
+     */
+    public function getUsersArray() {
+        $criteria = new CDbCriteria();
+        $criteria->select = "id,username";
+        $data = CHtml::listData($this->findAll($criteria), "id", "username");
+        return $data;
+    }
+
 }

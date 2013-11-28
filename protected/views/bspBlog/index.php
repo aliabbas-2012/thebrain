@@ -30,8 +30,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'filter' => $model,
     'columns' => array(
         'title',
-        'img',
-        'user_id',
+        array('name' => 'img', "value" => 'zHtml::imageLink($data, "img", "blog")', "type" => "raw"),
+        array('name' => 'user_id', "value" => '!empty($data->user_id) ? $data->user->username : ""'),
         array(
             'class' => 'CButtonColumn',
             

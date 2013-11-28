@@ -9,9 +9,9 @@
 $this->widget('zii.widgets.CDetailView', array(
     'data' => $model,
     'attributes' => array(
-        'user_id',
+        array('name' => 'user_id', "value" => !empty($model->user_id) ? $model->user->username : ""),
         'title',
-        'img',
+        array('name' => 'img', "value" => zHtml::imageLink($model, "img", "blog"), "type" => "raw"),
         'description',
         array('name' => 'detail', 'value' => $model->detail, 'type' => 'raw'),
     ),

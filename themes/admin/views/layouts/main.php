@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-
+        <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/jquery.min.js"></script>
         <script>
             var base_theme_path = '<?php echo Yii::app()->theme->baseUrl ?>';
         </script>
@@ -53,7 +53,7 @@
             <!-- /#left -->
             <?php echo $content ?>
             <?php require_once 'tpl_footer.php' ?>;
-            <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/jquery.min.js"></script>
+
             <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/bootstrap/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/style-switcher.js"></script>
             <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/main.min.js"></script>

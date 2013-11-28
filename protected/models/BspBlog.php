@@ -32,9 +32,11 @@ class BspBlog extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('title, img, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('title, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('user_id', 'length', 'max' => 45),
-            array('title, img', 'length', 'max' => 255),
+            array('img', 'file', 'allowEmpty' => $this->isNewRecord ? false : true,
+                'types' => 'jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG'),
+            array('title, ', 'length', 'max' => 255),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('description, detail, date_create', 'safe'),
             // The following rule is used by search().
@@ -50,6 +52,7 @@ class BspBlog extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
         );
     }
 
@@ -61,7 +64,7 @@ class BspBlog extends DTActiveRecord {
             'id' => 'ID',
             'user_id' => 'User',
             'title' => 'Title',
-            'img' => 'Img',
+            'img' => 'Image',
             'description' => 'Description',
             'detail' => 'Detail',
             'date_create' => 'Date Create',
