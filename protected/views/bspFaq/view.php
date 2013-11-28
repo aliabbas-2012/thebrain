@@ -2,39 +2,28 @@
 /* @var $this BspFaqController */
 /* @var $model BspFaq */
 
-$this->breadcrumbs=array(
-	'Bsp Faqs'=>array('index'),
-	$model->ID,
-);
-
-$this->menu=array(
-	array('label'=>'List BspFaq', 'url'=>array('index')),
-	array('label'=>'Create BspFaq', 'url'=>array('create')),
-	array('label'=>'Update BspFaq', 'url'=>array('update', 'id'=>$model->ID)),
-	array('label'=>'Delete BspFaq', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->ID),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage BspFaq', 'url'=>array('admin')),
+$this->breadcrumbs = array(
+    'Bsp Faqs' => array('index'),
+    $model->ID,
 );
 ?>
 
-<h1>View BspFaq #<?php echo $model->ID; ?></h1>
+<h1>View Bsp Faq #<?php echo $model->ID; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'ID',
-		'userID',
-		'sQname',
-		'sQdetails',
-		'dDateposted',
-		'sAnswers',
-		'dDateUpdate',
-		'iStatus',
-		'sQname_en',
-		'sQdetails_en',
-		'sAnswers_en',
-		'create_time',
-		'create_user_id',
-		'update_time',
-		'update_user_id',
-	),
-)); ?>
+<?php
+$this->widget('zii.widgets.CDetailView', array(
+    'data' => $model,
+    'attributes' => array(
+        array('name' => 'userID', "value" => !empty($model->userID) ? $model->user->username : ""),
+        array('name' => 'sQname', "value" => $model->sQname, "type" => "raw"),
+        array('name' => 'sQdetails', "value" => $model->sQdetails, "type" => "raw"),
+        array('name' => 'sAnswers', "value" => $model->sAnswers, "type" => "raw"),
+        array('name' => 'sQname_en', "value" => $model->sQname_en, "type" => "raw"),
+        array('name' => 'sQdetails_en', "value" => $model->sQdetails_en, "type" => "raw"),
+        array('name' => 'sAnswers_en', "value" => $model->sAnswers_en, "type" => "raw"),
+        'dDateposted',
+        'dDateUpdate',
+        array('name' => 'iStatus', 'value' => $model->iStatus == 1 ? "Active" : "InActive"),
+    ),
+));
+?>

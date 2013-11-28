@@ -1,37 +1,17 @@
+
+<h1>View Bsp Articla #<?php echo $model->ID; ?></h1>
+
 <?php
-/* @var $this BspArticlaController */
-/* @var $model BspArticla */
-
-$this->breadcrumbs=array(
-	'Bsp Articlas'=>array('index'),
-	$model->ID,
-);
-
-$this->menu=array(
-	array('label'=>'List BspArticla', 'url'=>array('index')),
-	array('label'=>'Create BspArticla', 'url'=>array('create')),
-	array('label'=>'Update BspArticla', 'url'=>array('update', 'id'=>$model->ID)),
-	array('label'=>'Delete BspArticla', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->ID),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage BspArticla', 'url'=>array('admin')),
-);
+$this->widget('zii.widgets.CDetailView', array(
+    'data' => $model,
+    'attributes' => array(
+        array('name' => 'article_name', "value" => $model->article_name, "type" => "raw"),
+        array('name' => 'article_name_de', "value" => $model->article_name_de, "type" => "raw"),
+        array('name' => 'details_en', "value" => $model->details_en, "type" => "raw"),
+        array('name' => 'details_de', "value" => $model->details_de, "type" => "raw"),
+        'custom_url',
+        'custom_url_de',
+        array('name' => 'iStatus', 'value' => $model->iStatus == 1 ? "Active" : "InActive"),
+    ),
+));
 ?>
-
-<h1>View BspArticla #<?php echo $model->ID; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'ID',
-		'article_name',
-		'details_en',
-		'details_de',
-		'custom_url',
-		'iStatus',
-		'article_name_de',
-		'custom_url_de',
-		'create_time',
-		'create_user_id',
-		'update_time',
-		'update_user_id',
-	),
-)); ?>

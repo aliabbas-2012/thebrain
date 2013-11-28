@@ -98,61 +98,6 @@
 
     </div><!-- group -->
 
-
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'dDateposted', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
-
-            <?php
-            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                'model' => $model,
-                'attribute' => 'dDateposted',
-                'options' => array(
-                    'mode' => 'focus',
-                    'dateFormat' => Yii::app()->params['dateformat'],
-                    'showAnim' => 'slideDown',
-                ),
-                'htmlOptions' => array(
-                    'size' => '15', // textField size
-                    'maxlength' => '10', // textField maxlength
-                    'class' => 'form-control'
-                ),
-            ));
-            ?>
-            <?php echo $form->error($model, 'dDateposted'); ?>
-
-        </div>
-
-    </div><!-- group -->
-
-
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'dDateUpdate', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
-           
-            <?php
-            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                'model' => $model,
-                'attribute' => 'dDateUpdate',
-                'options' => array(
-                    'mode' => 'focus',
-                    'dateFormat' => Yii::app()->params['dateformat'],
-                    'showAnim' => 'slideDown',
-                ),
-                'htmlOptions' => array(
-                    'size' => '15', // textField size
-                    'maxlength' => '10', // textField maxlength
-                    'class' => 'form-control'
-                ),
-            ));
-            ?>
-            <?php echo $form->error($model, 'dDateUpdate'); ?>
-
-        </div>
-
-    </div><!-- group -->
-
-
     <div class="form-group">
         <?php echo $form->labelEx($model, 'iStatus', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">

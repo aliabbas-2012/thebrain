@@ -67,10 +67,10 @@ class BspFaq extends DTActiveRecord {
             'userID' => 'User',
             'sQname' => 'S Qname',
             'sQdetails' => 'S Qdetails',
-            'dDateposted' => 'D Dateposted',
+            'dDateposted' => 'Date Post',
             'sAnswers' => 'S Answers',
-            'dDateUpdate' => 'D Date Update',
-            'iStatus' => 'I Status',
+            'dDateUpdate' => 'Date Update',
+            'iStatus' => 'Status',
             'sQname_en' => 'S Qname En',
             'sQdetails_en' => 'S Qdetails En',
             'sAnswers_en' => 'S Answers En',
@@ -127,6 +127,20 @@ class BspFaq extends DTActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    public function beforeValidate() {
+        if ($this->isNewRecord) {
+
+            $this->dDateposted =  date("Y-m-d H:i:s"); //new CDbExpression('NOW()');
+            $this->dDateUpdate =$this->dDateposted;
+
+        } else {
+            //not a new record, so just set the last updated time and last updated user id
+            $this->dDateUpdate = new CDbExpression('NOW()');
+            
+        }
+        return parent::beforeValidate();
     }
 
 }
