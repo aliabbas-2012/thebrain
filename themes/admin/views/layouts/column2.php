@@ -20,167 +20,109 @@
     </div>
 
     <!-- #menu -->
+    <?php
+    $menue = array(
+        0 => array(
+            "name" => "Blog",
+            "id" => "blog",
+            "items" => array(
+                array('label' => 'Create', 'url' => '/bspBlog/create'),
+                array('label' => 'List All', 'url' => '/bspBlog/index'),
+            )),
+        1 => array(
+            "name" => "Item",
+            "id" => "bspItem",
+            "items" => array(
+                array('label' => 'Create', 'url' => '/bspItem/create'),
+                array('label' => 'List All', 'url' => '/bspItem/index'),
+            )),
+        2 => array(
+            "name" => "Faq",
+            "id" => "bspFaq",
+            "items" => array(
+                array('label' => 'Create', 'url' => '/bspFaq/create'),
+                array('label' => 'List All', 'url' => '/bspFaq/index'),
+            )),
+        3 => array(
+            "name" => "Article",
+            "id" => "bspArticla",
+            "items" => array(
+                array('label' => 'Create', 'url' => '/bspArticla/create'),
+                array('label' => 'List All', 'url' => '/bspArticla/index'),
+            )),
+        4 => array(
+            "name" => "Category",
+            "id" => "bspCategory",
+            "items" => array(
+                array('label' => 'Create', 'url' => '/bspCategory/create'),
+                array('label' => 'List All', 'url' => '/bspCategory/index'),
+            )),
+        5 => array(
+            "name" => "Advertising",
+            "id" => "bspAdvertising",
+            "items" => array(
+                array('label' => 'Create', 'url' => '/bspAdvertising/create'),
+                array('label' => 'List All', 'url' => '/bspAdvertising/index'),
+            )),
+        6 => array(
+            "name" => "News Feed",
+            "id" => "bspNewfeed",
+            "items" => array(
+                array('label' => 'Create', 'url' => '/bspNewfeed/create'),
+                array('label' => 'List All', 'url' => '/bspNewfeed/index'),
+            )),
+        7 => array(
+            "name" => "Mails",
+            "id" => "bspMessage",
+            "items" => array(
+                array('label' => 'Create', 'url' => '/bspMessage/create'),
+                array('label' => 'List All', 'url' => '/bspMessage/index'),
+            )),
+        8 => array(
+            "name" => "Order",
+            "id" => "bspOrder",
+            "items" => array(
+                array('label' => 'Create', 'url' => '/bspOrder/create'),
+                array('label' => 'List All', 'url' => '/bspOrder/index'),
+            )),
+    );
+    ?>
     <ul id="menu" class="collapse">
         <li class="nav-header">Menu</li>
         <li class="nav-divider"></li>
-        <li class="panel ">
-            <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#dashboard-nav">
-                <i class="fa fa-dashboard"></i>Dashboard
-                <span class="pull-right">
-                    <i class="fa fa-angle-left"></i>
-                </span>
-            </a>
-            <ul class="collapse" id="dashboard-nav">
-                <li class="">
-                    <a href="dashboard.html">
-                        <i class="fa fa-angle-right"></i>
-                        Default Style</a>
-                </li>
-                <li class="">
-                    <a href="alterne.html">
-                        <i class="fa fa-angle-right"></i>Alternative Style</a>
-                </li>
-            </ul>
-        </li>
-        <li class="panel ">
-            <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#component-nav">
-                <i class="fa fa-tasks"></i>Components
-                <span class="pull-right">
-                    <i class="fa fa-angle-left"></i>
-                </span>
-            </a>
-            <ul class="collapse" id="component-nav">
-                <li class="">
-                    <a href="icon.html">
-                        <i class="fa fa-angle-right"></i>Icon</a>
-                </li>
-                <li class="">
-                    <a href="button.html">
-                        <i class="fa fa-angle-right"></i>
-                        Button</a>
-                </li>
-                <li class="">
-                    <a href="progress.html">
-                        <i class="fa fa-angle-right"></i>
-                        Progress</a>
-                </li>
-                <li class="">
-                    <a href="pricing.html">
-                        <i class="fa fa-credit-card"></i>Pricing Table</a>
-                </li>
-                <li class="">
-                    <a href="bgimage.html">
-                        <i class="fa fa-angle-right"></i>Bg Image</a>
-                </li>
-                <li class="">
-                    <a href="bgcolor.html">
-                        <i class="fa fa-angle-right"></i>Bg Color</a>
-                </li>
-            </ul>
-        </li>
-        <li class="panel ">
-            <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle collapsed" data-target="#form-nav">
-                <i class="fa fa-pencil"></i>Forms
-                <span class="pull-right">
-                    <i class="fa fa-angle-left"></i>
-                </span>
-            </a>
-            <ul class="collapse" id="form-nav">
-                <li class="">
-                    <a href="form-general.html">
-                        <i class="fa fa-angle-right"></i>General</a>
-                </li>
-                <li class="">
-                    <a href="form-validation.html">
-                        <i class="fa fa-angle-right"></i>Validation</a>
-                </li>
-                <li class="">
-                    <a href="form-wysiwyg.html">
-                        <i class="fa fa-angle-right"></i>WYSIWYG</a>
-                </li>
-                <li class="">
-                    <a href="form-wizard.html">
-                        <i class="fa fa-angle-right"></i>Wizard &amp; File Upload</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="table.html">
-                <i class="fa fa-table"></i>Tables</a>
-        </li>
-        <li>
-            <a href="file.html">
-                <i class="fa fa-file"></i>File Manager</a>
-        </li>
-        <li>
-            <a href="typography.html">
-                <i class="fa fa-font"></i>Typography</a>
-        </li>
-        <li>
-            <a href="maps.html">
-                <i class="fa fa-map-marker"></i>Maps</a>
-        </li>
-        <li>
-            <a href="chart.html">
-                <i class="fa fa fa-bar-chart-o"></i>Charts</a>
-        </li>
-        <li>
-            <a href="calendar.html">
-                <i class="fa fa-calendar"></i>
-                Calendar</a>
-        </li>
-        <li class="panel">
-            <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#error-nav">
-                <i class="fa fa-exclamation-triangle"></i>Error Pages
-                <span class="pull-right">
-                    <i class="fa fa-angle-left"></i>
-                </span>
-            </a>
-            <ul class="collapse" id="error-nav">
-                <li>
-                    <a href="403.html">
-                        <i class="fa fa-angle-right"></i>403</a>
-                </li>
-                <li>
-                    <a href="404.html">
-                        <i class="fa fa-angle-right"></i>404</a>
-                </li>
-                <li>
-                    <a href="405.html">
-                        <i class="fa fa-angle-right"></i>405</a>
-                </li>
-                <li>
-                    <a href="500.html">
-                        <i class="fa fa-angle-right"></i>500</a>
-                </li>
-                <li>
-                    <a href="503.html">
-                        <i class="fa fa-angle-right"></i>503</a>
-                </li>
-                <li>
-                    <a href="offline.html">
-                        <i class="fa fa-angle-right"></i>offline</a>
-                </li>
-                <li>
-                    <a href="countdown.html">
-                        <i class="fa fa-angle-right"></i>Under Construction</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="grid.html">
-                <i class="fa fa-columns"></i>Grid</a>
-        </li>
-        <li>
-            <a href="blank.html">
-                <i class="fa fa-square-o"></i>Blank Page
-            </a>
-        </li>
-        <li class="nav-divider"></li>
-        <li>
-            <a href="login.html">
-                <i class="fa fa-sign-in"></i>Login Page</a>
-        </li>
+        <?php
+        foreach ($menue as $menu):
+            ?>
+            <li class="panel">
+                <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" 
+                   data-target="#<?php echo $menu['id']; ?>-nav">
+                    <i class="fa fa-<?php echo $menu['id']; ?>"></i><?php echo $menu['name']; ?>
+                    <span class="pull-right">
+                        <i class="fa fa-angle-left"></i>
+                    </span>
+                </a>
+                <ul class="collapse" id="<?php echo $menu['id']; ?>-nav">
+                    <?php
+                    foreach ($menu['items'] as $m_item):
+                        ?>
+                        <li class="">
+
+                            <a href="<?php echo $this->createUrl($m_item['url']); ?>">
+                                <i class="fa fa-angle-right"></i>
+                                <?php echo $m_item['label']; ?>
+                            </a>
+                        </li>
+                        <?php
+                    endforeach;
+                    ?>
+
+                </ul>
+            </li>
+            <?php
+        endforeach;
+        ?>
+
+
     </ul><!-- /#menu -->
 </div>
 <div id="content">

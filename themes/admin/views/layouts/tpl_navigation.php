@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a href="index.html" class="navbar-brand">
+        <a href="<?php echo $this->createUrl("/site/index"); ?>" class="navbar-brand">
             <img src="<?php echo Yii::app()->theme->baseUrl ?>/assets/img/logo.png" alt="">
         </a>
     </header>

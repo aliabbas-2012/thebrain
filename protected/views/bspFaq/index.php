@@ -38,6 +38,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'bsp-faq-grid',
     'dataProvider' => $model->search(),
     'filter' => $model,
+    'cssFile' => Yii::app()->theme->baseUrl . "/assets/css/gridview.css",
+    'pager' => array(
+        'cssFile' => '',
+    ),
     'columns' => array(
         array('name' => 'userID', "value" => '!empty($data->userID) ? $data->user->username : ""'),
         'sQname',

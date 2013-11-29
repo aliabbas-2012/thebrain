@@ -34,6 +34,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'bsp-category-grid',
     'dataProvider' => $model->search(),
     'filter' => $model,
+    'cssFile' => Yii::app()->theme->baseUrl . "/assets/css/gridview.css",
+    'pager' => array(
+        'cssFile' => '',
+    ),
     'columns' => array(
         'name',
         'parent_name',

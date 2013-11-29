@@ -47,6 +47,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'bsp-articla-grid',
     'dataProvider' => $model->search(),
     'filter' => $model,
+    'cssFile' => Yii::app()->theme->baseUrl . "/assets/css/gridview.css",
+    'pager' => array(
+        'cssFile' => '',
+    ),
     'columns' => array(
         'article_name',
         'article_name_de',

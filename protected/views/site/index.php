@@ -1,20 +1,32 @@
-<?php
-/* @var $this SiteController */
-
-$this->pageTitle=Yii::app()->name;
-?>
-
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
-
-<p>Congratulations! You have successfully created your Yii application.</p>
-
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+<div class="text-center">
+    <ul class="stats_box">
+        <li>
+            <div class="sparkline bar_week"></div>
+            <div class="stat_text">
+                <strong>2.345</strong>Weekly Visit
+                <span class="percent down"> <i class="fa fa-caret-down"></i> -16%</span>
+            </div>
+        </li>
+        <li>
+            <div class="sparkline line_day"></div>
+            <div class="stat_text">
+                <strong>165</strong>Daily Visit
+                <span class="percent up"> <i class="fa fa-caret-up"></i> +23%</span>
+            </div>
+        </li>
+        <li>
+            <div class="sparkline pie_week"></div>
+            <div class="stat_text">
+                <strong>$2 345.00</strong>Weekly Sale
+                <span class="percent"> 0%</span>
+            </div>
+        </li>
+        <li>
+            <div class="sparkline stacked_month"></div>
+            <div class="stat_text">
+                <strong>$678.00</strong>Monthly Sale
+                <span class="percent down"> <i class="fa fa-caret-down"></i> -10%</span>
+            </div>
+        </li>
+    </ul>
+</div>

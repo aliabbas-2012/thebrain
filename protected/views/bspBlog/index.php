@@ -25,8 +25,11 @@ $('.search-form form').submit(function(){
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'bsp-blog-grid',
-    'cssFile'=>Yii::app()->theme->baseUrl."/assets/css/gridview.css",
     'dataProvider' => $model->search(),
+    'cssFile' => Yii::app()->theme->baseUrl . "/assets/css/gridview.css",
+    'pager' => array(
+        'cssFile' => '',
+    ),
     'filter' => $model,
     'columns' => array(
         'title',
@@ -34,7 +37,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array('name' => 'user_id', "value" => '!empty($data->user_id) ? $data->user->username : ""'),
         array(
             'class' => 'CButtonColumn',
-            
         ),
     ),
 ));
