@@ -11,4 +11,5 @@ $conf_component_db = array(
     'password' => 'abc123AB',
     'charset' => 'utf8',
 );
+
 ?>
