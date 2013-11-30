@@ -68,6 +68,7 @@
         <?php echo $form->labelEx($model, 'sFile', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->fileField($model, 'sFile'); ?>
+            <?php echo zHtml::imageLink($model, 'sFile', "message"); ?>
             <?php echo $form->error($model, 'sFile'); ?>
 
         </div>
