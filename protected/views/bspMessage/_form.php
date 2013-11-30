@@ -85,10 +85,6 @@
 
     </div><!-- group -->
 
-
-
-
-
     <div class='form-actions no-margin-bottom'>
         <?php echo CHtml::submitButton('Save', array('class' => 'btn btn-primary')); ?>
     </div>      

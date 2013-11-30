@@ -40,6 +40,9 @@ class BspMessage extends DTActiveRecord {
             array('sFile, subject', 'length', 'max' => 255),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('detail, date_time', 'safe'),
+            array('sFile', 'file', 'allowEmpty' => $this->isNewRecord ? false : true,
+                'maxSize'=> 5120000, 
+                'types' => 'jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG,doc,pdf,odt,docx,xlsx,xls,txt'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('Id, user_send, user_receive, is_view, detail, sFile, subject, date_time, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),

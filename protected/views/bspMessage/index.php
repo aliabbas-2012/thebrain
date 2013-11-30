@@ -52,7 +52,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
         'cssFile' => '',
     ),
     'columns' => array(
-        'user_send',
+        array(
+            'name' => 'user_send',
+            'value' => '!empty($data->sent_user) ? $data->sent_user->user_email : ""'
+        ),
         'user_receive_name',
         'subject',
         'sFile',

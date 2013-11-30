@@ -58,8 +58,19 @@ class BspMessageController extends Controller {
         if (isset($_POST['BspMessage'])) {
             $model->user_send = Yii::app()->user->id;
             $model->attributes = $_POST['BspMessage'];
-            if ($model->save())
+
+            //making instance of the uploaded image 
+            $attachment = DTUploadedFile::getInstance($model, 'sFile');
+            $model->sFile = $attachment;
+            if ($model->save()) {
+
+                $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("message", $model->Id));
+                if (!empty($attachment)) {
+                    $attachment->saveAs($upload_path . $attachment->name);
+                }
+
                 $this->redirect(array('view', 'id' => $model->Id));
+            }
         }
 
         $this->render('create', array(
