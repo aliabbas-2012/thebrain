@@ -1,17 +1,4 @@
 <?php
-/* @var $this BspNewfeedController */
-/* @var $model BspNewfeed */
-
-$this->breadcrumbs = array(
-    'Bsp Newfeeds' => array('index'),
-    'Manage',
-);
-
-$this->menu = array(
-    array('label' => 'List BspNewfeed', 'url' => array('index')),
-    array('label' => 'Create BspNewfeed', 'url' => array('create')),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();
@@ -52,18 +39,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
         'cssFile' => '',
     ),
     'columns' => array(
-        'id',
         'status',
         'detail',
         'description',
         'detail_de',
         'description_de',
-        /*
-          'create_time',
-          'create_user_id',
-          'update_time',
-          'update_user_id',
-         */
+        array('name' => "status",'$data->status == 1 ? "Active" : "Deactive"'),
         array(
             'class' => 'CButtonColumn',
         ),
