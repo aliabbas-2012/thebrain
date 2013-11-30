@@ -52,20 +52,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
         'cssFile' => '',
     ),
     'columns' => array(
-        'Id',
         'user_send',
-        'user_receive',
-        'is_view',
-        'detail',
+        'user_receive_name',
+        'subject',
         'sFile',
-        /*
-          'subject',
-          'date_time',
-          'create_time',
-          'create_user_id',
-          'update_time',
-          'update_user_id',
-         */
+        array('name' => 'is_view', 'value' => '$data->is_view == 1 ? "Viewed" : "Not Viewed"'),
+        'date_time',
         array(
             'class' => 'CButtonColumn',
         ),
