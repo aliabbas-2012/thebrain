@@ -91,6 +91,7 @@ class BspBlogController extends Controller {
 
         if (isset($_POST['BspBlog'])) {
             $model->attributes = $_POST['BspBlog'];
+            
             //making instance of the uploaded image 
             $img_file = DTUploadedFile::getInstance($model, 'img');
             if (!empty($img_file)) {

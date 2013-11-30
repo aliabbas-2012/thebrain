@@ -16,8 +16,7 @@
         <?php echo Yii::t('app', 'Fields with'); ?> <span class="required">*</span> <?php echo Yii::t('app', 'are required'); ?>.
     </p>
 
-    <?php echo $form->errorSummary($model); ?>
-
+  
     <div class="form-group">
         <?php echo $form->labelEx($model, 'user_id', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">

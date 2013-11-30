@@ -53,10 +53,13 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'filter' => $model,
     'columns' => array(
         'adv_name',
-        'adv_img',
+        array('name' => 'adv_img', "value" => 'zHtml::imageLink($data, "adv_img", "adv_img")', "type" => "raw"),
         'adv_url',
-        'adv_position',
-        'iStatus',
+        array("name" => 'adv_name_de', 'value' => '$data->adv_name_de','headerHtmlOptions'=>array("width"=>"15%")),
+        array('name' => 'adv_img_de', "value" => 'zHtml::imageLink($data, "adv_img_de", "adv_img_de")', "type" => "raw"),
+        'adv_url_de',
+        array("name" => 'adv_position', 'value' => '$data->all_positions[$data->adv_position]'),
+        array("name" => 'iStatus', 'value' => '$data->all_status[$data->iStatus]'),
         array(
             'class' => 'CButtonColumn',
         ),
