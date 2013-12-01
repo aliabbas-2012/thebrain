@@ -213,23 +213,15 @@
 
     </div><!-- group -->
 
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'item_image', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
-            <?php echo $form->textField($model, 'item_image', array('class' => 'form-control', 'maxlength' => 255)); ?>
-            <?php echo $form->error($model, 'item_image'); ?>
-
-        </div>
-
-    </div><!-- group -->
-
 
     <div class="form-group">
         <?php echo $form->labelEx($model, 'background_image', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
-            <?php echo zHtml::kendoUploader($model, 'background_image','background_image_name',
-                    $this->createUrl("/site/uploadTemp",array("model"=>get_class($model),"attribute"=>"BspItem_background_image"))
-                    ); 
+            <?php
+            echo zHtml::kendoUploader($model, 'background_image', 'background_image_name', 
+                    $this->createUrl("/site/uploadTemp", array("model" => get_class($model), "attribute" => "BspItem_background_image"))
+            );
+            echo zHtml::imageLinkRemove($model, 'background_image', get_class($model));
             ?>
             <?php echo $form->error($model, 'background_image'); ?>
 

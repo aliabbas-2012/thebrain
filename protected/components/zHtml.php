@@ -32,8 +32,37 @@ class zHtml extends CHtml {
     }
 
     /**
-     * 
+     * static link
+     * of image
      * @param type $model
+     * @param type $attribute
+     */
+    public static function imageLinkRemove($model, $attribute, $folder) {
+        if (!$model->isNewRecord && !empty($model->$attribute)) {
+            $path = Yii::app()->baseUrl . "/uploads/" . $folder . "/" . $model->primaryKey . "/" . $model->$attribute;
+            $link = CHtml::link($model->$attribute, $path, array("target" => "_blank", "id" => $attribute . "_image"));
+            $url = Yii::app()->controller->createUrl("/site/deleteTemp", array(
+                "action" => "removeactual",
+                "id" => $model->id,
+                "attribute" => $attribute,
+                "model" => get_class($model))
+            );
+            $elments = CJSON::encode(array($attribute . "_remove", $attribute . "_image"));
+            $updateElem = get_class($model)."_".$attribute;
+            $removeLink = CHtml::link("Remove", "javascript.void(0)", array(
+                        'onclick' => 'thepuzzleadmin.removeElementAjax("' . $url . '",' . $elments . ',"'.$updateElem.'");return false;',
+                        "id" => $attribute . "_remove",
+                        
+                            )
+            );
+
+            return $link . " " . $removeLink;
+        }
+    }
+
+    /**
+     * 
+     * @param type $model$
      * @param type $attribute
      * @param type $attribute_name
      * @return type

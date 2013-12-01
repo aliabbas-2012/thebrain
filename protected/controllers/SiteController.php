@@ -97,8 +97,9 @@ class SiteController extends Controller {
      * @param type $attribute
      */
     public function actionUploadTemp($model, $attribute) {
+        $module = $model;
         if (isset($_REQUEST['action']) && $_REQUEST['action'] == "remove") {
-            $path = $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("temp", Yii::app()->user->id));
+            $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, $module));
             if (is_file($path . $_REQUEST['fileNames'])) {
                 unlink($path . $_REQUEST['fileNames']);
             }
@@ -118,13 +119,28 @@ class SiteController extends Controller {
                 $model->upload_temp_image = $img_file;
                 if ($model->validate()) {
 
-                    $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("temp", Yii::app()->user->id));
+                    $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("temp", Yii::app()->user->id, $module));
                     if (!empty($img_file)) {
                         $img_file->saveAs($upload_path . $img_file->name);
                         echo json_encode(array('file' => $img_file->name, "path" => $upload_path, "attribute" => $attribute));
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * 
+     * @param type $id
+     * @param type $model
+     * @param type $attribute
+     */
+    public function actionDeleteTemp($id, $model, $attribute) {
+        if (!empty($model)) {
+
+            $model = new $model;
+            $model = $model->updateByPk($id, array($attribute => ""));
+            echo "";
         }
     }
 

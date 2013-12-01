@@ -21,11 +21,68 @@ var thepuzzleadmin = {
         }
 
     },
-    kendoUpload: function(elem_id,url) {
-        $("#"+elem_id).kendoUpload({
+    /**
+     * to update element on ajax all
+     * @param {type} ajax_url
+     * @param {type} update_element_id
+     * @param {type} resource_elem_id
+     * @param {type} update_element_id
+     * @returns {undefined}
+     */
+    removeElementAjax: function(ajax_url, elems,update_element_id) {
+        if (confirm("Are you sure you want to delete")) {
+            jQuery.ajax({
+                type: "POST",
+                url: ajax_url,
+                async: false,
+                data:
+                        {
+                        }
+            }).done(function(response) {
+                count = 0;
+                for (e in elems) {
+                    if (count < elems.length) {
+                        jQuery("#" + elems[e]).remove();
+
+                    }
+                    count++;
+                }
+            });
+             jQuery("#" + update_element_id).val("");
+        }
+
+        return true;
+
+    },
+    /**
+     * to update element on ajax all
+     * @param {type} ajax_url
+     * @param {type} update_element_id
+     * @param {type} resource_elem_id
+     * @returns {undefined}
+     */
+    updateElementAjax: function(ajax_url, update_element_id, resource_elem_id) {
+
+        if (jQuery("#" + resource_elem_id).val() != "") {
+            jQuery.ajax({
+                type: "POST",
+                url: ajax_url,
+                async: false,
+                data:
+                        {
+                            resource_elem_id: jQuery("#" + resource_elem_id).val(),
+                        }
+            }).done(function(response) {
+                jQuery("#" + update_element_id).html(response);
+            });
+        }
+    },
+    kendoUpload: function(elem_id, url) {
+
+        $("#" + elem_id).kendoUpload({
             async: {
                 saveUrl: url,
-                removeUrl: url+"&action=remove",
+                removeUrl: url + "&action=remove",
                 autoUpload: true
             },
             localization: {
@@ -47,29 +104,30 @@ var thepuzzleadmin = {
      * @returns {undefined}
      */
     onSelect: function(e) {
-        console.log(e);
+        jQuery("#loading").show();
     },
     onUpload: function(e) {
-        
+
     },
     onSuccess: function(e) {
-       console.log(e.response);
-       jQuery("#"+e.response.attribute).val(e.response.file);
+
+        jQuery("#" + e.response.attribute).val(e.response.file);
+        jQuery("#loading").hide();
     },
     onError: function(e) {
-      
+
     },
     onComplete: function(e) {
-     
+
     },
     onCancel: function(e) {
-       
+
     },
     onRemove: function(e) {
-       console.log(e);
+
     },
     onProgress: function(e) {
-       
+
     },
     getFileInfo: function(e) {
         return $.map(e.files, function(file) {

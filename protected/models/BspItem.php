@@ -44,7 +44,7 @@
  */
 class BspItem extends DTActiveRecord {
 
-    public $background_image_name,$background_path;
+    public $background_image_name, $background_path;
     public $_per_price_options = array(
         1 => "Price fix",
         2 => "Price per hour",
@@ -224,6 +224,19 @@ class BspItem extends DTActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function afterSave() {
+        $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($this)));
+        if (is_file($path . $this->background_image)) {
+            copy($path . $this->background_image, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this),$this->primaryKey)) . $this->background_image);
+            unlink($path . $this->background_image);
+        }
+        return parent::afterSave();
     }
 
 }
