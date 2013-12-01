@@ -31,6 +31,25 @@ class zHtml extends CHtml {
         }
     }
 
+    /**
+     * 
+     * @param type $model
+     * @param type $attribute
+     * @param type $attribute_name
+     * @return type
+     */
+    public static function kendoUploader($model, $attribute, $attribute_name, $url = "", $options = array()) {
+        $uploadTemp = new UploadTemp();
+        $field = zHtml::activeFileField($uploadTemp, "upload_temp_image");
+        $field.= zHtml::activeHiddenField($model, $attribute);
+        $url = empty($url) ? Yii::app()->controller->createUrl("/site/uploadTemp") : $url;
+        Yii::app()->getClientScript()->registerScript(__CLASS__ . '#' . $attribute, "
+                            thepuzzleadmin.kendoUpload('" . get_class($uploadTemp) . "_" . "upload_temp_image" . "','" . $url . "');
+		", CClientScript::POS_READY);
+
+        return $field;
+    }
+
 }
 
 ?>

@@ -26,7 +26,7 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
         $this->layout = "column1";
-        if(!Yii::app()->user->isGuest){
+        if (!Yii::app()->user->isGuest) {
             $this->layout = "column2";
         }
         $this->render('index');
@@ -89,6 +89,43 @@ class SiteController extends Controller {
         }
         // display the login form
         $this->render('login', array('model' => $model));
+    }
+
+    /**
+     * 
+     * @param UploadTemp $model
+     * @param type $attribute
+     */
+    public function actionUploadTemp($model, $attribute) {
+        if (isset($_REQUEST['action']) && $_REQUEST['action'] == "remove") {
+            $path = $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("temp", Yii::app()->user->id));
+            if (is_file($path . $_REQUEST['fileNames'])) {
+                unlink($path . $_REQUEST['fileNames']);
+            }
+            echo CJSON::encode(array("success" => $_REQUEST['fileNames']));
+        } else {
+            $model = new UploadTemp();
+
+            // Uncomment the following line if AJAX validation is needed
+            // $this->performAjaxValidation($model);
+
+            if (isset($_POST)) {
+                $model->upload_temp_image = $_POST;
+
+                //making instance of the uploaded image 
+                $img_file = DTUploadedFile::getInstance($model, 'upload_temp_image');
+
+                $model->upload_temp_image = $img_file;
+                if ($model->validate()) {
+
+                    $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("temp", Yii::app()->user->id));
+                    if (!empty($img_file)) {
+                        $img_file->saveAs($upload_path . $img_file->name);
+                        echo json_encode(array('file' => $img_file->name, "path" => $upload_path, "attribute" => $attribute));
+                    }
+                }
+            }
+        }
     }
 
     /**

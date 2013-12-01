@@ -15,6 +15,11 @@
         <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/theme.css">
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/modernizr-build.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/thepuzzleadmin.js"></script>
+
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo Yii::app()->baseUrl ?>/css/Kendo/kendo.common.min.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo Yii::app()->baseUrl ?>/css/Kendo/kendo.metro.min.css"/>
+        <script type="text/javascript" language="javascript" src="<?php echo Yii::app()->baseUrl ?>/js/Kendo/kendo.web.min.js"></script>
+        
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
     <body>

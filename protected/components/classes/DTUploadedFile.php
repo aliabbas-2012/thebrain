@@ -38,6 +38,29 @@ class DTUploadedFile extends CUploadedFile {
         }
         return $newPath . DIRECTORY_SEPARATOR;
     }
+    /**
+     * 
+     * @param type $array
+     * @return string
+     */
+    public static function getFolderPath($array = array()) {
+        $basePath = Yii::app()->basePath;
+
+        if (strstr($basePath, "protected")) {
+            $basePath = realPath($basePath . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR);
+        }
+        if (is_array($array)) {
+            $newPath = $basePath;
+            $array = array_merge(array("uploads"), $array);
+
+            foreach ($array as $folder) {
+                $newPath.=DIRECTORY_SEPARATOR . $folder;
+            }
+        } else {
+            return "error";
+        }
+        return $newPath . DIRECTORY_SEPARATOR;
+    }
 
     /**
      * to delete to folder recursivly data
@@ -100,7 +123,7 @@ class DTUploadedFile extends CUploadedFile {
      */
     public static function deleteExistingFile($file) {
         if (is_file($file)) {
-           
+
             unlink($file);
             return true;
         } else {

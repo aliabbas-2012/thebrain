@@ -44,6 +44,7 @@
  */
 class BspItem extends DTActiveRecord {
 
+    public $background_image_name,$background_path;
     public $_per_price_options = array(
         1 => "Price fix",
         2 => "Price per hour",
@@ -89,7 +90,7 @@ class BspItem extends DTActiveRecord {
             array('num_review, discount_price', 'length', 'max' => 30),
             array('is_public', 'length', 'max' => 5),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
-            array('description, date_create', 'safe'),
+            array('background_path,background_image_name,description, date_create', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, category_id, sub_category_id, group_id, name, avatar_image, description, num_star, num_like, user_id, date_create, price, num_review, sound_id, video_id, item_image, background_image, discount_price, is_public, showlocation, num_orders, my_condition, my_other_price, iStatus, iPayment, special_deal, currency_id, per_price, seo_title, seo_description, seo_keywords, lat, lng, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
