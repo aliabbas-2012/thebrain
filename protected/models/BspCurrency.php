@@ -1,27 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "bsp_category".
+ * This is the model class for table "bsp_currency".
  *
- * The followings are the available columns in table 'bsp_category':
+ * The followings are the available columns in table 'bsp_currency':
  * @property integer $id
  * @property string $name
- * @property string $parent_name
- * @property integer $parent_id
- * @property integer $level
- * @property string $num_post
+ * @property string $symbol
  * @property string $create_time
  * @property string $create_user_id
  * @property string $update_time
  * @property string $update_user_id
  */
-class BspCategory extends DTActiveRecord {
+class BspCurrency extends DTActiveRecord {
 
     /**
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'bsp_category';
+        return 'bsp_currency';
     }
 
     /**
@@ -31,32 +28,14 @@ class BspCategory extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name,create_time, create_user_id, update_time, update_user_id', 'required'),
-            array('parent_id, level', 'numerical', 'integerOnly' => true),
-            array('name', 'length', 'max' => 45),
-            array('parent_name', 'length', 'max' => 225),
-            array('num_post', 'length', 'max' => 30),
+            array('create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('name', 'length', 'max' => 50),
+            array('symbol', 'length', 'max' => 255),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, name, parent_name, parent_id, level, num_post, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
+            array('id, name, symbol, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
         );
-    }
-
-    /**
-     * inser level and cateogory
-     */
-    public function beforeValidate() {
-        if (!empty($this->parent_id)) {
-            $category = BspCategory::model()->find("id =" . $this->parent_id);
-            $this->level = $category->level + 1;
-            $this->parent_name = $category->name;
-        } else {
-            $this->level = 1;
-            $this->parent_id = 0;
-            $this->parent_name = "Root";
-        }
-        return parent::beforeValidate();
     }
 
     /**
@@ -66,7 +45,7 @@ class BspCategory extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'parent' => array(self::BELONGS_TO, 'BspCategory', 'parent_id'),
+            
         );
     }
 
@@ -77,10 +56,7 @@ class BspCategory extends DTActiveRecord {
         return array(
             'id' => 'ID',
             'name' => 'Name',
-            'parent_name' => 'Parent Name',
-            'parent_id' => 'Parent',
-            'level' => 'Level',
-            'num_post' => 'total post',
+            'symbol' => 'Symbol',
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
             'update_time' => 'Update Time',
@@ -107,10 +83,7 @@ class BspCategory extends DTActiveRecord {
 
         $criteria->compare('id', $this->id);
         $criteria->compare('name', $this->name, true);
-        $criteria->compare('parent_name', $this->parent_name, true);
-        $criteria->compare('parent_id', $this->parent_id);
-        $criteria->compare('level', $this->level);
-        $criteria->compare('num_post', $this->num_post, true);
+        $criteria->compare('symbol', $this->symbol, true);
         $criteria->compare('create_time', $this->create_time, true);
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
@@ -125,50 +98,29 @@ class BspCategory extends DTActiveRecord {
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
-     * @return BspCategory the static model class
+     * @return BspCurrency the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
 
     /**
-     * get chtml list of get category
+     * get Currency options
      */
-    public function getCategoryList() {
+    public function getCurrencies() {
         $criteria = new CDbCriteria();
-        $criteria->select = "id,name";
-        $data = CHtml::listData($this->findAll($criteria), "id", "name");
-        return $data;
-    }
-
-    /**
-     * get full root categories
-     * services and rentals
-     */
-    public function getRootCategories() {
-        $criteria = new CDbCriteria();
-        $criteria->select = "id,name";
-        $criteria->addInCondition("name", array("Services", "Rentals"));
-        $data = CHtml::listData($this->findAll($criteria), "id", "name");
-        return $data;
+        $criteria->select = "id,symbol";
+        $data = $this->findAll($criteria);
+        return CHtml::listData($data, "id", "symbol");
     }
 
     /**
      * 
-     * @param type $id
+     * @return type
      */
-    public function getChildrenCategories($id) {
-        /**
-         * if id is null then empty result
-         */
-        if(empty($id)){
-            return array();
-        }
-        $criteria = new CDbCriteria();
-        $criteria->select = "id,name";
-        $criteria->addCondition("parent_id = ".$id);
-        $data = CHtml::listData($this->findAll($criteria), "id", "name");
-        return $data;
+    public function afterFind() {
+        $this->symbol = html_entity_decode($this->symbol);
+        return parent::afterFind();
     }
 
 }

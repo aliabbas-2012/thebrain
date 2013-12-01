@@ -9,7 +9,7 @@
         <div class="media-body">
             <h5 class="media-heading">Archie</h5>
             <ul class="list-unstyled user-info">
-                <li> <a href="">Administrator</a> </li>
+                <li> <a href=""><?php echo Yii::app()->user->name ?></a> </li>
                 <li>Last Access :
                     <br>
                     <small>

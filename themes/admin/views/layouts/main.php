@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/jquery.min.js"></script>
         <script>
             var base_theme_path = '<?php echo Yii::app()->theme->baseUrl ?>';
@@ -13,9 +14,14 @@
         <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/Font-Awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl ?>/assets/css/theme.css">
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/lib/modernizr-build.min.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/thepuzzleadmin.js"></script>
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
     <body>
+        <div id="loading" align="center">
+            Please Wait
+
+        </div>
         <div id="wrap">
             <div id="top">
 

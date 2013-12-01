@@ -1,6 +1,6 @@
 <?php
 
-class BspItemController extends Controller {
+class UsersController extends Controller {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -26,7 +26,13 @@ class BspItemController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'index', 'view', 'delete', 'getChildrenCategories'),
+                'actions' => array(
+                    'create', 'update',
+                    'index', 'view', 'delete',
+                    'changepass',
+                    'profile',
+                    'profileview'
+                ),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -50,13 +56,13 @@ class BspItemController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new BspItem;
+        $model = new Users;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['BspItem'])) {
-            $model->attributes = $_POST['BspItem'];
+        if (isset($_POST['Users'])) {
+            $model->attributes = $_POST['Users'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
@@ -77,8 +83,8 @@ class BspItemController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['BspItem'])) {
-            $model->attributes = $_POST['BspItem'];
+        if (isset($_POST['Users'])) {
+            $model->attributes = $_POST['Users'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
@@ -102,13 +108,13 @@ class BspItemController extends Controller {
     }
 
     /**
-     * Manages all models.
+     * Lists all models.
      */
     public function actionIndex() {
-        $model = new BspItem('search');
+        $model = new Users('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['BspItem']))
-            $model->attributes = $_GET['BspItem'];
+        if (isset($_GET['Users']))
+            $model->attributes = $_GET['Users'];
 
         $this->render('index', array(
             'model' => $model,
@@ -116,23 +122,93 @@ class BspItemController extends Controller {
     }
 
     /**
-     * get children category
+     * User Profile managment
      */
-    public function actionGetChildrenCategories() {
-        $data = BspCategory::model()->getChildrenCategories($_REQUEST['id']);
-        echo CJSON::encode($data);
+    public function actionChangepass() {
+        // renders the view file 'protected/views/site/index.php'
+        // using the default layout 'protected/views/layouts/main.php'
+        if (Yii::app()->user->isGuest) {
+            // If the user is guest or not logged in redirect to the login form
+            $this->redirect(array('site/login'));
+        } else {
+            $model = new ChangePassword;
+            if (isset($_POST['ChangePassword'])) {
+
+                $model->attributes = $_POST['ChangePassword'];
+                if ($model->validate()) {
+
+                    $user = $model->_model;
+                    $user->password = md5($model->password);
+                    $user->save(false);
+                    Yii::app()->user->setFlash("success", "Password changed succesfully");
+                    $this->redirect($this->createUrl("changepass"));
+                }
+            }
+
+            $this->render('changepass', array('model' => $model));
+        }
     }
 
-    /*
+    /**
+     *  change profile
+     */
+    public function actionProfile() {
+
+        $model = Users::model()->findByPk(Yii::app()->user->id);
+
+
+        $oldimage = "";
+        if (empty($model)) {
+            $model = new Users;
+            $model->id = Yii::app()->user->id;
+        } else {
+            $oldimage = $model->photo;
+        }
+
+
+        if (isset($_POST['Users'])) {
+            $model->attributes = $_POST['Users'];
+            $model->photo = CUploadedFile::getInstance($model, 'photo');
+            $paths = $model->getUploadPath();
+            $uploadPath = $paths['upload_path'];
+            $model->photo_thumb = $model->photo;
+            $flag = true;
+
+            if (empty($model->photo)) {
+                $flag = false;
+                $model->photo = $oldimage;
+            }
+            if ($model->save()) {
+                if ($flag == true) {
+                    $dir = array("users", $model->id);
+                    $uploadPathF = ItstUploadFile::createRecurSiveDirectories($dir);
+                    $model->photo->saveAs($uploadPathF . $model->photo);
+                }
+                $this->redirect($this->createUrl("users/profileview"));
+            }
+        }
+
+        $this->render("profile", array("model" => $model));
+    }
+
+    /**
+     * 
+     */
+    public function actionProfileview() {
+        $model = Users::model()->findByPk(Yii::app()->user->id);
+
+        $this->render("profileview", array("model" => $model));
+    }
+
+    /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer $id the ID of the model to be loaded
-     * @return BspItem the loaded model
+     * @return Users the loaded model
      * @throws CHttpException
      */
-
     public function loadModel($id) {
-        $model = BspItem::model()->findByPk($id);
+        $model = Users::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -140,10 +216,10 @@ class BspItemController extends Controller {
 
     /**
      * Performs the AJAX validation.
-     * @param BspItem $model the model to be validated
+     * @param Users $model the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'bsp-item-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'users-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }

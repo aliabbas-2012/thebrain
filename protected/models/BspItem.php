@@ -44,6 +44,28 @@
  */
 class BspItem extends DTActiveRecord {
 
+    public $_per_price_options = array(
+        1 => "Price fix",
+        2 => "Price per hour",
+        3 => "Price per day",
+        4 => "Price per week",
+        5 => "Price per month",
+    );
+
+    /**
+     * options for is_public field
+     * means it ready to deliver
+     * @var type 
+     */
+    public $_ready_to_deliver = array(
+        1 => "immediately",
+        2 => "within 24 hours",
+        3 => "within 48 hours",
+        4 => "within 3 days",
+        5 => "within 1 week",
+        6 => "upon consultation",
+    );
+
     /**
      * @return string the associated database table name
      */
@@ -58,7 +80,7 @@ class BspItem extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('seo_title, seo_description, seo_keywords, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('seo_title,category_id,group_id, seo_description, seo_keywords, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('category_id, sub_category_id, group_id, num_star, user_id, sound_id, video_id, showlocation, num_orders, my_condition, my_other_price, iStatus, iPayment, special_deal, currency_id, per_price', 'numerical', 'integerOnly' => true),
             array('price, lat, lng', 'numerical'),
             array('name', 'length', 'max' => 200),
@@ -81,6 +103,10 @@ class BspItem extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'currency' => array(self::BELONGS_TO, 'BspCurrency', 'currency_id'),
+            'group' => array(self::BELONGS_TO, 'BspCategory', 'group_id'),
+            'category' => array(self::BELONGS_TO, 'BspCategory', 'category_id'),
+            'sub_category' => array(self::BELONGS_TO, 'BspCategory', 'sub_category_id'),
         );
     }
 
@@ -107,12 +133,12 @@ class BspItem extends DTActiveRecord {
             'item_image' => 'Item Image',
             'background_image' => 'Background Image',
             'discount_price' => 'Discount Price',
-            'is_public' => 'true, false',
-            'showlocation' => 'Showlocation',
+            'is_public' => 'Ready to deliver',
+            'showlocation' => 'Confirm to deliver',
             'num_orders' => 'This field auto increase +1 when user has their customer order',
             'my_condition' => 'My Condition',
-            'my_other_price' => 'My Other Price',
-            'iStatus' => 'I Status',
+            'my_other_price' => 'Offer additional prices',
+            'iStatus' => 'Status',
             'iPayment' => 'I Payment',
             'special_deal' => 'Special Deal',
             'currency_id' => 'Currency',
