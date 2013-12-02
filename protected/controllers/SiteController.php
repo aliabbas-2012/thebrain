@@ -111,10 +111,22 @@ class SiteController extends Controller {
             // $this->performAjaxValidation($model);
 
             if (isset($_POST)) {
-                $model->upload_temp_image = $_POST;
+                /**
+                 * in this multiple instance are loaded
+                 */
+                if (isset($_REQUEST['index'])) {
+                    foreach ($_POST as $post) {
+                        $model->upload_temp_image = $post;
+                    }
+                    $img_file = DTUploadedFile::getInstance($model, '[' . $_REQUEST['index'] . ']upload_temp_image');
+                }
+                else {
+                    $model->upload_temp_image = $_POST;
+                    $img_file = DTUploadedFile::getInstance($model, 'upload_temp_image');
+                }
 
                 //making instance of the uploaded image 
-                $img_file = DTUploadedFile::getInstance($model, 'upload_temp_image');
+
 
                 $model->upload_temp_image = $img_file;
                 if ($model->validate()) {

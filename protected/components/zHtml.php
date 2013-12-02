@@ -48,11 +48,10 @@ class zHtml extends CHtml {
                 "model" => get_class($model))
             );
             $elments = CJSON::encode(array($attribute . "_remove", $attribute . "_image"));
-            $updateElem = get_class($model)."_".$attribute;
+            $updateElem = get_class($model) . "_" . $attribute;
             $removeLink = CHtml::link("Remove", "javascript.void(0)", array(
-                        'onclick' => 'thepuzzleadmin.removeElementAjax("' . $url . '",' . $elments . ',"'.$updateElem.'");return false;',
+                        'onclick' => 'thepuzzleadmin.removeElementAjax("' . $url . '",' . $elments . ',"' . $updateElem . '");return false;',
                         "id" => $attribute . "_remove",
-                        
                             )
             );
 
@@ -74,6 +73,25 @@ class zHtml extends CHtml {
         $url = empty($url) ? Yii::app()->controller->createUrl("/site/uploadTemp") : $url;
         Yii::app()->getClientScript()->registerScript(__CLASS__ . '#' . $attribute, "
                             thepuzzleadmin.kendoUpload('" . get_class($uploadTemp) . "_" . "upload_temp_image" . "','" . $url . "');
+		", CClientScript::POS_READY);
+
+        return $field;
+    }
+
+    /**
+     * 
+     * @param type $model$
+     * @param type $attribute
+     * @param type $attribute_name
+     * @return type
+     */
+    public static function kendoMultiUploader($index, $model, $attribute, $attribute_name, $url = "", $options = array()) {
+        $uploadTemp = new UploadTemp();
+        $field = zHtml::activeFileField($uploadTemp, '[' . $index . ']upload_temp_image');
+        $field.= zHtml::activeHiddenField($model, $attribute);
+        $url = empty($url) ? Yii::app()->controller->createUrl("/site/uploadTemp", array("index" => $index)) : $url;
+        Yii::app()->getClientScript()->registerScript(__CLASS__ . '#' . $attribute, "
+                            thepuzzleadmin.kendoUpload('" . get_class($uploadTemp) . "_" . $index . "_upload_temp_image" . "','" . $url . "');
 		", CClientScript::POS_READY);
 
         return $field;

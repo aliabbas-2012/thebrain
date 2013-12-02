@@ -1,6 +1,7 @@
 <h1>View Bsp Item #<?php echo $model->id; ?></h1>
 
 <?php
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/functions.js');
 $this->widget('zii.widgets.CDetailView', array(
     'data' => $model,
     'attributes' => array(
@@ -18,10 +19,13 @@ $this->widget('zii.widgets.CDetailView', array(
         array('name' => 'lng', 'value' => $model->lng,),
         array('name' => 'my_other_price', 'value' => $model->my_other_price == 1 ? "Yes" : "No",),
         array('name' => 'iStatus', 'value' => $model->iStatus == 1 ? "Enabled" : "Disabled",),
-        array('name' => 'background_image', 'value' => zHtml::imageLink($model, 'background_image', get_class($model)),"type"=>"raw"),
+        array('name' => 'background_image', 'value' => zHtml::imageLink($model, 'background_image', get_class($model)), "type" => "raw"),
         array('name' => 'seo_title', 'value' => $model->seo_title,),
         array('name' => 'seo_description', 'value' => $model->seo_description,),
         array('name' => 'seo_keywords', 'value' => $model->seo_keywords,),
     ),
 ));
+
+$this->renderPartial('item_video/_container', array('model' => $model, "type" => "form"));
+$this->renderPartial('image_items/_container', array('model' => $model, "type" => "form"));
 ?>

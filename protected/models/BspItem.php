@@ -108,6 +108,37 @@ class BspItem extends DTActiveRecord {
             'group' => array(self::BELONGS_TO, 'BspCategory', 'group_id'),
             'category' => array(self::BELONGS_TO, 'BspCategory', 'category_id'),
             'sub_category' => array(self::BELONGS_TO, 'BspCategory', 'sub_category_id'),
+            'item_video' => array(self::HAS_MANY, 'BspItemVideo', 'item_id'),
+            'image_items' => array(self::HAS_MANY, 'BspItemImage', 'item_id'),
+        );
+    }
+
+    /**
+     * Behaviour
+     *
+     */
+    public function behaviors() {
+        return array(
+            'CSaveRelationsBehavior' => array(
+                'class' => 'CSaveRelationsBehavior',
+                'relations' => array(
+                    'basicFeatures' => array("message" => "Please, fill required fields"),
+                ),
+            ),
+            'CMultipleRecords' => array(
+                'class' => 'CMultipleRecords'
+            ),
+//            'DTMultiLangBehaviour' => array(
+//                'class' => 'DTMultiLangBehaviour',
+//                'langClassName' => 'ProductLang',
+//                'relation' => 'productlangs',
+//                'langTableName' => 'product_lang',
+//                'langForeignKey' => 'product_id',
+//                'localizedAttributes' => array('product_name', 'product_description', 'product_overview'), //attributes of the model to be translated
+//                'localizedPrefix' => '',
+//                'languages' => Yii::app()->params['translatedLanguages'], // array of your translated languages. Example : array('fr' => 'Français', 'en' => 'English')
+//                'defaultLanguage' => Yii::app()->params['defaultLanguage'], //your main language. Example : 'fr'
+//            ),
         );
     }
 
@@ -233,7 +264,7 @@ class BspItem extends DTActiveRecord {
     public function afterSave() {
         $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($this)));
         if (is_file($path . $this->background_image)) {
-            copy($path . $this->background_image, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this),$this->primaryKey)) . $this->background_image);
+            copy($path . $this->background_image, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey)) . $this->background_image);
             unlink($path . $this->background_image);
         }
         return parent::afterSave();

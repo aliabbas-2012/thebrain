@@ -67,7 +67,7 @@ class DTActiveRecord extends CActiveRecord {
             $this->update_user_id = 1;
         }
         parent::beforeValidate();
-        $this->attributes = $this->decodeArray($this->attributes);
+        //$this->attributes = $this->decodeArray($this->attributes);
         return true;
     }
 

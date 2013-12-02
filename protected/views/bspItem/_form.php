@@ -2,6 +2,8 @@
 
 
     <?php
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/functions.js');
+
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'bsp-item-form',
         'enableAjaxValidation' => false,
@@ -218,8 +220,7 @@
         <?php echo $form->labelEx($model, 'background_image', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php
-            echo zHtml::kendoUploader($model, 'background_image', 'background_image_name', 
-                    $this->createUrl("/site/uploadTemp", array("model" => get_class($model), "attribute" => "BspItem_background_image"))
+            echo zHtml::kendoUploader($model, 'background_image', 'background_image_name', $this->createUrl("/site/uploadTemp", array("model" => get_class($model), "attribute" => "BspItem_background_image"))
             );
             echo zHtml::imageLinkRemove($model, 'background_image', get_class($model));
             ?>
@@ -262,6 +263,12 @@
 
     </div><!-- group -->
 
+    <?php
+    if ($this->action->id != "update") {
+        $this->renderPartial('item_video/_container', array('model' => $model, "type" => "field"));
+        $this->renderPartial('image_items/_container', array('model' => $model, "type" => "field"));
+    }
+    ?>
 
     <div class='form-actions no-margin-bottom'>
         <?php echo CHtml::submitButton('Save', array('class' => 'btn btn-primary')); ?>
@@ -270,3 +277,4 @@
     $this->endWidget();
     ?>
 </div><!-- form -->
+
