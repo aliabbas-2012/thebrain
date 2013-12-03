@@ -111,7 +111,7 @@ class BspItemVideo extends DTActiveRecord {
     }
 
     /**
-     *  parsing image
+     *  parsing video url
      */
     public function beforeSave() {
         if ($this->isNewRecord) {
