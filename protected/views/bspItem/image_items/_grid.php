@@ -6,7 +6,7 @@ $mName = "BspItemImage";
     <?php
     $config = array(
         'criteria' => array(
-            'condition' => 'item_id=' . $model->id ." AND image_url <> ''",
+            'condition' => 'item_id=' . $model->id ." AND is_image = 1 ",
         )
     );
     $mNameobj = new $mName;

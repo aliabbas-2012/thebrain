@@ -6,7 +6,7 @@ $mName = "BspItemVideo";
     <?php
     $config = array(
         'criteria' => array(
-            'condition' => 'item_id=' . $model->id ." AND video_url <> ''",
+            'condition' => 'item_id=' . $model->id ." AND is_image = 0",
         )
     );
     $mNameobj = new $mName;

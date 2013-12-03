@@ -20,8 +20,6 @@ $relationName = "item_keywords";
         echo CHtml::activeTextArea($model, '[' . $index . ']keyword', array("class" => "form-control"));
         ?>
     </td>
-    <td class="field">
-
 
 
     <td class="del del-icon" >
