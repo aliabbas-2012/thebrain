@@ -3,8 +3,8 @@
 if (!isset($display)) {
     $display = 'none';
 }
-$mName = "BspItemImage";
-$relationName = "image_items";
+$mName = "BspItemSearchKeyword";
+$relationName = "item_keywords";
 ?>
 <tr class="even grid_fields" style="display:<?php echo $display; ?>">
 
@@ -17,30 +17,11 @@ $relationName = "image_items";
         }
         ?>
         <?php
-        //echo CHtml::activeTextField($model, '[' . $index . ']image_url', array("class" => "form-control"));
-        ?>
-        <?php
-        echo zHtml::kendoMultiUploader($index, $model, '[' . $index . ']image_url', '[' . $index . ']image_url', $this->createUrl("/site/uploadTemp", array("index" => $index, "model" => get_class($model), "attribute" => "BspItemImage_" . $index . "_image_url"))
-        );
-        echo zHtml::imageLinkRemove($model, 'image_url', get_class($model));
+        echo CHtml::activeTextArea($model, '[' . $index . ']keyword', array("class" => "form-control"));
         ?>
     </td>
     <td class="field">
-        <?php
-        echo CHtml::activeCheckBox($model, '[' . $index . ']is_offer', array(
-            "class" => "default_checkbox", "onclick" => "
-                                 cobj = this;
-                                 jQuery('.default_checkbox').each(function()
-                                 {
-                                    if(jQuery(cobj).is(':checked') && jQuery(this).attr('id') != jQuery(cobj).attr('id')){
-                                        jQuery(this).removeAttr('checked');
-                                    }
-                                 })  
-                                "
-        ));
-        ?>
 
-    </td>
 
 
     <td class="del del-icon" >

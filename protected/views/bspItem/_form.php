@@ -267,6 +267,8 @@
     if ($this->action->id != "update") {
         $this->renderPartial('item_video/_container', array('model' => $model, "type" => "field"));
         $this->renderPartial('image_items/_container', array('model' => $model, "type" => "field"));
+        $this->renderPartial('item_related_sounds/_container', array('model' => $model, "type" => "field"));
+        $this->renderPartial('item_keywords/_container', array('model' => $model, "type" => "field"));
     }
     ?>
 

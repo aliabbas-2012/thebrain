@@ -1,8 +1,8 @@
 <?php
-$dir = "image_items";
+$dir = "item_keywords";
 $fields_div_id = $dir . '_fields';
-$heading = "Item Images";
-$mName = "BspItemImage";
+$heading = "Keywords/Tags";
+$mName = "BspItemSearchKeyword";
 
 /* when page is rediretc it contains #relation name use same name to go at that child at page */
 $relationName = $dir;
@@ -91,15 +91,12 @@ if (!$model->isNewRecord) {
                 <table class="table table-bordered table-condensed table-hover table-striped dataTable">
                     <thead>
                         <tr class="odd grid_title">
-                            <td class=" sorting_1"> <div class="title" ><?php echo CHtml::activeLabel($relateModelobj, 'image_url'); ?></div></td>
-                            <td class=" sorting_1"> <div class="title" ><?php echo CHtml::activeLabel($relateModelobj, 'is_offer'); ?></div></td>
-
+                            <td class=" sorting_1"> <div class="title"><?php echo CHtml::activeLabel($relateModelobj, 'keyword'); ?></div></td>
                         </tr>
                     </thead>
 
                     <tbody id="<?php echo $fields_div_id; ?>" class="form">
                         <?php
-                      
                         /* for loading with js */
                         $relationName_index_sc = -1;
                         if (isset($_POST[$mName]) || ($this->action->id == 'create' && count($model->$relationName) > 0)) {

@@ -198,6 +198,12 @@ class BspItemController extends Controller {
         if (isset($_POST['BspItemVideo'])) {
             $model->setRelationRecords('item_video', is_array($_POST['BspItemVideo']) ? $_POST['BspItemVideo'] : array());
         }
+        if (isset($_POST['BspItemSoundUrl'])) {
+            $model->setRelationRecords('item_related_sounds', is_array($_POST['BspItemSoundUrl']) ? $_POST['BspItemSoundUrl'] : array());
+        }
+        if (isset($_POST['BspItemSearchKeyword'])) {
+            $model->setRelationRecords('item_keywords', is_array($_POST['BspItemSearchKeyword']) ? $_POST['BspItemSearchKeyword'] : array());
+        }
 
 
 
@@ -213,6 +219,8 @@ class BspItemController extends Controller {
 
         $this->manageChild($model, "item_video", "item");
         $this->manageChild($model, "image_items", "item");
+        $this->manageChild($model, "item_related_sounds", "item");
+        $this->manageChild($model, "item_keywords", "item");
     }
 
     /*
