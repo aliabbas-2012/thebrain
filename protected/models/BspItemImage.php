@@ -9,6 +9,7 @@
  * @property string $image_url
  * @property string $video_url
  * @property integer $is_offer
+ * @property integer $is_image
  * @property string $create_time
  * @property string $create_user_id
  * @property string $update_time
@@ -34,7 +35,7 @@ class BspItemImage extends DTActiveRecord {
             array('item_id, is_offer', 'numerical', 'integerOnly' => true),
             array('image_url, video_url', 'length', 'max' => 255),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
-            array('id,item_id', 'safe'),
+            array('id,item_id,is_image', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, item_id, image_url, video_url, is_offer, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
@@ -74,13 +75,6 @@ class BspItemImage extends DTActiveRecord {
         );
     }
 
-    function validateUSAZip($zip_code) {
-        if (preg_match("/^([0-9]{5})(-[0-9]{4})?$/i", $zip_code))
-            return true;
-        else
-            return false;
-    }
-
     /**
      * Retrieves a list of models based on the current search/filter conditions.
      *
@@ -103,6 +97,7 @@ class BspItemImage extends DTActiveRecord {
         $criteria->compare('image_url', $this->image_url, true);
         $criteria->compare('video_url', $this->video_url, true);
         $criteria->compare('is_offer', $this->is_offer);
+        $criteria->compare('is_image', $this->is_image);
         $criteria->compare('create_time', $this->create_time, true);
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
@@ -128,6 +123,7 @@ class BspItemImage extends DTActiveRecord {
      */
     public function beforeSave() {
         $this->updateAllToUndefault();
+        $this->is_image = 1;
         parent::beforeSave();
         return true;
     }
