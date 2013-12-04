@@ -112,6 +112,7 @@ class BspItem extends DTActiveRecord {
             'image_items' => array(self::HAS_MANY, 'BspItemImage', 'item_id'),
             'item_related_sounds' => array(self::HAS_MANY, 'BspItemSoundUrl', 'item_id'),
             'item_keywords' => array(self::HAS_MANY, 'BspItemSearchKeyword', 'item_id'),
+            'item_price_offers' => array(self::HAS_MANY, 'BspItemPriceOffer', 'item_id'),
         );
     }
 

@@ -265,6 +265,7 @@
 
     <?php
     if ($this->action->id != "update") {
+        $this->renderPartial('item_price_offers/_container', array('model' => $model, "type" => "field"));
         $this->renderPartial('item_video/_container', array('model' => $model, "type" => "field"));
         $this->renderPartial('image_items/_container', array('model' => $model, "type" => "field"));
         $this->renderPartial('item_related_sounds/_container', array('model' => $model, "type" => "field"));
