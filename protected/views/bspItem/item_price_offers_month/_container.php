@@ -1,8 +1,8 @@
 <?php
-$dir = "item_price_offers";
+$dir = "item_price_offers_month";
 $fields_div_id = $dir . '_fields';
-$heading = "Item Offers";
-$mName = "BspItemPriceOffer";
+$heading = "Item Offers Per Month";
+$mName = "BspItemPriceOfferMonth";
 
 /* when page is rediretc it contains #relation name use same name to go at that child at page */
 $relationName = $dir;
@@ -69,7 +69,7 @@ if (!$model->isNewRecord) {
                             
                             ";
 
-
+                       
                         echo CHtml::link('Add New', '#', array(
                             'onclick' => $onclick, "class" => "plus_bind"
                         ))

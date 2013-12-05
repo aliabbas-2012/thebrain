@@ -3,8 +3,8 @@
 if (!isset($display)) {
     $display = 'none';
 }
-$mName = "BspItemPriceOffer";
-$relationName = "item_price_offers";
+$mName = "BspItemPriceOfferWeek";
+$relationName = "item_price_offers_week";
 ?>
 <tr class="even grid_fields" style="display:<?php echo $display; ?>">
 

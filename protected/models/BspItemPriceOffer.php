@@ -17,6 +17,9 @@
  * @property string $update_user_id
  */
 class BspItemPriceOffer extends DTActiveRecord {
+    /*
+     * Whole model for week
+     */
 
     /**
      *

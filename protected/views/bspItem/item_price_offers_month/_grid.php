@@ -1,6 +1,6 @@
 <?php
-$relationName = "item_price_offers";
-$mName = "BspItemPriceOffer";
+$relationName = "item_price_offers_month";
+$mName = "BspItemPriceOfferMonth";
 ?>
 <div class="<?php echo $relationName; ?> child" style="<?php echo 'display:block'; ?>">
     <?php
