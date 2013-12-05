@@ -44,6 +44,11 @@
  */
 class BspItem extends DTActiveRecord {
 
+    /**
+     *
+     * @var type 
+     */
+    public $is_extra;
     public $background_image_name, $background_path, $_per_price;
     public $_per_price_options = array(
         1 => "Price fix",

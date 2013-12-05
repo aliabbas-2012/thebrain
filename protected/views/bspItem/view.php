@@ -26,6 +26,13 @@ $this->widget('zii.widgets.CDetailView', array(
     ),
 ));
 
+//handling price types
+$this->renderPartial('item_price_offers_hour/_container', array('model' => $model, "type" => "form"));
+$this->renderPartial('item_price_offers_day/_container', array('model' => $model, "type" => "form"));
+$this->renderPartial('item_price_offers_week/_container', array('model' => $model, "type" => "form"));
+$this->renderPartial('item_price_offers_month/_container', array('model' => $model, "type" => "form"));
+
+
 $this->renderPartial('item_video/_container', array('model' => $model, "type" => "form"));
 $this->renderPartial('image_items/_container', array('model' => $model, "type" => "form"));
 $this->renderPartial('item_related_sounds/_container', array('model' => $model, "type" => "form"));

@@ -28,4 +28,13 @@ class BspItemPriceOfferMonth extends BspItemPriceOffer {
         return parent::model($className);
     }
 
+    /**
+     * 
+     * @set period type
+     */
+    public function beforeValidate() {
+        $this->period = 5;
+        return parent::beforeValidate();
+    }
+
 }

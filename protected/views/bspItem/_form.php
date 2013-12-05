@@ -1,3 +1,6 @@
+<script>
+    var prev_price_offer = "";
+</script>
 <div class="form wide">
 
 
@@ -87,21 +90,30 @@
     <div class="form-group">
         <?php echo $form->labelEx($model, 'per_price', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
-            <?php 
-                echo $form->dropDownList($model, 'per_price', 
-                    $model->_per_price_options, 
-                    array(
-                        'class' => 'form-control',
-                        'onchange'=>'
+            <?php
+            echo $form->dropDownList($model, 'per_price', $model->_per_price_options, array(
+                'class' => 'form-control',
+                'onfocus' => '
+                            prev_price_offer = jQuery(this).val();
+                        ',
+                'onchange' => '
                                 //case of fix
                                 current_val = jQuery(this).val();
                                 if(current_val==1){
-                                    jQuery("#item_price_offers_fields").children().remove();
-                                    jQuery(".price_offers").prop("checked", false);
+                                    if(confirm("Your Data will be lost in thi case,are you sure")){
+                                        
+                                        jQuery(".price_offers_tbody").children().remove();
+                                         
+                                    }
+                                    else {
+                                       
+                                    }
                                 }
+                                
+                                
                                
                             '
-                      )); 
+            ));
             ?>
             <?php echo $form->error($model, 'per_price'); ?>
 
@@ -277,18 +289,7 @@
         </div>
 
     </div><!-- group -->
-    
-    <div class="form-group">
-        <label class="control-label col-lg-2"></label>
-        <div class="col-lg-4">
-            <?php
-                unset($model->_per_price_options[1]);
-                echo $form->checkBoxList($model, '_per_price', $model->_per_price_options, array('template' => '<div class="btn-div2">{input} {label}</div>', 'separator' => ' ','class'=>'price_offers')); ?>
-            <?php echo $form->error($model, '_per_price'); ?>
 
-        </div>
-
-    </div><!-- group -->
 
     <?php
     if ($this->action->id != "update") {
@@ -297,7 +298,7 @@
         $this->renderPartial('item_price_offers_day/_container', array('model' => $model, "type" => "field"));
         $this->renderPartial('item_price_offers_week/_container', array('model' => $model, "type" => "field"));
         $this->renderPartial('item_price_offers_month/_container', array('model' => $model, "type" => "field"));
-        
+
         $this->renderPartial('item_video/_container', array('model' => $model, "type" => "field"));
         $this->renderPartial('image_items/_container', array('model' => $model, "type" => "field"));
         $this->renderPartial('item_related_sounds/_container', array('model' => $model, "type" => "field"));

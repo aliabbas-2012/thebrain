@@ -23,6 +23,18 @@ $mName = "BspItemPriceOfferDay";
                 'name' => 'id',
                 'value' => '$data->id'
             ),
+            array(
+                'name' => 'option',
+                'value' => '$data->all_offers[$data->option]'
+            ),
+            array(
+                'name' => 'start',
+                'value' => '$data->start'
+            ),
+            array(
+                'name' => 'end',
+                'value' => '$data->end'
+            ),
          
             array
                 (

@@ -37,7 +37,21 @@ if (!$model->isNewRecord) {
                 <td>
                     <div class="right_float">
                         <?php
-                        $onclick = "	
+                        $condition = "  if(jQuery('#BspItem_per_price').val() == 1){
+                                alert('Fix Price does not allowed ');
+                                return false;
+                            }";
+                        if (!$model->isNewRecord) {
+                            $condition = "  if({$model->per_price} == 1){
+                                alert('Fix Price does not allowed ');
+                                return false;
+                            }";
+                        }
+                        $onclick = $condition . "
+                            if(jQuery('#BspItem_per_price').val() == 1){
+                                alert('Fix Price does not allowed ');
+                                return false;
+                            }
                             u = '" . $this->createUrl("loadChildByAjax", array("mName" => "$mName", "dir" => $dir,
                                     "load_for" => $this->action->id,)) . "&index=' +  " . $relationName . "_index_sc;
 
@@ -53,7 +67,7 @@ if (!$model->isNewRecord) {
                         $onCheckBoxclick = "
                             if($(this).is(':checked')){
                                 u = '" . $this->createUrl("loadChildByAjax", array("mName" => "$mName", "dir" => $dir,
-                                        "load_for" => $this->action->id, "option" => "extra")) . "&index=' +  " . $relationName . "_index_sc;
+                                    "load_for" => $this->action->id, "option" => "extra")) . "&index=' +  " . $relationName . "_index_sc;
 
 
                                 add_newSub_child_row(u, '" . $dir . "', '" . $fields_div_id . "', 'grid_fields', true);
@@ -69,7 +83,7 @@ if (!$model->isNewRecord) {
                             
                             ";
 
-                       
+
                         echo CHtml::link('Add New', '#', array(
                             'onclick' => $onclick, "class" => "plus_bind"
                         ))
@@ -113,9 +127,9 @@ if (!$model->isNewRecord) {
                         <tr class="odd grid_title">
                             <td class=" sorting_1">
                                 <div class="title">
-                                    <?php echo CHtml::activeLabel($relateModelobj, 'is_extra'); ?>
+                                    <?php echo CHtml::activeLabel($model, 'is_extra'); ?>
                                     <?php
-                                    echo CHtml::activeCheckBox($relateModelobj, 'is_extra', array(
+                                    echo CHtml::activeCheckBox($model, 'is_extra', array(
                                         "onclick" => $onCheckBoxclick,
                                     ));
                                     ?>
@@ -129,7 +143,7 @@ if (!$model->isNewRecord) {
                         </tr>
                     </thead>
 
-                    <tbody id="<?php echo $fields_div_id; ?>" class="form">
+                    <tbody id="<?php echo $fields_div_id; ?>" class="form price_offers_tbody">
                         <?php
                         /* for loading with js */
                         $relationName_index_sc = -1;

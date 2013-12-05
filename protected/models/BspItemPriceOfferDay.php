@@ -28,4 +28,13 @@ class BspItemPriceOfferDay extends BspItemPriceOffer {
         return parent::model($className);
     }
 
+    /**
+     * 
+     * @set period type
+     */
+    public function beforeValidate() {
+        $this->period = 3;
+        return parent::beforeValidate();
+    }
+
 }

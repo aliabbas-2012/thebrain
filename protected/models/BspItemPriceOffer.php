@@ -17,15 +17,8 @@
  * @property string $update_user_id
  */
 class BspItemPriceOffer extends DTActiveRecord {
-    /*
-     * Whole model for week
-     */
 
-    /**
-     *
-     * @var type 
-     */
-    public $is_extra;
+    public $all_offers = array("abs" => "Absolute Rate", "range" => "Breakdown Rate", "extra" => "Extra");
 
     /**
      * @return string the associated database table name
@@ -42,7 +35,7 @@ class BspItemPriceOffer extends DTActiveRecord {
         // will receive user inputs.
         return array(
             array('option, price, period, create_time, create_user_id, update_time, update_user_id', 'required'),
-            array('item_id, period, start, end', 'numerical', 'integerOnly' => true),
+            array('item_id, period,price, start, end', 'numerical', 'integerOnly' => true),
             array('price', 'numerical'),
             array('option', 'length', 'max' => 8),
             array('create_user_id, update_user_id', 'length', 'max' => 11),

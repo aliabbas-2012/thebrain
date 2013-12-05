@@ -6,7 +6,7 @@ $mName = "BspItemPriceOfferWeek";
     <?php
     $config = array(
         'criteria' => array(
-            'condition' => 'item_id=' . $model->id ,
+            'condition' => 'item_id=' . $model->id,
         )
     );
     $mNameobj = new $mName;
@@ -23,7 +23,18 @@ $mName = "BspItemPriceOfferWeek";
                 'name' => 'id',
                 'value' => '$data->id'
             ),
-         
+            array(
+                'name' => 'option',
+                'value' => '$data->all_offers[$data->option]'
+            ),
+            array(
+                'name' => 'start',
+                'value' => '$data->start'
+            ),
+            array(
+                'name' => 'end',
+                'value' => '$data->end'
+            ),
             array
                 (
                 'class' => 'CButtonColumn',

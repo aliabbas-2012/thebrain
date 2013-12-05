@@ -205,6 +205,23 @@ class BspItemController extends Controller {
             $model->setRelationRecords('item_keywords', is_array($_POST['BspItemSearchKeyword']) ? $_POST['BspItemSearchKeyword'] : array());
         }
 
+        /**
+         * offer prices
+         */
+        if (isset($_POST['BspItemPriceOfferHour'])) {
+            $model->setRelationRecords('item_price_offers_hour', is_array($_POST['BspItemPriceOfferHour']) ? $_POST['BspItemPriceOfferHour'] : array());
+        }
+        if (isset($_POST['BspItemPriceOfferDay'])) {
+            $model->setRelationRecords('item_price_offers_day', is_array($_POST['BspItemPriceOfferDay']) ? $_POST['BspItemPriceOfferDay'] : array());
+        }
+        if (isset($_POST['BspItemPriceOfferMonth'])) {
+            $model->setRelationRecords('item_price_offers_month', is_array($_POST['BspItemPriceOfferMonth']) ? $_POST['BspItemPriceOfferMonth'] : array());
+        }
+        if (isset($_POST['BspItemPriceOfferWeek'])) {
+            $model->setRelationRecords('item_price_offers_week', is_array($_POST['BspItemPriceOfferWeek']) ? $_POST['BspItemPriceOfferWeek'] : array());
+        }
+
+
 
 
         return true;
