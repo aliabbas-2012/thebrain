@@ -68,10 +68,49 @@ class Users extends DTActiveRecord {
             array('zipcode', 'length', 'max' => 45),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('birthday, description, sRecentList, sWishList', 'safe'),
+            array('fbmail,paypal_mail', 'email'),
+            array('user_email', $this->isNewRecord ? 'email' : "safe"),
+            array('user_email,username', 'unique'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, first_name, second_name, username, user_email, type, phone, avatar, birthday, gender, store_url, paypal_mail, fbmail, password, password_hint, description, address, country, city, zipcode, lat, lng, background, sRecentList, sWishList, lastActiveTime, email_authenticate, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
         );
+    }
+
+    /*
+      validate postal code
+     * */
+
+    public function validatePostal($attribute, $params) {
+        $ZIPREG = array(
+            "United States" => "^\d{5}([\-]?\d{4})?$",
+            "United Kingdom" => "^(GIR|[A-Z]\d[A-Z\d]??|[A-Z]{2}\d[A-Z\d]??)[ ]??(\d[A-Z]{2})$",
+            "Germany" => "\b((?:0[1-46-9]\d{3})|(?:[1-357-9]\d{4})|(?:[4][0-24-9]\d{3})|(?:[6][013-9]\d{3}))\b",
+            "Canada" => "^([ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ])\ {0,1}(\d[ABCEGHJKLMNPRSTVWXYZ]\d)$",
+            "France" => "^(F-)?((2[A|B])|[0-9]{2})[0-9]{3}$",
+            "Italy" => "^(V-|I-)?[0-9]{5}$",
+            "Australia" => "^(0[289][0-9]{2})|([1345689][0-9]{3})|(2[0-8][0-9]{2})|(290[0-9])|(291[0-4])|(7[0-4][0-9]{2})|(7[8-9][0-9]{2})$",
+            "Netherlands" => "^[1-9][0-9]{3}\s?([a-zA-Z]{2})?$",
+            "Spain" => "^([1-9]{2}|[0-9][1-9]|[1-9][0-9])[0-9]{3}$",
+            "Denmark" => "^([D-d][K-k])?( |-)?[1-9]{1}[0-9]{3}$",
+            "Sweden" => "^(s-|S-){0,1}[0-9]{3}\s?[0-9]{2}$",
+            "Belgium" => "^[1-9]{1}[0-9]{3}$"
+        );
+
+        if (!empty($this->country)) {
+            $code = Country::model()->getCountryCode($this->country);
+            if (isset($ZIPREG[$code]) && !preg_match("/" . $ZIPREG[$code] . "/i", $this->$attribute)) {
+                $this->addError($attribute, "zip Code is not valid");
+            } else {
+                if (!preg_match("//^[0-9]{5}([- ]?[0-9]{4})?$/", $this->$attribute)) {
+                    $this->addError($attribute, "zip Code is not valid");
+                }
+            }
+        } else {
+            if (!preg_match("//^[0-9]{5}([- ]?[0-9]{4})?$/", $this->$attribute)) {
+                $this->addError($attribute, "zip Code is not valid");
+            }
+        }
     }
 
     /**
@@ -197,6 +236,45 @@ class Users extends DTActiveRecord {
         $criteria->select = "id,username";
         $data = CHtml::listData($this->findAll($criteria), "id", "username");
         return $data;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function afterFind() {
+        $this->birthday = !empty($this->birthday) ? ItstFunctions::dateFormatForView($this->birthday) : "";
+        return parent::afterFind();
+    }
+
+    public function beforeSave() {
+        $this->birthday = !empty($this->birthday) ? ItstFunctions::dateFormatForSave($this->birthday) : "";
+        return parent::beforeSave();
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function afterSave() {
+        $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($this)));
+        $this->uploadAvtar($path);
+        
+        if (is_file($path . $this->background)) {
+            copy($path . $this->background, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey)) . $this->background);
+            unlink($path . $this->background);
+        }
+        
+        return parent::afterSave();
+    }
+    /**
+     * 
+     */
+    public function uploadAvtar($path) {
+        if (is_file($path . $this->avatar)) {
+            copy($path . $this->avatar, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey)) . $this->avatar);
+            unlink($path . $this->avatar);
+        }
     }
 
 }

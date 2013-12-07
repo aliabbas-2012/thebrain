@@ -74,3 +74,9 @@ $relationName = "item_price_offers_week";
     </td>
 
 </tr>
+<script>
+    jQuery(function(){
+        jQuery("#<?php echo get_class($model); ?>_<?php echo $index;?>_start").kendoNumericTextBox({min: 1})
+        jQuery("#<?php echo get_class($model); ?>_<?php echo $index;?>_end").kendoNumericTextBox({min: 1})
+    })
+</script>

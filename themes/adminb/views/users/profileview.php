@@ -7,21 +7,26 @@
 <?php
 $this->widget('zii.widgets.CDetailView', array(
     'data' => $model,
-    'cssFile' => Yii::app()->baseURL . '/css/detailview.css',
     'attributes' => array(
         'username',
-        'email',
-        'title',
-        array(
-            'name' => 'group',
-            'value' => isset($model->group) ? $model->group->name : ""
-        ),
-        array(
-            "name" => "photo",
-            "value" => CHtml::link(CHtml::image($model->photo_img, '', array("width" => "50", "height" => "50")), $model->photo_img, array("target" => "_blank",
-                "rel" => "lightbox[_default]")),
-            "type"=>"raw"
-        )
+        'user_email',
+        'first_name',
+        'second_name',
+        array('name' => 'gender', 'value' => $model->gender == 1 ? "Male" : "Female"),
+        'birthday',
+        'avatar',
+        'paypal_mail',
+        'fbmail',
+        'background',
+        'address',
+        'country',
+        'city',
+        'zipcode',
+        'phone',
+        'lat',
+        'lng',
+        array('name' => 'store_url', 'value' => Yii::app()->request->hostInfo."/".Yii::app()->baseUrl."/".$model->store_url),
+        'description',
     ),
 ));
 ?>

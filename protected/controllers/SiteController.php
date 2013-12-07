@@ -119,8 +119,7 @@ class SiteController extends Controller {
                         $model->upload_temp_image = $post;
                     }
                     $img_file = DTUploadedFile::getInstance($model, '[' . $_REQUEST['index'] . ']upload_temp_image');
-                }
-                else {
+                } else {
                     $model->upload_temp_image = $_POST;
                     $img_file = DTUploadedFile::getInstance($model, 'upload_temp_image');
                 }
@@ -163,5 +162,6 @@ class SiteController extends Controller {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
     }
-
+    
+   
 }

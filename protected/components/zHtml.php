@@ -40,7 +40,7 @@ class zHtml extends CHtml {
     public static function imageLinkRemove($model, $attribute, $folder) {
         if (!$model->isNewRecord && !empty($model->$attribute)) {
             $path = Yii::app()->baseUrl . "/uploads/" . $folder . "/" . $model->primaryKey . "/" . $model->$attribute;
-            $link = CHtml::link($model->$attribute, $path, array("target" => "_blank", "id" => $attribute . "_image"));
+            $link = CHtml::link($model->$attribute, $path, array("target" => "_blank", "id" => $attribute . "_image",  "style"=>"margin-left:150px;"));
             $url = Yii::app()->controller->createUrl("/site/deleteTemp", array(
                 "action" => "removeactual",
                 "id" => $model->id,
@@ -52,6 +52,7 @@ class zHtml extends CHtml {
             $removeLink = CHtml::link("Remove", "javascript.void(0)", array(
                         'onclick' => 'thepuzzleadmin.removeElementAjax("' . $url . '",' . $elments . ',"' . $updateElem . '");return false;',
                         "id" => $attribute . "_remove",
+                          "style"=>"margin-left:10px;"
                             )
             );
 

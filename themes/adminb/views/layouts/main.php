@@ -2,18 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
         <?php
         $baseUrl = Yii::app()->theme->baseUrl;
         $cs = Yii::app()->getClientScript();
-       // $cs->registerScriptFile($baseUrl . '/js/jquery1.8.js', CClientScript::POS_HEAD);
+        // $cs->registerScriptFile($baseUrl . '/js/jquery1.8.js', CClientScript::POS_HEAD);
         ?>
-         <script src="<?php echo Yii::app()->theme->baseUrl ?>/js/jquery1.8.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl ?>/js/jquery1.8.js"></script>
         <meta charset="utf-8">
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Free yii themes, free web application theme">
         <meta name="author" content="Webapplicationthemes.com">
-        <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+<!--        <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>-->
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>

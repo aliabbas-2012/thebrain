@@ -35,6 +35,13 @@ class UsersController extends Controller {
                 ),
                 'users' => array('@'),
             ),
+            array('allow', // allow authenticated user to perform 'create' and 'update' actions
+                'actions' => array(
+                    'forget',
+                    'resetPass'
+                ),
+                'users' => array('?'),
+            ),
             array('deny', // deny all users
                 'users' => array('*'),
             ),
@@ -156,34 +163,10 @@ class UsersController extends Controller {
 
         $model = Users::model()->findByPk(Yii::app()->user->id);
 
-
-        $oldimage = "";
-        if (empty($model)) {
-            $model = new Users;
-            $model->id = Yii::app()->user->id;
-        } else {
-            $oldimage = $model->photo;
-        }
-
-
         if (isset($_POST['Users'])) {
             $model->attributes = $_POST['Users'];
-            $model->photo = CUploadedFile::getInstance($model, 'photo');
-            $paths = $model->getUploadPath();
-            $uploadPath = $paths['upload_path'];
-            $model->photo_thumb = $model->photo;
-            $flag = true;
 
-            if (empty($model->photo)) {
-                $flag = false;
-                $model->photo = $oldimage;
-            }
             if ($model->save()) {
-                if ($flag == true) {
-                    $dir = array("users", $model->id);
-                    $uploadPathF = ItstUploadFile::createRecurSiveDirectories($dir);
-                    $model->photo->saveAs($uploadPathF . $model->photo);
-                }
                 $this->redirect($this->createUrl("users/profileview"));
             }
         }
@@ -222,6 +205,72 @@ class UsersController extends Controller {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'users-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+
+    /**
+     * forget password
+     */
+    public function actionForget() {
+        $this->layout = "//layouts/column1";
+        $model = new ForgetForm();
+
+
+
+        // collect user input data
+        if (isset($_POST['ForgetForm'])) {
+            $model->attributes = $_POST['ForgetForm'];
+            // validate user input and redirect to the previous page if valid
+            if ($model->validate()) {
+
+                $user = Users::model()->find("email='" . $model->email . "'");
+
+                $itst = new ItstFunctions;
+                $key = $itst->getRanddomeNo(25);
+                $user->updateByPk($user->id, array("email_authenticate" => $key));
+                $body = "Reset your link <br/>";
+                $url = $this->createAbsoluteUrl("/site/resetPass", array("id" => $user->id, "key" => $key));
+                $body.= CHtml::link($url, $url);
+                $email['From'] = Yii::app()->params->adminEmail;
+                $email['To'] = $model->email;
+                $email['Subject'] = "Reset your link";
+                $email['Body'] = $body;
+                $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
+
+                $this->sendEmail2($email);
+
+                Yii::app()->user->setFlash("success", "Reset Link has been sent successfully");
+                $this->redirect($this->createUrl("/site/forget"));
+            }
+        }
+        // display the login form
+        $this->render('forget', array('model' => $model));
+    }
+
+    /**
+     * 
+     * @param type $id
+     * @param type $key
+     */
+    public function actionResetPass($id, $key) {
+        $user = Users::model()->findByPk($id);
+
+        if ($user->email_authenticate == $key) {
+            $model = new ResetPassword;
+            if (isset($_POST['ResetPassword'])) {
+
+                $model->attributes = $_POST['ResetPassword'];
+                if ($model->validate()) {
+
+                    $user->password = md5($model->password);
+                    $user->updateByPk($user->id, array("password" => $user->password, "email_authenticate" => "1"));
+                    Yii::app()->user->setFlash("success", "Password changed succesfully");
+                    $this->redirect($this->createUrl("/site/login"));
+                }
+            }
+            $this->render('resetPass', array('model' => $model));
+        } else {
+            echo "Invalid Key";
         }
     }
 

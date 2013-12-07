@@ -139,7 +139,7 @@ if (!$model->isNewRecord) {
                             <td class=" sorting_1"> <div class="title"><?php echo CHtml::activeLabel($relateModelobj, 'start'); ?></div></td>
                             <td class=" sorting_1"> <div class="title"><?php echo CHtml::activeLabel($relateModelobj, 'end'); ?></div></td>
                             <td class=" sorting_1"> <div class="title"><?php echo CHtml::activeLabel($relateModelobj, 'price'); ?></div></td>
-
+                            <td class=" sorting_1"> </td>
                         </tr>
                     </thead>
 
