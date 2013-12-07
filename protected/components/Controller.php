@@ -79,7 +79,7 @@ class Controller extends CController {
          */
         Yii::app()->clientScript->scriptMap = array(
             (YII_DEBUG ? 'jquery.js' : 'jquery.min.js') => false,
-                //'jquery-ui.min.js' => false,
+                //'jquery.ba-bbq.js' => false,
                 //'jquery-ui.css' => false
         );
 

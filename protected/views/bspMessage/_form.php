@@ -16,7 +16,7 @@
         <?php echo Yii::t('app', 'Fields with'); ?> <span class="required">*</span> <?php echo Yii::t('app', 'are required'); ?>.
     </p>
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'user_receive', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php
@@ -54,7 +54,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'subject', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'subject', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -64,7 +64,7 @@
 
     </div><!-- group -->
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'sFile', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->fileField($model, 'sFile'); ?>
@@ -76,7 +76,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'detail', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textArea($model, 'detail', array('class' => 'form-control', 'rows' => '10', 'cols' => '10')); ?>

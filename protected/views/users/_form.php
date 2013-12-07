@@ -19,7 +19,7 @@
 
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'first_name', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'first_name', array('class' => 'form-control', 'maxlength' => 50)); ?>
@@ -30,7 +30,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'second_name', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'second_name', array('class' => 'form-control', 'maxlength' => 50)); ?>
@@ -41,7 +41,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'username', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -52,7 +52,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'user_email', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'user_email', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -63,7 +63,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'type', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'type', array('class' => 'form-control', 'maxlength' => 9)); ?>
@@ -74,7 +74,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'phone', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'phone', array('class' => 'form-control', 'maxlength' => 30)); ?>
@@ -85,7 +85,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'avatar', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'avatar', array('class' => 'form-control', 'maxlength' => 300)); ?>
@@ -96,7 +96,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'birthday', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php
@@ -122,7 +122,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'gender', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'gender', array('class' => 'form-control', 'maxlength' => 6)); ?>
@@ -133,7 +133,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'store_url', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'store_url', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -144,7 +144,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'paypal_mail', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'paypal_mail', array('class' => 'form-control', 'maxlength' => 50)); ?>
@@ -155,7 +155,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'fbmail', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'fbmail', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -166,7 +166,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'password', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->passwordField($model, 'password', array('class' => 'form-control', 'maxlength' => 50)); ?>
@@ -177,7 +177,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'password_hint', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'password_hint', array('class' => 'form-control', 'maxlength' => 200)); ?>
@@ -188,7 +188,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'description', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textArea($model, 'description', array('class' => 'form-control')); ?>
@@ -199,7 +199,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'address', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'address', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -210,7 +210,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'country', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'country', array('class' => 'form-control', 'maxlength' => 100)); ?>
@@ -221,7 +221,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'city', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'city', array('class' => 'form-control', 'maxlength' => 200)); ?>
@@ -232,7 +232,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'zipcode', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'zipcode', array('class' => 'form-control', 'maxlength' => 45)); ?>
@@ -243,7 +243,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'lat', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'lat', array('class' => 'form-control')); ?>
@@ -254,7 +254,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'lng', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'lng', array('class' => 'form-control')); ?>
@@ -265,7 +265,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'background', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'background', array('class' => 'form-control', 'maxlength' => 300)); ?>
@@ -276,7 +276,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'sRecentList', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textArea($model, 'sRecentList', array('class' => 'form-control')); ?>
@@ -287,7 +287,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'sWishList', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textArea($model, 'sWishList', array('class' => 'form-control')); ?>
@@ -298,7 +298,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'lastActiveTime', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'lastActiveTime', array('class' => 'form-control')); ?>
@@ -309,7 +309,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'email_authenticate', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'email_authenticate', array('class' => 'form-control', 'maxlength' => 255)); ?>

@@ -19,7 +19,7 @@
 
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'article_name', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'article_name', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -30,7 +30,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'details_en', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textArea($model, 'details_en', array('class' => 'form-control')); ?>
@@ -41,7 +41,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'details_de', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textArea($model, 'details_de', array('class' => 'form-control')); ?>
@@ -52,7 +52,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'custom_url', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'custom_url', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -62,7 +62,7 @@
 
     </div><!-- group -->
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'article_name_de', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'article_name_de', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -73,7 +73,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'custom_url_de', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'custom_url_de', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -84,7 +84,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'iStatus', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->dropDownList($model, 'iStatus', array("1" => "Active", "0" => "InActive"), array('class' => 'form-control')); ?>

@@ -2,6 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <?php
+        $baseUrl = Yii::app()->theme->baseUrl;
+        $cs = Yii::app()->getClientScript();
+       // $cs->registerScriptFile($baseUrl . '/js/jquery1.8.js', CClientScript::POS_HEAD);
+        ?>
+         <script src="<?php echo Yii::app()->theme->baseUrl ?>/js/jquery1.8.js"></script>
         <meta charset="utf-8">
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +19,8 @@
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <?php
-        $baseUrl = Yii::app()->theme->baseUrl;
-        $cs = Yii::app()->getClientScript();
-        Yii::app()->clientScript->registerCoreScript('jquery');
-        ?>
+
+
         <!-- Fav and Touch and touch icons -->
         <link rel="shortcut icon" href="<?php echo $baseUrl; ?>/img/icons/favicon.ico">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $baseUrl; ?>/img/icons/apple-touch-icon-144-precomposed.png">
@@ -46,8 +49,11 @@
         $cs->registerScriptFile($baseUrl . '/js/plugins/jquery.knob.js');
         $cs->registerScriptFile($baseUrl . '/js/plugins/jquery.masonry.min.js');
         $cs->registerScriptFile($baseUrl . '/js/styleswitcher.js');
-        $cs->registerScriptFile($baseUrl . '/js/fleet.js');
         ?>
+        <script src="<?php echo Yii::app()->theme->baseUrl ?>/assets/js/thepuzzleadmin.js"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo Yii::app()->baseUrl ?>/css/Kendo/kendo.common.min.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo Yii::app()->baseUrl ?>/css/Kendo/kendo.metro.min.css"/>
+        <script type="text/javascript" language="javascript" src="<?php echo Yii::app()->baseUrl ?>/js/Kendo/kendo.web.min.js"></script>
     </head>
 
     <body>

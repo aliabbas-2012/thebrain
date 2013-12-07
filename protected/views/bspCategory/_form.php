@@ -19,7 +19,7 @@
 
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'name', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'name', array('class' => 'form-control', 'maxlength' => 45)); ?>
@@ -31,7 +31,7 @@
 
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'parent_id', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->dropDownList($model, 'parent_id', array("" => "None") + BspCategory::model()->getCategoryList(), array('class' => 'form-control')); ?>

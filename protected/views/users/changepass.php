@@ -24,7 +24,7 @@ if (Yii::app()->user->hasFlash('success')) {
 
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'old_pwd', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->passwordField($model, 'old_pwd', array('class' => 'form-control', 'maxlength' => 200)); ?>
@@ -33,7 +33,7 @@ if (Yii::app()->user->hasFlash('success')) {
         </div>
 
     </div><!-- group -->
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'password', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->passwordField($model, 'password', array('class' => 'form-control', 'maxlength' => 200)); ?>
@@ -42,7 +42,7 @@ if (Yii::app()->user->hasFlash('success')) {
         </div>
 
     </div><!-- group -->
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'pwd_repeat', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->passwordField($model, 'pwd_repeat', array('class' => 'form-control', 'maxlength' => 200)); ?>

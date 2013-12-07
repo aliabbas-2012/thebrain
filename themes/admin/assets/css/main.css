@@ -2660,3 +2660,10 @@ span.required {
     background: #FEE;
     border-color: #C00;
 }
+span.k-widget.k-numerictextbox {
+    border-radius: 3px;
+    height: 34px;
+}
+span.k-icon.k-i-arrow-n {
+    margin-left: 0 !important;
+}

@@ -17,7 +17,7 @@
     </p>
 
   
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'user_id', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
 
@@ -27,7 +27,7 @@
         </div>
 
     </div><!-- group -->
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'title', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'title', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -36,7 +36,7 @@
         </div>
 
     </div><!-- group -->
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'img', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->fileField($model, 'img', array('class' => '')); ?>
@@ -46,7 +46,7 @@
         </div>
 
     </div><!-- group -->
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'description', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textArea($model, 'description', array('class' => 'form-control')); ?>
@@ -55,7 +55,7 @@
         </div>
 
     </div><!-- group -->
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'detail', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textArea($model, 'detail', array('class' => 'form-control')); ?>

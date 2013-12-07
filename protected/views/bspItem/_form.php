@@ -5,7 +5,7 @@
 
 
     <?php
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/functions.js');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/functions.js',  CClientScript::POS_END);
 
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'bsp-item-form',
@@ -21,9 +21,9 @@
     </p>
 
 
-    <div class="form-group">
+  <div class="row">
         <?php echo $form->labelEx($model, 'group_id', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       
             <?php
             echo $form->dropDownList($model, 'group_id', array("" => "Select") + BspCategory::model()->getRootCategories(), array(
                 'class' => 'form-control',
@@ -32,13 +32,12 @@
             ?>
             <?php echo $form->error($model, 'group_id'); ?>
 
-        </div>
+        
+    </div><!-- row -->
 
-    </div><!-- group -->
-
-    <div class="form-group">
+     <div class="row">
         <?php echo $form->labelEx($model, 'category_id', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+        
             <?php
             if (!$model->isNewRecord || $model->hasErrors()):
                 $category_list = array("" => "Select") + BspCategory::model()->getChildrenCategories($model->group_id);
@@ -53,14 +52,14 @@
             ?>
             <?php echo $form->error($model, 'category_id'); ?>
 
-        </div>
+    
 
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'sub_category_id', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       
             <?php
             if (!$model->isNewRecord || $model->hasErrors()):
                 $category_list = array("" => "Select") + BspCategory::model()->getChildrenCategories($model->category_id);
@@ -72,24 +71,24 @@
             ?>
             <?php echo $form->error($model, 'sub_category_id'); ?>
 
-        </div>
+
 
     </div><!-- group -->
 
-    <div class="form-group">
+     <div class="row">
+    
         <?php echo $form->labelEx($model, 'name', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+
             <?php echo $form->textField($model, 'name', array('class' => 'form-control', 'maxlength' => 200)); ?>
             <?php echo $form->error($model, 'name'); ?>
 
-        </div>
-
+        
     </div><!-- group -->
 
 
-    <div class="form-group">
+     <div class="row">
         <?php echo $form->labelEx($model, 'per_price', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+     
             <?php
             echo $form->dropDownList($model, 'per_price', $model->_per_price_options, array(
                 'class' => 'form-control',
@@ -117,36 +116,36 @@
             ?>
             <?php echo $form->error($model, 'per_price'); ?>
 
-        </div>
+       
 
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'currency_id', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+        
             <?php echo $form->dropDownList($model, 'currency_id', BspCurrency::model()->getCurrencies(), array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'currency_id'); ?>
 
-        </div>
+       
 
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'price', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+     
             <?php echo $form->textField($model, 'price', array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'price'); ?>
 
-        </div>
+      
 
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'description', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->textArea($model, 'description', array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'description'); ?>
 
@@ -155,9 +154,9 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'special_deal', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->checkBox($model, 'special_deal'); ?>
             <?php echo $form->error($model, 'special_deal'); ?>
 
@@ -166,9 +165,9 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'discount_price', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->textField($model, 'discount_price', array('class' => 'form-control', 'maxlength' => 30)); ?>
             <?php echo $form->error($model, 'discount_price'); ?>
 
@@ -176,9 +175,9 @@
 
     </div><!-- group -->
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'is_public', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->dropDownList($model, 'is_public', $model->_ready_to_deliver, array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'is_public'); ?>
 
@@ -187,9 +186,9 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'showlocation', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->checkBox($model, 'showlocation'); ?>
             <?php echo $form->error($model, 'showlocation'); ?>
 
@@ -198,9 +197,9 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'lat', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->textField($model, 'lat', array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'lat'); ?>
 
@@ -209,9 +208,9 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'lng', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->textField($model, 'lng', array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'lng'); ?>
 
@@ -220,9 +219,9 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'my_other_price', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->checkBox($model, 'my_other_price'); ?>
             <?php echo $form->error($model, 'my_other_price'); ?>
 
@@ -232,9 +231,9 @@
 
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'iStatus', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->dropDownList($model, 'iStatus', array("0" => "Disabled", "1" => "Enabled"), array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'iStatus'); ?>
 
@@ -243,9 +242,9 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'background_image', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php
             echo zHtml::kendoUploader($model, 'background_image', 'background_image_name', $this->createUrl("/site/uploadTemp", array("model" => get_class($model), "attribute" => "BspItem_background_image"))
             );
@@ -258,9 +257,9 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'seo_title', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->textField($model, 'seo_title', array('class' => 'form-control', 'maxlength' => 255)); ?>
             <?php echo $form->error($model, 'seo_title'); ?>
 
@@ -269,9 +268,9 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'seo_description', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->textArea($model, 'seo_description', array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'seo_description'); ?>
 
@@ -280,9 +279,9 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'seo_keywords', array('class' => 'control-label col-lg-2')); ?>
-        <div class="col-lg-4">
+       <div class="">
             <?php echo $form->textField($model, 'seo_keywords', array('class' => 'form-control', 'maxlength' => 255)); ?>
             <?php echo $form->error($model, 'seo_keywords'); ?>
 

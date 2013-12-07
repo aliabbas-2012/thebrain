@@ -14,7 +14,7 @@
         <?php echo Yii::t('app', 'Fields with'); ?> <span class="required">*</span> <?php echo Yii::t('app', 'are required'); ?>.
     </p>
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'adv_name', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'adv_name', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -25,7 +25,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'adv_img', array('class' => 'control-label col-lg-2')); ?>
          <div class="col-lg-4">
             <?php echo $form->fileField($model, 'adv_img', array('class' => '')); ?>
@@ -37,7 +37,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'adv_url', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'adv_url', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -47,7 +47,7 @@
 
     </div><!-- group -->
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'adv_name_de', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'adv_name_de', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -58,7 +58,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'adv_img_de', array('class' => 'control-label col-lg-2')); ?>
           <div class="col-lg-4">
             <?php echo $form->fileField($model, 'adv_img_de', array('class' => '')); ?>
@@ -70,7 +70,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'adv_url_de', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->textField($model, 'adv_url_de', array('class' => 'form-control', 'maxlength' => 255)); ?>
@@ -80,7 +80,7 @@
 
     </div><!-- group -->
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'adv_position', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->dropDownList($model, 'adv_position', $model->all_positions,array('class' => 'form-control')); ?>
@@ -91,7 +91,7 @@
     </div><!-- group -->
 
 
-    <div class="form-group">
+    <div class="row">
         <?php echo $form->labelEx($model, 'iStatus', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
             <?php echo $form->dropDownList($model, 'iStatus',$model->all_status, array('class' => 'form-control')); ?>
