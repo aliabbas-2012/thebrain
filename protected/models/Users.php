@@ -261,7 +261,7 @@ class Users extends DTActiveRecord {
         $this->uploadAvtar($path);
         
         if (is_file($path . $this->background)) {
-            copy($path . $this->background, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey)) . $this->background);
+            copy($path . $this->background, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey,"background")) . $this->background);
             unlink($path . $this->background);
         }
         
@@ -272,7 +272,7 @@ class Users extends DTActiveRecord {
      */
     public function uploadAvtar($path) {
         if (is_file($path . $this->avatar)) {
-            copy($path . $this->avatar, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey)) . $this->avatar);
+            copy($path . $this->avatar, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey,"avatar")) . $this->avatar);
             unlink($path . $this->avatar);
         }
     }

@@ -100,7 +100,7 @@
     <div class="row-fluid wide-fluid">
         <?php echo $form->labelEx($model, 'background'); ?>
         <?php
-        echo zHtml::kendoMultiUploader(1, $model, '[' . 1 . ']background', '[' . 1 . ']background', $this->createUrl("/site/uploadTemp", array("index" => 1, "model" => get_class($model), "attribute" => "Users_" . 1 . "_background"))
+        echo zHtml::kendoMultiUploader(1, $model, 'background', 'background', $this->createUrl("/site/uploadTemp", array("index" => 1, "model" => get_class($model), "attribute" => "Users_background"))
         );
         echo zHtml::imageLinkRemove($model, 'background', get_class($model));
         ?>
@@ -149,12 +149,7 @@
 
         <?php echo $form->error($model, 'lng', array("class" => 'alert alert-error')); ?>
     </div>
-    <div class="row-fluid wide-fluid">
-        <?php echo $form->labelEx($model, 'lng'); ?>
-        <?php echo $form->textField($model, 'lng'); ?> 
 
-        <?php echo $form->error($model, 'lng', array("class" => 'alert alert-error')); ?>
-    </div>
     <div class="row-fluid wide-fluid">
         <?php echo $form->labelEx($model, 'store_url'); ?>
         <?php echo Yii::app()->request->hostInfo."/".Yii::app()->baseUrl."/"; ?>
