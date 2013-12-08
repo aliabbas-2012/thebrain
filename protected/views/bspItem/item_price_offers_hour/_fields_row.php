@@ -20,8 +20,12 @@ $relationName = "item_price_offers_hour";
         ?>
         <?php
         //extra option
-        if (isset($_REQUEST['option']) && $_REQUEST['option'] == 'extra') {
+
+        if ((isset($_REQUEST['option']) && $_REQUEST['option'] == 'extra')) {
             echo CHtml::activeHiddenField($model, '[' . $index . ']option', array("value" => $_REQUEST['option'], "class" => "form-control"));
+            echo CHtml::label("Extra", "Extra", array("id" => "extra_id"));
+        } else if ($model->option == "extra") {
+            echo CHtml::activeHiddenField($model, '[' . $index . ']option', array("value" => $model->option, "class" => "form-control"));
             echo CHtml::label("Extra", "Extra", array("id" => "extra_id"));
         } else {
             $dropDown_arr = array(
@@ -36,8 +40,10 @@ $relationName = "item_price_offers_hour";
     </td>
     <td class="field">
         <?php
-        //extra option
+//extra option
         if (isset($_REQUEST['option']) && $_REQUEST['option'] == 'extra') {
+            echo CHtml::activeHiddenField($model, '[' . $index . ']start', array("class" => "form-control"));
+        } else if ($model->option == "extra") {
             echo CHtml::activeHiddenField($model, '[' . $index . ']start', array("class" => "form-control"));
         } else {
             echo CHtml::activeTextField($model, '[' . $index . ']start', array("class" => "form-control"));
@@ -49,6 +55,8 @@ $relationName = "item_price_offers_hour";
         <?php
         //extra option
         if (isset($_REQUEST['option']) && $_REQUEST['option'] == 'extra') {
+            echo CHtml::activeHiddenField($model, '[' . $index . ']end', array("class" => "form-control"));
+        } else if ($model->option == "extra") {
             echo CHtml::activeHiddenField($model, '[' . $index . ']end', array("class" => "form-control"));
         } else {
             echo CHtml::activeTextField($model, '[' . $index . ']end', array("class" => "form-control"));
@@ -86,8 +94,8 @@ $relationName = "item_price_offers_hour";
 
 </tr>
 <?php
-if (!isset($_REQUEST['option'])) {
-    ?>
+if (!isset($_REQUEST['option']) && $model->option!="extra") {
+    ?>|
     <script>
         jQuery(function() {
             jQuery("#<?php echo get_class($model); ?>_<?php echo $index; ?>_start").kendoNumericTextBox({min: 1});
@@ -100,7 +108,7 @@ if (!isset($_REQUEST['option'])) {
 ?>
 <script>
     jQuery(function() {
-        
+
 
     })
 </script>

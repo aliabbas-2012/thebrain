@@ -40,10 +40,23 @@ class BspItemPriceOffer extends DTActiveRecord {
             array('option', 'length', 'max' => 8),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('is_extra', 'safe'),
+            array('end', 'validateTimeRange'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, item_id, option, price, period, start, end, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
         );
+    }
+
+    /**
+     * 
+     */
+    public function validateTimeRange($attribute) {
+        
+        if ($this->option == "range") {
+            if ($this->start >= $this->end) {
+                $this->addError($attribute, "Greater then start");
+            }
+        }
     }
 
     /**
