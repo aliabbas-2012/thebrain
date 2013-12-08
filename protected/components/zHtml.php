@@ -30,6 +30,21 @@ class zHtml extends CHtml {
             return CHtml::link($model->$attribute, $path, array("target" => "_blank"));
         }
     }
+    /**
+     * static link
+     * of image
+     * where one models has double image fields
+     * @param type $model
+     * @param type $attribute
+     * @param type $folder
+     */
+    public static function imageDoubleLink($model, $attribute, $folder,$folder2) {
+        if (!$model->isNewRecord && !empty($model->$attribute)) {
+            $path = Yii::app()->baseUrl . "/uploads/" . $folder . "/" . $model->primaryKey . "/".$folder2."/" . $model->$attribute;
+
+            return CHtml::link($model->$attribute, $path, array("target" => "_blank"));
+        }
+    }
 
     /**
      * static link
