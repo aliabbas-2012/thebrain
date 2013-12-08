@@ -223,15 +223,16 @@ class UsersController extends Controller {
             // validate user input and redirect to the previous page if valid
             if ($model->validate()) {
 
-                $user = Users::model()->find("email='" . $model->email . "'");
+                $user = Users::model()->find("user_email='" . $model->email . "'");
 
                 $itst = new ItstFunctions;
                 $key = $itst->getRanddomeNo(25);
                 $user->updateByPk($user->id, array("email_authenticate" => $key));
                 $body = "Reset your link <br/>";
-                $url = $this->createAbsoluteUrl("/site/resetPass", array("id" => $user->id, "key" => $key));
+                $url = $this->createAbsoluteUrl("/users/resetPass", array("id" => $user->id, "key" => $key));
                 $body.= CHtml::link($url, $url);
                 $email['From'] = Yii::app()->params->adminEmail;
+                $email['FromName'] = Yii::app()->name;
                 $email['To'] = $model->email;
                 $email['Subject'] = "Reset your link";
                 $email['Body'] = $body;
@@ -240,7 +241,7 @@ class UsersController extends Controller {
                 $this->sendEmail2($email);
 
                 Yii::app()->user->setFlash("success", "Reset Link has been sent successfully");
-                $this->redirect($this->createUrl("/site/forget"));
+                $this->redirect($this->createUrl("/user/forget"));
             }
         }
         // display the login form

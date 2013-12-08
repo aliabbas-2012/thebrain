@@ -95,6 +95,8 @@
                                 'items' => array(
                                     array('label' => 'Edit Profile', 'url' => array('/users/profile'), 'visible' => !Yii::app()->user->isGuest),
                                     array('label' => 'View Profile', 'url' => array('/users/profileview'), 'visible' => !Yii::app()->user->isGuest),
+                                    array('label' => 'Change Password', 'url' => array('/users/changepass'), 'visible' => !Yii::app()->user->isGuest),
+                                    array('label' => 'Logout', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
                                 )),
                             array('label' => 'Login <span class="caret"></span>',
                                 'url' => '#',

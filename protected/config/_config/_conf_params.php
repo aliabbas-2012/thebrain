@@ -10,12 +10,11 @@ $params = array(
     // this is used in contact page
     
     'dateformat' => 'y/m/d',
+    'site_logo' => '/img/logo.png',
 
-    'adminEmail' => 'ubaidullah@darussalampk.com',
-    'defaultFrom' => 'no_reply@darussalam.com',
-    'dtechHR' => 'ubaidullah@darussalampk.com',
-    
-    'default_admin' => 'webmaster@darussalampk.com',
+    'adminEmail' => 'no_reply@thepuzzzle.com',
+    'defaultFrom' => 'no_reply@thepuzzzle.com',
+
     'dateformat' => 'm/d/y',
     'mailHost' => 'smtp.gmail.com',
     'smtp' => true,

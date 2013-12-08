@@ -23,7 +23,7 @@ class ForgetForm extends CFormModel {
     }
 
     public function isEmailRecrod() {
-        if (Users::model()->count("email='" . $this->email . "'") == 0) {
+        if (Users::model()->count("user_email='" . $this->email . "'") == 0) {
             $this->addError("email", "Your provided email does'nt exist");
         }
     }

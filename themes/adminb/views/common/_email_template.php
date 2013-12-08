@@ -6,7 +6,7 @@
          text-align:left;
          border-bottom: 1px solid #D2D2D2;
          border-top: 2px solid #292929;
-         color:#000000;background-color:#F1F1F1;"><div style="float:left;width:130px;padding:20px 0px;"><img alt="" src="<?php echo Yii::app()->request->hostInfo . Yii::app()->baseUrl . Yii::app()->params->site_logo; ?>" /></div>
+         color:#000000;background-color:#F1F1F1;"><div style="float:left;width:130px;padding:20px 0px;"><img alt="" src="<?php echo Yii::app()->request->hostInfo . Yii::app()->theme->baseUrl . Yii::app()->params->site_logo; ?>" /></div>
          <div style="float:left"><h1 style="font-size:21px;padding-left:5px"><?php echo Yii::app()->name ?></h1></div>
         <div style="clear:both"></div>
     </div>
