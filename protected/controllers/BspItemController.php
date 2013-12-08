@@ -238,6 +238,11 @@ class BspItemController extends Controller {
         $this->manageChild($model, "image_items", "item");
         $this->manageChild($model, "item_related_sounds", "item");
         $this->manageChild($model, "item_keywords", "item");
+        
+        $this->manageChild($model, "item_price_offers_hour", "item");
+        $this->manageChild($model, "item_price_offers_day", "item");
+        $this->manageChild($model, "item_price_offers_day", "item");
+        $this->manageChild($model, "item_price_offers_week", "item");
     }
 
     /*

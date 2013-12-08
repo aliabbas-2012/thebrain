@@ -293,10 +293,10 @@
     <?php
     if ($this->action->id != "update") {
         //handling price types
-        $this->renderPartial('item_price_offers_hour/_container', array('model' => $model, "type" => "field"));
-        $this->renderPartial('item_price_offers_day/_container', array('model' => $model, "type" => "field"));
-        $this->renderPartial('item_price_offers_week/_container', array('model' => $model, "type" => "field"));
-        $this->renderPartial('item_price_offers_month/_container', array('model' => $model, "type" => "field"));
+        //$this->renderPartial('item_price_offers_hour/_container', array('model' => $model, "type" => "field"));
+        //$this->renderPartial('item_price_offers_day/_container', array('model' => $model, "type" => "field"));
+        //$this->renderPartial('item_price_offers_week/_container', array('model' => $model, "type" => "field"));
+        //$this->renderPartial('item_price_offers_month/_container', array('model' => $model, "type" => "field"));
 
         $this->renderPartial('item_video/_container', array('model' => $model, "type" => "field"));
         $this->renderPartial('image_items/_container', array('model' => $model, "type" => "field"));

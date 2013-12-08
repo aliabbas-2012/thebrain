@@ -119,10 +119,10 @@ class BspItem extends DTActiveRecord {
             'item_keywords' => array(self::HAS_MANY, 'BspItemSearchKeyword', 'item_id'),
             //item of week
             'item_price_offers_fix' => array(self::HAS_MANY, 'BspItemPriceOffer', 'item_id'),
-            'item_price_offers_hour' => array(self::HAS_MANY, 'BspItemPriceOfferHour', 'item_id'),
-            'item_price_offers_day' => array(self::HAS_MANY, 'BspItemPriceOfferDay', 'item_id'),
-            'item_price_offers_week' => array(self::HAS_MANY, 'BspItemPriceOfferWeek', 'item_id'),
-            'item_price_offers_month' => array(self::HAS_MANY, 'BspItemPriceOfferMonth', 'item_id'),
+            'item_price_offers_hour' => array(self::HAS_MANY, 'BspItemPriceOfferHour', 'item_id','condition'=>'period = 2'),
+            'item_price_offers_day' => array(self::HAS_MANY, 'BspItemPriceOfferDay', 'item_id','condition'=>'period = 3'),
+            'item_price_offers_week' => array(self::HAS_MANY, 'BspItemPriceOfferWeek', 'item_id','condition'=>'period = 4'),
+            'item_price_offers_month' => array(self::HAS_MANY, 'BspItemPriceOfferMonth', 'item_id','condition'=>'period = 5'),
         );
     }
 

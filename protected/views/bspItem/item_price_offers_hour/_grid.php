@@ -6,7 +6,7 @@ $mName = "BspItemPriceOfferHour";
     <?php
     $config = array(
         'criteria' => array(
-            'condition' => 'item_id=' . $model->id,
+            'condition' => 'item_id=' . $model->id. " AND period = 2",
         )
     );
     $mNameobj = new $mName;
@@ -34,6 +34,10 @@ $mName = "BspItemPriceOfferHour";
             array(
                 'name' => 'end',
                 'value' => '$data->end'
+            ),
+            array(
+                'name' => 'price',
+                'value' => '$data->price'
             ),
             array
                 (

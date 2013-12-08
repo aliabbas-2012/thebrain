@@ -6,7 +6,7 @@ $mName = "BspItemPriceOfferWeek";
     <?php
     $config = array(
         'criteria' => array(
-            'condition' => 'item_id=' . $model->id,
+            'condition' => 'item_id=' . $model->id. " AND period = 4",
         )
     );
     $mNameobj = new $mName;
@@ -34,6 +34,10 @@ $mName = "BspItemPriceOfferWeek";
             array(
                 'name' => 'end',
                 'value' => '$data->end'
+            ),
+            array(
+                'name' => 'price',
+                'value' => '$data->price'
             ),
             array
                 (

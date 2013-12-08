@@ -6,7 +6,7 @@ $mName = "BspItemPriceOfferDay";
     <?php
     $config = array(
         'criteria' => array(
-            'condition' => 'item_id=' . $model->id ,
+            'condition' => 'item_id=' . $model->id . " AND period = 3",
         )
     );
     $mNameobj = new $mName;
@@ -35,7 +35,10 @@ $mName = "BspItemPriceOfferDay";
                 'name' => 'end',
                 'value' => '$data->end'
             ),
-         
+            array(
+                'name' => 'price',
+                'value' => '$data->price'
+            ),
             array
                 (
                 'class' => 'CButtonColumn',
