@@ -139,6 +139,20 @@ var thepuzzleadmin = {
             }
             return info;
         }).join(", ");
-    }
+    },
+   /**
+    * Show time end 
+    * @param {type} e
+    * @returns {undefined}
+    */         
+   showTimeEnd : function(obj){
+       
+       if(jQuery(obj).val() == "abs"){
+           jQuery(obj).parent().next().next().children().hide();
+       }
+       else if(jQuery(obj).val() == "range"){
+           jQuery(obj).parent().next().next().children().show();
+       }
+   }         
 
 }

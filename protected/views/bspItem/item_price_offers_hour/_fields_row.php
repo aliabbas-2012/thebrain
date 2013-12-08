@@ -29,21 +29,32 @@ $relationName = "item_price_offers_hour";
                 "range" => "Breakdown Rate",
                     //"extra"=>"Each Extra",
             );
-            echo CHtml::activeDropDownList($model, '[' . $index . ']option', $dropDown_arr, array("class" => "form-control"));
+            echo CHtml::activeDropDownList($model, '[' . $index . ']option', $dropDown_arr, array("class" => "form-control", "onchange" => "thepuzzleadmin.showTimeEnd(this)")
+            );
         }
         ?>
     </td>
     <td class="field">
-
         <?php
-        echo CHtml::activeTextField($model, '[' . $index . ']start', array("class" => "form-control"));
+        //extra option
+        if (isset($_REQUEST['option']) && $_REQUEST['option'] == 'extra') {
+            echo CHtml::activeHiddenField($model, '[' . $index . ']start', array("class" => "form-control"));
+        } else {
+            echo CHtml::activeTextField($model, '[' . $index . ']start', array("class" => "form-control"));
+        }
         ?>
+
     </td>
     <td class="field">
-
         <?php
-        echo CHtml::activeTextField($model, '[' . $index . ']end', array("class" => "form-control"));
+        //extra option
+        if (isset($_REQUEST['option']) && $_REQUEST['option'] == 'extra') {
+            echo CHtml::activeHiddenField($model, '[' . $index . ']end', array("class" => "form-control"));
+        } else {
+            echo CHtml::activeTextField($model, '[' . $index . ']end', array("class" => "form-control"));
+        }
         ?>
+
     </td>
     <td class="field">
 
@@ -74,9 +85,22 @@ $relationName = "item_price_offers_hour";
     </td>
 
 </tr>
+<?php
+if (!isset($_REQUEST['option'])) {
+    ?>
+    <script>
+        jQuery(function() {
+            jQuery("#<?php echo get_class($model); ?>_<?php echo $index; ?>_start").kendoNumericTextBox({min: 1});
+            jQuery("#<?php echo get_class($model); ?>_<?php echo $index; ?>_end").kendoNumericTextBox({min: 1});
+            jQuery("#<?php echo get_class($model); ?>_<?php echo $index; ?>_option").trigger("change");
+        })
+    </script>
+    <?php
+}
+?>
 <script>
-    jQuery(function(){
-        jQuery("#<?php echo get_class($model); ?>_<?php echo $index;?>_start").kendoNumericTextBox({min: 1})
-        jQuery("#<?php echo get_class($model); ?>_<?php echo $index;?>_end").kendoNumericTextBox({min: 1})
+    jQuery(function() {
+        
+
     })
 </script>
