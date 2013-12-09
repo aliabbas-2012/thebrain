@@ -55,6 +55,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array('name' => 'group_id', 'value' => '!empty($data->group) ? $data->group->name : ""'),
         array('name' => 'category_id', 'value' => !empty($data->category) ? $data->category->name : ""),
         array('name' => 'sub_category_id', 'value' => '!empty($data->sub_category) ? $data->sub_category->name : ""'),
+        array('name' => 'per_price', 'value' => '!empty($data->_per_price_options[$data->per_price]) ? $data->_per_price_options[$data->per_price] : ""'),
         'name',
         array(
             'class' => 'CButtonColumn',

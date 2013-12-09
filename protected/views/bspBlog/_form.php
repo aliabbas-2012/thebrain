@@ -1,7 +1,20 @@
+
 <div class="form wide">
 
 
     <?php
+    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/editor/redactor.css');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/editor/redactor.js', CClientScript::POS_END);
+    Yii::app()->clientScript->registerScript('editor_rel', "
+      $('#BspBlog_detail').redactor({
+                focus: true,
+                autoresize: false,
+                initCallback: function()
+                {
+
+                }
+            });
+      ", CClientScript::POS_READY);
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'bsp-blog-form',
         'enableAjaxValidation' => false,
@@ -16,7 +29,7 @@
         <?php echo Yii::t('app', 'Fields with'); ?> <span class="required">*</span> <?php echo Yii::t('app', 'are required'); ?>.
     </p>
 
-  
+
     <div class="row">
         <?php echo $form->labelEx($model, 'user_id', array('class' => 'control-label col-lg-2')); ?>
         <div class="col-lg-4">
