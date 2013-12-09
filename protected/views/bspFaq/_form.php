@@ -2,6 +2,18 @@
 
 
     <?php
+    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/editor/redactor.css');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/editor/redactor.js', CClientScript::POS_END);
+    Yii::app()->clientScript->registerScript('editor_rel', "
+      $('#BspFaq_sQdetails,#BspFaq_sAnswers,#BspFaq_sQdetails_en,#BspFaq_sAnswers_en').redactor({
+                focus: true,
+                autoresize: false,
+                initCallback: function()
+                {
+
+                }
+            });
+      ", CClientScript::POS_READY);
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'bsp-faq-form',
         'enableAjaxValidation' => false,
@@ -15,7 +27,7 @@
         <?php echo Yii::t('app', 'Fields with'); ?> <span class="required">*</span> <?php echo Yii::t('app', 'are required'); ?>.
     </p>
 
-    
+
 
 
 
