@@ -29,7 +29,7 @@ var thepuzzleadmin = {
      * @param {type} update_element_id
      * @returns {undefined}
      */
-    removeElementAjax: function(ajax_url, elems,update_element_id) {
+    removeElementAjax: function(ajax_url, elems, update_element_id) {
         if (confirm("Are you sure you want to delete")) {
             jQuery.ajax({
                 type: "POST",
@@ -48,7 +48,7 @@ var thepuzzleadmin = {
                     count++;
                 }
             });
-             jQuery("#" + update_element_id).val("");
+            jQuery("#" + update_element_id).val("");
         }
 
         return true;
@@ -140,19 +140,46 @@ var thepuzzleadmin = {
             return info;
         }).join(", ");
     },
-   /**
-    * Show time end 
-    * @param {type} e
-    * @returns {undefined}
-    */         
-   showTimeEnd : function(obj){
-       
-       if(jQuery(obj).val() == "abs"){
-           jQuery(obj).parent().next().next().children().hide();
-       }
-       else if(jQuery(obj).val() == "range"){
-           jQuery(obj).parent().next().next().children().show();
-       }
-   }         
+    /**
+     * Show time end 
+     * @param {type} e
+     * @returns {undefined}
+     */
+    showTimeEnd: function(obj) {
+
+        if (jQuery(obj).val() == "abs") {
+            jQuery(obj).parent().next().next().children().hide();
+        }
+        else if (jQuery(obj).val() == "range") {
+            jQuery(obj).parent().next().next().children().show();
+        }  },
+    GetGeo: function(val) {
+        var address = val;
+        if (address != null) {
+            var geocoder;
+            var addlocation;
+            geocoder = new google.maps.Geocoder();
+            if (geocoder) {
+                geocoder.geocode({'address': address}, function(results, status) {
+                    //alert(status)
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        addlocation = results[0].geometry.location;
+                        var lat = addlocation.lat();
+                        var lng = addlocation.lng();
+                        console.log(results);
+                     
+                        //alert($('#lat').val() +' ' + $('#lng').val())
+                       
+                    }
+                    else {
+//                                    alert("Geocode was not successful for the following reason: " + status);
+                    }
+                });
+            }
+        } else {
+           
+        }
+    }
+
 
 }
