@@ -25,9 +25,10 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-        $this->layout = "column1";
-        if (!Yii::app()->user->isGuest) {
-            $this->layout = "column2";
+        $this->layout = "column2";
+        if (Yii::app()->user->isGuest) {
+            $this->layout = "column1";
+            $this->redirect($this->createUrl("/site/login"));
         }
         $this->render('index');
     }
