@@ -24,6 +24,17 @@ $('.search-form form').submit(function(){
 	return false;
 });
 ");
+/**
+ * it alwa
+ */
+$this->PcmWidget['filter'] = array('name' => 'ItstCustomViewFilter',
+    'attributes' => array(
+        'model' => $searchModel,
+        'action' => Yii::app()->createUrl($this->route),
+        'ajax' => false,
+        'grid_id' => 'bsp-item-grid',
+        'view_name'=>'item_filter_search'
+        ));
 ?>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script>
