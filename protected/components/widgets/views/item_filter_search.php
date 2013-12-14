@@ -40,11 +40,19 @@
         <?php echo $form->dropDownList($this->model, 'username', $alphabets, array('class' => 'form-control', 'maxlength' => 200)); ?>
         <?php echo $form->error($this->model, 'username'); ?>
     </div><!-- group -->
+    <div class="row">
+        <?php echo $form->labelEx($this->model, 'ratings', array('class' => 'control-label col-lg-2')); ?>
+        <?php echo $form->dropDownList($this->model, 'ratings', 
+                    array("1"=>"1 Star","2"=>"2 Stars","3"=>"3 Stars","4"=>"4 Stars",5=>"5 Stars"), 
+                    array('class' => 'form-control', 'maxlength' => 200)); 
+        ?>
+        <?php echo $form->error($this->model, 'ratings'); ?>
+    </div><!-- group -->
 
     <div class="row">
-        <?php echo $form->labelEx($this->model, 'most_visited', array('class' => 'control-label col-lg-2')); ?>
-        <?php echo $form->checkBox($this->model, 'most_visited'); ?>
-        <?php echo $form->error($this->model, 'most_visited'); ?>
+        <?php echo $form->labelEx($this->model, 'special_deal', array('class' => 'control-label col-lg-2')); ?>
+        <?php echo $form->checkBox($this->model, 'special_deal'); ?>
+        <?php echo $form->error($this->model, 'special_deal'); ?>
     </div><!-- group -->
 
     <div class="row">
@@ -54,9 +62,14 @@
     </div><!-- group -->
 
     <div class="row">
-        <?php echo $form->labelEx($this->model, 'most_visited', array('class' => 'control-label col-lg-2')); ?>
-        <?php echo $form->checkBox($this->model, 'most_visited'); ?>
-        <?php echo $form->error($this->model, 'most_visited'); ?>
+        <?php echo $form->labelEx($this->model, 'most_bought', array('class' => 'control-label col-lg-2')); ?>
+        <?php echo $form->checkBox($this->model, 'most_bought'); ?>
+        <?php echo $form->error($this->model, 'most_bought'); ?>
+    </div><!-- group -->
+    <div class="row">
+        <?php echo $form->labelEx($this->model, 'is_cancel', array('class' => 'control-label col-lg-2')); ?>
+        <?php echo $form->checkBox($this->model, 'is_cancel'); ?>
+        <?php echo $form->error($this->model, 'is_cancel'); ?>
     </div><!-- group -->
 
 
