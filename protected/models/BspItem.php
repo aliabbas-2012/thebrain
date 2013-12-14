@@ -115,6 +115,7 @@ class BspItem extends DTActiveRecord {
             'sub_category' => array(self::BELONGS_TO, 'BspCategory', 'sub_category_id'),
             'item_video' => array(self::HAS_MANY, 'BspItemVideo', 'item_id'),
             'image_items' => array(self::HAS_MANY, 'BspItemImage', 'item_id'),
+            'image_offer' => array(self::HAS_ONE, 'BspItemImage', 'item_id','condition'=>'is_offer = 1'),
             'item_related_sounds' => array(self::HAS_MANY, 'BspItemSoundUrl', 'item_id'),
             'item_keywords' => array(self::HAS_MANY, 'BspItemSearchKeyword', 'item_id'),
             //item of week
