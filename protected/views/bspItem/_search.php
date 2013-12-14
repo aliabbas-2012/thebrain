@@ -11,6 +11,10 @@
         'action' => Yii::app()->createUrl($this->route),
         'method' => 'get',
     ));
+    $alphabets = array(""=>"All");
+    for ($i = 65; $i <= 90; $i++) {
+        $alphabets[chr($i)] = chr($i);
+    }
     ?>
     <div class="row">
 
@@ -104,34 +108,52 @@
 
         <?php echo $form->dropDownList($model, 'currency_id', array("" => "All") + BspCurrency::model()->getCurrencies(), array('class' => 'form-control')); ?>
         <?php echo $form->error($model, 'currency_id'); ?>
+    </div><!-- group -->
 
+    <div class="row">
+        <?php echo $form->labelEx($model, 'start_price', array('class' => 'control-label col-lg-2')); ?>
 
+        <?php echo $form->textField($model, 'start_price', array('class' => 'form-control')); ?>
+        <?php echo $form->error($model, 'start_price'); ?>
+    </div><!-- group -->
+    <div class="row">
+        <?php echo $form->labelEx($model, 'end_price', array('class' => 'control-label col-lg-2')); ?>
 
+        <?php echo $form->textField($model, 'end_price', array('class' => 'form-control')); ?>
+        <?php echo $form->error($model, 'end_price'); ?>
     </div><!-- group -->
 
 
     <div class="row">
-        <?php echo $form->labelEx($model, 'price', array('class' => 'control-label col-lg-2')); ?>
-
-        <?php echo $form->textField($model, 'price', array('class' => 'form-control')); ?>
-        <?php echo $form->error($model, 'price'); ?>
-
-
-
+        <?php echo $form->labelEx($model, 'offer_name', array('class' => 'control-label col-lg-2')); ?>
+        <?php echo $form->dropDownList($model, 'offer_name', $alphabets, array('class' => 'form-control', 'maxlength' => 200)); ?>
+        <?php echo $form->error($model, 'offer_name'); ?>
     </div><!-- group -->
-
-
+    <div class="row">
+        <?php echo $form->labelEx($model, 'username', array('class' => 'control-label col-lg-2')); ?>
+        <?php echo $form->dropDownList($model, 'username', $alphabets, array('class' => 'form-control', 'maxlength' => 200)); ?>
+        <?php echo $form->error($model, 'username'); ?>
+    </div><!-- group -->
 
     <div class="row">
-        <?php echo $form->labelEx($model, 'special_deal', array('class' => 'control-label col-lg-2')); ?>
-        <div class="">
-            <?php echo $form->checkBox($model, 'special_deal'); ?>
-            <?php echo $form->error($model, 'special_deal'); ?>
-
-        </div>
-
+        <?php echo $form->labelEx($model, 'num_star', array('class' => 'control-label col-lg-2')); ?>
+        <?php
+        echo $form->dropDownList($model, 'num_star', array("" => "--", "0"=>"No Star","1" => "1 Star", "2" => "2 Stars", "3" => "3 Stars", "4" => "4 Stars", 5 => "5 Stars"), array('class' => 'form-control', 'maxlength' => 200));
+        ?>
+        <?php echo $form->error($model, 'num_star'); ?>
     </div><!-- group -->
 
+    <div class="row">
+        <?php echo $form->labelEx($model, 'most_visited', array('class' => 'control-label col-lg-2')); ?>
+        <?php echo $form->checkBox($model, 'most_visited'); ?>
+        <?php echo $form->error($model, 'most_visited'); ?>
+    </div><!-- group -->
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'most_bought', array('class' => 'control-label col-lg-2')); ?>
+        <?php echo $form->checkBox($model, 'most_bought'); ?>
+        <?php echo $form->error($model, 'most_bought'); ?>
+    </div><!-- group -->
 
     <div class="row">
         <?php echo $form->labelEx($model, 'discount_price', array('class' => 'control-label col-lg-2')); ?>
@@ -152,18 +174,6 @@
         </div>
 
     </div><!-- group -->
-
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'showlocation', array('class' => 'control-label col-lg-2')); ?>
-        <div class="">
-            <?php echo $form->checkBox($model, 'showlocation'); ?>
-            <?php echo $form->error($model, 'showlocation'); ?>
-
-        </div>
-
-    </div><!-- group -->
-
 
     <div class="row">
         <?php echo $form->labelEx($model, 'lat', array('class' => 'control-label col-lg-2',)); ?>
@@ -186,19 +196,6 @@
 
     </div><!-- group -->
 
-
-    <div class="row">
-        <?php echo $form->labelEx($model, 'my_other_price', array('class' => 'control-label col-lg-2')); ?>
-        <div class="">
-            <?php echo $form->checkBox($model, 'my_other_price'); ?>
-            <?php echo $form->error($model, 'my_other_price'); ?>
-
-        </div>
-
-    </div><!-- group -->
-
-
-
     <div class="row">
         <?php echo $form->labelEx($model, 'iStatus', array('class' => 'control-label col-lg-2')); ?>
         <div class="">
@@ -209,6 +206,36 @@
 
     </div><!-- group -->
 
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'showlocation', array('class' => 'control-label col-lg-2')); ?>
+        <div class="">
+            <?php echo $form->dropDownList($model, 'showlocation',array(""=>"All","0"=>"No","1"=>"Yes")); ?>
+            <?php echo $form->error($model, 'showlocation'); ?>
+
+        </div>
+
+    </div><!-- group -->
+
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'special_deal', array('class' => 'control-label col-lg-2')); ?>
+        <div class="">
+            <?php echo $form->dropDownList($model, 'special_deal',array(""=>"All","0"=>"No","1"=>"Yes")); ?>
+            <?php echo $form->error($model, 'special_deal'); ?>
+
+        </div>
+
+    </div><!-- group -->
+    <div class="row">
+        <?php echo $form->labelEx($model, 'my_other_price', array('class' => 'control-label col-lg-2')); ?>
+        <div class="">
+            <?php echo $form->dropDownList($model, 'my_other_price',array(""=>"All","0"=>"No","1"=>"Yes")); ?>
+            <?php echo $form->error($model, 'my_other_price'); ?>
+
+        </div>
+
+    </div><!-- group -->
 
     <div class="row buttons">
         <?php echo CHtml::submitButton('Search', array("class" => "btn btn-primary")); ?>

@@ -65,7 +65,7 @@ class Controller extends CController {
          * install configurations
          */
         //$this->installConfig();
-        $this->layout = "//layouts/column2";
+        $this->layout = "//layouts/column1";
         if (get_class($this->getModule()) == "WebModule") {
             
             Yii::app()->theme = "resp_frontend";

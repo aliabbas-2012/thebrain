@@ -33,7 +33,7 @@ $this->PcmWidget['filter'] = array('name' => 'ItstCustomViewFilter',
         'action' => Yii::app()->createUrl($this->route),
         'ajax' => false,
         'grid_id' => 'bsp-item-grid',
-        'view_name'=>'item_filter_search'
+        'view_name' => 'item_filter_search'
         ));
 ?>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
@@ -156,8 +156,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array('name' => 'group_id', 'value' => '!empty($data->group) ? $data->group->name : ""'),
         array('name' => 'category_id', 'value' => '!empty($data->category) ? $data->category->name : ""'),
         array('name' => 'sub_category_id', 'value' => '!empty($data->sub_category) ? $data->sub_category->name : ""'),
-        array('name' => 'per_price', 'value' => '!empty($data->_per_price_options[$data->per_price]) ? $data->_per_price_options[$data->per_price] : ""'),
         'name',
+        array('name' => 'per_price', 'value' => '!empty($data->_per_price_options[$data->per_price]) ? $data->_per_price_options[$data->per_price] : ""'),
+        array('name' => 'price', 'value' => '$data->price'),
+        array('name' => 'discount_price', 'value' => '$data->discount_price',),
+        array('name' => 'currency_id', 'value' => '!empty($data->currency) ? $data->currency->symbol : ""'),
+        array('name' => 'special_deal', 'value' => '$data->special_deal',),
+        array('name' => 'num_star', 'value' => '$data->num_star',),
+        array('name' => 'iStatus', 'value' => '$data->iStatus == 1 ? "Enabled" : "Disabled"',),
         array(
             'class' => 'CButtonColumn',
         ),

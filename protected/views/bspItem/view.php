@@ -15,6 +15,7 @@ $this->widget('zii.widgets.CDetailView', array(
         array('name' => 'discount_price', 'value' => $model->discount_price,),
         array('name' => 'is_public', 'value' => !empty($model->_ready_to_deliver[$model->is_public]) ? $model->_ready_to_deliver[$model->is_public] : "",),
         array('name' => 'showlocation', 'value' => $model->showlocation == 1 ? "Yes" : "No",),
+        array('name' => 'num_star', 'value' => $model->num_star,),
         array('name' => 'lat', 'value' => $model->lat,),
         array('name' => 'lng', 'value' => $model->lng,),
         array('name' => 'my_other_price', 'value' => $model->my_other_price == 1 ? "Yes" : "No",),

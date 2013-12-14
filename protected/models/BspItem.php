@@ -63,6 +63,9 @@ class BspItem extends DTActiveRecord {
      * @var type 
      */
     public $start_price, $end_price;
+    public $offer_name, $username;
+    public $most_visited;
+    public $most_bought;
 
     /**
      * options for is_public field
@@ -102,6 +105,8 @@ class BspItem extends DTActiveRecord {
             array('is_public', 'length', 'max' => 5),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('start_price,end_price', 'safe'),
+            array('offer_name,username', 'safe'),
+            array('most_visited,most_bought', 'safe'),
             array('loc_name,_per_price,background_path,background_image_name,description, date_create', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -125,6 +130,7 @@ class BspItem extends DTActiveRecord {
             'image_offer' => array(self::HAS_ONE, 'BspItemImage', 'item_id', 'condition' => 'is_offer = 1'),
             'item_related_sounds' => array(self::HAS_MANY, 'BspItemSoundUrl', 'item_id'),
             'item_keywords' => array(self::HAS_MANY, 'BspItemSearchKeyword', 'item_id'),
+            'item_orders' => array(self::HAS_MANY, 'BspOrder', 'item_id'),
             //item of week
             'item_price_offers_fix' => array(self::HAS_MANY, 'BspItemPriceOffer', 'item_id'),
             'item_price_offers_hour' => array(self::HAS_MANY, 'BspItemPriceOfferHour', 'item_id', 'condition' => 'period = 2'),
@@ -175,8 +181,8 @@ class BspItem extends DTActiveRecord {
             'name' => 'Name',
             'avatar_image' => 'Avatar Image',
             'description' => 'Description',
-            'num_star' => 'Num Star',
-            'num_like' => 'Num Like',
+            'num_star' => 'Ratings',
+            'num_like' => 'Likes',
             'user_id' => 'User',
             'date_create' => 'Date Create',
             'price' => 'Price',
@@ -263,9 +269,50 @@ class BspItem extends DTActiveRecord {
         $criteria->compare('update_time', $this->update_time, true);
         $criteria->compare('update_user_id', $this->update_user_id, true);
 
+        $criteria->compare('name', $this->offer_name, true);
+
+        if (!empty($this->username)) {
+            $crit = new CDbCriteria();
+            $crit->compare('first_name', $this->username, true);
+            $crit->compare('second_name', $this->username, true);
+            $crit->compare('username', $this->username, true);
+            $crit->compare('user_email', $this->username, true);
+            $crit->select = "id";
+
+            $users = CHtml::listData(Users::model()->findAll($crit), "id", "id");
+
+            $criteria->addInCondition('user_id', $users);
+        }
+
+        if (!empty($this->start_price)) {
+            $criteria->addCondition("price>=" . $this->start_price);
+        }
+        if (!empty($this->end_price)) {
+            $criteria->addCondition("price<=" . $this->end_price);
+        }
+
+        if (!empty($this->most_bought)) {
+            $crit = new CDbCriteria();
+            $crit->group = "item_id";
+            $crit->select = "item_id";
+            $crit->having = "count(item_id) >= 2";
+
+            $order_items = CHtml::listData(BspOrder::model()->findAll($crit), "item_id", "item_id");
+
+            $criteria->addInCondition('id', $order_items);
+        }
+
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
+    }
+
+    /**
+     * 
+     */
+    public function beforeValidate() {
+        $this->user_id = Yii::app()->user->id;
+        return parent::beforeValidate();
     }
 
     /**
