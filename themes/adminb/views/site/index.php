@@ -210,14 +210,14 @@ $baseUrl = Yii::app()->theme->baseUrl;
                     'value' => 'CHtml::link($data->id,Yii::app()->controller->createUrl("/bspItem/view", array("id" => $data->id)))',
                     'type' => 'raw',
                 ),
-                array('name' => 'name','value'=>'substr($data->name,1,8)'),
+                array('name' => 'name', 'value' => 'substr($data->name,1,8)'),
                 array('name' => 'group_id', 'value' => '!empty($data->group) ? $data->group->name : ""'),
                 array('name' => 'category_id', 'value' => '!empty($data->category) ? $data->category->name : ""'),
                 //array('name' => 'sub_category_id', 'value' => '!empty($data->sub_category) ? $data->sub_category->name : ""'),
                 array('name' => 'per_price', 'value' => '!empty($data->_per_price_options[$data->per_price]) ? $data->_per_price_options[$data->per_price] : ""'),
             ),
         ));
-        
+
         $this->endWidget();
         ?>
     </div><!--/span-->
@@ -249,7 +249,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
                     'value' => 'CHtml::link($data->id,Yii::app()->controller->createUrl("/bspItem/view", array("id" => $data->id)))',
                     'type' => 'raw',
                 ),
-                array('name' => 'name','value'=>'substr($data->name,1,8)'),
+                array('name' => 'name', 'value' => 'substr($data->name,1,8)'),
                 array('name' => 'group_id', 'value' => '!empty($data->group) ? $data->group->name : ""'),
                 array('name' => 'category_id', 'value' => '!empty($data->category) ? $data->category->name : ""'),
                 //array('name' => 'sub_category_id', 'value' => '!empty($data->sub_category) ? $data->sub_category->name : ""'),
@@ -281,9 +281,77 @@ $baseUrl = Yii::app()->theme->baseUrl;
             'title' => '<span class="icon-th-list"></span> Visitors Chart',
             'titleCssClass' => ''
         ));
+        $sql = "SELECT total_items,label " .
+                "FROM ( " .
+                "SELECT " .
+                "count(id) as  total_items,'Total' as label " .
+                "FROM bsp_item " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(id) as  total_items,'Fix Price' as label " .
+                "FROM bsp_item WHERE bsp_item.per_price = 1 " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(id) as  total_items,'Price per hour' as label " .
+                "FROM bsp_item WHERE bsp_item.per_price = 2 " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(id) as  total_items,'Price per day' as label " .
+                "FROM bsp_item WHERE bsp_item.per_price = 3 " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(id) as  total_items,'Price per week' as label " .
+                "FROM bsp_item WHERE bsp_item.per_price = 4 " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(id) as  total_items,'Price per month' as label " .
+                "FROM bsp_item WHERE bsp_item.per_price = 5 " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(id) as  total_items,'None' as label " .
+                "FROM bsp_item WHERE bsp_item.per_price IS NULL " .
+                ") " .
+                "item_data";
+        $command = Yii::app()->db->createCommand($sql);
+        $data = $command->queryAll();
+        $data_graph = array(
+            0 => array(
+                "data" => ($data[1]['total_items'] * 100) / $data[0]['total_items'],
+                "label" => $data[1]['label'],
+                "color" => "#B22222",
+            ),
+            1 => array(
+                "data" => ($data[2]['total_items'] * 100) / $data[0]['total_items'],
+                "label" => $data[2]['label'],
+                "color" => "#0000CD",
+            ),
+            2 => array(
+                "data" => ($data[3]['total_items'] * 100) / $data[0]['total_items'],
+                "label" => $data[3]['label'],
+                "color" => "#00FFFF",
+            ),
+            3 => array(
+                "data" => ($data[4]['total_items'] * 100) / $data[0]['total_items'],
+                "label" => $data[4]['label'],
+                "color" => "#8A2BE2",
+            ),
+            4 => array(
+                "data" => ($data[5]['total_items'] * 100) / $data[0]['total_items'],
+                "label" => $data[5]['label'],
+                "color" => "#D2691E",
+            ),
+            5 => array(
+                "data" => ($data[6]['total_items'] * 100) / $data[0]['total_items'],
+                "label" => $data[6]['label'],
+                "color" => "#006400",
+            ),
+        );
+        unset($data);
         ?>
-
-        <div class="pieStats" style="height: 230px;width:100%;margin-top:15px; margin-bottom:15px;"></div>
+        <script>
+            var pie_data_graph = <?php echo CJSON::encode($data_graph); ?>;
+        </script>    
+        <div  class="pieStats"  style="height: 230px;width:100%;margin-top:15px; margin-bottom:15px;"></div>
 
         <?php $this->endWidget(); ?>
     </div>
