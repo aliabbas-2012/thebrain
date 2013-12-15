@@ -5,7 +5,8 @@ $this->pageTitle = Yii::app()->name;
 $baseUrl = Yii::app()->theme->baseUrl;
 ?>
 
-
+<script src="<?php echo Yii::app()->theme->baseUrl ?>/js/jquery.easy-pie-chart.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo Yii::app()->theme->baseUrl ?>/css/piechart.css"/>
 <div class="row-fluid">
     <div class="span3 ">
         <div class="stat-block">
@@ -61,7 +62,159 @@ $baseUrl = Yii::app()->theme->baseUrl;
         </div>
     </div>
 </div>
-
+<div class="row-fluid">
+    <?php
+    $sql = "SELECT total_items,label " .
+            "FROM ( " .
+            "SELECT " .
+            "count(id) as  total_items,'Total' as label " .
+            "FROM bsp_item " .
+            "UNION ALL " .
+            "SELECT " .
+            "count(id) as  total_items,'Fix Price' as label " .
+            "FROM bsp_item WHERE bsp_item.per_price = 1 " .
+            "UNION ALL " .
+            "SELECT " .
+            "count(id) as  total_items,'Price per hour' as label " .
+            "FROM bsp_item WHERE bsp_item.per_price = 2 " .
+            "UNION ALL " .
+            "SELECT " .
+            "count(id) as  total_items,'Price per day' as label " .
+            "FROM bsp_item WHERE bsp_item.per_price = 3 " .
+            "UNION ALL " .
+            "SELECT " .
+            "count(id) as  total_items,'Price per week' as label " .
+            "FROM bsp_item WHERE bsp_item.per_price = 4 " .
+            "UNION ALL " .
+            "SELECT " .
+            "count(id) as  total_items,'Price per month' as label " .
+            "FROM bsp_item WHERE bsp_item.per_price = 5 " .
+            "UNION ALL " .
+            "SELECT " .
+            "count(id) as  total_items,'None' as label " .
+            "FROM bsp_item WHERE bsp_item.per_price IS NULL " .
+            ") " .
+            "item_data";
+    $command = Yii::app()->db->createCommand($sql);
+    $data = $command->queryAll();
+    $data_graph = array(
+        0 => array(
+            "data" => ($data[1]['total_items'] * 100) / $data[0]['total_items'],
+            "label" => $data[1]['label'],
+            "color" => "#B22222",
+        ),
+        1 => array(
+            "data" => ($data[2]['total_items'] * 100) / $data[0]['total_items'],
+            "label" => $data[2]['label'],
+            "color" => "#0000CD",
+        ),
+        2 => array(
+            "data" => ($data[3]['total_items'] * 100) / $data[0]['total_items'],
+            "label" => $data[3]['label'],
+            "color" => "#00FFFF",
+        ),
+        3 => array(
+            "data" => ($data[4]['total_items'] * 100) / $data[0]['total_items'],
+            "label" => $data[4]['label'],
+            "color" => "#8A2BE2",
+        ),
+        4 => array(
+            "data" => ($data[5]['total_items'] * 100) / $data[0]['total_items'],
+            "label" => $data[5]['label'],
+            "color" => "#D2691E",
+        ),
+        5 => array(
+            "data" => ($data[6]['total_items'] * 100) / $data[0]['total_items'],
+            "label" => $data[6]['label'],
+            "color" => "#006400",
+        ),
+    );
+    ?>
+    <div class="span2">
+        <?php
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => '<span class="icon-th-list"></span> Fix Price',
+            'titleCssClass' => ''
+        ));
+        ?>
+        <div class="chart" data-percent="<?php echo $data_graph[0]['data']; ?>"><?php echo $data_graph[0]['data']; ?>%</div>
+        <div class="chart-bottom-heading"><span class="label label-info">Fix Price</span>
+        </div>
+        <?php
+        $this->endWidget();
+        ?>
+    </div>
+    <div class="span2">
+        <?php
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => '<span class="icon-th-list"></span> Price per hour',
+            'titleCssClass' => ''
+        ));
+        ?>
+        <div class="chart" data-percent="<?php echo $data_graph[1]['data']; ?>"><?php echo $data_graph[1]['data']; ?>%</div>
+        <div class="chart-bottom-heading"><span class="label label-info">Price per hour</span>
+        </div>
+        <?php
+        $this->endWidget();
+        ?>
+    </div>
+    <div class="span2">
+        <?php
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => '<span class="icon-th-list"></span> Price per day',
+            'titleCssClass' => ''
+        ));
+        ?>
+        <div class="chart" data-percent="<?php echo $data_graph[2]['data']; ?>"><?php echo $data_graph[2]['data']; ?>%</div>
+        <div class="chart-bottom-heading"><span class="label label-info">Price per day</span>
+        </div>
+        <?php
+        $this->endWidget();
+        ?>
+    </div>
+    <div class="span2">
+        <?php
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => '<span class="icon-th-list"></span> Price per week',
+            'titleCssClass' => ''
+        ));
+        ?>
+        <div class="chart" data-percent="<?php echo $data_graph[3]['data']; ?>"><?php echo $data_graph[3]['data']; ?>%</div>
+        <div class="chart-bottom-heading"><span class="label label-info">Price per week</span>
+        </div>
+        <?php
+        $this->endWidget();
+        ?>
+    </div>
+    <div class="span2">
+        <?php
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => '<span class="icon-th-list"></span> Price per month',
+            'titleCssClass' => ''
+        ));
+        ?>
+        <div class="chart" data-percent="<?php echo $data_graph[4]['data']; ?>"><?php echo $data_graph[4]['data']; ?>%</div>
+        <div class="chart-bottom-heading"><span class="label label-info">Price per month</span>
+        </div>
+        <?php
+        $this->endWidget();
+        ?>
+    </div>
+    <div class="span2">
+        <?php
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => '<span class="icon-th-list"></span> None',
+            'titleCssClass' => ''
+        ));
+        ?>
+        <div class="chart" data-percent="<?php echo $data_graph[5]['data']; ?>"><?php echo $data_graph[5]['data']; ?>%</div>
+        <div class="chart-bottom-heading"><span class="label label-info">None</span>
+        </div>
+        <?php
+        $this->endWidget();
+        ?>
+    </div>
+</div>    
 <div class="row-fluid">
 
     <div class="span6">
@@ -70,71 +223,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
             'title' => '<span class="icon-th-list"></span> Offers Pie Chart',
             'titleCssClass' => ''
         ));
-        $sql = "SELECT total_items,label " .
-                "FROM ( " .
-                "SELECT " .
-                "count(id) as  total_items,'Total' as label " .
-                "FROM bsp_item " .
-                "UNION ALL " .
-                "SELECT " .
-                "count(id) as  total_items,'Fix Price' as label " .
-                "FROM bsp_item WHERE bsp_item.per_price = 1 " .
-                "UNION ALL " .
-                "SELECT " .
-                "count(id) as  total_items,'Price per hour' as label " .
-                "FROM bsp_item WHERE bsp_item.per_price = 2 " .
-                "UNION ALL " .
-                "SELECT " .
-                "count(id) as  total_items,'Price per day' as label " .
-                "FROM bsp_item WHERE bsp_item.per_price = 3 " .
-                "UNION ALL " .
-                "SELECT " .
-                "count(id) as  total_items,'Price per week' as label " .
-                "FROM bsp_item WHERE bsp_item.per_price = 4 " .
-                "UNION ALL " .
-                "SELECT " .
-                "count(id) as  total_items,'Price per month' as label " .
-                "FROM bsp_item WHERE bsp_item.per_price = 5 " .
-                "UNION ALL " .
-                "SELECT " .
-                "count(id) as  total_items,'None' as label " .
-                "FROM bsp_item WHERE bsp_item.per_price IS NULL " .
-                ") " .
-                "item_data";
-        $command = Yii::app()->db->createCommand($sql);
-        $data = $command->queryAll();
-        $data_graph = array(
-            0 => array(
-                "data" => ($data[1]['total_items'] * 100) / $data[0]['total_items'],
-                "label" => $data[1]['label'],
-                "color" => "#B22222",
-            ),
-            1 => array(
-                "data" => ($data[2]['total_items'] * 100) / $data[0]['total_items'],
-                "label" => $data[2]['label'],
-                "color" => "#0000CD",
-            ),
-            2 => array(
-                "data" => ($data[3]['total_items'] * 100) / $data[0]['total_items'],
-                "label" => $data[3]['label'],
-                "color" => "#00FFFF",
-            ),
-            3 => array(
-                "data" => ($data[4]['total_items'] * 100) / $data[0]['total_items'],
-                "label" => $data[4]['label'],
-                "color" => "#8A2BE2",
-            ),
-            4 => array(
-                "data" => ($data[5]['total_items'] * 100) / $data[0]['total_items'],
-                "label" => $data[5]['label'],
-                "color" => "#D2691E",
-            ),
-            5 => array(
-                "data" => ($data[6]['total_items'] * 100) / $data[0]['total_items'],
-                "label" => $data[6]['label'],
-                "color" => "#006400",
-            ),
-        );
+
         unset($data);
         ?>
         <script>
@@ -770,5 +859,11 @@ $baseUrl = Yii::app()->theme->baseUrl;
                         v = this.cv;
                     }
                 });
+    });
+</script>
+<script>
+    $(function() {
+        // Easy pie charts
+        $('.chart').easyPieChart({animate: 1000});
     });
 </script>
