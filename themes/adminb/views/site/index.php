@@ -149,6 +149,17 @@ $baseUrl = Yii::app()->theme->baseUrl;
         <div class="summary">
             <ul>
                 <li>
+                    <?php
+                    $command = Yii::app()->db->createCommand('SELECT count(id) as  total_user FROM bsp_user WHERE type ="non-admin" ');
+                    $data = $command->queryScalar();
+                    ?>
+                    <span class="summary-icon">
+                        <img src="<?php echo $baseUrl; ?>/img/group.png" width="36" height="36" alt="Active Members">
+                    </span>
+                    <span class="summary-number"><?php echo $data ?></span>
+                    <span class="summary-title"> Total Active Members</span>
+                </li>
+                <li>
                     <span class="summary-icon">
                         <img src="<?php echo $baseUrl; ?>/img/credit.png" width="36" height="36" alt="Monthly Income">
                     </span>
@@ -177,17 +188,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
                     <span class="summary-number"><?php echo $data ?></span>
                     <span class="summary-title"> Rental Offers</span>
                 </li>
-                <li>
-                    <?php
-                    $command = Yii::app()->db->createCommand('SELECT count(id) as  total_user FROM bsp_user WHERE type ="non-admin" ');
-                    $data = $command->queryScalar();
-                    ?>
-                    <span class="summary-icon">
-                        <img src="<?php echo $baseUrl; ?>/img/group.png" width="36" height="36" alt="Active Members">
-                    </span>
-                    <span class="summary-number"><?php echo $data ?></span>
-                    <span class="summary-title"> Active Members</span>
-                </li>
+
                 <li>
                     <?php
                     $command = Yii::app()->db->createCommand('SELECT count(id) as  total FROM bsp_item WHERE WEEK(create_time) = WEEK(current_date)');
@@ -197,11 +198,50 @@ $baseUrl = Yii::app()->theme->baseUrl;
                         <img src="<?php echo $baseUrl; ?>/img/folder_page.png" width="36" height="36" alt="Recent Conversions">
                     </span>
                     <span class="summary-number"><?php echo $data ?></span>
-                    <span class="summary-title"> Recent Offers</span></li>
+                    <span class="summary-title"> Recent Offers</span>
+                </li>
 
             </ul>
         </div>
-
+    </div>
+    <div class="span3">
+        <div class="summary" style="float:left;width: 50%">
+            <ul>
+                <li>
+                    <?php
+                    $command = Yii::app()->db->createCommand('SELECT count(id) as  total_user FROM bsp_user WHERE fbmail IS NULL AND type ="non-admin" ');
+                    $data = $command->queryScalar();
+                    ?>
+                    <span class="summary-icon">
+                        <img src="<?php echo $baseUrl; ?>/img/group.png" width="36" height="36" alt="Active Members">
+                    </span>
+                    <span class="summary-number"><?php echo $data ?></span>
+                    <span class="summary-title"> Register On website</span>
+                </li>
+                <li>
+                    <?php
+                    $command = Yii::app()->db->createCommand('SELECT count(id) as  total_user FROM bsp_user WHERE fbmail IS NOT NULL AND type ="non-admin" ');
+                    $data = $command->queryScalar();
+                    ?>
+                    <span class="summary-icon">
+                        <img src="<?php echo $baseUrl; ?>/img/group.png" width="36" height="36" alt="Active Members">
+                    </span>
+                    <span class="summary-number"><?php echo $data ?></span>
+                    <span class="summary-title"> Login Using Face Book</span>
+                </li>
+                <li>
+                    <?php
+                    $command = Yii::app()->db->createCommand('SELECT count(id) as  total_user FROM bsp_user WHERE  type ="admin" ');
+                    $data = $command->queryScalar();
+                    ?>
+                    <span class="summary-icon">
+                        <img src="<?php echo $baseUrl; ?>/img/group.png" width="36" height="36" alt="Active Members">
+                    </span>
+                    <span class="summary-number"><?php echo $data ?></span>
+                    <span class="summary-title">Admin Account</span>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -288,7 +328,141 @@ $baseUrl = Yii::app()->theme->baseUrl;
 
     </div><!--/span-->
 </div><!--/row-->
+<div class="row-fluid">
 
+    <div class="span6">
+        <?php
+        $gridDataProvider = new CArrayDataProvider(array(
+            array('id' => 1, 'Total Post' => BspBlog::model()->count()),
+        ));
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => 'Blog',
+            'titleCssClass' => ''
+        ));
+
+        $this->widget('zii.widgets.grid.CGridView', array(
+            /* 'type'=>'striped bordered condensed', */
+            'htmlOptions' => array('class' => 'table table-striped table-bordered table-condensed'),
+            'dataProvider' => $gridDataProvider,
+            'template' => "{items}",
+            'columns' => array(
+                array('name' => 'Total Post', 'header' => 'Total Post'),
+            ),
+        ));
+        $this->endWidget();
+        ?>
+    </div><!--/span-->
+    <div class="span6">
+        <?php
+        $sql = "SELECT total_items,label " .
+                "FROM ( " .
+                "SELECT " .
+                "count(id) as  total_items,'Total' as label " .
+                "FROM bsp_item " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(bsp_item.id) as  total_items,'Total Visits' as label " .
+                "FROM bsp_item " .
+                "INNER JOIN bsp_item_log " .
+                "ON bsp_item_log.item_id = bsp_item.id " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(bsp_item.id) as  total_items,'Total Servies' as label " .
+                "FROM bsp_item WHERE bsp_item.group_id = 9 " .
+
+                "UNION ALL " .
+                "SELECT " .
+                "count(bsp_item.id) as  total_items,'Total Servies Visits' as label " .
+                "FROM bsp_item  " .
+                "INNER JOIN bsp_item_log " .
+                "ON bsp_item_log.item_id = bsp_item.id " .
+                "WHERE bsp_item.group_id = 9 " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(bsp_item.id) as  total_items,'Total Rental' as label " .
+                "FROM bsp_item WHERE bsp_item.group_id = 10 " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(bsp_item.id) as  total_items,'Total Rental Visits' as label " .
+                "FROM bsp_item " .
+                "INNER JOIN bsp_item_log " .
+                "ON bsp_item_log.item_id = bsp_item.id " .
+                "WHERE bsp_item.group_id = 10 " .
+                ") " .
+                "item_data";
+        $command = Yii::app()->db->createCommand($sql);
+        $data = $command->queryAll();
+        $gridDataProvider = new CArrayDataProvider(array(
+            array('id' => 1, 'Total Offers' => $data[0]['total_items'], 'Total Visits' => $data[1]['total_items']),
+        ));
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => 'Offers',
+            'titleCssClass' => ''
+        ));
+
+        $this->widget('zii.widgets.grid.CGridView', array(
+            /* 'type'=>'striped bordered condensed', */
+            'htmlOptions' => array('class' => 'table table-striped table-bordered table-condensed'),
+            'dataProvider' => $gridDataProvider,
+            'template' => "{items}",
+            'columns' => array(
+                array('name' => 'Total Offers',),
+                array('name' => 'Total Visits',),
+            ),
+        ));
+        $this->endWidget();
+        ?>
+    </div><!--/span-->
+</div>
+<div class="row-fluid">
+
+    <div class="span6">
+        <?php
+        $gridDataProvider = new CArrayDataProvider(array(
+            array('id' => 1, 'Rental Offers' => $data[4]['total_items'],"Total Visits"=>$data[5]['total_items']),
+        ));
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => 'Rental Offers',
+            'titleCssClass' => ''
+        ));
+
+        $this->widget('zii.widgets.grid.CGridView', array(
+            /* 'type'=>'striped bordered condensed', */
+            'htmlOptions' => array('class' => 'table table-striped table-bordered table-condensed'),
+            'dataProvider' => $gridDataProvider,
+            'template' => "{items}",
+            'columns' => array(
+                array('name' => 'Rental Offers',),
+                array('name' => 'Total Visits',),
+            ),
+        ));
+        $this->endWidget();
+        ?>
+    </div><!--/span-->
+    <div class="span6">
+        <?php
+        $gridDataProvider = new CArrayDataProvider(array(
+            array('id' => 1, 'Service Offers' => $data[2]['total_items'],"Total Visits"=>$data[3]['total_items']),
+        ));
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => 'Service Offers',
+            'titleCssClass' => ''
+        ));
+
+        $this->widget('zii.widgets.grid.CGridView', array(
+            /* 'type'=>'striped bordered condensed', */
+            'htmlOptions' => array('class' => 'table table-striped table-bordered table-condensed'),
+            'dataProvider' => $gridDataProvider,
+            'template' => "{items}",
+            'columns' => array(
+                array('name' => 'Service Offers',),
+                array('name' => 'Total Visits',),
+            ),
+        ));
+        $this->endWidget();
+        ?>
+    </div><!--/span-->
+</div>
 <div class="row-fluid">
     <?php
     $this->beginWidget('zii.widgets.CPortlet', array(
