@@ -369,7 +369,6 @@ $baseUrl = Yii::app()->theme->baseUrl;
                 "SELECT " .
                 "count(bsp_item.id) as  total_items,'Total Servies' as label " .
                 "FROM bsp_item WHERE bsp_item.group_id = 9 " .
-
                 "UNION ALL " .
                 "SELECT " .
                 "count(bsp_item.id) as  total_items,'Total Servies Visits' as label " .
@@ -388,6 +387,26 @@ $baseUrl = Yii::app()->theme->baseUrl;
                 "INNER JOIN bsp_item_log " .
                 "ON bsp_item_log.item_id = bsp_item.id " .
                 "WHERE bsp_item.group_id = 10 " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(bsp_faq.ID) as  total_items,'Total Faq' as label " .
+                "FROM bsp_faq " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(bsp_articla.ID) as  total_items,'Total Artical' as label " .
+                "FROM bsp_articla " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(bsp_advertising.ID) as  total_items,'Total Advertisng' as label " .
+                "FROM bsp_advertising " .
+                "UNION ALL " .
+                "SELECT " .
+                "count(bsp_comment.id) as  total_items,'Total Comments' as label " .
+                "FROM bsp_comment " .
+                "UNION ALL " .
+                "SELECT " .
+                "IFNULL(SUM(bsp_item_price_offer.price),0) as  total_items,'Total Price' as label " .
+                "FROM bsp_item_price_offer " .
                 ") " .
                 "item_data";
         $command = Yii::app()->db->createCommand($sql);
@@ -419,7 +438,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
     <div class="span6">
         <?php
         $gridDataProvider = new CArrayDataProvider(array(
-            array('id' => 1, 'Rental Offers' => $data[4]['total_items'],"Total Visits"=>$data[5]['total_items']),
+            array('id' => 1, 'Rental Offers' => $data[4]['total_items'], "Total Visits" => $data[5]['total_items']),
         ));
         $this->beginWidget('zii.widgets.CPortlet', array(
             'title' => 'Rental Offers',
@@ -442,7 +461,7 @@ $baseUrl = Yii::app()->theme->baseUrl;
     <div class="span6">
         <?php
         $gridDataProvider = new CArrayDataProvider(array(
-            array('id' => 1, 'Service Offers' => $data[2]['total_items'],"Total Visits"=>$data[3]['total_items']),
+            array('id' => 1, 'Service Offers' => $data[2]['total_items'], "Total Visits" => $data[3]['total_items']),
         ));
         $this->beginWidget('zii.widgets.CPortlet', array(
             'title' => 'Service Offers',
@@ -462,6 +481,127 @@ $baseUrl = Yii::app()->theme->baseUrl;
         $this->endWidget();
         ?>
     </div><!--/span-->
+</div>
+<!-- other information -->
+<div class="row-fluid">
+
+    <div class="span6">
+        <?php
+        $gridDataProvider = new CArrayDataProvider(array(
+            array('id' => 1, 'Total question & answer' => $data[6]['total_items']),
+        ));
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => 'FAQ',
+            'titleCssClass' => ''
+        ));
+
+        $this->widget('zii.widgets.grid.CGridView', array(
+            /* 'type'=>'striped bordered condensed', */
+            'htmlOptions' => array('class' => 'table table-striped table-bordered table-condensed'),
+            'dataProvider' => $gridDataProvider,
+            'template' => "{items}",
+            'columns' => array(
+                array('name' => 'Total question & answer',),
+            ),
+        ));
+        $this->endWidget();
+        ?>
+    </div><!--/span-->
+    <div class="span6">
+        <?php
+        $gridDataProvider = new CArrayDataProvider(array(
+            array('id' => 1, 'Total artical' => $data[7]['total_items']),
+        ));
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => 'Artical',
+            'titleCssClass' => ''
+        ));
+
+        $this->widget('zii.widgets.grid.CGridView', array(
+            /* 'type'=>'striped bordered condensed', */
+            'htmlOptions' => array('class' => 'table table-striped table-bordered table-condensed'),
+            'dataProvider' => $gridDataProvider,
+            'template' => "{items}",
+            'columns' => array(
+                array('name' => 'Total artical',),
+            ),
+        ));
+        $this->endWidget();
+        ?>
+    </div><!--/span-->
+</div>
+<div class="row-fluid">
+
+    <div class="span6">
+        <?php
+        $gridDataProvider = new CArrayDataProvider(array(
+            array('id' => 1, 'Total Advertisng' => $data[8]['total_items']),
+        ));
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => 'Advertisng',
+            'titleCssClass' => ''
+        ));
+
+        $this->widget('zii.widgets.grid.CGridView', array(
+            /* 'type'=>'striped bordered condensed', */
+            'htmlOptions' => array('class' => 'table table-striped table-bordered table-condensed'),
+            'dataProvider' => $gridDataProvider,
+            'template' => "{items}",
+            'columns' => array(
+                array('name' => 'Total Advertisng',),
+            ),
+        ));
+        $this->endWidget();
+        ?>
+    </div><!--/span-->
+    <div class="span6">
+        <?php
+        $gridDataProvider = new CArrayDataProvider(array(
+            array('id' => 1, 'Total Comment' => $data[9]['total_items']),
+        ));
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => 'Comment',
+            'titleCssClass' => ''
+        ));
+
+        $this->widget('zii.widgets.grid.CGridView', array(
+            /* 'type'=>'striped bordered condensed', */
+            'htmlOptions' => array('class' => 'table table-striped table-bordered table-condensed'),
+            'dataProvider' => $gridDataProvider,
+            'template' => "{items}",
+            'columns' => array(
+                array('name' => 'Total Comment',),
+            ),
+        ));
+        $this->endWidget();
+        ?>
+    </div><!--/span-->
+</div>
+<div class="row-fluid">
+
+    <div class="span6">
+        <?php
+        $gridDataProvider = new CArrayDataProvider(array(
+            array('id' => 1, 'Total Payment' => $data[10]['total_items']),
+        ));
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => 'Payment',
+            'titleCssClass' => ''
+        ));
+
+        $this->widget('zii.widgets.grid.CGridView', array(
+            /* 'type'=>'striped bordered condensed', */
+            'htmlOptions' => array('class' => 'table table-striped table-bordered table-condensed'),
+            'dataProvider' => $gridDataProvider,
+            'template' => "{items}",
+            'columns' => array(
+                array('name' => 'Total Payment',),
+            ),
+        ));
+        $this->endWidget();
+        ?>
+    </div><!--/span-->
+
 </div>
 <div class="row-fluid">
     <?php
