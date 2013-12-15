@@ -296,11 +296,25 @@ class BspItem extends DTActiveRecord {
             $crit = new CDbCriteria();
             $crit->group = "item_id";
             $crit->select = "item_id";
-            $crit->having = "count(item_id) >= 2";
+            //$crit->having = "count(item_id) >= 2";
+            $crit->limit = "10";
+            $crit->order = " count(item_id) DESC";
 
             $order_items = CHtml::listData(BspOrder::model()->findAll($crit), "item_id", "item_id");
 
             $criteria->addInCondition('id', $order_items);
+        }
+        if (!empty($this->most_visited)) {
+            $crit = new CDbCriteria();
+            $crit->group = "item_id";
+            $crit->select = "item_id";
+            //$crit->having = "count(item_id) >= 2";
+            $crit->limit = "10";
+            $crit->order = " count(item_id) DESC";
+
+            $visited_items = CHtml::listData(BspItemLog::model()->findAll($crit), "item_id", "item_id");
+
+            $criteria->addInCondition('id', $visited_items);
         }
 
         return new CActiveDataProvider($this, array(
