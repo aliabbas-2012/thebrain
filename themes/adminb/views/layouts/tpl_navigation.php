@@ -9,7 +9,10 @@
 
             <!-- Be sure to leave the brand out there if you want it shown -->
             <a class="brand" href="<?php echo $this->createUrl("/site/index"); ?>">
-                <?php echo Yii::app()->name ?> <small></small>
+                <?php
+                    echo CHtml::image(Yii::app()->theme->baseUrl."/img/logo.png",'',array("width"=>"160"));
+                ?>
+                <?php //echo Yii::app()->name ?> <small></small>
             </a>
 
             <div class="nav-collapse">
