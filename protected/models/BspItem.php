@@ -131,6 +131,7 @@ class BspItem extends DTActiveRecord {
             'item_related_sounds' => array(self::HAS_MANY, 'BspItemSoundUrl', 'item_id'),
             'item_keywords' => array(self::HAS_MANY, 'BspItemSearchKeyword', 'item_id'),
             'item_orders' => array(self::HAS_MANY, 'BspOrder', 'item_id'),
+            'item_logs' => array(self::HAS_MANY, 'BspItemLog', 'item_id'),
             //item of week
             'item_price_offers_fix' => array(self::HAS_MANY, 'BspItemPriceOffer', 'item_id'),
             'item_price_offers_hour' => array(self::HAS_MANY, 'BspItemPriceOfferHour', 'item_id', 'condition' => 'period = 2'),
@@ -336,6 +337,21 @@ class BspItem extends DTActiveRecord {
             unlink($path . $this->background_image);
         }
         return parent::afterSave();
+    }
+
+    /**
+     * Each time when user view record in detail view page save that user and
+     * some data to activity log. 
+     */
+    public function saveViewerForLog() {
+        $model = new BspItemLog;
+        $view_time = date("Y-m-d") . " " . date("H:i:s");
+        $ip_address = Yii::app()->request->getUserHostAddress();
+        $model->message = 'Viewed by ' . Yii::app()->user->name . ' on ' . $view_time . ' from ' . $ip_address . ' \n';
+        $model->item_id = $this->id;
+        $model->log_type = "viewed";
+        $model->ip_address = $ip_address;
+        $model->save();
     }
 
 }

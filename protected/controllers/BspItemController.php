@@ -43,6 +43,7 @@ class BspItemController extends Controller {
      */
     public function actionView($id) {
         $model = $this->loadModel($id);
+        $model->saveViewerForLog();
         $this->manageChildrens($model);
         $this->render('view', array(
             'model' => $model,

@@ -27,7 +27,7 @@ class DTActiveRecord extends CActiveRecord {
 
     public function __construct($scenario = 'insert') {
 
-        $this->_action = isset(Yii::app()->controller->action)?Yii::app()->controller->action->id:"";
+        $this->_action = isset(Yii::app()->controller->action) ? Yii::app()->controller->action->id : "";
         $this->_controller = Yii::app()->controller->id;
         $this->_current_module = get_class(Yii::app()->controller->getModule());
 
@@ -169,6 +169,8 @@ class DTActiveRecord extends CActiveRecord {
         parent::updateByPk($pk, $attributes, $condition, $params);
         return true;
     }
+
+   
 
 }
 
