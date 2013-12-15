@@ -39,12 +39,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
         'cssFile' => '',
     ),
     'columns' => array(
-        'status',
         'detail',
         'description',
         'detail_de',
         'description_de',
-        array('name' => "status",'$data->status == 1 ? "Active" : "Deactive"'),
+        array('name' => "status","value"=>'$data->status == 1 ? "Active" : "Deactive"'),
         array(
             'class' => 'CButtonColumn',
         ),

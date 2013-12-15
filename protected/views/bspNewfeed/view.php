@@ -26,7 +26,7 @@ $this->widget('zii.widgets.CDetailView', array(
         'description',
         'detail_de',
         'description_de',
-        array('name' => "status", $model->status == 1 ? "Active" : "Deactive"),
+        array('name' => "status","value"=> $model->status == 1 ? "Active" : "Deactive"),
     ),
 ));
 ?>
