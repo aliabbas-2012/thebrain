@@ -19,7 +19,7 @@
  */
 class BspMessage extends DTActiveRecord {
 
-    public $user_receive_name;
+    public $user_receive_name,$user_send_name;
 
     /**
      * @return string the associated database table name
