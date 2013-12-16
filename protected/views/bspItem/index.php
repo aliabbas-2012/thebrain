@@ -157,6 +157,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array('name' => 'category_id', 'value' => '!empty($data->category) ? $data->category->name : ""'),
         array('name' => 'sub_category_id', 'value' => '!empty($data->sub_category) ? $data->sub_category->name : ""'),
         'name',
+        array('name' => 'user_id', 'value' => '!empty($data->user_rel) ? $data->user_rel->username : ""'),
         array('name' => 'per_price', 'value' => '!empty($data->_per_price_options[$data->per_price]) ? $data->_per_price_options[$data->per_price] : ""'),
         array('name' => 'price', 'value' => '$data->price'),
         array('name' => 'discount_price', 'value' => '$data->discount_price',),

@@ -121,6 +121,7 @@ class BspItem extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'user_rel' => array(self::BELONGS_TO, 'Users', 'user_id'),
             'currency' => array(self::BELONGS_TO, 'BspCurrency', 'currency_id'),
             'group' => array(self::BELONGS_TO, 'BspCategory', 'group_id'),
             'category' => array(self::BELONGS_TO, 'BspCategory', 'category_id'),
