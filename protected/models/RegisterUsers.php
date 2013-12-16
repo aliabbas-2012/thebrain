@@ -25,7 +25,7 @@ class RegisterUsers extends Users {
             array('password password_repeat,password_hint', 'required'),
             array('username, user_email', 'unique'),
             array('user_email', 'email'),
-            array('password', 'compare', 'compareAttribute' => 'pwd_repeat'),
+            array('password', 'compare', 'compareAttribute' => 'password_repeat'),
         );
 
         return array_merge($rules, parent::rules());

@@ -183,7 +183,7 @@
 
 
     <div class="row-fluid buttons wide-button">
-        <?php echo CHtml::submitButton('Update', array('class' => 'btn btn btn-primary')); ?>
+        <?php echo CHtml::submitButton('Save', array('class' => 'btn btn btn-primary')); ?>
     </div>
     <?php $this->endWidget(); ?>
     <?php $this->endWidget(); ?>
