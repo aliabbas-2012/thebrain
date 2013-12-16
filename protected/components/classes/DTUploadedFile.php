@@ -26,7 +26,7 @@ class DTUploadedFile extends CUploadedFile {
         if (is_array($array)) {
             $newPath = $basePath;
             $array = array_merge(array("uploads"), $array);
-
+            //CVarDumper::dump($array,10,true);
             foreach ($array as $folder) {
                 $newPath.=DIRECTORY_SEPARATOR . $folder;
                 if (!is_dir($newPath)) {
