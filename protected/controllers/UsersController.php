@@ -191,7 +191,9 @@ class UsersController extends Controller {
      * @throws CHttpException
      */
     public function loadModel($id) {
-        $model = Users::model()->findByPk($id);
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("id <> " . Yii::app()->user->id);
+        $model = Users::model()->findByPk($id, $criteria);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;

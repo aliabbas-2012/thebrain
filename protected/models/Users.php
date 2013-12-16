@@ -212,6 +212,9 @@ class Users extends DTActiveRecord {
         $criteria->compare('update_time', $this->update_time, true);
         $criteria->compare('update_user_id', $this->update_user_id, true);
 
+
+        $criteria->addCondition("id <> " . Yii::app()->user->id." AND type ='non-admin'");
+
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
@@ -259,20 +262,21 @@ class Users extends DTActiveRecord {
     public function afterSave() {
         $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($this)));
         $this->uploadAvtar($path);
-        
+
         if (is_file($path . $this->background)) {
-            copy($path . $this->background, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey,"background")) . $this->background);
+            copy($path . $this->background, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey, "background")) . $this->background);
             unlink($path . $this->background);
         }
-        
+
         return parent::afterSave();
     }
+
     /**
      * 
      */
     public function uploadAvtar($path) {
         if (is_file($path . $this->avatar)) {
-            copy($path . $this->avatar, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey,"avatar")) . $this->avatar);
+            copy($path . $this->avatar, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey, "avatar")) . $this->avatar);
             unlink($path . $this->avatar);
         }
     }
