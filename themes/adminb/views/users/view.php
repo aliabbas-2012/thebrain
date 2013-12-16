@@ -4,16 +4,10 @@
 
 $this->breadcrumbs = array(
     'Users' => array('index'),
-    $model->title,
+    $model->username,
 );
 
-$this->menu = array(
-    array('label' => 'List Users', 'url' => array('index')),
-    array('label' => 'Create Users', 'url' => array('create')),
-    array('label' => 'Update Users', 'url' => array('update', 'id' => $model->id)),
-    array('label' => 'Delete Users', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => 'Manage Users', 'url' => array('admin')),
-);
+
 ?>
 
 
@@ -35,30 +29,20 @@ $this->menu = array(
 $this->widget('zii.widgets.CDetailView', array(
     'data' => $model,
     'attributes' => array(
-        'id',
+        'first_name',
+        'second_name',
         'username',
-        'title',
-        'email',
+        'user_email',
+        'birthday',
         array(
-            'name' => 'is_active',
-            'value' => $model->is_active == 1 ? "Yes" : "No",
+            'name' => 'gender',
+            'value' => $model->gender ==1?"Male":"Female",
             'type' => "raw",
         ),
-        array(
-            'name' => 'group_id',
-            'value' => !empty($model->group) ? $model->group->name : "",
-            'type' => "raw",
-        ),
-        array(
-            'name' => 'access_control_id',
-            'value' => !empty($model->access_contol) ? $model->access_contol->name : "",
-            'type' => "raw",
-        ),
-        array(
-            'name' => 'company_id',
-            'value' => !empty($this->list_companies[$model->company_id]) ? $this->list_companies[$model->company_id] : "",
-            'type' => "raw",
-        ),
+        'fbmail',
+        'paypal_mail',
+        'country',
+        'city',
     ),
 ));
 ?>

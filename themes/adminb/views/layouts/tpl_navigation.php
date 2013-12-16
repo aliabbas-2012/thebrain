@@ -10,7 +10,7 @@
             <!-- Be sure to leave the brand out there if you want it shown -->
             <a class="brand" href="<?php echo $this->createUrl("/site/index"); ?>">
                 <?php
-                    echo CHtml::image(Yii::app()->theme->baseUrl."/img/logo.png",'',array("width"=>"120"));
+                echo CHtml::image(Yii::app()->theme->baseUrl . "/img/logo.png", '', array("width" => "120"));
                 ?>
                 <?php //echo Yii::app()->name ?> <small></small>
             </a>
@@ -26,6 +26,14 @@
                                 'items' => array(
                                     array('label' => 'Create', 'url' => array('/bspBlog/create'), 'visible' => !Yii::app()->user->isGuest),
                                     array('label' => 'List', 'url' => array('/bspBlog/index'), 'visible' => !Yii::app()->user->isGuest),
+                                )),
+                            array('label' => 'Users <span class="caret"></span>',
+                                'url' => '#', 'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
+                                'visible' => !Yii::app()->user->isGuest,
+                                'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
+                                'items' => array(
+                                    array('label' => 'Create', 'url' => array('/users/create'), 'visible' => !Yii::app()->user->isGuest),
+                                    array('label' => 'List', 'url' => array('/users/index'), 'visible' => !Yii::app()->user->isGuest),
                                 )),
                             array('label' => 'Item <span class="caret"></span>',
                                 'url' => '#', 'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
