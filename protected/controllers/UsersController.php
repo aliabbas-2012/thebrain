@@ -63,13 +63,13 @@ class UsersController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new Users;
+        $model = new RegisterUsers;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Users'])) {
-            $model->attributes = $_POST['Users'];
+        if (isset($_POST['RegisterUsers'])) {
+            $model->attributes = $_POST['RegisterUsers'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
