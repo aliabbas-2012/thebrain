@@ -1,0 +1,6 @@
+user-agent: *
+
+Disallow: /loadArtical/9-term-conditions
+Disallow: /loadArtical/13
+Disallow: /loadArtical/10-privacy-policy
+
