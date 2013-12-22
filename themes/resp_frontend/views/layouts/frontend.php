@@ -95,9 +95,16 @@
                         </li>
                         <li class="dropdown">
                             <a  class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a >Action</a></li>                                
-                            </ul>
+                            <div class="dropdown-menu">
+                                <form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
+                                      <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
+                                      <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
+                                      <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
+                                      <label class="string optional" for="user_remember_me"> Remember me</label>
+                                     
+                                      <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="Sign In" />
+                                </form>                               
+                            </div>
                         </li>
 
                         <li>
