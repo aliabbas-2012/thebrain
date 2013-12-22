@@ -41,46 +41,130 @@
                         <span class="icon-bar"></span>
                     </button>
                     <?php
-                        //CVarDumper::dump(Yii::app()->homeUrl,10,true);
-                        //die;
+                    //CVarDumper::dump(Yii::app()->homeUrl,10,true);
+                    //die;
                     ?>
                     <a class="navbar-brand" href="<?php echo Yii::app()->homeUrl[0]; ?>">
-                        <?php 
-                            echo CHtml::image(Yii::app()->theme->baseUrl."/images/logo.png",'',array("width"=>"200"));
+                        <?php
+                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/logo.png", '', array("width" => "200"));
                         ?>
                     </a>
                 </div>
                 <div class="navbar-collapse collapse">
-                   
-                    <ul class="nav navbar-nav navbar-right">
+                    <?php
+                    $criteria = new CDbCriteria();
+                    $criteria->select = "ID,article_name,article_name_de,custom_url,custom_url_de";
+                    $articless = CHtml::listData(BspArticla::model()->findAll($criteria), "ID", "slug");
+
+                    $how_works = !empty($articless[8]) ? "8-" . $articless[8] : "8-how-it-works";
+
+                    $term_cond = !empty($articless[9]) ? "9-" . $articless[9] : "9-how-it-works";
+
+                    $privacy_pol = !empty($articless[10]) ? "10-" . $articless[10] : "10-how-it-works";
+                    ?>
+                    <ul class="nav navbar-nav navbar-right"> 
+                        <li class="dropdown">
+                            <a  class="dropdown-toggle" data-toggle="dropdown">
+                                <?php
+                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/notify.png", '', array("height" => "20"));
+                                ?>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <?php
+                                    echo CHtml::link(Yii::t('link', "Dashboard"), '');
+                                    ?>
+                                </li>                                
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a  class="dropdown-toggle" data-toggle="dropdown">
+                                <?php
+                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/mail.png", '', array("height" => "20"));
+                                ?>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <?php
+                                    echo CHtml::link(Yii::t('link', "View All Messages"), '');
+                                    ?>
+                                </li>                                
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a  class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a >Action</a></li>                                
+                            </ul>
+                        </li>
+
                         <li>
                             <?php
-                                echo CHtml::link("Home",$this->createUrl("/web/default/index"));
+                            echo CHtml::link("Home", $this->createUrl("/web/default/index"));
                             ?>
                         </li>
                         <li>
                             <?php
-                                echo CHtml::link("Blog",$this->createUrl("/web/blog/index"));
+                            echo CHtml::link("Blog", $this->createUrl("/web/blog/index"));
                             ?>                        
                         </li>
                         <li>
                             <?php
-                                echo CHtml::link("How It Works",$this->createUrl("/web/blog/index"));
+                            echo CHtml::link("How It Works", $this->createUrl("/web/blog/index"));
                             ?>                        
                         </li>
-                        
+
+
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+            <div class="container">
+
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav"> 
                         <li class="dropdown">
-                            <a  class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a >Action</a></li>
-                                <li><a >Another action</a></li>
-                                <li><a >Something else here</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>
-                                <li><a>Separated link</a></li>
-                                <li><a>One more separated link</a></li>
+                            <a  class="dropdown-toggle head_category" data-toggle="dropdown">
+                                <?php echo Yii::t('link', 'All Categories') ?>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu category_head_menu">
+                                <?php
+                                $data = BspCategory::model()->findAll(array('condition' => 'parent_id=0'));
+                                $i = 1;
+                                foreach ($data as $da) {
+                                    $link = Yii::app()->request->baseUrl . '/category/' . $da->id . '-' . MyHelper::convert_no_sign($da->name);
+                                    $cssClass = "";
+                                    if($da->name != "Services" && $da->name !="Rentals"){
+                                        $cssClass = "clearleft";
+                                    }
+                                    echo '<li id="menu-item-' . $i . '" class='.$cssClass.'><a href="javascript:void(0);">' . $da->name . '</a>';
+                                    
+                                    
+                                    echo CHtml::openTag("ul",array("class"=>""));
+                                    $subcate = BspCategory::model()->findAll(array('condition' => 'parent_id=' . $da->id));
+                                    foreach ($subcate as $sub) {
+                                        $slink = Yii::app()->request->baseUrl . '/category/' . $sub->id . '-' . MyHelper::convert_no_sign($sub->name);
+                                        echo '<li>';
+                                        echo '<a href="javascript:void(0);">' . $sub->name . '</a>';
+                                        echo '</li>';
+                                    }
+                                    echo CHtml::closeTag("ul");
+                                    echo '</li>';
+                                    
+                                    $i++;
+                                }
+                                ?>
+                                                                
                             </ul>
                         </li>
+
+
+
+
+
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
