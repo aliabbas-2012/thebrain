@@ -219,5 +219,9 @@ select.error
 }
 div.error {
     color: red;
+    font-size: 11px;
 }
 /*--------- Login Box ------------*/
+.login-border-top {
+    border-top: 1px;
+}

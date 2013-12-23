@@ -38,7 +38,7 @@
               })
                 .done(function( resp ) {
                     jQuery(".login-dropdown-menu").html(resp);
-                    if(jQuery.trim(jQuery("#login-form .error").html()) == ""){
+                    if(jQuery.trim(jQuery(".login-box div.error").html()) == ""){
                         window.location.reload();
                     }
                     
@@ -61,5 +61,5 @@
         }
         ?>
     </div>
-    <div style="border"
+    <div style="login-border-top"></div>
 </div>
