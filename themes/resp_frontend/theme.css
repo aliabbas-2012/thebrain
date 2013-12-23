@@ -149,6 +149,13 @@ ul.dropdown-menu li a {
         font-family: arial;
         padding-left: 0px;
     }
+    .login-border-top {
+        border-top:1px solid #E0E0E0;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        color:#000;    
+    }
 
 }
 #footer {
@@ -222,6 +229,4 @@ div.error {
     font-size: 11px;
 }
 /*--------- Login Box ------------*/
-.login-border-top {
-    border-top: 1px;
-}
+

@@ -24,7 +24,7 @@
      <?php echo $form->checkBox($model, 'rememberMe', array("style" => "float: left; margin-right: 10px;")); ?>
     <?php echo $form->label($model, 'rememberMe', array("class" => "string optional")); ?>
     <?php
-        echo CHtml::link("Forget Password ?",$this->createUrl("/web/user/forgetPass"),array("class"=>"optional"));
+    echo CHtml::link("Forget Password ?", $this->createUrl("/web/user/forgetPass"), array("class" => "optional"));
     ?>
     <?php
     echo CHtml::submitButton('Login', array(
@@ -55,11 +55,13 @@
             echo $model->getError('username');
             echo "<div class='clear'></div>";
             echo $model->getError('password');
-        }
-        else {
+        } else {
             echo "";
         }
         ?>
     </div>
-    <div style="login-border-top"></div>
+
+</div>
+<div class="login-border-top">
+    Don't have an account ? <?php echo CHtml::link("Sign Up", $this->createUrl("/web/user/register")) ?>
 </div>
