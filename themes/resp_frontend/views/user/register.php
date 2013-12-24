@@ -68,7 +68,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="form-group">
     <?php echo $form->labelEx($model, 'avatar', array('class' => 'control-label col-sm-2')); ?>
     <div class="col-lg-4">
-        
+
         <?php
         echo zHtml::kendoUploader($model, 'avatar', 'avatar', $this->createUrl("/site/uploadTemp", array("model" => get_class($model), "attribute" => "Users_avatar"))
         );
@@ -84,7 +84,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="form-group">
     <?php echo $form->labelEx($model, 'background', array('class' => 'control-label col-sm-2')); ?>
     <div class="col-lg-4">
-        
+
         <?php
         echo zHtml::kendoMultiUploader(1, $model, 'background', 'background', $this->createUrl("/site/uploadTemp", array("index" => 1, "model" => get_class($model), "attribute" => "Users_background"))
         );
@@ -243,7 +243,11 @@ $form = $this->beginWidget('CActiveForm', array(
 
 </div><!-- group -->
 
-
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Sign in</button>
+    </div>
+</div>
 
 <?php
 $this->endWidget();
