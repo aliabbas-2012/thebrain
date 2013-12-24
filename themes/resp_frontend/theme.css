@@ -1,5 +1,5 @@
 body {
-    padding-top: 70px;
+    
     padding-bottom: 30px;
 }
 
@@ -20,6 +20,7 @@ body {
     background-image: -webkit-gradient(linear, left bottom, left top, from(#fafcfc), color-stop(0.536, #f3f5f9), to(#ffffff));
     background-image: -moz-linear-gradient(90deg, #fafcfc 0%, #f3f5f9 53.6%, #ffffff 100%);
     border:0;
+    min-height: 120px ;
 }
 .navbar li > a {
     color: #414141 !important;
@@ -228,5 +229,6 @@ div.error {
     color: red;
     font-size: 11px;
 }
+
 /*--------- Login Box ------------*/
 
