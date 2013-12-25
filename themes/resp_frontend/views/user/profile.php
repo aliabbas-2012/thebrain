@@ -2,7 +2,7 @@
     <h2>
         Profile
         <?php
-        echo CHtml::link(CHtml::button("View Profile", array("class" => "btn btn-primary")), $this->createUrl("/users/profileview"), array("style" => "float:right"));
+        echo CHtml::link(CHtml::button("View Profile", array("class" => "btn btn-default")), $this->createUrl("/web/user/profileview"), array("style" => "float:right"));
         ?>
     </h2>
     <?php
