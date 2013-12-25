@@ -1,7 +1,7 @@
 <div class="page-header">
     <h1>Forgot Password <small></small></h1>
 </div>
-<div class="row-fluid">
+<div class="form-group-fluid">
 
     <div class="span6 offset3">
         <?php
@@ -26,23 +26,32 @@
                 'clientOptions' => array(
                     'validateOnSubmit' => true,
                 ),
+                'htmlOptions' => array(
+                    'class' => 'form-horizontal'
+                )
             ));
             ?>
 
             <p class="note">Fields with <span class="required">*</span> are required.</p>
 
-            <div class="row">
-                <?php echo $form->labelEx($model, 'email'); ?>
-                <?php echo $form->textField($model, 'email'); ?>
-                <?php echo $form->error($model, 'email', array("class" => 'alert alert-error')); ?>
+            <div class="form-group">
+                <?php echo $form->labelEx($model, 'email', array('class' => 'control-label col-sm-2')); ?>
+                <div class="col-lg-4">
+                    <?php echo $form->textField($model, 'email', array('class' => 'form-control')); ?>
+                    <?php echo $form->error($model, 'email', array("class" => 'alert alert-error')); ?>
+                </div>
+
             </div>
 
 
-            <div class="row buttons">
-                <?php echo CHtml::submitButton('Submit', array('class' => 'btn btn btn-primary')); ?>
-                <?php
-                echo CHtml::link("login", $this->createUrl("/site/login"));
-                ?>
+            <div class="form-group buttons">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <?php echo CHtml::submitButton('Submit', array('class' => 'btn btn-default')); ?>
+                    <?php
+                    echo CHtml::link("login", $this->createUrl("/web/site/login"));
+                    ?>
+                </div>
+
             </div>
 
             <?php $this->endWidget(); ?>

@@ -250,7 +250,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 </div><!-- group -->
 
-<div class="form-group">
+<div class="form-group buttons">
     <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default">Sign in</button>
     </div>

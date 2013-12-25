@@ -24,7 +24,6 @@ class UserController extends Controller {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
-                    
                     'changepass',
                     'profile',
                     'profileview'
@@ -34,7 +33,8 @@ class UserController extends Controller {
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
                     'forget',
-                    'resetPass'
+                    'resetPass',
+                    'register',
                 ),
                 'users' => array('?'),
             ),
@@ -100,7 +100,7 @@ class UserController extends Controller {
                 }
             }
 
-            $this->render('changepass', array('model' => $model));
+            $this->render('//user/changepass', array('model' => $model));
         }
     }
 
@@ -119,7 +119,7 @@ class UserController extends Controller {
             }
         }
 
-        $this->render("profile", array("model" => $model));
+        $this->render("//user/profile", array("model" => $model));
     }
 
     /**
@@ -128,14 +128,14 @@ class UserController extends Controller {
     public function actionProfileview() {
         $model = Users::model()->findByPk(Yii::app()->user->id);
 
-        $this->render("profileview", array("model" => $model));
+        $this->render("//user/profileview", array("model" => $model));
     }
 
     /**
      * forget password
      */
     public function actionForget() {
-        $this->layout = "//layouts/column1";
+
         $model = new ForgetForm();
 
 
@@ -168,7 +168,7 @@ class UserController extends Controller {
             }
         }
         // display the login form
-        $this->render('forget', array('model' => $model));
+        $this->render('//user/forget', array('model' => $model));
     }
 
     /**
@@ -192,7 +192,7 @@ class UserController extends Controller {
                     $this->redirect($this->createUrl("/site/login"));
                 }
             }
-            $this->render('resetPass', array('model' => $model));
+            $this->render('//user/resetPass', array('model' => $model));
         } else {
             echo "Invalid Key";
         }
