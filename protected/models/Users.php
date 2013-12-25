@@ -55,7 +55,7 @@ class Users extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('username, user_email, store_url, lastActiveTime, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('username, user_email, store_url, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('lat, lng', 'numerical'),
             array('first_name, second_name, paypal_mail, password', 'length', 'max' => 50),
             array('username, user_email, store_url, fbmail, address, email_authenticate', 'length', 'max' => 255),
@@ -67,7 +67,7 @@ class Users extends DTActiveRecord {
             array('country', 'length', 'max' => 100),
             array('zipcode', 'length', 'max' => 45),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
-            array('birthday, description, sRecentList, sWishList', 'safe'),
+            array('lastActiveTime,birthday, description, sRecentList, sWishList', 'safe'),
             array('fbmail,paypal_mail', 'email'),
             array('user_email', $this->isNewRecord ? 'email' : "safe"),
             array('user_email,username', 'unique'),

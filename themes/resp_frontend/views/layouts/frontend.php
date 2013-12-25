@@ -30,7 +30,10 @@
     </head>
 
     <body>
+        <div id="loading" align="center">
+            Please Wait
 
+        </div>
         <!-- Fixed navbar -->
         <div class="navbar navbar-inverse" role="navigation">
             <div class="container">

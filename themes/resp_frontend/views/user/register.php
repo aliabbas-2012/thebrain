@@ -1,5 +1,13 @@
 <h3>Register Yourself</h3>
 <?php
+if (Yii::app()->user->hasFlash('success')):
+    echo CHtml::openTag("div", array("class" => "alert-success"));
+    echo Yii::app()->user->getFlash('success');
+    echo CHtml::closeTag("div");
+endif;
+
+?>
+<?php
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'users-form',
     'enableAjaxValidation' => false,
@@ -54,98 +62,6 @@ $form = $this->beginWidget('CActiveForm', array(
 
 
 
-<div class="form-group">
-    <?php echo $form->labelEx($model, 'phone', array('class' => 'control-label col-sm-2')); ?>
-    <div class="col-lg-4">
-        <?php echo $form->textField($model, 'phone', array('class' => 'form-control', 'maxlength' => 30)); ?>
-        <?php echo $form->error($model, 'phone'); ?>
-
-    </div>
-
-</div><!-- group -->
-
-
-<div class="form-group">
-    <?php echo $form->labelEx($model, 'avatar', array('class' => 'control-label col-sm-2')); ?>
-    <div class="col-lg-4">
-
-        <?php
-        echo zHtml::kendoUploader($model, 'avatar', 'avatar', $this->createUrl("/site/uploadTemp", array("model" => get_class($model), "attribute" => "Users_avatar"))
-        );
-        echo zHtml::imageLinkRemove($model, 'avatar', get_class($model));
-        ?>
-        <?php echo $form->error($model, 'avatar'); ?>
-
-    </div>
-
-</div><!-- group -->
-
-
-<div class="form-group">
-    <?php echo $form->labelEx($model, 'background', array('class' => 'control-label col-sm-2')); ?>
-    <div class="col-lg-4">
-
-        <?php
-        echo zHtml::kendoMultiUploader(1, $model, 'background', 'background', $this->createUrl("/site/uploadTemp", array("index" => 1, "model" => get_class($model), "attribute" => "Users_background"))
-        );
-        echo zHtml::imageLinkRemove($model, 'background', get_class($model));
-        ?>
-        <?php echo $form->error($model, 'background'); ?>
-
-    </div>
-
-</div><!-- group -->
-
-
-
-<div class="form-group">
-    <?php echo $form->labelEx($model, 'birthday', array('class' => 'control-label col-sm-2')); ?>
-    <div class="col-lg-4">
-        <?php
-        $form->widget('zii.widgets.jui.CJuiDatePicker', array(
-            'model' => $model,
-            'attribute' => 'birthday',
-            'value' => $model->birthday,
-            'options' => array(
-                'showButtonPanel' => true,
-                'changeYear' => true,
-                'dateFormat' => 'yy-mm-dd',
-            ),
-            'htmlOptions' => array(
-                'class' => 'form-control'
-            ),
-        ));
-        ;
-        ?>
-        <?php echo $form->error($model, 'birthday'); ?>
-
-    </div>
-
-</div><!-- group -->
-
-
-<div class="form-group">
-    <?php echo $form->labelEx($model, 'gender', array('class' => 'control-label col-sm-2')); ?>
-    <div class="col-lg-4">
-        <?php echo $form->textField($model, 'gender', array('class' => 'form-control', 'maxlength' => 6)); ?>
-        <?php echo $form->error($model, 'gender'); ?>
-
-    </div>
-
-</div><!-- group -->
-
-
-<div class="form-group">
-    <?php echo $form->labelEx($model, 'store_url', array('class' => 'control-label col-sm-2')); ?>
-    <div class="col-lg-4">
-        <?php echo $form->textField($model, 'store_url', array('class' => 'form-control', 'maxlength' => 255)); ?>
-        <?php echo $form->error($model, 'store_url'); ?>
-
-    </div>
-
-</div><!-- group -->
-
-
 
 
 <div class="form-group">
@@ -173,6 +89,97 @@ $form = $this->beginWidget('CActiveForm', array(
     <div class="col-lg-4">
         <?php echo $form->textField($model, 'password_hint', array('class' => 'form-control', 'maxlength' => 200)); ?>
         <?php echo $form->error($model, 'password_hint'); ?>
+
+    </div>
+
+</div><!-- group -->
+
+<div class="form-group">
+    <?php echo $form->labelEx($model, 'phone', array('class' => 'control-label col-sm-2')); ?>
+    <div class="col-lg-4">
+        <?php echo $form->textField($model, 'phone', array('class' => 'form-control', 'maxlength' => 30)); ?>
+        <?php echo $form->error($model, 'phone'); ?>
+
+    </div>
+
+</div><!-- group -->
+
+
+<div class="form-group">
+    <?php echo $form->labelEx($model, 'avatar', array('class' => 'control-label col-sm-2')); ?>
+    <div class="col-lg-4">
+
+        <?php
+        echo zHtml::kendoUploader($model, 'avatar', 'avatar', $this->createUrl("/site/uploadTemp", array("model" => get_class($model), "attribute" => "RegisterUsers_avatar"))
+        );
+        echo zHtml::imageLinkRemove($model, 'avatar', get_class($model));
+        ?>
+        <?php echo $form->error($model, 'avatar'); ?>
+
+    </div>
+
+</div><!-- group -->
+
+
+<div class="form-group">
+    <?php echo $form->labelEx($model, 'background', array('class' => 'control-label col-sm-2')); ?>
+    <div class="col-lg-4">
+
+        <?php
+        echo zHtml::kendoMultiUploader(1, $model, 'background', 'background', $this->createUrl("/site/uploadTemp", array("index" => 1, "model" => get_class($model), "attribute" => "RegisterUsers_background"))
+        );
+        echo zHtml::imageLinkRemove($model, 'background', get_class($model));
+        ?>
+        <?php echo $form->error($model, 'background'); ?>
+
+    </div>
+
+</div><!-- group -->
+
+
+
+<div class="form-group">
+    <?php echo $form->labelEx($model, 'birthday', array('class' => 'control-label col-sm-2')); ?>
+    <div class="col-lg-4">
+        <?php
+        $form->widget('zii.widgets.jui.CJuiDatePicker', array(
+            'model' => $model,
+            'attribute' => 'birthday',
+            'value' => $model->birthday,
+            'options' => array(
+                'showButtonPanel' => true,
+                'changeYear' => true,
+                'dateFormat' => 'y/m/d',
+            ),
+            'htmlOptions' => array(
+                'class' => 'form-control'
+            ),
+        ));
+        ;
+        ?>
+        <?php echo $form->error($model, 'birthday'); ?>
+
+    </div>
+
+</div><!-- group -->
+
+
+<div class="form-group">
+    <?php echo $form->labelEx($model, 'gender', array('class' => 'control-label col-sm-2')); ?>
+    <div class="col-lg-4">
+        <?php echo $form->dropDownList($model, 'gender', array("1" => "Male", "2" => "Female"), array('class' => 'form-control', 'maxlength' => 6)); ?>
+        <?php echo $form->error($model, 'gender'); ?>
+
+    </div>
+
+</div><!-- group -->
+
+
+<div class="form-group">
+    <?php echo $form->labelEx($model, 'store_url', array('class' => 'control-label col-sm-2')); ?>
+    <div class="col-lg-4">
+        <?php echo $form->textField($model, 'store_url', array('class' => 'form-control', 'maxlength' => 255)); ?>
+        <?php echo $form->error($model, 'store_url'); ?>
 
     </div>
 
