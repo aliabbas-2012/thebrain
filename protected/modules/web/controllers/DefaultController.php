@@ -5,7 +5,9 @@ class DefaultController extends Controller {
     public function actionIndex() {
         $this->render('//default/index');
     }
-
+    /**
+     * ajax based login
+     */
     public function actionLogin() {
         $model = new LoginForm;
 

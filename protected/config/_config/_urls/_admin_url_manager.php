@@ -8,5 +8,6 @@
 $rules_admin = array(
     /** admin url ** */
      'admin' => '/site/login',
+     'login' => '/site/login',
 );
 ?>

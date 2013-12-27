@@ -101,6 +101,10 @@ class SiteController extends Controller {
         $module = $model;
         if (isset($_REQUEST['action']) && $_REQUEST['action'] == "remove") {
             $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, $module));
+            //in case of attribute 
+            if (!empty($attribute)) {
+                $path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, $module, $attribute));
+            }
             if (is_file($path . $_REQUEST['fileNames'])) {
                 unlink($path . $_REQUEST['fileNames']);
             }
@@ -130,8 +134,11 @@ class SiteController extends Controller {
 
                 $model->upload_temp_image = $img_file;
                 if ($model->validate()) {
-
-                    $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("temp", Yii::app()->user->id, $module));
+                    if (!empty($attribute)) {
+                        $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("temp", Yii::app()->user->id, $module, $attribute));
+                    } else {
+                        $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("temp", Yii::app()->user->id, $module));
+                    }
                     if (!empty($img_file)) {
                         $img_file->saveAs($upload_path . $img_file->name);
                         echo json_encode(array('file' => $img_file->name, "path" => $upload_path, "attribute" => $attribute));
@@ -163,6 +170,5 @@ class SiteController extends Controller {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
     }
-    
-   
+
 }

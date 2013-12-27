@@ -30,6 +30,7 @@ class zHtml extends CHtml {
             return CHtml::link($model->$attribute, $path, array("target" => "_blank"));
         }
     }
+
     /**
      * static link
      * of image
@@ -38,9 +39,9 @@ class zHtml extends CHtml {
      * @param type $attribute
      * @param type $folder
      */
-    public static function imageDoubleLink($model, $attribute, $folder,$folder2) {
+    public static function imageDoubleLink($model, $attribute, $folder, $folder2) {
         if (!$model->isNewRecord && !empty($model->$attribute)) {
-            $path = Yii::app()->baseUrl . "/uploads/" . $folder . "/" . $model->primaryKey . "/".$folder2."/" . $model->$attribute;
+            $path = Yii::app()->baseUrl . "/uploads/" . $folder . "/" . $model->primaryKey . "/" . $folder2 . "/" . $model->$attribute;
 
             return CHtml::link($model->$attribute, $path, array("target" => "_blank"));
         }
@@ -52,10 +53,14 @@ class zHtml extends CHtml {
      * @param type $model
      * @param type $attribute
      */
-    public static function imageLinkRemove($model, $attribute, $folder) {
+    public static function imageLinkRemove($model, $attribute, $folder, $attribute_folder = "") {
         if (!$model->isNewRecord && !empty($model->$attribute)) {
-            $path = Yii::app()->baseUrl . "/uploads/" . $folder . "/" . $model->primaryKey . "/" . $model->$attribute;
-            $link = CHtml::link($model->$attribute, $path, array("target" => "_blank", "id" => $attribute . "_image",  "style"=>"margin-left:150px;"));
+            $path = Yii::app()->baseUrl . "/uploads/" . $folder . "/" . $model->primaryKey;
+            if (!empty($attribute_folder)) {
+                 $path.="/" . $attribute_folder;
+            }
+            $path.="/" . $model->$attribute;
+            $link = CHtml::link($model->$attribute, $path, array("target" => "_blank", "id" => $attribute . "_image", "style" => "margin-left:150px;"));
             $url = Yii::app()->controller->createUrl("/site/deleteTemp", array(
                 "action" => "removeactual",
                 "id" => $model->id,
@@ -67,7 +72,7 @@ class zHtml extends CHtml {
             $removeLink = CHtml::link("Remove", "javascript.void(0)", array(
                         'onclick' => 'thepuzzleadmin.removeElementAjax("' . $url . '",' . $elments . ',"' . $updateElem . '");return false;',
                         "id" => $attribute . "_remove",
-                          "style"=>"margin-left:10px;"
+                        "style" => "margin-left:10px;"
                             )
             );
 

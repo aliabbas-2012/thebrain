@@ -95,13 +95,48 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a  class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
-                            <div class="dropdown-menu login-dropdown-menu">
-                                <?php
-                                $model = new LoginForm;
-                                $this->renderPartial("//common/_login_box", array("model" => $model));
+                            <?php
+                            /**
+                             * login
+                             */
+                            if (empty(Yii::app()->user)):
                                 ?>
-                            </div>
+                                <a  class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
+                                <div class="dropdown-menu login-dropdown-menu">
+                                    <?php
+                                    $model = new LoginForm;
+                                    $this->renderPartial("//common/_login_box", array("model" => $model));
+                                    ?>
+                                </div>
+                                <?php
+                            else :
+                                ?>
+                                <a  class="dropdown-toggle" data-toggle="dropdown">
+                                    <?php
+                                    echo Yii::app()->user->name;
+                                    ?>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <?php
+                                        echo CHtml::link(Yii::t('link', "View Profile"), $this->createUrl('/web/user/profileview'));
+                                        ?>
+                                    </li>                                
+                                    <li>
+                                        <?php
+                                        echo CHtml::link(Yii::t('link', "Edit Profile"), $this->createUrl('/web/user/profile'));
+                                        ?>
+                                    </li>                                
+                                    <li>
+                                        <?php
+                                        echo CHtml::link(Yii::t('link', "Logout "), $this->createUrl('/site/logout'));
+                                        ?>
+                                    </li>                                
+                                </ul>
+                            <?php
+                            endif;
+                            ?>
                         </li>
 
                         <li>

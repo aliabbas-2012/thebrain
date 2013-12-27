@@ -32,9 +32,10 @@ class UserController extends Controller {
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
-                    'forget',
+                    'forgetPass',
                     'resetPass',
                     'register',
+                    'login'
                 ),
                 'users' => array('?'),
             ),
@@ -115,7 +116,7 @@ class UserController extends Controller {
             $model->attributes = $_POST['Users'];
 
             if ($model->save()) {
-                $this->redirect($this->createUrl("users/profileview"));
+                $this->redirect($this->createUrl("/web/user/profileview"));
             }
         }
 
@@ -132,9 +133,33 @@ class UserController extends Controller {
     }
 
     /**
+     * Displays the login page
+     */
+    public function actionLogin() {
+        
+        $model = new LoginForm;
+
+        // if it is ajax validation request
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        // collect user input data
+        if (isset($_POST['LoginForm'])) {
+            $model->attributes = $_POST['LoginForm'];
+            // validate user input and redirect to the previous page if valid
+            if ($model->validate() && $model->login())
+                $this->redirect(Yii::app()->user->returnUrl);
+        }
+        // display the login form
+        $this->render('//user/login', array('model' => $model));
+    }
+
+    /**
      * forget password
      */
-    public function actionForget() {
+    public function actionForgetPass() {
 
         $model = new ForgetForm();
 
