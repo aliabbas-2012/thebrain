@@ -1,5 +1,5 @@
 body {
-    
+
     padding-bottom: 30px;
 }
 
@@ -158,6 +158,10 @@ ul.dropdown-menu li a {
         color:#000;    
     }
 
+    .tabs-container {
+        margin-top: 30px;
+    }
+
 }
 #footer {
     height: 60px;
@@ -247,4 +251,180 @@ div.error,div.errorMessage {
     top: 0;
     z-index: 100000 !important;
 
+}
+.nav-tabs li {
+    border:1px solid #C0C0C0;
+}
+.nav-tabs li a {
+    font-size: 1.6em;
+    color:#D0D0D0;
+    border:none !important;
+}
+.nav-tabs li.active a {
+    font-size: 1.6em;
+    color:#414141;
+}
+.nav-tabs li.active {
+
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#fafcfc), color-stop(0.536, #f3f5f9), to(#ffffff));
+    background-image: -moz-linear-gradient(90deg, #fafcfc 0%, #f3f5f9 53.6%, #ffffff 100%);
+}
+.tab-content {
+    margin-top: 20px;
+}
+
+/** gallery css **/
+.info-item {
+    background: none repeat scroll center center rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid #EAEAEA;
+    bottom: 0;
+    display: none;
+    height: 100px;
+    padding-bottom: 10px;
+    position: absolute;
+    width: 90%;
+    z-index: 500;
+}
+.offer_name {
+    height: 50px;
+    margin: 5px 10px 0;
+}
+.offer_address {
+    color: #414141;
+    float: left;
+    font-size: 11px;
+    height: 25px;
+    line-height: 30px;
+    padding-left: 8px;
+    width: 70px;
+}
+.offer_address img {
+    left: 0;
+    margin-right: 5px;
+    max-height: 20px;
+    max-width: 20px;
+    position: relative;
+    top: -6px;
+}
+.info-item .offer_like {
+    height: 15px;
+    margin-left: 5px;
+    margin-top: 5px;
+    position: relative;
+    width: 15px;
+}
+
+.percentLike {
+    color: #414141;
+    float: left;
+    font-size: 11px;
+    height: 20px;
+    line-height: 30px;
+    width: 33px;
+}
+
+div.item-img-content div.info-item.hover-content a.favorAdd {
+    float: left;
+    margin-left: 0;
+    position: relative;
+}
+.favorAdd {
+    margin-bottom: 0;
+}
+
+div.item-img-content div.info-item.hover-content div.offer_numlike {
+    background: none no-repeat scroll center center rgba(0, 0, 0, 0);
+    border: 1px solid #CDCDCD;
+    border-radius: 3px;
+    color: #414141;
+    float: right;
+    font-family: Arial;
+    height: 21px;
+    line-height: 21px;
+    padding-left: 4px;
+    padding-top: 1px;
+    width: 40px;
+    font-size: 10px;
+
+}
+div.item-img-content div.info-item.hover-content a.favorAdd {
+    float: left;
+    margin-left: 15px;
+
+    position: relative;
+}
+.hover-option {
+    display: none;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 800;
+}
+.watch {
+    background: none repeat scroll center center rgba(255, 255, 255, 0.95);
+    float: left;
+    height: 30px;
+    padding-left: 5px;
+    width: 242px;
+    z-index: 900;
+}
+.watch {
+    background: none repeat scroll center center rgba(255, 255, 255, 0.95);
+    float: left;
+    height: 30px;
+    padding-left: 5px;
+    width: 242px;
+    z-index: 900;
+}
+.delete {
+    background: none repeat scroll center center #FFFFFF;
+    border-radius: 5px;
+    bottom: 40px;
+    float: right;
+    height: 25px;
+    margin-top: 10px;
+    position: relative;
+    text-align: center;
+    width: 34px;
+}
+
+.delete a {
+    display: block;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.delete img {
+    margin: 7px 10px;
+    z-index: 900;
+}
+.delete img {
+    position: relative;
+    width: 13px;
+}
+
+.cate-cotent {
+    height: 20px;
+    margin: 8px 5px 0;
+    padding: 2px 5px;
+}
+
+.catename {
+    color: #414141;
+    float: left;
+    font-size: 13px;
+    height: 20px;
+    line-height: 20px;
+    width: 40%;
+}
+.price-offer {
+    color: #414141;
+    float: right;
+    font-family: Arial;
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+    width: 25%;
 }

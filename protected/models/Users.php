@@ -262,10 +262,10 @@ class Users extends DTActiveRecord {
     public function afterSave() {
         $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($this)));
         $this->uploadAvtar($path);
-        $path.="Users_background".DIRECTORY_SEPARATOR;
-        
+        $path.="Users_background" . DIRECTORY_SEPARATOR;
+
         if (is_file($path . $this->background)) {
-            
+
             copy($path . $this->background, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey, "background")) . $this->background);
             unlink($path . $this->background);
         }
@@ -277,9 +277,10 @@ class Users extends DTActiveRecord {
      * 
      */
     public function uploadAvtar($path) {
-
+        $path.= "Users_avatar" . DIRECTORY_SEPARATOR;
+        
         if (is_file($path . $this->avatar)) {
-            $path.=   "Users_avatar".DIRECTORY_SEPARATOR;
+
             copy($path . $this->avatar, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey, "avatar")) . $this->avatar);
             unlink($path . $this->avatar);
         }

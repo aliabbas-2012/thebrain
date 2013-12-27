@@ -4,7 +4,7 @@
     if (!empty($user->avatar)) {
         echo CHtml::image(Yii::app()->baseUrl . "/uploads/Users/" . $user->id . "/avatar/" . $user->avatar, '', array("height" => 20));
     } else {
-        echo Yii::app()->user->name;
+        echo $user->username;
     }
     ?>
     <b class="caret"></b>

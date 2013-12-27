@@ -99,7 +99,7 @@
                             /**
                              * login
                              */
-                            if (empty(Yii::app()->user)):
+                            if (empty(Yii::app()->user->id)):
                                 ?>
                                 <a  class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
                                 <div class="dropdown-menu login-dropdown-menu">
