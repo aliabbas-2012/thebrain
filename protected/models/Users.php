@@ -269,8 +269,7 @@ class Users extends DTActiveRecord {
             copy($path . $this->background, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey, "background")) . $this->background);
             unlink($path . $this->background);
         }
-        
-        
+
         return parent::afterSave();
     }
 
