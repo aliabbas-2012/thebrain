@@ -92,7 +92,22 @@
 
         </div>
         <div class="tab-pane" id="saved_offers">
-            dssdsd 
+            <?php
+            $criteria = new CDbCriteria();
+            $criteria->select = "item_id";
+            $criteria->order = "id DESC";
+            $criteria->limit = "16";
+            $criteria->distinct = "item_id";
+
+            $saved_items = CHtml::listData(BspFarvorite::model()->findAll($criteria), 'item_id', 'item_id');
+            $criteria = new CDbCriteria();
+            $criteria->limit = "16";
+            $criteria->order = "id DESC";
+            $criteria->addInCondition('id', $saved_items);
+            $items = BspItem::model()->findAll($criteria);
+            $this->renderPartial("//default/_tab_items", array("items" => $items));
+            ?>
+
         </div>
 
     </div>
