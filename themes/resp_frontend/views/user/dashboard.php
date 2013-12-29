@@ -27,7 +27,7 @@
         <li><a href="#my_offers" data-toggle="tab">My Offers <span> <?php echo Yii::app()->user->user->numitems; ?> </span></a></li>
         <li><a href="#my_orders" data-toggle="tab">My Orders <span><?php echo Yii::app()->user->user->numseller_orders + Yii::app()->user->user->numbuyer_orders; ?></span></a></li>
         <li><a href="#settings" data-toggle="tab">Settings<span><?php echo $countper  * 10 ;?>%</a></span></li>
-        <li><a href="#payment" data-toggle="tab">Payment<span><?php echo Yii::app()->user->user->sellerPayment; ?></span></a></li>
+        <li><a href="#payment" data-toggle="tab">Payment<span><?php echo Yii::app()->user->user->sellerPayment." &euro;"; ?></span></a></li>
         <li><a href="#ratings" data-toggle="tab">Ratings<span><?php echo Yii::app()->user->user->getRatings(); ?></span></a></li>
 
     </ul>
