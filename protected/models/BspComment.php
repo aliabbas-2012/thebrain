@@ -1,24 +1,29 @@
 <?php
 
 /**
- * This is the model class for table "bsp_currency".
+ * This is the model class for table "bsp_comment".
  *
- * The followings are the available columns in table 'bsp_currency':
+ * The followings are the available columns in table 'bsp_comment':
  * @property integer $id
- * @property string $name
- * @property string $symbol
+ * @property integer $user_id
+ * @property integer $item_id
+ * @property integer $order_id
+ * @property integer $objType
+ * @property double $rating
+ * @property string $comment
+ * @property string $date_comment
  * @property string $create_time
  * @property string $create_user_id
  * @property string $update_time
  * @property string $update_user_id
  */
-class BspCurrency extends DTActiveRecord {
+class BspComment extends DTActiveRecord {
 
     /**
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'bsp_currency';
+        return 'bsp_comment';
     }
 
     /**
@@ -28,13 +33,14 @@ class BspCurrency extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('create_time, create_user_id, update_time, update_user_id', 'required'),
-            array('name', 'length', 'max' => 50),
-            array('symbol', 'length', 'max' => 255),
+            array('user_id, order_id, objType, rating, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('user_id, item_id, order_id, objType', 'numerical', 'integerOnly' => true),
+            array('rating', 'numerical'),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
+            array('comment, date_comment', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, name, symbol, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
+            array('id, user_id, item_id, order_id, objType, rating, comment, date_comment, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -45,7 +51,30 @@ class BspCurrency extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'order' => array(self::BELONGS_TO, 'Order', 'order_id'),
+            'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
         );
+    }
+    
+    /**
+     * get the comments related with order
+     * 
+     * @param type $user_id
+     * @return BspComment
+     */
+    public function seller($user_id) {
+
+        $this->getDbCriteria()->mergeWith(array(
+            'with' => array(
+                'order' => array(
+                    'select' => false,
+                    'condition' => 'user_id = order.buyer_id AND order.seller_id = :seller_id',
+                    'params' => array(':seller_id' => $user_id),
+                ),
+            ),
+        ));
+
+        return $this;
     }
 
     /**
@@ -54,8 +83,13 @@ class BspCurrency extends DTActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'name' => 'Name',
-            'symbol' => 'Symbol',
+            'user_id' => 'User',
+            'item_id' => 'Item',
+            'order_id' => 'Order',
+            'objType' => 'Obj Type',
+            'rating' => 'Rating',
+            'comment' => 'Comment',
+            'date_comment' => 'Date Comment',
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
             'update_time' => 'Update Time',
@@ -81,8 +115,13 @@ class BspCurrency extends DTActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
-        $criteria->compare('name', $this->name, true);
-        $criteria->compare('symbol', $this->symbol, true);
+        $criteria->compare('user_id', $this->user_id);
+        $criteria->compare('item_id', $this->item_id);
+        $criteria->compare('order_id', $this->order_id);
+        $criteria->compare('objType', $this->objType);
+        $criteria->compare('rating', $this->rating);
+        $criteria->compare('comment', $this->comment, true);
+        $criteria->compare('date_comment', $this->date_comment, true);
         $criteria->compare('create_time', $this->create_time, true);
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
@@ -97,31 +136,10 @@ class BspCurrency extends DTActiveRecord {
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
-     * @return BspCurrency the static model class
+     * @return BspComment the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
-    }
-
-    /**
-     * get Currency options
-     */
-    public function getCurrencies() {
-        $criteria = new CDbCriteria();
-        $criteria->select = "id,symbol";
-        $data = $this->findAll($criteria);
-        return CHtml::listData($data, "id", "symbol");
-    }
-
-    /**
-     * 
-     * @return type
-     */
-    public function afterFind() {
-        if (Yii::app()->controller->id == 'bspItem') {
-            $this->symbol = html_entity_decode($this->symbol);
-        }
-        return parent::afterFind();
     }
 
 }

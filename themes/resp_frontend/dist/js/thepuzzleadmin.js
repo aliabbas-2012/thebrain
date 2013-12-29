@@ -63,19 +63,20 @@ var thepuzzleadmin = {
      */
     updateElementAjax: function(ajax_url, update_element_id, resource_elem_id) {
 
-        if (jQuery("#" + resource_elem_id).val() != "") {
-            jQuery.ajax({
-                type: "POST",
-                url: ajax_url,
-                async: false,
-                data:
-                        {
-                            resource_elem_id: jQuery("#" + resource_elem_id).val(),
-                        }
-            }).done(function(response) {
+        jQuery.ajax({
+            type: "POST",
+            url: ajax_url,
+            async: false,
+            data:
+                    {
+                        resource_elem_id: resource_elem_id != "" ? jQuery("#" + resource_elem_id).val() : "",
+                    }
+        }).done(function(response) {
+            if (update_element_id != "") {
                 jQuery("#" + update_element_id).html(response);
-            });
-        }
+            }
+        });
+
     },
     kendoUpload: function(elem_id, url) {
 
@@ -152,7 +153,8 @@ var thepuzzleadmin = {
         }
         else if (jQuery(obj).val() == "range") {
             jQuery(obj).parent().next().next().children().show();
-        }  },
+        }
+    },
     GetGeo: function(val) {
         var address = val;
         if (address != null) {
@@ -166,10 +168,6 @@ var thepuzzleadmin = {
                         addlocation = results[0].geometry.location;
                         var lat = addlocation.lat();
                         var lng = addlocation.lng();
-                        console.log(results);
-                     
-                        //alert(jQuery('#lat').val() +' ' + jQuery('#lng').val())
-                       
                     }
                     else {
 //                                    alert("Geocode was not successful for the following reason: " + status);
@@ -177,9 +175,19 @@ var thepuzzleadmin = {
                 });
             }
         } else {
-           
-        }
-    }
 
+        }
+    },
+    showAlertBox: function(msg,type) {
+        jQuery(".alert-"+type).html(msg);
+        jQuery(".alert-"+type).show();
+      
+        jQuery(window).scrollTop(".alert-"+type);
+        setTimeout(function() {
+            jQuery(".alert-"+type).html("");
+            jQuery(".alert-"+type).fadeOut();
+        }, 1000);
+
+    }
 
 }

@@ -121,6 +121,28 @@ class Users extends DTActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'bspNotifies' => array(self::HAS_MANY, 'BspNotify', 'user_id'),
+            'messagesRecv' => array(self::HAS_MANY, 'BspMessage', 'user_receive'),
+            'messagesSent' => array(self::HAS_MANY, 'BspMessage', 'user_send'),
+            'user_items' => array(self::HAS_MANY, 'BspItem', 'user_id'),
+            'comments' => array(self::HAS_MANY, 'BspComment', 'user_id'),
+            'seller_orders' => array(self::HAS_MANY, 'BspOrder', 'seller_id'),
+            'buyer_orders' => array(self::HAS_MANY, 'BspOrder', 'buyer_id'),
+            'statmessagesRecv' => array(self::STAT, 'BspMessage', 'user_receive'),
+            'statmessagesSent' => array(self::STAT, 'BspMessage', 'user_send'),
+            'numitems' => array(self::STAT, 'BspItem', 'user_id'),
+            'numseller_orders' => array(self::STAT, 'BspOrder', 'seller_id'),
+            'numbuyer_orders' => array(self::STAT, 'BspOrder', 'buyer_id'),
+            'sellerPayment' => array(self::STAT, 'BspOrder', 'seller_id', 'select' => 'SUM(payment)'),
+            'ratings' => array(self::STAT, 'BspComment', 'user_id', 'select' => '
+                 
+                    count(bsp_comment.id) ratings
+                  FROM
+                    bsp_comment
+                    INNER JOIN bsp_order ON (bsp_comment.order_id = bsp_order.id)
+                    AND (bsp_comment.user_id = bsp_order.buyer_id)
+                  WHERE
+                    (bsp_comment.user_id = :user_id)
+            ')
         );
     }
 
@@ -278,12 +300,30 @@ class Users extends DTActiveRecord {
      */
     public function uploadAvtar($path) {
         $path.= "Users_avatar" . DIRECTORY_SEPARATOR;
-        
+
         if (is_file($path . $this->avatar)) {
 
             copy($path . $this->avatar, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey, "avatar")) . $this->avatar);
             unlink($path . $this->avatar);
         }
+    }
+
+    /**
+     * get command against data
+     */
+    public function getRatings() {
+        $connection = Yii::app()->db;
+        $sql = "SELECT 
+                count(bsp_comment.id) ratings
+              FROM
+                bsp_comment
+                INNER JOIN bsp_order ON (bsp_comment.order_id = bsp_order.id)
+                AND (bsp_comment.user_id = bsp_order.buyer_id)
+              WHERE
+                (bsp_comment.user_id = " . $this->id . ")";
+
+        $command = $connection->createCommand($sql);
+        return $command->queryScalar();
     }
 
 }

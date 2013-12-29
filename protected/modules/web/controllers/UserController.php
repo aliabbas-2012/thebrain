@@ -26,7 +26,10 @@ class UserController extends Controller {
                 'actions' => array(
                     'changepass',
                     'profile',
-                    'profileview'
+                    'profileview',
+                    'saveItemLog',
+                    'dashboard',
+                    'messages'
                 ),
                 'users' => array('@'),
             ),
@@ -136,7 +139,7 @@ class UserController extends Controller {
      * Displays the login page
      */
     public function actionLogin() {
-        
+
         $model = new LoginForm;
 
         // if it is ajax validation request
@@ -221,6 +224,43 @@ class UserController extends Controller {
         } else {
             echo "Invalid Key";
         }
+    }
+
+    /**
+     * saving item likes
+     * wish list
+     * @param type $action
+     * @param type $item_id
+     */
+    public function actionSaveItemLog($action, $item_id) {
+        switch ($action) {
+            case "like":
+                $model = new BspItemLike;
+                $model->item_id = $item_id;
+                $model->user_id = Yii::app()->user->id;
+                $model->save();
+                break;
+            case "favrout":
+                $model = new BspFarvorite;
+                $model->item_id = $item_id;
+                $model->user_id = Yii::app()->user->id;
+                $model->save();
+                break;
+        }
+    }
+
+    /**
+     * 
+     */
+    public function actionDashboard() {
+       
+        $this->render("//user/dashboard");
+    }
+    /**
+     * 
+     */
+    public function actionMessages(){
+        $this->render("//user/messages");
     }
 
 }

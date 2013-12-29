@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/docs-assets/ico/favicon.png">
+    <head>        
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+        <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/docs-assets/ico/favicon.png" />
 
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+
+
+        <meta charset="iso-8859-15"> 
+
 
         <!-- Bootstrap core CSS -->
         <link href="<?php echo Yii::app()->theme->baseUrl ?>/dist/css/bootstrap.css" rel="stylesheet">
@@ -26,7 +30,9 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-
+        <?php
+        header('Content-Type: text/html; charset="utf-8"', true);
+        ?>
     </head>
 
     <body>
@@ -45,7 +51,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="<?php echo Yii::app()->homeUrl[0]; ?>">
+                    <a class="navbar-brand" href="<?php echo $this->createUrl(Yii::app()->homeUrl[0]); ?>">
                         <?php
                         echo CHtml::image(Yii::app()->theme->baseUrl . "/images/logo.png", '', array("width" => "200"));
                         ?>
@@ -74,7 +80,7 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <?php
-                                    echo CHtml::link(Yii::t('link', "Dashboard"), '');
+                                    echo CHtml::link(Yii::t('link', "Dashboard"), $this->createUrl('/web/user/dashboard'));
                                     ?>
                                 </li>                                
                             </ul>
@@ -89,7 +95,7 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <?php
-                                    echo CHtml::link(Yii::t('link', "View All Messages"), '');
+                                    echo CHtml::link(Yii::t('link', "View All Messages"), $this->createUrl('/web/user/messages'));
                                     ?>
                                 </li>                                
                             </ul>
@@ -127,7 +133,7 @@
                         </li>
                         <li>
                             <?php
-                            echo CHtml::link("How It Works", $this->createUrl("/web/blog/index"));
+                            echo CHtml::link("How It Works", $this->createUrl("/web/default"));
                             ?>                        
                         </li>
 
@@ -222,7 +228,10 @@
             </div>
         </div>
 
-        <div class="container theme-showcase">
+        <div id="content_container" class="container theme-showcase">
+            <div class="alert alert-warning" style="display: none"></div>
+            <div class="alert alert-success" style="display: none"></div>
+
             <?php echo $content; ?>
 
         </div> <!-- /container -->
@@ -232,31 +241,21 @@
             <nav class="navbar-default">
                 <div class="navbar-inner navbar-content-center">
                     <ul class="footer-contain">
-                        <?php
-                        $criteria = new CDbCriteria();
-                        $criteria->select = "ID,article_name,article_name_de,custom_url,custom_url_de";
-                        $articless = CHtml::listData(BspArticla::model()->findAll($criteria), "ID", "slug");
 
-                        $how_works = !empty($articless[8]) ? "8-" . $articless[8] : "8-how-it-works";
-
-                        $term_cond = !empty($articless[9]) ? "9-" . $articless[9] : "9-how-it-works";
-
-                        $privacy_pol = !empty($articless[10]) ? "10-" . $articless[10] : "10-how-it-works";
-                        ?>	
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/loadArtical/" . $how_works); ?>"><?php echo Yii::t('link', 'How it works') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/default/article/" . $how_works); ?>"><?php echo Yii::t('link', 'How it works') ?></a>
                         </li>
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/blog/"); ?>"><?php echo Yii::t('link', 'Blog') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/blog/index"); ?>"><?php echo Yii::t('link', 'Blog') ?></a>
                         </li>
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/faq/"); ?>"><?php echo Yii::t('link', 'FAQ') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/faq/index"); ?>"><?php echo Yii::t('link', 'FAQ') ?></a>
                         </li>
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/loadArtical/" . $term_cond); ?>"><?php echo Yii::t('link', 'Term &amp; Conditions') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/default/article/" . $term_cond); ?>"><?php echo Yii::t('link', 'Term &amp; Conditions') ?></a>
                         </li>
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/loadArtical/" . $privacy_pol); ?>"><?php echo Yii::t('link', 'Privacy Policy') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/default/article/" . $privacy_pol); ?>"><?php echo Yii::t('link', 'Privacy Policy') ?></a>
                         </li>
                         <li class="link"><a href="javascript:void(0)" onclick="window.location = '<?php echo "http://" . "en." . "thepuzzzle.com/" . Yii::app()->request->getPathInfo(); ?>'"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/en.png"  alt="Language Flag EN"/></a></li>
                         <li class="link"><a href="javascript:void(0)" onclick="window.location = '<?php echo "http://" . "de." . "thepuzzzle.com/" . Yii::app()->request->getPathInfo(); ?>'"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/de.png" alt="Language Flag DE"/></a></li>

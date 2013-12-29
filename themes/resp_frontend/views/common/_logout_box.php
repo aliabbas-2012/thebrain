@@ -1,6 +1,6 @@
 <a  class="dropdown-toggle" data-toggle="dropdown">
     <?php
-    $user = Users::model()->findByPk(Yii::app()->user->id);
+    $user = Yii::app()->user->user;
     if (!empty($user->avatar)) {
         echo CHtml::image(Yii::app()->baseUrl . "/uploads/Users/" . $user->id . "/avatar/" . $user->avatar, '', array("height" => 20));
     } else {
