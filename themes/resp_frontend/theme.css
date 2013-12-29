@@ -674,3 +674,62 @@ ul.grid.clearfix {
     top: -15px;
     left: 50px;
 }
+
+/** Dashboard page **/
+
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+}
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+}
+body {
+    padding-bottom: 30px;
+}
+body {
+    background-color: #FFFFFF;
+    color: #333333;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+body {
+    margin: 0;
+}
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+html {
+    font-family: sans-serif;
+}
+.hellotext {
+    color: #16ACEA;
+    font-size: 25px;
+    font-weight: bold;
+}
+.noteleft {
+    background-color: #FFFFFF;
+    border: 1px solid #E3E3E3;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px #E2E0E0;
+    font-size: 12px;
+    height: 27px;
+    line-height: 27px;
+    margin-top: 15px;
+    padding-left: 10px;
+    position: relative;
+    text-align: left;
+}
+.noteleft a {
+    color: #FF3C5D;
+    margin-top: -4px;
+}
+a.del_box {
+    color: #777777;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
