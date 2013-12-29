@@ -8,6 +8,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
         <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/docs-assets/ico/favicon.png" />
 
+        <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/jquery-1.10.2.min.js"></script>
+
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
 
@@ -275,7 +277,7 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/jquery-1.10.2.min.js"></script>
+
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/bootstrap.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/docs-assets/js/holder.js"></script>
 

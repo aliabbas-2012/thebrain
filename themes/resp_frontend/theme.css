@@ -640,3 +640,37 @@ ul.grid.clearfix {
     margin-left: 10px;
     font-size: 18px;
 }
+#my_mails h1 {
+    border-bottom: 1px solid #C2C2C2;
+    margin-top: 35px;
+    height: 38px;
+    font-size: 22px;
+}
+#my_mails img.line-blog {
+    width: 25px;
+    position: relative;
+    top: -25px;
+    left: 50px;
+}
+#my_mails .tab-header {
+    border-bottom: 1px solid #C2C2C2;
+    margin-top: 35px;
+    height: 40px;
+    font-size: 22px;
+}
+#my_mails .tab-header a {
+    color: #DCDCDC;
+    text-decoration: none;
+}
+#my_mails .tab-header a:nth-child(2) {
+    margin-left: 50px;
+}
+#my_mails .tab-header a.active {
+    color:#414141;
+}
+#my_mails img.line-blog-btm {
+    width: 25px;
+    position: relative;
+    top: -15px;
+    left: 50px;
+}

@@ -250,17 +250,19 @@ class UserController extends Controller {
     }
 
     /**
-     * 
+     * User Dashboard
      */
     public function actionDashboard() {
-       
+
         $this->render("//user/dashboard");
     }
+
     /**
-     * 
+     *  inbox and sent messages
+     * @param type $type
      */
-    public function actionMessages(){
-        $this->render("//user/messages");
+    public function actionMessages($type = "inbox") {
+        $this->render("//user/messages", array('type' => $type));
     }
 
 }

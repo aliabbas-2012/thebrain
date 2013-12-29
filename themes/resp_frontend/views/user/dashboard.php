@@ -1,42 +1,60 @@
 <div class="tabs-container">
+
     <?php
-    $countper = 10;
-    if (Yii::app()->user->user->first_name == '')
-        $countper--;
-    if (Yii::app()->user->user->second_name == '')
-        $countper--;
-    if (Yii::app()->user->user->phone == '')
-        $countper--;
-    if (Yii::app()->user->user->birthday == '0000-00-00')
-        $countper--;
-    if (Yii::app()->user->user->description == '')
-        $countper--;
-    if (Yii::app()->user->user->city == '')
-        $countper--;
-    if (Yii::app()->user->user->country == '')
-        $countper--;
-    if (Yii::app()->user->user->zipcode == '')
-        $countper--;
-    if (Yii::app()->user->user->avatar == '' || Yii::app()->user->user->avatar == 'no_image')
-        $countper--;
-    if (Yii::app()->user->user->background == '' || Yii::app()->user->user->background == 'no_image')
-        $countper--;
+        /**
+         * tab bar
+         */
+        $this->renderPartial("//common/_tab_bar");
     ?>
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#my_mails" data-toggle="tab">My Mails <span><?php echo Yii::app()->user->user->statmessagesRecv; ?></span></a></li>
-        <li><a href="#my_offers" data-toggle="tab">My Offers <span> <?php echo Yii::app()->user->user->numitems; ?> </span></a></li>
-        <li><a href="#my_orders" data-toggle="tab">My Orders <span><?php echo Yii::app()->user->user->numseller_orders + Yii::app()->user->user->numbuyer_orders; ?></span></a></li>
-        <li><a href="#settings" data-toggle="tab">Settings<span><?php echo $countper  * 10 ;?>%</a></span></li>
-        <li><a href="#payment" data-toggle="tab">Payment<span><?php echo Yii::app()->user->user->sellerPayment." &euro;"; ?></span></a></li>
-        <li><a href="#ratings" data-toggle="tab">Ratings<span><?php echo Yii::app()->user->user->getRatings(); ?></span></a></li>
-
-    </ul>
-
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="my_mails">
-
-
+            <h1><?php echo Yii::t('notify', "My Messages") ?></h1>
+            <?php
+            echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("class" => "line-blog"));
+            ?>
+            <div class="tab-header">
+                <a class="active" href="<?php $this->createUrl("/web/user/message") ?>">
+                    <?php echo Yii::t('notify', "My Inbox") ?>
+                </a>
+                <a  href="<?php $this->createUrl("/web/user/message", array("type" => "sent")) ?>">
+                    <?php echo Yii::t('notify', "Sent") ?>
+                </a>
+            </div>
+            <?php
+            echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("class" => "line-blog-btm"));
+            ?>` 
+            <div class="clear"></div>
+            <?php
+            $criteria = new CDbCriteria();
+            $criteria->addCondition("user_receive = " . Yii::app()->user->id);
+            $dataProvider = new CActiveDataProvider('BspMessage', array(
+                'criteria' => $criteria,
+            ));
+            $this->widget('zii.widgets.grid.CGridView', array(
+                'id' => 'bsp-message-grid',
+                'dataProvider' => $dataProvider,
+                'cssFile' => Yii::app()->theme->baseUrl . "/dist/css/gridview.css",
+                'pager' => array(
+                    'cssFile' => '',
+                ),
+                'columns' => array(
+                    array(
+                        'name' => 'user_send',
+                        'value' => '!empty($data->sent_user) ? $data->sent_user->user_email : ""'
+                    ),
+                    'user_receive_name',
+                    'subject',
+                    'detail',
+                    'sFile',
+                    array('name' => 'is_view', 'value' => '$data->is_view == 1 ? "Viewed" : "Not Viewed"'),
+                    'date_time',
+                    array(
+                        'class' => 'CButtonColumn',
+                    ),
+                ),
+            ));
+            ?>
         </div>
         <div class="tab-pane" id="my_offers">
 
