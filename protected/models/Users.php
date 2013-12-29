@@ -309,7 +309,8 @@ class Users extends DTActiveRecord {
     }
 
     /**
-     * get command against data
+     * get rating
+     * of user
      */
     public function getRatings() {
         $connection = Yii::app()->db;
