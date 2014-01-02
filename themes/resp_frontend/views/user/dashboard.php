@@ -1,3 +1,9 @@
+<?php
+
+Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/css/Screen.css', CClientScript::POS_END);
+
+?>
+
 <div class="tabs-container">
 
     <?php
@@ -95,6 +101,28 @@
     	<div class="col-lg-3">
         	<div class="saved-offers-img">
         		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="over-img1"></div>
+                	<div class="info-item hover-content">
+                		<div class="offer_name">
+                			<a href="/offer-detail/598-1-stunde-gassi-f-hren">1 Stunde Gassi führen...</a>
+                		</div>
+                		<div class="offer_address">
+                			, Munich,
+                		</div>
+                		<div class="percentLike">100%</div>
+                		<div class="clear"></div>
+                	</div>
+                	<div class="hover-option hover-content">
+                		<div class="watch">
+                			<a href="offer-detail/598-1-stunde-gassi-f-hren">More...</a>
+                		</div>
+                		<div class="delete">
+                			<a href="javascript:;" title="598">
+                				<img class="star" src="<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/x.png"); ?>">
+                			</a>
+                		</div>
+                		<div class="clear"></div>
+                	</div>
                 <div class="cate-cotent">
 					<div class="catename">Service Offer</div>
                 	<div class="price-offer">
@@ -109,6 +137,28 @@
         <div class="col-lg-3">
         	<div class="saved-offers-img">
         		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="over-img1"></div>
+                	<div class="info-item hover-content">
+                		<div class="offer_name">
+                			<a href="/offer-detail/598-1-stunde-gassi-f-hren">1 Stunde Gassi führen...</a>
+                		</div>
+                		<div class="offer_address">
+                			, Munich,
+                		</div>
+                		<div class="percentLike">100%</div>
+                		<div class="clear"></div>
+                	</div>
+                	<div class="hover-option hover-content">
+                		<div class="watch">
+                			<a href="offer-detail/598-1-stunde-gassi-f-hren">More...</a>
+                		</div>
+                		<div class="delete">
+                			<a href="javascript:;" title="598">
+                				<img class="star" src="<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/x.png"); ?>">
+                			</a>
+                		</div>
+                		<div class="clear"></div>
+                	</div>
                 <div class="cate-cotent">
 					<div class="catename">Service Offer</div>
                 	<div class="price-offer">
@@ -123,6 +173,28 @@
         <div class="col-lg-3">
         	<div class="saved-offers-img">
         		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="over-img1"></div>
+                	<div class="info-item hover-content">
+                		<div class="offer_name">
+                			<a href="/offer-detail/598-1-stunde-gassi-f-hren">1 Stunde Gassi führen...</a>
+                		</div>
+                		<div class="offer_address">
+                			, Munich,
+                		</div>
+                		<div class="percentLike">100%</div>
+                		<div class="clear"></div>
+                	</div>
+                	<div class="hover-option hover-content">
+                		<div class="watch">
+                			<a href="offer-detail/598-1-stunde-gassi-f-hren">More...</a>
+                		</div>
+                		<div class="delete">
+                			<a href="javascript:;" title="598">
+                				<img class="star" src="<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/x.png"); ?>">
+                			</a>
+                		</div>
+                		<div class="clear"></div>
+                	</div>
                 <div class="cate-cotent">
 					<div class="catename">Service Offer</div>
                 	<div class="price-offer">
@@ -137,6 +209,28 @@
         <div class="col-lg-3">
         	<div class="saved-offers-img">
         		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="over-img1"></div>
+                	<div class="info-item hover-content">
+                		<div class="offer_name">
+                			<a href="/offer-detail/598-1-stunde-gassi-f-hren">1 Stunde Gassi führen...</a>
+                		</div>
+                		<div class="offer_address">
+                			, Munich,
+                		</div>
+                		<div class="percentLike">100%</div>
+                		<div class="clear"></div>
+                	</div>
+                	<div class="hover-option hover-content">
+                		<div class="watch">
+                			<a href="offer-detail/598-1-stunde-gassi-f-hren">More...</a>
+                		</div>
+                		<div class="delete">
+                			<a href="javascript:;" title="598">
+                				<img class="star" src="<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/x.png"); ?>">
+                			</a>
+                		</div>
+                		<div class="clear"></div>
+                	</div>
                 <div class="cate-cotent">
 					<div class="catename">Service Offer</div>
                 	<div class="price-offer">
@@ -156,6 +250,28 @@
     	<div class="col-lg-3">
         	<div class="saved-offers-img">
         		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="over-img1"></div>
+                	<div class="info-item hover-content">
+                		<div class="offer_name">
+                			<a href="/offer-detail/598-1-stunde-gassi-f-hren">1 Stunde Gassi führen...</a>
+                		</div>
+                		<div class="offer_address">
+                			, Munich,
+                		</div>
+                		<div class="percentLike">100%</div>
+                		<div class="clear"></div>
+                	</div>
+                	<div class="hover-option hover-content">
+                		<div class="watch">
+                			<a href="offer-detail/598-1-stunde-gassi-f-hren">More...</a>
+                		</div>
+                		<div class="delete">
+                			<a href="javascript:;" title="598">
+                				<img class="star" src="<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/x.png"); ?>">
+                			</a>
+                		</div>
+                		<div class="clear"></div>
+                	</div>
                 <div class="cate-cotent">
 					<div class="catename">Service Offer</div>
                 	<div class="price-offer">
@@ -170,6 +286,28 @@
         <div class="col-lg-3">
         	<div class="saved-offers-img">
         		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="over-img1"></div>
+                	<div class="info-item hover-content">
+                		<div class="offer_name">
+                			<a href="/offer-detail/598-1-stunde-gassi-f-hren">1 Stunde Gassi führen...</a>
+                		</div>
+                		<div class="offer_address">
+                			, Munich,
+                		</div>
+                		<div class="percentLike">100%</div>
+                		<div class="clear"></div>
+                	</div>
+                	<div class="hover-option hover-content">
+                		<div class="watch">
+                			<a href="offer-detail/598-1-stunde-gassi-f-hren">More...</a>
+                		</div>
+                		<div class="delete">
+                			<a href="javascript:;" title="598">
+                				<img class="star" src="<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/x.png"); ?>">
+                			</a>
+                		</div>
+                		<div class="clear"></div>
+                	</div>
                 <div class="cate-cotent">
 					<div class="catename">Service Offer</div>
                 	<div class="price-offer">
@@ -184,6 +322,28 @@
         <div class="col-lg-3">
         	<div class="saved-offers-img">
         		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="over-img1"></div>
+                	<div class="info-item hover-content">
+                		<div class="offer_name">
+                			<a href="/offer-detail/598-1-stunde-gassi-f-hren">1 Stunde Gassi führen...</a>
+                		</div>
+                		<div class="offer_address">
+                			, Munich,
+                		</div>
+                		<div class="percentLike">100%</div>
+                		<div class="clear"></div>
+                	</div>
+                	<div class="hover-option hover-content">
+                		<div class="watch">
+                			<a href="offer-detail/598-1-stunde-gassi-f-hren">More...</a>
+                		</div>
+                		<div class="delete">
+                			<a href="javascript:;" title="598">
+                				<img class="star" src="<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/x.png"); ?>">
+                			</a>
+                		</div>
+                		<div class="clear"></div>
+                	</div>
                 <div class="cate-cotent">
 					<div class="catename">Service Offer</div>
                 	<div class="price-offer">
@@ -198,6 +358,28 @@
         <div class="col-lg-3">
         	<div class="saved-offers-img">
         		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="over-img1"></div>
+                	<div class="info-item hover-content">
+                		<div class="offer_name">
+                			<a href="/offer-detail/598-1-stunde-gassi-f-hren">1 Stunde Gassi führen...</a>
+                		</div>
+                		<div class="offer_address">
+                			, Munich,
+                		</div>
+                		<div class="percentLike">100%</div>
+                		<div class="clear"></div>
+                	</div>
+                	<div class="hover-option hover-content">
+                		<div class="watch">
+                			<a href="offer-detail/598-1-stunde-gassi-f-hren">More...</a>
+                		</div>
+                		<div class="delete">
+                			<a href="javascript:;" title="598">
+                				<img class="star" src="<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/x.png"); ?>">
+                			</a>
+                		</div>
+                		<div class="clear"></div>
+                	</div>
                 <div class="cate-cotent">
 					<div class="catename">Service Offer</div>
                 	<div class="price-offer">

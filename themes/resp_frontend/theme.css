@@ -280,15 +280,13 @@ div.error,div.errorMessage {
     background: none repeat scroll center center rgba(255, 255, 255, 0.95);
     border-bottom: 1px solid #EAEAEA;
     bottom: 0;
-    display: none;
     height: 100px;
     padding-bottom: 10px;
     position: absolute;
-    width: 90%;
+    width: 89%;
     z-index: 500;
 }
 .offer_name {
-    height: 50px;
     margin: 5px 10px 0;
 }
 .offer_address {
@@ -351,11 +349,26 @@ div.item-img-content div.info-item.hover-content div.offer_numlike {
 div.item-img-content div.info-item.hover-content a.favorAdd {
     float: left;
     margin-left: 15px;
-
     position: relative;
 }
+.offer_name a {
+    color: #414141;
+    font: bold 14px/20px Arial;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+.watch a {
+	margin-left:50px;
+    color: #68BC46;
+    display: block;
+    font: bold 13px/30px Arial;
+    padding-left: 5px;
+    text-align: left;
+    text-decoration: none;
+    text-transform: lowercase;
+    z-index: 900;
+}
 .hover-option {
-    display: none;
     height: 40px;
     position: absolute;
     top: 0;
@@ -388,6 +401,7 @@ div.item-img-content div.info-item.hover-content a.favorAdd {
     position: relative;
     text-align: center;
     width: 34px;
+	margin-right: 88px;
 }
 
 .delete a {
