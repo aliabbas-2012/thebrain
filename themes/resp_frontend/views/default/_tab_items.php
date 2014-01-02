@@ -52,6 +52,9 @@ foreach ($segments as $items) {
             else {
                 $sItem.='<div class="catename">Rentals Offer</div>';
             }
+            if(!isset($item->currency->symbol)){
+                $item->currency->symbol = "&euro;";
+            }
             if ($item->special_deal == 1) {
                 $price = ' 
                                 <div class="price-offer">
