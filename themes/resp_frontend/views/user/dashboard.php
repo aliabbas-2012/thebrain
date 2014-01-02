@@ -102,7 +102,13 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
 
 </div>
 <div id="recently_viewed">
-
+    <?php
+    $criteria = new CDbCriteria();
+    $criteria->limit = "16";
+    $criteria->order = "id DESC";
+    $items = BspItem::model()->findAll($criteria);
+    $this->renderPartial("//user/_tab_items", array("items" => $items));
+    ?>
 </div>
 <?php
 Yii::app()->clientScript->registerScript('dashobard', '
