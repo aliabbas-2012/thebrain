@@ -417,7 +417,6 @@ div.item-img-content div.info-item.hover-content a.favorAdd {
     font-size: 13px;
     height: 20px;
     line-height: 20px;
-    width: 40%;
 }
 .price-offer {
     color: #414141;
@@ -830,5 +829,29 @@ a.del_box {
         font-size: 11px;
         margin-bottom: 5px;  
     }
+
+}
+
+.saved-offers-img { width:100%; text-align:center; background:#FFF; box-shadow: 3px 3px 5px rgba(120, 120, 120, 0.33); border: 1px solid #F1F1F1; height: 210px; margin-bottom: 30px; border-radius: 2px; }
+
+.saved-offers-img img { max-width:100%; width:auto; }
+
+.tabContent { float:left; display:block; background-color: #FAFCFC; border: 1px solid #C0C0C0; border-radius: 5px; box-shadow: 5px 5px 5px #E2E0E0; min-height: 48px; margin: 30px auto auto; width: 100%; }
+
+.tabContent ul { padding: 0; margin: 0; list-style: none outside none; }
+
+.tabContent ul li { border-left: 1px solid #C0C0C0; display: inline; float: left; height: 48px; padding: 0; margin: 0; }
+
+.tabContent ul li a { border-right-style: none; color: #D0D0D0; display: block; font-size: 1.6em; line-height: 46px; padding: 0 20px; text-decoration: none; margin: 0; }
+
+.tabContent ul li.nobor { border: medium none; padding: 0; margin: 0; }
+
+.tabContent ul li a.active, .tabContent ul li a:hover { background: none repeat scroll 0 0 #FFFFFF; border-right: 1px solid #C0C0C0; color: #414141; height: 100%; margin-right: -1px; height:45px; }
+
+@media (max-width: 680px) {
+	
+.tabContent ul li a.active, .tabContent ul li a:hover { border-bottom: 1px solid #C0C0C0; height:48px; }
+
+.tabContent ul li { display:block; border-bottom: 1px solid #C0C0C0; width:100%; text-align:center; }
 
 }

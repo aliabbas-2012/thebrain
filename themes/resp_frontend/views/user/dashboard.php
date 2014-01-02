@@ -20,6 +20,23 @@
         <a class="del_box" href="javascript:void(0)" onclick="jQuery(this).parent().remove();">x</a>
     </div>
     <div class="noteleft"><a href="<?php echo $this->createUrl('/web/offer/'); ?>" class="post"><?php echo Yii::t('user', 'Post your offer') ?></a></div>
+    <div class="container marketing">
+        <div class="row">
+            <div class="tabContent">
+                <ul>
+                    <li class="nobor">
+                    	<a class="tabs active" href="javascript:;" title="ordertab">My Recent Orders</a>
+                    </li>
+                    <li>
+                    	<a class="tabs" href="javascript:;" title="wishlisttab">Saved Offers</a>
+                    </li>
+                    <li>
+                    	<a class="tabs" href="javascript:;" title="recentlytab">Recently viewed</a>
+                    </li>
+                </ul>
+            </div>
+      	</div>
+  	</div>
 
     <div class="clear"></div>  
 
@@ -60,3 +77,136 @@
 
 </div>
 
+<div class="container marketing">
+	<div class="row">
+    	<div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-3">
+        </div>
+    </div>
+</div>
+<div class="container marketing">
+	<div class="row">
+    	<div class="col-lg-3">
+        	<div class="saved-offers-img">
+        		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="cate-cotent">
+					<div class="catename">Service Offer</div>
+                	<div class="price-offer">
+                		<label class="item-discount">10</label>
+                		<font class="item-discount" size="2"> €</font>
+                		<label>2</label>
+                		<font size="2"> €</font>
+                	</div>
+                </div>
+          	</div>
+        </div>
+        <div class="col-lg-3">
+        	<div class="saved-offers-img">
+        		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="cate-cotent">
+					<div class="catename">Service Offer</div>
+                	<div class="price-offer">
+                		<label class="item-discount">10</label>
+                		<font class="item-discount" size="2"> €</font>
+                		<label>2</label>
+                		<font size="2"> €</font>
+                	</div>
+                </div>
+          	</div>
+        </div>
+        <div class="col-lg-3">
+        	<div class="saved-offers-img">
+        		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="cate-cotent">
+					<div class="catename">Service Offer</div>
+                	<div class="price-offer">
+                		<label class="item-discount">10</label>
+                		<font class="item-discount" size="2"> €</font>
+                		<label>2</label>
+                		<font size="2"> €</font>
+                	</div>
+                </div>
+          	</div>
+        </div>
+        <div class="col-lg-3">
+        	<div class="saved-offers-img">
+        		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="cate-cotent">
+					<div class="catename">Service Offer</div>
+                	<div class="price-offer">
+                		<label class="item-discount">10</label>
+                		<font class="item-discount" size="2"> €</font>
+                		<label>2</label>
+                		<font size="2"> €</font>
+                	</div>
+                </div>
+          	</div>
+        </div>
+    </div>
+</div>
+
+<div class="container marketing">
+	<div class="row">
+    	<div class="col-lg-3">
+        	<div class="saved-offers-img">
+        		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="cate-cotent">
+					<div class="catename">Service Offer</div>
+                	<div class="price-offer">
+                		<label class="item-discount">10</label>
+                		<font class="item-discount" size="2"> €</font>
+                		<label>2</label>
+                		<font size="2"> €</font>
+                	</div>
+                </div>
+          	</div>
+        </div>
+        <div class="col-lg-3">
+        	<div class="saved-offers-img">
+        		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="cate-cotent">
+					<div class="catename">Service Offer</div>
+                	<div class="price-offer">
+                		<label class="item-discount">10</label>
+                		<font class="item-discount" size="2"> €</font>
+                		<label>2</label>
+                		<font size="2"> €</font>
+                	</div>
+                </div>
+          	</div>
+        </div>
+        <div class="col-lg-3">
+        	<div class="saved-offers-img">
+        		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="cate-cotent">
+					<div class="catename">Service Offer</div>
+                	<div class="price-offer">
+                		<label class="item-discount">10</label>
+                		<font class="item-discount" size="2"> €</font>
+                		<label>2</label>
+                		<font size="2"> €</font>
+                	</div>
+                </div>
+          	</div>
+        </div>
+        <div class="col-lg-3">
+        	<div class="saved-offers-img">
+        		<?php echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png"); ?>
+                <div class="cate-cotent">
+					<div class="catename">Service Offer</div>
+                	<div class="price-offer">
+                		<label class="item-discount">10</label>
+                		<font class="item-discount" size="2"> €</font>
+                		<label>2</label>
+                		<font size="2"> €</font>
+                	</div>
+                </div>
+          	</div>
+        </div>
+    </div>
+</div>
