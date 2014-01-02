@@ -4,6 +4,7 @@
     /**
      * tab bar
      */
+    Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/css/screen.css', CClientScript::POS_END);
     $this->renderPartial("//common/_tab_bar");
     ?>
     <!-- Tab panes -->
