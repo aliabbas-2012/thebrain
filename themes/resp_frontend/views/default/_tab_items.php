@@ -1,10 +1,10 @@
 <?php
+$total_likes = BspItemLike::model()->count();
 $segments = array_chunk($items, 4);
 foreach ($segments as $items) {
     ?>
     <div class="row">
         <?php
-        $total_likes = BspItemLike::model()->count();
         foreach ($items as $item):
             $avatar = "";
             $link = Yii::app()->baseUrl . '/offer-detail/' . $item->id . '-' . MyHelper::convert_no_sign($item->name);
@@ -12,27 +12,26 @@ foreach ($segments as $items) {
             //getting no of lykes
             $likes = BspItemLike::model()->count(array('condition' => "item_id='$item->id'"));
             $percent = 0;
-            if ($likes == 0){
+            if ($likes == 0) {
                 $likes = '0000';
-            }
-            else{
-                $percent = ($likes*100)/$total_likes;
+            } else {
+                $percent = ($likes * 100) / $total_likes;
             }
 
             if (!empty($user->avatar)) {
-                $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar,'',array("width"=>"20"));
+                $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, '', array("width" => "20"));
             } else {
-                $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg','',array("width"=>"20"));
+                $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', '', array("width" => "20"));
             }
             $city = isset($user->city) ? $user->city : "";
 
             $sItem = '<div class="item-img-content">';
             $sItem.= '<div class="info-item hover-content">';
             $sItem.='<div class="offer_name"><a href="javascript:void(0)">' . substr($item->name, 0, 51) . '...</a></div>';
-            $sItem.='<div class="offer_address">'.$avatar. $city . '</div>';
-            $sItem.= CHtml::image(Yii::app()->theme->baseUrl . '/images/handLike.png', 'Like', array("title" => "Like", "class" => "offer_like","id"=>$item->id));
-            $sItem.='<div class="percentLike">'.$percent.'%</div>';
-            $sItem.='<a class="favorAdd" title="' . $item->id . '">'.CHtml::image(Yii::app()->theme->baseUrl . '/images/start.png', 'Save this offer', array("title" => "Save this offer", "class" => "star add-wishlist")).'</a>';
+            $sItem.='<div class="offer_address">' . $avatar . $city . '</div>';
+            $sItem.= CHtml::image(Yii::app()->theme->baseUrl . '/images/handLike.png', 'Like', array("title" => "Like", "class" => "offer_like", "id" => $item->id));
+            $sItem.='<div class="percentLike">' . $percent . '%</div>';
+            $sItem.='<a class="favorAdd" title="' . $item->id . '">' . CHtml::image(Yii::app()->theme->baseUrl . '/images/start.png', 'Save this offer', array("title" => "Save this offer", "class" => "star add-wishlist")) . '</a>';
             $sItem.='<div class="offer_numlike show_far_num_' . $item->id . '">' . $likes . '</div>';
             $sItem.='<div class="clear"></div>';
             $sItem.='</div>'; // end of info-item
@@ -52,7 +51,7 @@ foreach ($segments as $items) {
             else {
                 $sItem.='<div class="catename">Rentals Offer</div>';
             }
-            if(!isset($item->currency->symbol)){
+            if (!isset($item->currency->symbol)) {
                 $item->currency->symbol = "&euro;";
             }
             if ($item->special_deal == 1) {

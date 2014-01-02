@@ -246,7 +246,6 @@
         <li><?php echo Yii::t('site', 'Posted Offers Total') ?>  <?php echo showCounter($offer); ?></li>
         <li><?php
             echo Yii::t('site', 'Total Payments') . '  ' . str_pad($total_payment, 8, "0", STR_PAD_LEFT);
-            ;
             ?></li>
     </ul>
 </div>
