@@ -44,11 +44,11 @@
                     'cssFile' => '',
                 ),
                 'columns' => array(
-                    'subject',
-                    'detail',
-                    'sFile',
+                    array('name' => 'subject', 'value' => '$data->subject'),
+                    array('name' => 'detail', 'value' => '$data->detail'),
+                    array('name' => 'sFile', 'value' => '$data->sFile'),
                     array('name' => 'is_view', 'value' => '$data->is_view == 1 ? "Viewed" : "Not Viewed"'),
-                    'date_time',
+                    array('name' => 'sFile', 'value' => '$data->date_time'),
                     array(
                         'class' => 'CButtonColumn',
                     ),
