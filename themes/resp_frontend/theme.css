@@ -661,35 +661,70 @@ ul.grid.clearfix {
     margin-left: 10px;
     font-size: 18px;
 }
-#my_mails h1 {
+#my_mails h1,
+#my_offers h1,
+my_orders h1,
+#settings h1,
+#payment h1,
+#ratings h1 {
     border-bottom: 1px solid #C2C2C2;
     margin-top: 35px;
     height: 38px;
     font-size: 22px;
 }
-#my_mails img.line-blog {
+#my_mails img.line-blog,
+#my_offers img.line-blog,
+my_orders img.line-blog,
+#settings img.line-blog,
+#payment img.line-blog,
+#ratings img.line-blog {
     width: 25px;
     position: relative;
     top: -25px;
     left: 50px;
 }
-#my_mails .tab-header {
+#my_mails .tab-header,
+#my_offers .tab-header,
+my_orders .tab-header,
+#settings .tab-header,
+#payment .tab-header,
+#ratings .tab-header {
     border-bottom: 1px solid #C2C2C2;
     margin-top: 35px;
     height: 40px;
     font-size: 22px;
 }
-#my_mails .tab-header a {
+#my_mails .tab-header a,
+#my_offers .tab-header a,
+my_orders .tab-header a,
+#settings .tab-header a,
+#payment .tab-header a,
+#ratings .tab-header a  {
     color: #DCDCDC;
     text-decoration: none;
 }
-#my_mails .tab-header a:nth-child(2) {
+#my_mails .tab-header a:nth-child(2),
+#my_offers .tab-header a:nth-child(2),
+my_orders .tab-header a:nth-child(2),
+#settings .tab-header a:nth-child(2),
+#payment .tab-header a:nth-child(2),
+#ratings .tab-header a:nth-child(2) {
     margin-left: 50px;
 }
-#my_mails .tab-header a.active {
+#my_mails .tab-header a.active,
+#my_offers .tab-header a.active,
+my_orders .tab-header a.active,
+#settings .tab-header a.active,
+#payment .tab-header a.active,
+#ratings .tab-header a.active  {
     color:#414141;
 }
-#my_mails img.line-blog-btm {
+#my_mails img.line-blog-btm,
+#my_offers img.line-blog-btm,
+my_orders img.line-blog-btm,
+#settings img.line-blog-btm,
+#payment img.line-blog-btm,
+#ratings img.line-blog-btm  {
     width: 25px;
     position: relative;
     top: -15px;
@@ -869,9 +904,9 @@ a.del_box {
 .tabContent ul li a.active, .tabContent ul li a:hover { background: none repeat scroll 0 0 #FFFFFF; border-right: 1px solid #C0C0C0; color: #414141; height: 100%; margin-right: -1px; height:45px; }
 
 @media (max-width: 680px) {
-
     .tabContent ul li a.active, .tabContent ul li a:hover { border-bottom: 1px solid #C0C0C0; height:48px; }
-
     .tabContent ul li { display:block; border-bottom: 1px solid #C0C0C0; width:100%; text-align:center; }
-
+}
+.space-blog {
+    height: 50px;
 }
