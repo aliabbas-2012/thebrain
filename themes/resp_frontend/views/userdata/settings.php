@@ -122,13 +122,25 @@
 
             </div>
             <div class="form_2nd_part_container">
-                <div id="storefront_bigimagecontent">
+                <div id="storefront_bigimagecontent" style="z-index: 1">
                     <?php
                     if (!empty($model->background)) {
                         $background = Yii::app()->baseUrl . "/uploads/Users/" . $model->id . "/background/" . $model->background;
                         echo CHtml::image($background, '', array("class" => "background_setting"));
                     } else {
                         echo CHtml::image("", '', array("class" => "background_setting"));
+                    }
+                    ?>
+
+                </div>
+                <div style="">
+                    <?php
+                    if (!empty($model->background)) {
+                        $avatar = Yii::app()->baseUrl . "/uploads/Users/" . $model->id . "/avatar/" . $model->avatar;
+                        echo CHtml::image($avatar, '', array("class" => "user_setting"));
+                    }
+                    else {
+                        echo CHtml::image("", '', array("class" => "user_setting"));
                     }
                     ?>
                 </div>
@@ -192,7 +204,7 @@
                 jQuery("#loading").hide();
                 jQuery("#Users_background").val(e.response.file);
                 jQuery(".background_setting").attr("src", path);
-                jQuery(".background_select .k-upload-files.k-reset").hide();
+                jQuery(".background_select .k-upload-files").hide();
             },
             upload: function(e) {
 
@@ -201,7 +213,7 @@
         jQuery("#UploadTemp_upload_temp_image").kendoUpload({
             async: {
                 saveUrl: "<?php
-    echo $this->createUrl("/site/uploadTemp", array("index" => 1, "model" => get_class($model), "attribute" => "Users_avatar"));
+    echo $this->createUrl("/site/uploadTemp", array("model" => get_class($model), "attribute" => "Users_avatar"));
     ?>",
                 autoUpload: true
             },
@@ -225,14 +237,14 @@
             },
             select: function(e) {
                 jQuery("#loading").show();
-                jQuery(".avatar_select .k-upload-files.k-reset").show();
+                jQuery(".avatar_select .k-upload-files").show();
             },
             success: function(e) {
 
                 path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/Users/Users_avatar/" ?>" + e.response.file;
                 jQuery("#loading").hide();
-                jQuery("#Users_background").val(e.response.file);
-                jQuery(".background_setting").attr("src", path);
+                jQuery("#Users_avatar").val(e.response.file);
+                jQuery(".user_setting").attr("src", path);
                 jQuery(".avatar_select .k-upload-files.k-reset").hide();
             },
             upload: function(e) {

@@ -953,7 +953,7 @@ a.del_box {
 }
 .form_2nd_part_container .avatar_select .k-dropzone .k-upload-button {
     width: 330px;
-     margin-left: 50%;
+    margin-left: 50%;
 }
 
 .form_2nd_part_container .avatar_select .k-dropzone .k-upload-button >span 
@@ -968,7 +968,7 @@ a.del_box {
 }
 .form_2nd_part_container .background_select .k-dropzone .k-upload-button {
     width: 330px;
-   
+
 }
 .form_2nd_part_container img.background_setting{
     min-width: 100%;
@@ -987,6 +987,18 @@ a.del_box {
     -o-transition:opacity 2s ease-in-out;
     transition:opacity 2s ease-in-out;
     z-index:0;
+}
+.form_2nd_part_container img.user_setting{
+    height: 150px;
+    width: 150px;
+    z-index: 3;
+    border-radius: 150px;
+    -moz-box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.52);
+    -webkit-box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.52);
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.52);
+    left: 363px;
+    position: absolute;
+    top: 79px;
 }
 @media (max-width: 680px) {
     .form_2nd_part_container img.background_setting{
