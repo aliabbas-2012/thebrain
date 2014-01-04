@@ -60,6 +60,23 @@
     padding-right: 25px;
 }
 
+.grid-view table.table th a
+{
+    background:url(../img/sort_both.png) right center no-repeat;
+    padding-right: 25px;
+}
+.grid-view table.table th a.asc
+{
+    background:url(../img/up.png) right center no-repeat;
+    padding-right: 25px;
+}
+
+.grid-view table.table th a.desc
+{
+    background:url(../img/down.png) right center no-repeat;
+    padding-right: 25px;
+}
+
 .grid-view table.items tr.even {
     background: #F9F9F9;
 }

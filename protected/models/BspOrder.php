@@ -23,7 +23,27 @@
  * @property string $update_user_id
  */
 class BspOrder extends DTActiveRecord {
+    /**
+     * Returns the static model of the specified AR class.
+     * @param string $className active record class name.
+     * @return Order the static model class
+     */
 
+    const STATUS_ORDER_RECIEVED = 1;
+    const STATUS_ORDER_WORKING = 2;
+    const STATUS_ORDER_CANCELLED = 3;
+    const STATUS_ORDER_COMPLETE = 4;
+    const STATUS_ORDER_DESPATCHED = 5;
+    const STATUS_ORDER_REVIEWED = 6;
+    const STATUS_ESCROW_UNRECIEVED = 0;
+    const STATUS_ESCROW_RECIEVED = 1;
+    const STATUS_ESCROW_REFUNDED = 2;
+    const STATUS_ESCROW_APPROVED = 3;
+    const STATUS_ESCROW_OVERDUE = 4;
+    const STATUS_ESCROW_PAID = 5;
+    const STATUS_ESCROW_AWAITING = 6;
+
+    public $_status;
     /**
      * @return string the associated database table name
      */
@@ -69,12 +89,12 @@ class BspOrder extends DTActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'item_id' => 'Item',
+            'item_id' => 'Offer',
             'buyer_id' => 'Buyer',
             'seller_id' => 'Seller',
             'date_order' => 'Date Order',
             'date_start' => 'Date Start',
-            'date_finish' => 'Date Finish',
+            'date_finish' => 'Delivery Date',
             'description' => 'Description',
             'pph' => 'Pph',
             'comission' => 'Comission',
@@ -136,6 +156,31 @@ class BspOrder extends DTActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+    /**
+     * get payment status
+     * @return string
+     */
+    public function getStatuses() {
+        $statuses = array(
+            self::STATUS_ORDER_RECIEVED => "Recieved",
+            self::STATUS_ORDER_WORKING => "Working",
+            self::STATUS_ORDER_CANCELLED => "Cancelled",
+            self::STATUS_ORDER_COMPLETE => "Complete",
+            self::STATUS_ORDER_DESPATCHED => "Despatched",
+            self::STATUS_ORDER_REVIEWED => "Reviewed",
+        );
+     
+        return $statuses;
+    }
+    /**
+     * 
+     * @return type
+     */
+    public function afterFind() {
+        $all_status = $this->getStatuses();
+        $this->_status = $all_status[$this->status];
+        return parent::afterFind();
     }
 
 }

@@ -44,24 +44,29 @@ class UserdataController extends Controller {
     public function actionMyoffers() {
         $this->render("//userdata/myoffers");
     }
+
     /**
      * my Orders of particular login user
      */
     public function actionMyorders() {
         $this->render("//userdata/myorders");
     }
+
     /**
      * my Settings of particular login user
      */
     public function actionSettings() {
-        $this->render("//userdata/settings");
+        $model = Users::model()->findByPK(Yii::app()->user->id);
+        $this->render("//userdata/settings", array("model" => $model));
     }
+
     /**
      * my Settings of particular login user
      */
     public function actionPayment() {
         $this->render("//userdata/payment");
     }
+
     /**
      * my Settings of particular login user
      */

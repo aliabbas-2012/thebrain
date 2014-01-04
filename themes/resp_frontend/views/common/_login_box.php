@@ -31,6 +31,7 @@
         "class" => "btn btn-primary",
         "style" => "clear: left; width: 100%; height: 32px; font-size: 13px;",
         "onclick" => '
+                jQuery("#loading").show();
                 $.ajax({
                 type: "POST",
                 url: jQuery("#login-form").attr("action"),
@@ -38,6 +39,7 @@
               })
                 .done(function( resp ) {
                     jQuery(".login-dropdown-menu").html(resp);
+                    jQuery("#loading").hide();
                     if(jQuery.trim(jQuery(".login-box div.error").html()) == ""){
                         window.location.reload();
                     }

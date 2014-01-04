@@ -17,7 +17,7 @@ return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'The Puzzle',
     'theme' => 'adminb',
-    'homeUrl'=>array('/site/index'),
+    'homeUrl'=>array('/web/default/index'),
     // preloading 'log' component
     'preload' => array('log'),
     // autoloading model and component classes

@@ -62,14 +62,9 @@
                 <div class="navbar-collapse collapse">
                     <?php
                     $criteria = new CDbCriteria();
-                    $criteria->select = "ID,article_name,article_name_de,custom_url,custom_url_de";
-                    $articless = CHtml::listData(BspArticla::model()->findAll($criteria), "ID", "slug");
-
-                    $how_works = !empty($articless[8]) ? "8-" . $articless[8] : "8-how-it-works";
-
-                    $term_cond = !empty($articless[9]) ? "9-" . $articless[9] : "9-how-it-works";
-
-                    $privacy_pol = !empty($articless[10]) ? "10-" . $articless[10] : "10-how-it-works";
+                    $criteria->select = "ID,article_name,article_name_de,custom_url_de,custom_url";
+                    $articless = BspArticla::model()->findAll($criteria);
+                    
                     ?>
                     <ul class="nav navbar-nav navbar-right"> 
                         <li class="dropdown">
@@ -135,7 +130,7 @@
                         </li>
                         <li>
                             <?php
-                            echo CHtml::link("How It Works", $this->createUrl("/web/default"));
+                            echo CHtml::link("How It Works", $this->createUrl("/web/default/article", array("slug" => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-8")));
                             ?>                        
                         </li>
 
@@ -245,7 +240,7 @@
                     <ul class="footer-contain">
 
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/web/default/article/" . $how_works); ?>"><?php echo Yii::t('link', 'How it works') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/default/article/", array('slug' => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-9")); ?>"><?php echo Yii::t('link', 'How it works') ?></a>
                         </li>
                         <li class="link">
                             <a href="<?php echo $this->createUrl("/web/blog/index"); ?>"><?php echo Yii::t('link', 'Blog') ?></a>
@@ -254,15 +249,15 @@
                             <a href="<?php echo $this->createUrl("/web/faq/index"); ?>"><?php echo Yii::t('link', 'FAQ') ?></a>
                         </li>
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/web/default/article/" . $term_cond); ?>"><?php echo Yii::t('link', 'Term &amp; Conditions') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/default/article/", array('slug' => !empty($articless[1]) ? $articless[1]->slug : "terms_condition-9")); ?>"><?php echo Yii::t('link', 'Term &amp; Conditions') ?></a>
                         </li>
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/web/default/article/" . $privacy_pol); ?>"><?php echo Yii::t('link', 'Privacy Policy') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/default/article/", array('slug' => !empty($articless[2]) ? $articless[2]->slug : "privacy-10")); ?>"><?php echo Yii::t('link', 'Privacy Policy') ?></a>
                         </li>
-                        <li class="link"><a href="javascript:void(0)" onclick="window.location = '<?php echo "http://" . "en." . "thepuzzzle.com/" . Yii::app()->request->getPathInfo(); ?>'"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/en.png"  alt="Language Flag EN"/></a></li>
-                        <li class="link"><a href="javascript:void(0)" onclick="window.location = '<?php echo "http://" . "de." . "thepuzzzle.com/" . Yii::app()->request->getPathInfo(); ?>'"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/de.png" alt="Language Flag DE"/></a></li>
-                        <li class="link link_right"><a href="#"><img id="link_twitter" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/twitter.png" alt="twitter"/></a></li>
-                        <li class="link link_right"><a href="#"><img id="link_google" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/google.png" alt="google"/></a></li>
+                        <li class="link link-flag"><a href="javascript:void(0)" onclick="window.location = '<?php echo "http://" . "en." . "thepuzzzle.com/" . Yii::app()->request->getPathInfo(); ?>'"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/en.png"  alt="Language Flag EN"/></a></li>
+                        <li class="link link-flag"><a href="javascript:void(0)" onclick="window.location = '<?php echo "http://" . "de." . "thepuzzzle.com/" . Yii::app()->request->getPathInfo(); ?>'"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/de.png" alt="Language Flag DE"/></a></li>
+                        <li class="link link_right"><a href="javascript:void(0)"><img id="link_twitter" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/twitter.png" alt="twitter"/></a></li>
+                        <li class="link link_right"><a href="javascript:void(0)"><img id="link_google" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/google.png" alt="google"/></a></li>
                         <li class="link link_right"><a href="#"><img id="link_facebook" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/fb.png" alt="fb"/></a></li>
 
                     </ul>

@@ -208,6 +208,9 @@ ul.dropdown-menu li a {
     text-transform: uppercase;
     margin-right: 50px;
 }
+.footer-contain li.link-flag a {
+    padding-top: 0;
+}
 .footer-contain li.link_right {
     float: right;
 }
@@ -221,6 +224,19 @@ ul.dropdown-menu li a {
     height: 25px;
     width: auto;
 }
+
+@media (max-width: 480px) { 
+    .footer-contain li.link_right {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .footer-contain li.link_right {
+        display: none;
+    }
+}
+
 div.error input,
 div.error textarea,
 div.error select,
@@ -594,10 +610,6 @@ ul.grid.clearfix {
         float: left;
 
     }
-
-
-
-
 }
 
 @media (min-width: 992px) {
@@ -663,7 +675,7 @@ ul.grid.clearfix {
 }
 #my_mails h1,
 #my_offers h1,
-my_orders h1,
+#my_orders h1,
 #settings h1,
 #payment h1,
 #ratings h1 {
@@ -674,7 +686,7 @@ my_orders h1,
 }
 #my_mails img.line-blog,
 #my_offers img.line-blog,
-my_orders img.line-blog,
+#my_orders img.line-blog,
 #settings img.line-blog,
 #payment img.line-blog,
 #ratings img.line-blog {
@@ -685,7 +697,7 @@ my_orders img.line-blog,
 }
 #my_mails .tab-header,
 #my_offers .tab-header,
-my_orders .tab-header,
+#my_orders .tab-header,
 #settings .tab-header,
 #payment .tab-header,
 #ratings .tab-header {
@@ -696,7 +708,7 @@ my_orders .tab-header,
 }
 #my_mails .tab-header a,
 #my_offers .tab-header a,
-my_orders .tab-header a,
+#my_orders .tab-header a,
 #settings .tab-header a,
 #payment .tab-header a,
 #ratings .tab-header a  {
@@ -705,7 +717,7 @@ my_orders .tab-header a,
 }
 #my_mails .tab-header a:nth-child(2),
 #my_offers .tab-header a:nth-child(2),
-my_orders .tab-header a:nth-child(2),
+#my_orders .tab-header a:nth-child(2),
 #settings .tab-header a:nth-child(2),
 #payment .tab-header a:nth-child(2),
 #ratings .tab-header a:nth-child(2) {
@@ -713,7 +725,7 @@ my_orders .tab-header a:nth-child(2),
 }
 #my_mails .tab-header a.active,
 #my_offers .tab-header a.active,
-my_orders .tab-header a.active,
+#my_orders .tab-header a.active,
 #settings .tab-header a.active,
 #payment .tab-header a.active,
 #ratings .tab-header a.active  {
@@ -721,7 +733,7 @@ my_orders .tab-header a.active,
 }
 #my_mails img.line-blog-btm,
 #my_offers img.line-blog-btm,
-my_orders img.line-blog-btm,
+#my_orders img.line-blog-btm,
 #settings img.line-blog-btm,
 #payment img.line-blog-btm,
 #ratings img.line-blog-btm  {
@@ -909,4 +921,101 @@ a.del_box {
 }
 .space-blog {
     height: 50px;
+}
+
+/*** using in setting page **/
+.form_part_container {
+    -moz-box-shadow: 0 0 6px rgba(203, 203, 203, 0.44);
+    -webkit-box-shadow: 0 0 6px rgba(203, 203, 203, 0.44);
+    box-shadow: 0 0 6px rgba(203, 203, 203, 0.44);
+    border: 1px solid #bcbbbb;
+    background-color: rgba(255, 255, 255, 0.96);
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;;
+    display: block;
+    min-height: 320px;
+    margin-bottom: 20px;
+}
+.form_part_container>div{
+    margin-top: 40px;
+
+}
+.form_2nd_part_container {
+    display: block;
+    min-height: 320px;
+    margin-bottom: 20px;
+    margin-top: 80px;
+    position: relative;
+}
+.form_2nd_part_container .avatar_select .k-widget.k-upload {
+    margin-top: 50px;
+}
+.form_2nd_part_container .avatar_select .k-dropzone .k-upload-button {
+    width: 330px;
+     margin-left: 50%;
+}
+
+.form_2nd_part_container .avatar_select .k-dropzone .k-upload-button >span 
+{
+    color: #f51e65;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: none;
+}
+.form_2nd_part_container .background_select .k-widget.k-upload {
+    margin-top: 50px;
+}
+.form_2nd_part_container .background_select .k-dropzone .k-upload-button {
+    width: 330px;
+   
+}
+.form_2nd_part_container img.background_setting{
+    min-width: 100%;
+    height: 100%;
+    -moz-box-shadow: 0 0 5px rgba(203, 203, 203, 0.44);
+    -webkit-box-shadow: 0 0 5px rgba(203, 203, 203, 0.44);
+    box-shadow: 0 0 5px rgba(203, 203, 203, 0.44);
+    top: 0;
+    left:50%;
+    width:2000px;
+    position:absolute;
+    width: 1920px;
+    margin: 0 0 0 -960px;
+    -webkit-transition:opacity 2s ease-in-out;
+    -moz-transition:opacity 2s ease-in-out;
+    -o-transition:opacity 2s ease-in-out;
+    transition:opacity 2s ease-in-out;
+    z-index:0;
+}
+@media (max-width: 680px) {
+    .form_2nd_part_container img.background_setting{
+        width: 680px;
+        margin: 0 0 0 -394px;
+    }
+}
+@media (max-width: 500px) {
+    .form_2nd_part_container img.background_setting{
+        width: 500px;
+        margin: 0 0 0 -394px;
+    }
+}
+@media (max-width: 450px) {
+    .form_2nd_part_container img.background_setting{
+        width: 450px;
+        margin: 0 0 0 -394px;
+    }
+}
+.form_2nd_part_container div#storefront_bigimagecontent {
+    height: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #bfbfbf;
+}
+.form_2nd_part_container .background_select .k-dropzone .k-upload-button >span 
+{
+    color: #f51e65;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: none;
 }

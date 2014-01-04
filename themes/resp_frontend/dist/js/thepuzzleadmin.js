@@ -111,7 +111,7 @@ var thepuzzleadmin = {
 
     },
     onSuccess: function(e) {
-        console.log(e.response);
+               
         jQuery("#" + e.response.attribute).val(e.response.file);
         jQuery("#loading").hide();
     },

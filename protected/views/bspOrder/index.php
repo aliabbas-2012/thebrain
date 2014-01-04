@@ -62,7 +62,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         'comission',
         'amount',
         'payment',
-        array('name' => 'status', 'value' => '$data->status == 1 ? "Enabled" : "Disabled"',),
+        array('name' => 'status', 'value' => '$data->_status',),
         array(
             'class' => 'CButtonColumn',
         ),

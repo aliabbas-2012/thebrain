@@ -22,7 +22,7 @@ $this->menu = array(
 $this->widget('zii.widgets.CDetailView', array(
     'data' => $model,
     'attributes' => array(
-         array('name' => 'item_id', 'value' => !empty($model->item)?$model->item->name:"",),
+        array('name' => 'item_id', 'value' => !empty($model->item) ? $model->item->name : "",),
         'buyer_id',
         'seller_id',
         'date_order',
@@ -33,7 +33,7 @@ $this->widget('zii.widgets.CDetailView', array(
         'comission',
         'amount',
         'payment',
-        array('name' => 'status', 'value' => $model->status == 1 ? "Enabled" : "Disabled",),
+        array('name' => 'status', 'value' => $model->_status,),
         'create_time',
         'create_user_id',
         'update_time',
