@@ -57,6 +57,15 @@ class UserdataController extends Controller {
      */
     public function actionSettings() {
         $model = Users::model()->findByPK(Yii::app()->user->id);
+        $model = Users::model()->findByPk(Yii::app()->user->id);
+
+        if (isset($_POST['Users'])) {
+            $model->attributes = $_POST['Users'];
+
+            if ($model->save()) {
+                $this->redirect($this->createUrl("/web/userdata/settings"));
+            }
+        }
         $this->render("//userdata/settings", array("model" => $model));
     }
 

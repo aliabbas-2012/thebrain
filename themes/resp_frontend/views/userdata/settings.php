@@ -138,8 +138,7 @@
                     if (!empty($model->background)) {
                         $avatar = Yii::app()->baseUrl . "/uploads/Users/" . $model->id . "/avatar/" . $model->avatar;
                         echo CHtml::image($avatar, '', array("class" => "user_setting"));
-                    }
-                    else {
+                    } else {
                         echo CHtml::image("", '', array("class" => "user_setting"));
                     }
                     ?>
@@ -157,9 +156,42 @@
                     ?>
                     <?php echo $form->hiddenField($model, 'avatar', array('class' => 'form-control')); ?>
                 </div>
+            </div>
+            <div class="form_3nd_part_container">
 
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label style="color: #16acea;" class="col-sm-3"><?php echo Yii::t('user', 'Your Storefront Name') ?></label>
+                        <div class="clear"></div>
+                        <p style="font-size:13px; margin-left:10px; ">
+                            <?php echo Yii::t('user', 'This will be your custom ') ?> <strong> The Puzzzle</strong><?php echo Yii::t('user', 'link and shoild reflect the service or goods you sell ') ?> 
+                            <br />
+                            <strong><?php echo Yii::t('user', ' You can create a username only one time when saving your Settings') ?></strong><br />
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">thePuzzle.com/</label>
+                        <div class="col-lg-5">
+                            <?php echo $form->textField($model, 'store_url', array('class' => 'form-control')); ?> 
+                            <?php echo $form->error($model, 'store_url', array("class" => 'alert alert-error')); ?>
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <?php echo $form->labelEx($model, 'description', array('class' => 'control-label col-sm-2')); ?>
+                        <div class="clear"></div>
+                        <div class="col-lg-9">
+                            <?php echo $form->textArea($model, 'description', array('class' => 'form-control', 'style' => 'height:250px')); ?> 
+                            <?php echo $form->error($model, 'description', array("class" => 'alert alert-error')); ?>
+                        </div>
+                    </div>
+                </div>  
 
+            </div>
+            <div class="form-group buttons">
+                <div class="col-sm-offset-0 col-sm-10">
+                    <?php echo CHtml::submitButton('Save Setting', array('class' => 'btn btn btn-default')); ?>
+                </div>
             </div>
         </div>
     </div>

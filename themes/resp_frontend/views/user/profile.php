@@ -208,7 +208,6 @@
         <div class="col-sm-offset-2 col-sm-10">
             <?php echo CHtml::submitButton('Update', array('class' => 'btn btn btn-default')); ?>
         </div>
-        
     </div>
     <?php $this->endWidget(); ?>
     <?php $this->endWidget(); ?>

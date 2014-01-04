@@ -166,7 +166,7 @@ class Users extends DTActiveRecord {
             'fbmail' => 'Fbmail',
             'password' => 'Password',
             'password_hint' => 'Password Hint',
-            'description' => 'Description',
+            'description' => 'About you',
             'address' => 'Address',
             'country' => 'Country',
             'city' => 'City',
