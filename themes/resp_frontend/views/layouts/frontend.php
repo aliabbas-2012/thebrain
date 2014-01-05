@@ -64,7 +64,6 @@
                     $criteria = new CDbCriteria();
                     $criteria->select = "ID,article_name,article_name_de,custom_url_de,custom_url";
                     $articless = BspArticla::model()->findAll($criteria);
-                    
                     ?>
                     <ul class="nav navbar-nav navbar-right"> 
                         <li class="dropdown">
@@ -224,7 +223,13 @@
                 </div><!--/.nav-collapse -->
             </div>
         </div>
-
+        <div id="puzzle_slider">
+            <?php
+            if ($this->id == "default" && $this->action->id == "index") {
+                $this->renderPartial("//default/_slider");
+            }
+            ?> 
+        </div>
         <div id="content_container" class="container theme-showcase">
             <div class="alert alert-warning" style="display: none"></div>
             <div class="alert alert-success" style="display: none"></div>
