@@ -23,6 +23,7 @@ body {
     background-image: -moz-linear-gradient(90deg, #fafcfc 0%, #f3f5f9 53.6%, #ffffff 100%);
     border:0;
     min-height: 120px ;
+
 }
 .navbar li > a {
     color: #414141 !important;
@@ -270,22 +271,37 @@ div.error,div.errorMessage {
     z-index: 100000 !important;
 
 }
+.nav-tabs {
+    border-top: 1px solid #DDDDDD;
+    border-radius: 4;
+}
 .nav-tabs li {
-    border:1px solid #C0C0C0;
+    border-right:1px solid #DDDDDD;
+}
+.nav-tabs li:last-child {
+    border-right:1px solid #DDDDDD;
+
+}
+.nav-tabs li:first-child {
+    border-left:1px solid #DDDDDD;
+
+
 }
 .nav-tabs li a {
-    font-size: 1.6em;
-    color:#D0D0D0;
-    border:none !important;
+    font-size: 1.4em;
+    color: #414141;
+    border:none;
 }
 .nav-tabs li.active a {
-    font-size: 1.6em;
+    font-size: 1.4em;
     color:#414141;
+    border:none;
 }
 .nav-tabs li.active {
 
     background-image: -webkit-gradient(linear, left bottom, left top, from(#fafcfc), color-stop(0.536, #f3f5f9), to(#ffffff));
     background-image: -moz-linear-gradient(90deg, #fafcfc 0%, #f3f5f9 53.6%, #ffffff 100%);
+    border-bottom: 1px solid #DDDDDD;
 }
 .tab-content {
     margin-top: 20px;
@@ -714,13 +730,15 @@ ul.grid.clearfix {
 #ratings .tab-header a  {
     color: #DCDCDC;
     text-decoration: none;
+    font: 700 18px Arial;
+
 }
-#my_mails .tab-header a:nth-child(2),
-#my_offers .tab-header a:nth-child(2),
-#my_orders .tab-header a:nth-child(2),
-#settings .tab-header a:nth-child(2),
-#payment .tab-header a:nth-child(2),
-#ratings .tab-header a:nth-child(2) {
+#my_mails .tab-header a:not(:first-child),
+#my_offers .tab-header a:not(:first-child),
+#my_orders .tab-header a:not(:first-child),
+#settings .tab-header a:not(:first-child),
+#payment .tab-header a:not(:first-child),
+#ratings .tab-header a:not(:first-child) {
     margin-left: 50px;
 }
 #my_mails .tab-header a.active,
@@ -1000,7 +1018,7 @@ a.del_box {
     top: 79px;
 }
 .form_3nd_part_container {
-     -moz-box-shadow: 0 0 6px rgba(203, 203, 203, 0.44);
+    -moz-box-shadow: 0 0 6px rgba(203, 203, 203, 0.44);
     -webkit-box-shadow: 0 0 6px rgba(203, 203, 203, 0.44);
     box-shadow: 0 0 6px rgba(203, 203, 203, 0.44);
     border: 1px solid #bcbbbb;
@@ -1049,4 +1067,86 @@ a.del_box {
     font-weight: bold;
     font-size: 18px;
     text-transform: none;
+}
+
+
+/*----- payment page of my Payment **/
+.payment-panel {
+     margin-bottom: 30px;
+     
+}
+.w-block {
+    background-color: #F6F8F9;
+    border: 1px solid #E6E6E6;
+    border-radius: 3px;
+    box-shadow: 0 0 6px rgba(203, 203, 203, 0.44);
+    height: 285px;
+    padding: 10px 15px 30px 20px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+
+}
+.w-title {
+    color: #414141;
+    font: bold 18px Arial;
+    height: 30px;
+    margin-top: 20px;
+}
+.w-left {
+    color: #414141;
+    text-align: center;
+}
+
+.w-header {
+    background-color: rgba(255, 255, 255, 0.96);
+    border: 1px solid #D9D9D9;
+    border-radius: 3px;
+    box-shadow: 0 0 6px rgba(203, 203, 203, 0.44);
+    height: 61%;
+
+    margin-top: 25px;
+    padding-bottom: 10px;
+    text-align: center;
+    width: 96%;
+}
+.w-right {
+    color: #414141;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.w-money {
+    color: #414141;
+    font: bold 25px Arial;
+}
+
+.w-money {
+    color: #414141;
+    font: bold 25px Arial;
+}
+div.w-header.w-shadow button.k-button-green {
+    background-color: #414141;
+    border: 1px solid #BCBBBB;
+    color: #FFFFFF;
+}
+div.w-header.w-shadow button.k-button-green:hover {
+    background-color: #F6F8F9;
+    border: 1px solid #CECECE;
+    color: #16ACED;
+}
+
+.k-button-green {
+    border: 1px solid #BCBBBB;
+    border-radius: 5px;
+    color: #666666;
+    cursor: pointer;
+    font: bold 16px Arial;
+    height: 25px;
+    margin-top: 50px;
+    padding-top: 0;
+    text-align: center;
+    width: 120px;
 }

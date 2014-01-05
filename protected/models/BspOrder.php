@@ -44,6 +44,7 @@ class BspOrder extends DTActiveRecord {
     const STATUS_ESCROW_AWAITING = 6;
 
     public $_status;
+
     /**
      * @return string the associated database table name
      */
@@ -157,6 +158,7 @@ class BspOrder extends DTActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
+
     /**
      * get payment status
      * @return string
@@ -170,9 +172,50 @@ class BspOrder extends DTActiveRecord {
             self::STATUS_ORDER_DESPATCHED => "Despatched",
             self::STATUS_ORDER_REVIEWED => "Reviewed",
         );
-     
+
         return $statuses;
     }
+
+    /**
+     * get My Payment
+     * Amount
+     * for my-payment page
+     * 
+     */
+    public function getMyPaymentAmount() {
+        $account_escrows = Yii::app()->db->createCommand()
+                ->select('SUM(i.price) as amount')
+                ->from('bsp_order o')
+                ->rightJoin('bsp_item i', 'o.item_id=i.id')
+                ->where('o.seller_id=:id  AND  o.payment = :payment', array(':id' => Yii::app()->user->id, ":payment" => self::STATUS_ESCROW_APPROVED))
+                ->queryColumn();
+
+        $seller_escrows = Yii::app()->db->createCommand()
+                ->select('SUM(i.price) as amount')
+                ->from('bsp_order o')
+                ->rightJoin('bsp_item i', 'o.item_id=i.id')
+                ->where('o.seller_id=:id', array(':id' => Yii::app()->user->id))
+                ->queryColumn();
+
+        $buyer_escrows = Yii::app()->db->createCommand()
+                ->select('SUM(i.price) as amount')
+                ->from('bsp_item i')
+                ->leftJoin('bsp_order o', 'i.id=o.item_id')
+                ->where('o.buyer_id=:id', array(':id' => Yii::app()->user->id))
+                ->queryColumn();
+
+
+
+        $buyer_escrows_not_deposited = Yii::app()->db->createCommand()
+                ->select('SUM(i.price) as amount')
+                ->from('bsp_item i')
+                ->leftJoin('bsp_order o', 'i.id=o.item_id')
+                ->where("i.user_id = '" . Yii::app()->user->id . "'  AND  o.item_id IS NULL")
+                ->queryColumn();
+
+        return array("puzzle_wallet" => $account_escrows, "seller_wallet"=>$seller_escrows,"buyer_wallet"=>$buyer_escrows + $buyer_escrows_not_deposited);
+    }
+
     /**
      * 
      * @return type

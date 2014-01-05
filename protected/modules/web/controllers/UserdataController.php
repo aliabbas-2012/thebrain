@@ -72,8 +72,55 @@ class UserdataController extends Controller {
     /**
      * my Settings of particular login user
      */
-    public function actionPayment() {
-        $this->render("//userdata/payment");
+    public function actionPayment($type = "wallet") {
+        switch ($type) {
+            case "wallet":
+                $this->handleWalletPayment();
+                break;
+            case "statements":
+                $this->handleStatment();
+                break;
+            case "invoices":
+                $this->handleInvoices();
+                break;
+            case "transactions":
+                $this->handleTransactions();
+                break;
+        }
+    }
+
+    /**
+     * handle wallet payment here
+     * of user
+     */
+    public function handleWalletPayment() {
+        $wallet_data = BspOrder::model()->getMyPaymentAmount();
+      
+        $this->render("//userdata/payment",array("type"=>"wallet","wallet_data"=>$wallet_data));
+    }
+
+    /**
+     * handle wallet payment here
+     * of user
+     */
+    public function handleStatment() {
+        $this->render("//userdata/payment",array("type"=>"statements"));
+    }
+
+    /**
+     * handle invoices here
+     * of user
+     */
+    public function handleInvoices() {
+        $this->render("//userdata/payment",array("type"=>"transactions"));
+    }
+
+    /**
+     * handle Transaction here
+     * of user
+     */
+    public function handleTransactions() {
+        $this->render("//userdata/payment",array("type"=>"wallet"));
     }
 
     /**
