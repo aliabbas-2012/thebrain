@@ -303,6 +303,9 @@ div.error,div.errorMessage {
     background-image: -moz-linear-gradient(90deg, #fafcfc 0%, #f3f5f9 53.6%, #ffffff 100%);
     border-bottom: 1px solid #DDDDDD;
 }
+.nav-tabs>li.active>a:focus {
+    border:0;
+}
 .tab-content {
     margin-top: 20px;
 }
