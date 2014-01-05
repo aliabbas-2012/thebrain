@@ -62,7 +62,7 @@ var thepuzzleadmin = {
      * @returns {undefined}
      */
     updateElementAjax: function(ajax_url, update_element_id, resource_elem_id) {
-
+        jQuery("#loading").show();
         jQuery.ajax({
             type: "POST",
             url: ajax_url,
@@ -74,6 +74,7 @@ var thepuzzleadmin = {
         }).done(function(response) {
             if (update_element_id != "") {
                 jQuery("#" + update_element_id).html(response);
+                jQuery("#loading").hide();
             }
         });
 

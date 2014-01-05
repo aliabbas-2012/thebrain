@@ -28,7 +28,8 @@ class UserdataController extends Controller {
                     'myorders',
                     'settings',
                     'payment',
-                    'ratings'
+                    'ratings',
+                    'paymentdetail'
                 ),
                 'users' => array('@'),
             ),
@@ -128,6 +129,13 @@ class UserdataController extends Controller {
      */
     public function actionRatings() {
         $this->render("//userdata/ratings");
+    }
+    /**
+     * type detail
+     * @param type $type
+     */
+    public function actionPaymentdetail($type = "wallet"){
+        echo "ali";
     }
 
 }
