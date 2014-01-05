@@ -33,9 +33,17 @@
                     'columns' => array(
                         array('name' => 'category_id', 'value' => 'isset($data->category)?$data->category->name:""'),
                         array('name' => 'name', 'value' => '$data->name'),
-                        array('name' => 'description', 'value' => '$data->description'),
+                        array(
+                            'name' => 'description', 'value' => '$data->description',
+                            'headerHtmlOptions' => array("class" => "not_responsive"),
+                            'htmlOptions' => array("class" => "not_responsive")
+                        ),
                         array('name' => 'price', 'value' => 'isset($data->currency)?$data->price." ".html_entity_decode($data->currency->symbol):""'),
-                        array('name' => 'create_time', 'value' => '$data->create_time'),
+                        array('name' => 'create_time',
+                            'value' => '$data->create_time',
+                            'headerHtmlOptions' => array("class" => "not_responsive"),
+                            'htmlOptions' => array("class" => "not_responsive")
+                        ),
                         array(
                             'class' => 'CButtonColumn',
                         ),

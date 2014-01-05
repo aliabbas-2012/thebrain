@@ -96,8 +96,8 @@ class UserdataController extends Controller {
      */
     public function handleWalletPayment() {
         $wallet_data = BspOrder::model()->getMyPaymentAmount();
-      
-        $this->render("//userdata/payment",array("type"=>"wallet","wallet_data"=>$wallet_data));
+
+        $this->render("//userdata/payment", array("type" => "wallet", "wallet_data" => $wallet_data));
     }
 
     /**
@@ -105,7 +105,7 @@ class UserdataController extends Controller {
      * of user
      */
     public function handleStatment() {
-        $this->render("//userdata/payment",array("type"=>"statements"));
+        $this->render("//userdata/payment", array("type" => "statements"));
     }
 
     /**
@@ -113,7 +113,7 @@ class UserdataController extends Controller {
      * of user
      */
     public function handleInvoices() {
-        $this->render("//userdata/payment",array("type"=>"transactions"));
+        $this->render("//userdata/payment", array("type" => "transactions"));
     }
 
     /**
@@ -121,7 +121,7 @@ class UserdataController extends Controller {
      * of user
      */
     public function handleTransactions() {
-        $this->render("//userdata/payment",array("type"=>"wallet"));
+        $this->render("//userdata/payment", array("type" => "wallet"));
     }
 
     /**
@@ -130,12 +130,16 @@ class UserdataController extends Controller {
     public function actionRatings() {
         $this->render("//userdata/ratings");
     }
+
     /**
      * type detail
      * @param type $type
      */
-    public function actionPaymentdetail($type = "wallet"){
-        echo "ali";
+    public function actionPaymentdetail($type = "account") {
+
+        $dataProvider = BspOrder::model()->getPaymentDetail($type);
+
+        $this->renderPartial("//userdata/_payment_detail", array("dataProvider" => $dataProvider));
     }
 
 }

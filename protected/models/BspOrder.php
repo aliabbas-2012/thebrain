@@ -184,21 +184,21 @@ class BspOrder extends DTActiveRecord {
      */
     public function getMyPaymentAmount() {
         $account_escrows = Yii::app()->db->createCommand()
-                ->select('SUM(i.price) as amount')
+                ->select('SUM(o.amount) as amount')
                 ->from('bsp_order o')
                 ->rightJoin('bsp_item i', 'o.item_id=i.id')
                 ->where('o.seller_id=:id  AND  o.payment = :payment', array(':id' => Yii::app()->user->id, ":payment" => self::STATUS_ESCROW_APPROVED))
                 ->queryColumn();
 
         $seller_escrows = Yii::app()->db->createCommand()
-                ->select('SUM(i.price) as amount')
+                ->select('SUM(o.amount) as amount')
                 ->from('bsp_order o')
                 ->rightJoin('bsp_item i', 'o.item_id=i.id')
                 ->where('o.seller_id=:id', array(':id' => Yii::app()->user->id))
                 ->queryColumn();
 
         $buyer_escrows = Yii::app()->db->createCommand()
-                ->select('SUM(i.price) as amount')
+                ->select('SUM(o.amount) as amount')
                 ->from('bsp_item i')
                 ->leftJoin('bsp_order o', 'i.id=o.item_id')
                 ->where('o.buyer_id=:id', array(':id' => Yii::app()->user->id))
@@ -207,13 +207,99 @@ class BspOrder extends DTActiveRecord {
 
 
         $buyer_escrows_not_deposited = Yii::app()->db->createCommand()
-                ->select('SUM(i.price) as amount')
+                ->select('SUM(o.amount) as amount')
                 ->from('bsp_item i')
                 ->leftJoin('bsp_order o', 'i.id=o.item_id')
                 ->where("i.user_id = '" . Yii::app()->user->id . "'  AND  o.item_id IS NULL")
                 ->queryColumn();
 
-        return array("puzzle_wallet" => $account_escrows, "seller_wallet"=>$seller_escrows,"buyer_wallet"=>$buyer_escrows + $buyer_escrows_not_deposited);
+        return array("puzzle_wallet" => $account_escrows, "seller_wallet" => $seller_escrows, "buyer_wallet" => $buyer_escrows + $buyer_escrows_not_deposited);
+    }
+
+    /**
+     * get Payment detail
+     * @param type $type
+     */
+    public function getPaymentDetail($type) {
+
+        $criteria = new CDbCriteria;
+        switch ($type) {
+            case "account":
+                $criteria->with = array(
+                    'item' => array(
+                        'joinType' => 'Right JOIN',
+                        'together' => true,
+                    ),
+                );
+
+                $criteria->addCondition("t.seller_id= " . Yii::app()->user->id . " AND  t.payment = " . self::STATUS_ESCROW_APPROVED);
+                break;
+            case "seller":
+                $criteria->with = array(
+                    'item' => array(
+                        'joinType' => 'INNER JOIN',
+                        'together' => true,
+                    ),
+                );
+                $criteria->addCondition("t.seller_id= " . Yii::app()->user->id);
+                break;
+            case "buyer":
+                $criteria->with = array(
+                    'item' => array(
+                        'joinType' => 'INNER JOIN',
+                        'together' => true,
+                    ),
+                );
+                $criteria->addCondition("item.user_id= " . Yii::app()->user->id);
+                $prov1 = new CActiveDataProvider($this, array(
+                    'criteria' => $criteria,
+                ));
+
+                $criteria = new CDbCriteria;
+
+                $criteria->with = array(
+                    'item' => array(
+                        'joinType' => 'INNER JOIN',
+                        'together' => true,
+                    ),
+                );
+                $criteria->addCondition("t.seller_id= " . Yii::app()->user->id . " AND  t.item_id IS NULL");
+                $prov2 = new CActiveDataProvider($this, array(
+                    'criteria' => $criteria,
+                ));
+
+                $records = array();
+                for ($i = 0; $i < $prov1->totalItemCount; $i++) {
+                    $data = $prov1->data[$i];
+                    array_push($records, $data);
+                }
+                for ($i = 0; $i < $prov2->totalItemCount; $i++) {
+                    $data = $prov2->data[$i];
+                    array_push($records, $data);
+                }
+
+                //or you could use $records=array_merge($prov1->data , $prov2->data);
+
+                $provAll = new CArrayDataProvider($records, array(
+                    'sort' => array(//optional and sortring
+                        'attributes' => array(
+                            'id', 'name','price','amount','payment'),
+                    ),
+                    'pagination' => array('pageSize' => 10) //optional add a pagination
+                        )
+                );
+                break;
+        }
+        /**
+         * return dataProvider
+         */
+        if ($type == "buyer") {
+            return $provAll;
+        } else {
+            return new CActiveDataProvider($this, array(
+                'criteria' => $criteria,
+            ));
+        }
     }
 
     /**

@@ -32,9 +32,22 @@
                     ),
                     'columns' => array(
                         array('name' => 'date_order', 'value' => '$data->date_order'),
-                        array('name' => 'item_id', 'value' => 'isset($data->item)?$data->item->name:""'),
-                        array('name' => 'description', 'value' => '$data->description'),
-                        array('name' => 'date_start', 'value' => '$data->date_start'),
+                        array(
+                            'name' => 'item_id', 'value' => 'isset($data->item)?$data->item->name:""',
+                            'headerHtmlOptions' => array("class" => "not_responsive"),
+                            'htmlOptions' => array("class" => "not_responsive")
+                        ),
+                        array(
+                            'name' => 'description',
+                            'value' => '$data->description',
+                            'headerHtmlOptions' => array("class" => "not_responsive"),
+                            'htmlOptions' => array("class" => "not_responsive")
+                        ),
+                        array(
+                            'name' => 'date_start', 'value' => '$data->date_start',
+                            'headerHtmlOptions' => array("class" => "not_responsive"),
+                            'htmlOptions' => array("class" => "not_responsive")
+                        ),
                         array('name' => 'amount', 'value' => '$data->amount." ".html_entity_decode("&euro;")'),
                         array('name' => 'date_finish', 'value' => '$data->date_finish',),
                         array('name' => 'status', 'value' => '$data->_status',),

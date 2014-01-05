@@ -230,12 +230,16 @@ ul.dropdown-menu li a {
     .footer-contain li.link_right {
         display: none;
     }
+    th.not_responsive,td.not_responsive {
+        display: none;
+    }
 }
 
 @media (min-width: 768px) {
     .footer-contain li.link_right {
         display: none;
     }
+
 }
 
 div.error input,
@@ -1075,8 +1079,8 @@ a.del_box {
 
 /*----- payment page of my Payment **/
 .payment-panel {
-     margin-bottom: 30px;
-     
+    margin-bottom: 30px;
+
 }
 .w-block {
     background-color: #F6F8F9;
