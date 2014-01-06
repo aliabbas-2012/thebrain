@@ -219,6 +219,7 @@ class BspOrder extends DTActiveRecord {
     /**
      * get Payment detail
      * @param type $type
+     * when click on the grid will load
      */
     public function getPaymentDetail($type) {
 
@@ -283,7 +284,7 @@ class BspOrder extends DTActiveRecord {
                 $provAll = new CArrayDataProvider($records, array(
                     'sort' => array(//optional and sortring
                         'attributes' => array(
-                            'id', 'name','price','amount','payment'),
+                            'id', 'name', 'price', 'amount', 'payment'),
                     ),
                     'pagination' => array('pageSize' => 10) //optional add a pagination
                         )
@@ -300,6 +301,68 @@ class BspOrder extends DTActiveRecord {
                 'criteria' => $criteria,
             ));
         }
+    }
+
+    /**
+     * get Statment Data Provider
+     */
+    public function getStatmentDataProvider() {
+        $order = Yii::app()->db->createCommand()
+                        ->select('SUM(amount) AS income, SUM(pph) AS pphTotal')
+                        ->from('bsp_order')
+                        ->where('seller_id = :seller_id AND payment=:status and MONTHNAME(date_order) = :month', array(
+                            ':seller_id' => Yii::app()->user->id,
+                            ':status' => self::STATUS_ESCROW_PAID,
+                            ":month" => date('F')
+                        ))->queryRow();
+        $vat = 0;
+        $vat2 = 0;
+        $data = array(
+            //invoices
+            array(
+                'id'=>'',
+                "item" => "Income",
+                "net" => number_format($order['income'], 2),
+                "vat" => number_format($vat, 2),
+                "total" => number_format($order['income'] + $vat, 2)
+            ),
+            array(
+                'id'=>'',
+                "item" => "PPH Service Fees",
+                "net" => number_format($order['pphTotal'], 2),
+                "vat" => number_format($vat2, 2),
+                "total" => number_format($order['pphTotal'] + $vat2, 2)
+            ),
+            array('id'=>'',"item" => "&nbsp;", "net" => "", "vat" => "", "total" => ""),
+            array('id'=>'',"item" => "&nbsp;", "net" => "", "vat" => "", "total" => "")
+        );
+
+        $order2 = Yii::app()->db->createCommand()
+                ->select('SUM(amount) AS payments')
+                ->from('bsp_order')
+                ->where(
+                        'buyer_id = :buyer_id AND 
+                        payment=:status and MONTHNAME(date_order) = :month', array(':buyer_id' => Yii::app()->user->id, ':status' => self::STATUS_ESCROW_PAID, ":month" => date('F')))
+                ->queryRow();
+
+        $other_fees = 0;
+        $vat3 = 0;
+        $vat4 = 0;
+        $expenses = array(
+            array('id'=>'',"item" => "Payments", "net" => number_format($order2['payments'], 2), "vat" => number_format($vat3, 2), "total" => number_format($order2['payments'] + $vat3, 2)),
+            array('id'=>'',"item" => "Other Fees", "net" => number_format($other_fees, 2), "vat" => number_format($vat4, 2), "total" => number_format($other_fees + $vat4, 2)),
+            //net 
+            array('id'=>'',"item" => "Net Movement", "net" => number_format($order['income'] + $order['pphTotal'] - $order2['payments'] - $other_fees, 2), "vat" => number_format($vat + $vat2 + $vat3 + $vat4, 2), "total" => number_format($order['income'] + $vat + $order['pphTotal'] + $vat2 - $order2['payments'] - $vat3 - $other_fees - $vat4, 2)),
+        );
+
+        $data = array_merge($data, $expenses);
+        return new CArrayDataProvider($data, array(
+            'sort' => array(//optional and sortring
+                'attributes' => array(
+                    'id','item', 'net', 'vat', 'total'),
+            ),
+            'pagination' => array('pageSize' => 10) //optional add a pagination
+        ));
     }
 
     /**

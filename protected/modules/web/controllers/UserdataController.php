@@ -105,7 +105,8 @@ class UserdataController extends Controller {
      * of user
      */
     public function handleStatment() {
-        $this->render("//userdata/payment", array("type" => "statements"));
+        $statmentProvider = BspOrder::model()->getStatmentDataProvider();
+        $this->render("//userdata/statment", array("type" => "statements", "dataProvider" => $statmentProvider));
     }
 
     /**
@@ -113,7 +114,7 @@ class UserdataController extends Controller {
      * of user
      */
     public function handleInvoices() {
-        $this->render("//userdata/payment", array("type" => "transactions"));
+        $this->render("//userdata/invoices", array("type" => "invoices"));
     }
 
     /**
@@ -121,7 +122,8 @@ class UserdataController extends Controller {
      * of user
      */
     public function handleTransactions() {
-        $this->render("//userdata/payment", array("type" => "wallet"));
+
+        $this->render("//userdata/transaction", array("type" => "transactions"));
     }
 
     /**
@@ -138,7 +140,6 @@ class UserdataController extends Controller {
     public function actionPaymentdetail($type = "account") {
 
         $dataProvider = BspOrder::model()->getPaymentDetail($type);
-
         $this->renderPartial("//userdata/_payment_detail", array("dataProvider" => $dataProvider));
     }
 

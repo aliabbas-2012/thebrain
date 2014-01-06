@@ -7,12 +7,10 @@
  */
 $rules_web = array(
     /** other urls * */
-
     '<controller:\w+>/<id:\d+>' => '<controller>/view',
     '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
     '' => '/web/default/index',
-   
     '<slug:[\w-\.]+>/article' => '/web/default/article',
     'blog' => '/web/blog/index',
     'faq' => '/web/faq/index',
@@ -21,6 +19,7 @@ $rules_web = array(
     'my-offers' => '/web/userdata/myoffers',
     'my-orders' => '/web/userdata/myorders',
     'my-settings' => '/web/userdata/settings',
+    '<type:[\w-\.]+>/my-payments' => '/web/userdata/payment',
     'my-payments' => '/web/userdata/payment',
     'ratings' => '/web/userdata/ratings',
     'view/profile/user' => '/web/user/profileview',

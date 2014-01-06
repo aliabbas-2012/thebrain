@@ -8,7 +8,7 @@
     <a class="<?php echo $type == "invoices" ? "active" : "" ?>" href="<?php echo $this->createUrl("/web/userdata/payment", array("type" => "invoices")) ?>">
         <?php echo Yii::t('user', 'Invoices') ?>
     </a>
-    <a class="<?php echo $type == "transactions" ? "active" : "" ?>" href="<?php echo $this->createUrl("/web/userdata/payment", array("type" => "invoices")) ?>">
+    <a class="<?php echo $type == "transactions" ? "active" : "" ?>" href="<?php echo $this->createUrl("/web/userdata/payment", array("type" => "transactions")) ?>">
         <?php echo Yii::t('user', 'Transactions') ?>
     </a>
 </div>
