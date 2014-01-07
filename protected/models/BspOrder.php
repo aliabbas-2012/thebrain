@@ -43,7 +43,7 @@ class BspOrder extends DTActiveRecord {
     const STATUS_ESCROW_PAID = 5;
     const STATUS_ESCROW_AWAITING = 6;
 
-    public $_status;
+    public $_status,$_payment_status;
 
     /**
      * @return string the associated database table name
@@ -100,7 +100,7 @@ class BspOrder extends DTActiveRecord {
             'pph' => 'Pph',
             'comission' => 'Comission',
             'amount' => 'Amount',
-            'payment' => 'Payment',
+            'payment' => 'Payment Status',
             'status' => 'Status',
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
@@ -171,6 +171,22 @@ class BspOrder extends DTActiveRecord {
             self::STATUS_ORDER_COMPLETE => "Complete",
             self::STATUS_ORDER_DESPATCHED => "Despatched",
             self::STATUS_ORDER_REVIEWED => "Reviewed",
+        );
+
+        return $statuses;
+    }
+    /**
+     * 
+     * @return string
+     */
+    public function getPaymentStatuses() {
+        $statuses = array(
+            self::STATUS_ESCROW_RECIEVED => "Escrow Recieved",
+            self::STATUS_ESCROW_AWAITING => "Awaiting Payment",
+            self::STATUS_ESCROW_APPROVED => "Approved",
+            self::STATUS_ESCROW_PAID => "Paid",
+            self::STATUS_ESCROW_REFUNDED => "Refunded",
+            self::STATUS_ESCROW_OVERDUE => "Overdue",
         );
 
         return $statuses;
@@ -320,21 +336,21 @@ class BspOrder extends DTActiveRecord {
         $data = array(
             //invoices
             array(
-                'id'=>'',
+                'id' => '',
                 "item" => "Income",
                 "net" => number_format($order['income'], 2),
                 "vat" => number_format($vat, 2),
                 "total" => number_format($order['income'] + $vat, 2)
             ),
             array(
-                'id'=>'',
+                'id' => '',
                 "item" => "PPH Service Fees",
                 "net" => number_format($order['pphTotal'], 2),
                 "vat" => number_format($vat2, 2),
                 "total" => number_format($order['pphTotal'] + $vat2, 2)
             ),
-            array('id'=>'',"item" => "&nbsp;", "net" => "", "vat" => "", "total" => ""),
-            array('id'=>'',"item" => "&nbsp;", "net" => "", "vat" => "", "total" => "")
+            array('id' => '', "item" => "&nbsp;", "net" => "", "vat" => "", "total" => ""),
+            array('id' => '', "item" => "&nbsp;", "net" => "", "vat" => "", "total" => "")
         );
 
         $order2 = Yii::app()->db->createCommand()
@@ -349,19 +365,38 @@ class BspOrder extends DTActiveRecord {
         $vat3 = 0;
         $vat4 = 0;
         $expenses = array(
-            array('id'=>'',"item" => "Payments", "net" => number_format($order2['payments'], 2), "vat" => number_format($vat3, 2), "total" => number_format($order2['payments'] + $vat3, 2)),
-            array('id'=>'',"item" => "Other Fees", "net" => number_format($other_fees, 2), "vat" => number_format($vat4, 2), "total" => number_format($other_fees + $vat4, 2)),
+            array('id' => '', "item" => "Payments", "net" => number_format($order2['payments'], 2), "vat" => number_format($vat3, 2), "total" => number_format($order2['payments'] + $vat3, 2)),
+            array('id' => '', "item" => "Other Fees", "net" => number_format($other_fees, 2), "vat" => number_format($vat4, 2), "total" => number_format($other_fees + $vat4, 2)),
             //net 
-            array('id'=>'',"item" => "Net Movement", "net" => number_format($order['income'] + $order['pphTotal'] - $order2['payments'] - $other_fees, 2), "vat" => number_format($vat + $vat2 + $vat3 + $vat4, 2), "total" => number_format($order['income'] + $vat + $order['pphTotal'] + $vat2 - $order2['payments'] - $vat3 - $other_fees - $vat4, 2)),
+            array('id' => '', "item" => "Net Movement", "net" => number_format($order['income'] + $order['pphTotal'] - $order2['payments'] - $other_fees, 2), "vat" => number_format($vat + $vat2 + $vat3 + $vat4, 2), "total" => number_format($order['income'] + $vat + $order['pphTotal'] + $vat2 - $order2['payments'] - $vat3 - $other_fees - $vat4, 2)),
         );
 
         $data = array_merge($data, $expenses);
         return new CArrayDataProvider($data, array(
             'sort' => array(//optional and sortring
                 'attributes' => array(
-                    'id','item', 'net', 'vat', 'total'),
+                    'id', 'item', 'net', 'vat', 'total'),
             ),
             'pagination' => array('pageSize' => 10) //optional add a pagination
+        ));
+    }
+
+    /**
+     * get invoices
+     */
+    public function getInvoices() {
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("t.seller_id = '".Yii::app()->user->id."' ");
+        if(!empty($this->date_order)){
+            $this->date_order = ItstFunctions::dateFormatForSave($this->date_order);
+        }
+        $criteria->compare("date_order", $this->date_order);
+        $criteria->compare("payment", $this->payment);
+        $criteria->compare("status", $this->status);
+        $criteria->compare("amount", $this->amount);
+        
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
         ));
     }
 
@@ -371,6 +406,8 @@ class BspOrder extends DTActiveRecord {
      */
     public function afterFind() {
         $all_status = $this->getStatuses();
+        $payment_status = $this->getPaymentStatuses();
+        $this->_payment_status= isset($payment_status[$this->payment])?$payment_status[$this->payment]:"";
         $this->_status = $all_status[$this->status];
         return parent::afterFind();
     }

@@ -1164,3 +1164,34 @@ div.w-header.w-shadow button.k-button-green:hover {
     text-align: center;
     width: 120px;
 }
+
+.search-button {
+    background-color: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    float: left;
+    height: 34px;
+    width: 100px;
+}
+
+.search-button img {
+    cursor: pointer;
+    float: left;
+
+    margin-top: 8px;
+    margin-left: 40px;
+}
+.search-button:hover {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #D5D5D5 #D5D5D5 #CECECE;
+    border-image: none;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 0 5px rgba(206, 206, 206, 0.31) inset, 0 0 1px rgba(172, 172, 172, 0.47);
+    opacity: 0.82;
+    padding-bottom: 5px;
+}

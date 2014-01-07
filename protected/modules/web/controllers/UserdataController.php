@@ -114,7 +114,16 @@ class UserdataController extends Controller {
      * of user
      */
     public function handleInvoices() {
-        $this->render("//userdata/invoices", array("type" => "invoices"));
+        $model = new BspOrder;
+        if(isset($_GET['BspOrder'])){
+            $model->attributes = $_GET['BspOrder'];
+        }
+        $dataProvider = $model->getInvoices();
+        $this->render("//userdata/invoices", array(
+            "type" => "invoices",
+            "dataProvider" => $dataProvider,
+            "model" => $model
+        ));
     }
 
     /**
