@@ -51,11 +51,11 @@ class BspComment extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'order' => array(self::BELONGS_TO, 'Order', 'order_id'),
+            'order' => array(self::BELONGS_TO, 'BspOrder', 'order_id'),
             'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
         );
     }
-    
+
     /**
      * get the comments related with order
      * 
@@ -140,6 +140,92 @@ class BspComment extends DTActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    /**
+     * Retrieves a list of models based on the current search/filter conditions.
+     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+     */
+    public function getItemComments($item_id) {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
+
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('item_id', $item_id);
+        $criteria->order = "date_comment desc";
+
+
+        /* return new CActiveDataProvider(get_class($this), array(
+          'criteria'=>$criteria,
+
+          )); */
+
+        return $this->findAll($criteria);
+    }
+
+    public function getBuyerComments($user_id) {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
+
+        $criteria = new CDbCriteria;
+        $criteria->with = array(
+            "order" => array("condition" => "t.order_id  = order.id AND order.buyer_id = :user_id",
+                "params" => array(":user_id" => $user_id)
+            )
+        );
+
+        $criteria->order = "t.date_comment desc";
+
+
+        /* return new CActiveDataProvider(get_class($this), array(
+          'criteria'=>$criteria,
+
+          ));
+         */
+        return $this->findAll($criteria);
+    }
+
+    /**
+     * 
+     * @param type $user_id
+     * @return type
+     */
+    public function getSellerComments($user_id) {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
+       
+        $criteria = new CDbCriteria;
+        $criteria->with = array(
+            "order" => array("condition" => "t.order_id  = order.id AND order.seller_id = :user_id", 
+                "params" => array(":user_id" => $user_id))
+        );
+
+        $criteria->order = "t.date_comment desc";
+
+        /* return new CActiveDataProvider(get_class($this), array(
+          'criteria'=>$criteria,
+
+          )); */
+
+        return $this->findAll($criteria);
+    }
+    /**
+     * sleer comments
+     * @param type $user_id
+     * @return type
+     */
+    public function getNumSellerComments($user_id) {
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
+
+        $row = Yii::app()->db->createCommand()
+                ->select("COUNT(*) as comments ")
+                ->from("bsp_comment c")
+                ->join("bsp_order o", "c.order_id  = o.id")
+                ->where("o.seller_id = :user_id", array(":user_id" => $user_id))
+                ->queryRow();
+        return $row['comments'];
     }
 
 }

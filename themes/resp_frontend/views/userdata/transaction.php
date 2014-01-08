@@ -25,12 +25,88 @@
         </div>
 
         <div id="grid_content">
+            <div id="order-search">
+                <?php
+                $form = $this->beginWidget('CActiveForm', array(
+                    'action' => Yii::app()->createUrl($this->route),
+                    'method' => 'get',
+                    'htmlOptions' => array("id" => "invoice-search")
+                ));
+                ?>
+
+                <div class="col-md-2">
+                    <?php echo $form->label($model, 'date_order', array('class' => 'control-label col-sm-9')); ?> 
+                    <?php
+                    $this->widget('ItstJUIDatePicker', array(
+                        'model' => $model,
+                        'attribute' => 'date_order',
+                        'model_attribute' => 'date_order',
+                        'options' => array('showAnim' => 'fold',
+                            'dateFormat' => Yii::app()->params['dateformat'],
+                            'changeYear' => true,
+                        ),
+                        'htmlOptions' => array('class' => 'form-control')
+                    ));
+                    ?>
+                </div>
+
+                <div class="col-md-2">
+                    <label class="control-label col-sm-4">&nbsp;</label>   
+                    <div class="clear"></div>
+                    <div class="search-button">
+                        <a class="searchbt" href="javascript:void(0)">
+                            <?php
+                            echo CHtml::image(Yii::app()->theme->baseUrl . "/images/search_button.png");
+                            ?>
+                        </a>
+                    </div>
+                </div>
+                <?php $this->endWidget(); ?>
+            </div>
+            <div class="clear"></div>
+            <div class="space-blog"></div>
+
+
+            <?php
+            $this->widget('zii.widgets.grid.CGridView', array(
+                'id' => 'bsp-my-order-grid',
+                'itemsCssClass' => 'table table-bordered',
+                'dataProvider' => $dataProvider,
+                'cssFile' => Yii::app()->theme->baseUrl . "/dist/css/gridview.css",
+                'pager' => array(
+                    'cssFile' => '',
+                ),
+                'columns' => array(
+                    array(
+                        'name' => 'item_id', 'value' => 'isset($data->item)?$data->item->name:""',
+                        'headerHtmlOptions' => array("class" => "not_responsive"),
+                        'htmlOptions' => array("class" => "not_responsive")
+                    ),
+                    array('name' => 'amount', 'value' => '$data->amount." ".html_entity_decode("&euro;")'),
+                ),
+            ));
+            ?>
 
         </div>
 
     </div>
 </div>
 
-<script type="text/javascript">
-
-</script>
+<?php
+Yii::app()->clientScript->registerScript('search', "
+$('.searchbt').click(function(){
+	$('#loading').show();
+        $('#invoice-search').submit();
+        
+	return false;
+});
+$('#invoice-search').submit(function(){
+	$('#bsp-my-order-grid').yiiGridView('update', {
+		data: $(this).serialize()
+	});
+        $('#loading').hide();
+	return false;
+        
+});
+", CClientScript::POS_READY);
+?>

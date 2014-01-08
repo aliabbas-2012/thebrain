@@ -1195,3 +1195,49 @@ div.w-header.w-shadow button.k-button-green:hover {
     opacity: 0.82;
     padding-bottom: 5px;
 }
+
+/**------- rating page **/
+.reviewcomment {
+    background-color: #fff;
+    border-radius: 5px;
+    padding-top: 15px;
+    padding-left: 0;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #414141;
+    font-size: 12px;
+}
+.reviewcomment .review-img-content {
+    padding-right: 0
+}
+.reviewcomment .review-img-content img {
+    width: 100px;
+}
+.reviewcomment .title {
+    float: left;
+    font-weight: bold;
+    word-spacing: 2px;
+}
+.reviewcomment .title span {
+    color: #0099FF;
+}
+.reviewcomment .date {
+    font-weight: bold;
+}
+@media (min-width: 992px) {
+    .reviewcomment .ratingcomment {
+        float: right;
+    }
+}
+@media (min-width: 450px) {
+    .reviewcomment .review-content {
+        padding-left: 0 !important;;
+    }
+    .reviewcomment .ratingcomment {
+        clear:both;
+    }
+}
+.reviewcomment .ratingcomment img {
+    width: 15px;   
+    margin-top: -4px;
+    margin-left: 4px;
+}

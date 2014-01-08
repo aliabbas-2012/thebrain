@@ -115,7 +115,7 @@ class UserdataController extends Controller {
      */
     public function handleInvoices() {
         $model = new BspOrder;
-        if(isset($_GET['BspOrder'])){
+        if (isset($_GET['BspOrder'])) {
             $model->attributes = $_GET['BspOrder'];
         }
         $dataProvider = $model->getInvoices();
@@ -131,15 +131,24 @@ class UserdataController extends Controller {
      * of user
      */
     public function handleTransactions() {
-
-        $this->render("//userdata/transaction", array("type" => "transactions"));
+        $model = new BspOrder;
+        if (isset($_GET['BspOrder'])) {
+            $model->attributes = $_GET['BspOrder'];
+        }
+        $dataProvider = $model->getTransaction();
+        $this->render("//userdata/transaction", array(
+            "type" => "transactions",
+            "dataProvider" => $dataProvider,
+            "model" => $model
+        ));
     }
 
     /**
      * my Settings of particular login user
      */
     public function actionRatings() {
-        $this->render("//userdata/ratings");
+        $sellerComments = BspComment::model()->getSellerComments(Yii::app()->user->id);
+        $this->render("//userdata/ratings",array("sellerComments"=>$sellerComments));
     }
 
     /**

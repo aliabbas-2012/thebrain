@@ -43,7 +43,7 @@ class BspOrder extends DTActiveRecord {
     const STATUS_ESCROW_PAID = 5;
     const STATUS_ESCROW_AWAITING = 6;
 
-    public $_status,$_payment_status;
+    public $_status, $_payment_status;
 
     /**
      * @return string the associated database table name
@@ -175,6 +175,7 @@ class BspOrder extends DTActiveRecord {
 
         return $statuses;
     }
+
     /**
      * 
      * @return string
@@ -386,15 +387,31 @@ class BspOrder extends DTActiveRecord {
      */
     public function getInvoices() {
         $criteria = new CDbCriteria();
-        $criteria->addCondition("t.seller_id = '".Yii::app()->user->id."' ");
-        if(!empty($this->date_order)){
+        $criteria->addCondition("t.seller_id = '" . Yii::app()->user->id . "' ");
+        if (!empty($this->date_order)) {
             $this->date_order = ItstFunctions::dateFormatForSave($this->date_order);
         }
         $criteria->compare("date_order", $this->date_order);
         $criteria->compare("payment", $this->payment);
         $criteria->compare("status", $this->status);
         $criteria->compare("amount", $this->amount);
-        
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
+
+    /**
+     * Get Transaction
+     * when user is buyer
+     * or seller
+     */
+    public function getTransaction() {
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("t.seller_id = '" . Yii::app()->user->id . "' OR t.buyer_id = '" . Yii::app()->user->id . "'");
+        if (!empty($this->date_order)) {
+            $this->date_order = ItstFunctions::dateFormatForSave($this->date_order);
+        }
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
@@ -407,7 +424,7 @@ class BspOrder extends DTActiveRecord {
     public function afterFind() {
         $all_status = $this->getStatuses();
         $payment_status = $this->getPaymentStatuses();
-        $this->_payment_status= isset($payment_status[$this->payment])?$payment_status[$this->payment]:"";
+        $this->_payment_status = isset($payment_status[$this->payment]) ? $payment_status[$this->payment] : "";
         $this->_status = $all_status[$this->status];
         return parent::afterFind();
     }
