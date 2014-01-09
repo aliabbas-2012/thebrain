@@ -154,12 +154,9 @@ class BspComment extends DTActiveRecord {
 
         $criteria->compare('item_id', $item_id);
         $criteria->order = "date_comment desc";
-
-
-        /* return new CActiveDataProvider(get_class($this), array(
-          'criteria'=>$criteria,
-
-          )); */
+        return new CActiveDataProvider(get_class($this), array(
+            'criteria' => $criteria,
+        ));
 
         return $this->findAll($criteria);
     }
@@ -176,14 +173,9 @@ class BspComment extends DTActiveRecord {
         );
 
         $criteria->order = "t.date_comment desc";
-
-
-        /* return new CActiveDataProvider(get_class($this), array(
-          'criteria'=>$criteria,
-
-          ));
-         */
-        return $this->findAll($criteria);
+        return new CActiveDataProvider(get_class($this), array(
+            'criteria' => $criteria,
+        ));
     }
 
     /**
@@ -194,22 +186,19 @@ class BspComment extends DTActiveRecord {
     public function getSellerComments($user_id) {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.
-       
+
         $criteria = new CDbCriteria;
         $criteria->with = array(
-            "order" => array("condition" => "t.order_id  = order.id AND order.seller_id = :user_id", 
+            "order" => array("condition" => "t.order_id  = order.id AND order.seller_id = :user_id",
                 "params" => array(":user_id" => $user_id))
         );
 
         $criteria->order = "t.date_comment desc";
-
-        /* return new CActiveDataProvider(get_class($this), array(
-          'criteria'=>$criteria,
-
-          )); */
-
-        return $this->findAll($criteria);
+        return new CActiveDataProvider(get_class($this), array(
+            'criteria' => $criteria,
+        ));
     }
+
     /**
      * sleer comments
      * @param type $user_id

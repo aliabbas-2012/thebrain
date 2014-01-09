@@ -8,7 +8,15 @@
             <div class="col-xs-10 review-content">
                 <div class="col-md-5">
                     <div class="title" >
-                        <?php echo Yii::t('user', 'Review for') ?>  <span><?php echo isset($data->order) ? $data->order->description : ""; ?></span>
+                        <?php echo Yii::t('user', 'Review for') ?>
+                        <?php
+                        if ($user && !empty($data->user)):
+                            ?>
+                            <span><?php echo $data->user->first_name . " " . $data->user->second_name; ?></span> 
+                            <?php
+                        endif;
+                        ?>
+                        <span><?php echo isset($data->order) ? $data->order->description : ""; ?></span>
                     </div>
                 </div>
 

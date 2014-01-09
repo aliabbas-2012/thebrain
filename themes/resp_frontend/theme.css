@@ -703,6 +703,12 @@ ul.grid.clearfix {
     margin-left: 10px;
     font-size: 18px;
 }
+.nav-tabs > li.active > a:focus {   
+    cursor: default;
+    background-color: transparent;
+    border: 0;
+    border-bottom-color: transparent;
+}
 #my_mails h1,
 #my_offers h1,
 #my_orders h1,
@@ -1205,6 +1211,7 @@ div.w-header.w-shadow button.k-button-green:hover {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: #414141;
     font-size: 12px;
+    margin-top: 5px;
 }
 .reviewcomment .review-img-content {
     padding-right: 0
@@ -1240,4 +1247,36 @@ div.w-header.w-shadow button.k-button-green:hover {
     width: 15px;   
     margin-top: -4px;
     margin-left: 4px;
+}
+#grid_content {
+    border:0;
+}
+#grid_content ul.k-tabstrip-items {
+    border:none;
+    background: none;
+}
+#grid_content ul.k-tabstrip-items li {
+    border:none;
+    background: none;
+}
+#grid_content div.k-content {
+    border: 0;
+    padding: 0;
+    background: none;
+    margin-top: 10px;
+}
+#grid_content ul.k-tabstrip-items li{
+    background-color: #F6F8F9;
+    margin-right: 5px;
+}
+#grid_content ul.k-tabstrip-items li a{
+    color:#000000;
+    font-weight: bold;
+}
+#grid_content ul.k-tabstrip-items li.k-state-active{
+    background-color: #000000;
+}
+#grid_content ul.k-tabstrip-items li.k-state-active a{
+    color:#fff;
+    font-weight: bold;
 }

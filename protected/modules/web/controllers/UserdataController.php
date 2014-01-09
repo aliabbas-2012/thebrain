@@ -147,8 +147,9 @@ class UserdataController extends Controller {
      * my Settings of particular login user
      */
     public function actionRatings() {
-        $sellerComments = BspComment::model()->getSellerComments(Yii::app()->user->id);
-        $this->render("//userdata/ratings",array("sellerComments"=>$sellerComments));
+        $sellerComments = BspComment::model()->getSellerComments(Yii::app()->user->id)->getData();
+        $buyerComments = BspComment::model()->getBuyerComments(Yii::app()->user->id)->getData();
+        $this->render("//userdata/ratings",array("sellerComments"=>$sellerComments,"buyerComments"=>$buyerComments));
     }
 
     /**
