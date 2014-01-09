@@ -140,8 +140,8 @@ class SiteController extends Controller {
                         $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("temp", Yii::app()->user->id, $module));
                     }
                     if (!empty($img_file)) {
-                        $img_file->saveAs($upload_path . str_replace("","_",$img_file->name));
-                        echo json_encode(array('file' => str_replace("","_",$img_file->name), "path" => $upload_path, "attribute" => $attribute));
+                        $img_file->saveAs($upload_path . str_replace(" ","_",$img_file->name));
+                        echo json_encode(array('file' => str_replace(" ","_",$img_file->name), "path" => $upload_path, "attribute" => $attribute));
                     }
                 }
             }
