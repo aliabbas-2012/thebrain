@@ -297,7 +297,7 @@ class Users extends DTActiveRecord {
 
     /**
      * 
-     */
+     */ 
     public function uploadAvtar($path) {
         $path.= "Users_avatar" . DIRECTORY_SEPARATOR;
 
