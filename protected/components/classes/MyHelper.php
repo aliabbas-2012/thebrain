@@ -11,31 +11,25 @@ class MyHelper {
         $password = sha1($password);
         return sha1($salt . $password);
     }
+
     // this class returen the css class of icon public, private, and friend
     public static function loadClassUserSettingIcon($reviewInformationID) {
         $returnvalue = "publicIcon";
-        if($reviewInformationID == 1)
-        {
+        if ($reviewInformationID == 1) {
             $returnvalue = "friendIcon";
-        }else if($reviewInformationID == 2)
-        {
-             $returnvalue = "privateIcon";
+        } else if ($reviewInformationID == 2) {
+            $returnvalue = "privateIcon";
         }
         return $returnvalue;
     }
-       
-    public static function checkUserSpam()
-    {
-        if (!isset(Yii::app()->session['phimsonicSS'])) 
-        {
-            if(isset($_REQUEST['id']))
-            {
-                if((int)$_REQUEST['id'] != 0 && (int)$_REQUEST['id'] != Yii::app()->session['phimsonicSS'])
-                {
-               
-                    echo "Your computer IP:192.168.0.120 does not have right to access this page,<br> please <a href='javascript:history.go(-1)'>click here</a> to come back!"  ;
+
+    public static function checkUserSpam() {
+        if (!isset(Yii::app()->session['phimsonicSS'])) {
+            if (isset($_REQUEST['id'])) {
+                if ((int) $_REQUEST['id'] != 0 && (int) $_REQUEST['id'] != Yii::app()->session['phimsonicSS']) {
+
+                    echo "Your computer IP:192.168.0.120 does not have right to access this page,<br> please <a href='javascript:history.go(-1)'>click here</a> to come back!";
                     return 1;
-                    
                 }
             }
         }
@@ -100,25 +94,25 @@ class MyHelper {
         $d1 = mktime($hour, $minute, $second, $month, $day, $year);
         $d2 = mktime($now['hours'], $now['minutes'], $now['seconds'], $now['mon'], $now['mday'], $now['year']);
         $d = $d2 - $d1;
-        switch(true){
-            case ($d>=(7*24*60*60)) ://neu so ngay lon hon hoac bang 7
+        switch (true) {
+            case ($d >= (7 * 24 * 60 * 60)) ://neu so ngay lon hon hoac bang 7
                 return self::num2($day) . " " . month . " " . self::num2($month) . " " . year . " " . self::num2($year);
                 break;
-            case ($d<(7*24*60*60) && $d>=(24*60*60))://neu so ngay nho hon 7 va lon 1
-                return abs(floor($d / (24*60*60)))." ".days_ago;
+            case ($d < (7 * 24 * 60 * 60) && $d >= (24 * 60 * 60))://neu so ngay nho hon 7 va lon 1
+                return abs(floor($d / (24 * 60 * 60))) . " " . days_ago;
                 break;
-            case ($d<(24*60*60) && $d>=(60*60))://neu so gio it hon 24 va lon hon hoac bang 1
-                return abs(floor($d /(60*60)))." ".hours_ago;
+            case ($d < (24 * 60 * 60) && $d >= (60 * 60))://neu so gio it hon 24 va lon hon hoac bang 1
+                return abs(floor($d / (60 * 60))) . " " . hours_ago;
                 break;
-            case ($d<(60*60) && $d >=60)://so phut nho hon 1 gio
-                return abs(floor($d/60))." ".minutes_ago;
+            case ($d < (60 * 60) && $d >= 60)://so phut nho hon 1 gio
+                return abs(floor($d / 60)) . " " . minutes_ago;
                 break;
-            case ($d<60):
+            case ($d < 60):
                 return afew_seconds_ago;
                 break;
         }
     }
-    
+
     public static function checkonlinestatus($datetime) {
         if ($datetime == '')
             return '';
@@ -134,12 +128,12 @@ class MyHelper {
         $d1 = mktime($hour, $minute, $second, $month, $day, $year);
         $d2 = mktime($now['hours'], $now['minutes'], $now['seconds'], $now['mon'], $now['mday'], $now['year']);
         $d = $d2 - $d1;
-        
-        if($d<(10*60)){//so phut nho hon 10 phut
-             return 1;//online;   
+
+        if ($d < (10 * 60)) {//so phut nho hon 10 phut
+            return 1; //online;   
         }
         else
-            return 0;//offline;   
+            return 0; //offline;   
     }
 
     public static function get_datetime() {
@@ -328,43 +322,38 @@ class MyHelper {
         return self::cut_string($str, $len, $more);
     }
 
-    public static function isView($title){
-	//$view = true;
-	/*switch($title){
-		case 'Account':
-		 if(Yii::app()->user->id != '')
-		 $view = true;
-		 break;
-		case 'Social Account':
-		 if(count(UserModule::getModuleAuth()->getHybridAuth()->getConnectedProviders()) > 0)
-		  $view = true;
-		 
-		 break;
-		   
-	}
-*/
-	return true;
-	
-	}
-	
-	 public static  function word_limiter($str, $limit = 100, $end_char = '&#8230;')
-     {
-        if (trim($str) == '')
-        { 
+    public static function isView($title) {
+        //$view = true;
+        /* switch($title){
+          case 'Account':
+          if(Yii::app()->user->id != '')
+          $view = true;
+          break;
+          case 'Social Account':
+          if(count(UserModule::getModuleAuth()->getHybridAuth()->getConnectedProviders()) > 0)
+          $view = true;
+
+          break;
+
+          }
+         */
+        return true;
+    }
+
+    public static function word_limiter($str, $limit = 100, $end_char = '&#8230;') {
+        if (trim($str) == '') {
             return $str;
         }
-        preg_match('/^\s*+(?:\S++\s*+){1,'.(int) $limit.'}/', $str, $matches);
+        preg_match('/^\s*+(?:\S++\s*+){1,' . (int) $limit . '}/', $str, $matches);
         $limit = rtrim($matches[0]);
-        if (strlen($str) == strlen($matches[0]))
-        {
+        if (strlen($str) == strlen($matches[0])) {
             $end_char = '';
-        }else{
-		   $limit =     $limit."<a class='show' href='javascript:#' style='color:#123efd;text-decoration:none;'>&nbsp;&nbsp;more".$end_char."</a><span  style='display:none;'>".substr($str,strlen($limit))."</span><a class= 'less' href='javascript:#' style='color:#123efd;display:none;text-decoration:none;'>&nbsp;&nbsp;less</a>";
-		}
-        
-        return  $limit;  
-      }
-	
+        } else {
+            $limit = $limit . "<a class='show' href='javascript:#' style='color:#123efd;text-decoration:none;'>&nbsp;&nbsp;more" . $end_char . "</a><span  style='display:none;'>" . substr($str, strlen($limit)) . "</span><a class= 'less' href='javascript:#' style='color:#123efd;display:none;text-decoration:none;'>&nbsp;&nbsp;less</a>";
+        }
+
+        return $limit;
+    }
+
 }
 
-    

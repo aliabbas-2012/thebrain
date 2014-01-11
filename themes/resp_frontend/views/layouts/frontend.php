@@ -161,20 +161,22 @@
                                 $data = BspCategory::model()->findAll(array('condition' => 'parent_id=0'));
                                 $i = 1;
                                 foreach ($data as $da) {
-                                    $link = Yii::app()->request->baseUrl . '/category/' . $da->id . '-' . MyHelper::convert_no_sign($da->name);
+                                    
                                     $cssClass = "";
                                     if ($da->name != "Services" && $da->name != "Rentals") {
                                         $cssClass = "clearleft";
                                     }
-                                    echo '<li id="menu-item-' . $i . '" class=' . $cssClass . '><a href="javascript:void(0);">' . $da->name . '</a>';
+                                    echo '<li id="menu-item-' . $i . '" class=' . $cssClass . '>';
+                                    
+                                    echo CHtml::link($da->name,$this->createUrl("/web/offers/category",array("category"=>$da->slug)));
 
 
                                     echo CHtml::openTag("ul", array("class" => ""));
                                     $subcate = BspCategory::model()->findAll(array('condition' => 'parent_id=' . $da->id));
                                     foreach ($subcate as $sub) {
-                                        $slink = Yii::app()->request->baseUrl . '/category/' . $sub->id . '-' . MyHelper::convert_no_sign($sub->name);
+                             
                                         echo '<li>';
-                                        echo '<a href="javascript:void(0);">' . $sub->name . '</a>';
+                                        echo CHtml::link($sub->name,$this->createUrl("/web/offers/category",array("category"=>$sub->slug)));
                                         echo '</li>';
                                     }
                                     echo CHtml::closeTag("ul");

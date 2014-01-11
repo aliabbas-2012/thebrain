@@ -24,5 +24,6 @@ $rules_web = array(
     'ratings' => '/web/userdata/ratings',
     'view/profile/user' => '/web/user/profileview',
     'edit/profile/user' => '/web/user/profile',
+    '/offers/category/<category:[\w-\.]+>/' => '/web/offers/category',
 );
 ?>

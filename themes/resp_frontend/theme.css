@@ -780,6 +780,9 @@ ul.grid.clearfix {
     top: -15px;
     left: 50px;
 }
+.tab-header a:not(.active):hover {
+    color: #16ACEA !important;
+}
 
 /** Dashboard page **/
 

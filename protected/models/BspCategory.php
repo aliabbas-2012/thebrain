@@ -16,7 +16,8 @@
  * @property string $update_user_id
  */
 class BspCategory extends DTActiveRecord {
-
+    
+    public $slug;
     /**
      * @return string the associated database table name
      */
@@ -37,6 +38,7 @@ class BspCategory extends DTActiveRecord {
             array('parent_name', 'length', 'max' => 225),
             array('num_post', 'length', 'max' => 30),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
+            array('slug','safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, name, parent_name, parent_id, level, num_post, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
@@ -161,14 +163,31 @@ class BspCategory extends DTActiveRecord {
         /**
          * if id is null then empty result
          */
-        if(empty($id)){
+        if (empty($id)) {
             return array();
         }
         $criteria = new CDbCriteria();
         $criteria->select = "id,name";
-        $criteria->addCondition("parent_id = ".$id);
+        $criteria->addCondition("parent_id = " . $id);
         $data = CHtml::listData($this->findAll($criteria), "id", "name");
         return $data;
     }
+    /**
+     * 
+     * @return type
+     */
+    public function afterFind() {
+        $this->slug = MyHelper::convert_no_sign(str_replace(Yii::app()->params['notallowdCharactorsUrl'],"",$this->name))."-".$this->primaryKey;
+        return parent::afterFind();
+    }
+    /**
+     * get Parent cateogry name 
+     * from its id   
+     * @param type $id
+     */
+    public function getParentCategory($id){
+        return $this->findByPk($id);
+    }
+    
 
 }
