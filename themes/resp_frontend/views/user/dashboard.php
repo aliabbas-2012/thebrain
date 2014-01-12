@@ -54,7 +54,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
         foreach ($orders as $order):
             ?>
             <div class="review">
-                <div class="review-img">
+                <div class="review-img col-lg-2">
                     <?php
                     if (!empty($order->item->image_offer->image_url)):
                         echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $order->item->image_offer->id . "/" . $order->item->image_offer->image_url, '');
@@ -63,11 +63,11 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
                     endif;
                     ?>
                 </div>
-                <div class="review-content">
+                <div class="review-content col-lg-6">
                     <div class="review-content-item"><?php echo isset($order->item) ? $order->item->name : "No Name"; ?></div>
                     <div class="review-content-amount"><?php echo $order->amount; ?> &euro;</div>
                 </div>
-                <div class="review-stats">
+                <div class="review-stats col-lg-2">
                     <div class="rating"> Order date:&nbsp;&nbsp;<?php echo date("d-m-Y", strtotime($order->date_order)); ?></div>
                     <div class="rating">Start date:&nbsp;&nbsp;<?php echo date("d-m-Y", strtotime($order->date_start)); ?></div>
                     <div class="rating"> Delivery date:&nbsp;&nbsp;<?php echo date("d-m-Y", strtotime($order->date_finish)); ?> </div>

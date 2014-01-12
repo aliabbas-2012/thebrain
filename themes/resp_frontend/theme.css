@@ -796,7 +796,7 @@ body {
     padding-bottom: 30px;
 }
 body {
-    background-color: #FFFFFF;
+    background: none repeat scroll 0 0 #F9FAFA;
     color: #333333;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
@@ -847,7 +847,7 @@ a.del_box {
 }
 #recentOrder  div.review{
     float: left;
-    height: 190px;
+    min-height: 190px;
     margin: 0 0 20px;
     background-color: #FFFFFF;
     border: 1px solid #DCDCDC;
@@ -856,12 +856,28 @@ a.del_box {
     color: #414141;
     padding: 15px;
     width: 100%;
+    padding-left: 0;
 }
+#recentOrder  div.review:hover {
+    background: #FAFCFA;
+}
+#recentOrder  div.review div.review-img {
+    background-color: #FFFFFF;
+    margin-left: 0;
+    text-align: center;
+
+}
+#recentOrder  div.review div.review-img img{
+    border: 1px solid #EDEDED;
+    border-radius: 3px;
+}
+
 #recentOrder  div.review div.review-img,
 #recentOrder  div.review div.review-content,
 #recentOrder div.review div.review-stats {
-    float: left;
 
+    padding-left: 0;
+    padding-right: 0;
 }
 #recentOrder  div.review div.review-content,
 #recentOrder div.review div.review-stats {
@@ -877,6 +893,10 @@ a.del_box {
     margin-left: 22px;
 }
 #recentOrder  div.review div.review-content .review-content-desc {
+    margin-left: 22px;
+    min-height: 80px;
+}
+#recentOrder  div.review div.review-content .review-content-other {
     margin-left: 22px;
 }
 #recentOrder  div.review div.review-content .review-content-amount {
@@ -912,6 +932,32 @@ a.del_box {
     font-weight: bold;
     margin-bottom: 20px;    
 }
+
+.itemPrice {
+    color: #414141;
+
+    font: bold 20px/60px Arial;
+    margin-left: 5px;
+
+    text-align: right;
+
+}
+.span-price{
+    margin-left: 15px;
+    font-size: 20px;
+}
+
+.dis-price{
+    color: red !important;
+    text-decoration: line-through;
+}
+
+.itemPrice label {
+    color: #414141;
+    font-family: Arial;
+    font-weight: bold;
+    margin-left: 4px;
+}
 @media (max-width: 480px) { 
     #recentOrder  div.review div.review-content {
         width: 150px;
@@ -925,7 +971,7 @@ a.del_box {
     }
     #recentOrder  div.review div.review-content .review-content-desc {
         float: left;
-        
+
         margin-top:5px;
         margin-left: 10px;
     }
@@ -1409,3 +1455,30 @@ div.w-header.w-shadow button.k-button-green:hover {
     border: 1px solid #B1B1B1;
     height: 22px;
 } 
+
+
+
+#grid_content #image_avatar {
+    border: 2px solid #FFFFFF;
+    border-radius: 1px;
+    box-shadow: 2px 1px 5px rgba(157, 159, 158, 0.58);
+    float: left;
+    height: 30px;
+    width: 30px;
+}
+#grid_content .city {
+    color: #414141;
+    float: left;
+    font-size: 11px;
+    margin-right: 10px;
+    padding: 5px 3px;
+    text-transform: capitalize;
+    font-weight: normal;
+}
+#grid_content .like-icon {
+    float: left;
+    height: 15px;
+    margin-right: 5px;
+    margin-top: 3px;
+    width: 15px;
+}
