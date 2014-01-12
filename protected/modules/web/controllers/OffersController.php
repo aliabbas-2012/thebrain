@@ -24,9 +24,14 @@ class OffersController extends Controller {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
-                    'category',
                 ),
                 'users' => array('@'),
+            ),
+            array('allow', // allow authenticated user to perform 'create' and 'update' actions
+                'actions' => array(
+                    'category',
+                ),
+                'users' => array('*'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -38,8 +43,16 @@ class OffersController extends Controller {
      * category search
      */
     public function actionCategory($category = "") {
-
-        $this->render("//offers/category", array("cat_arr" => explode("-", $category)));
+        $cat_arr = explode("-", $category);
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("group_id = " . $cat_arr[count($cat_arr) - 1]);
+        $dataProvider = new CActiveDataProvider('BspItem', array(
+            'criteria' => $criteria,
+        ));
+        $this->render("//offers/category", array(
+            "cat_arr" => $cat_arr,
+            "dataProvider" => $dataProvider
+        ));
     }
 
 }

@@ -190,8 +190,6 @@
     </ul>
 </div>
 
-
-
 <?php
 Yii::app()->clientScript->registerScript('logoFix', '
      $(document).ready(function() {
