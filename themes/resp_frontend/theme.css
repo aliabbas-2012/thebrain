@@ -909,6 +909,8 @@ a.del_box {
 #recentOrder  div.review div.review-stats {
     width: 170px;
     float: right;
+    border-left: 1px solid #DFDFDF;
+    min-height: 160px;
 }
 #recentOrder  div.review div.review-stats .review-content-amount {
     color: #414141;
