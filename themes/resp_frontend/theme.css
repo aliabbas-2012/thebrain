@@ -320,6 +320,11 @@ div.error,div.errorMessage {
         float:none;
     }
 }
+@media (max-width: 800px) { 
+    .nav-tabs > li {
+        float:none;
+    }
+}
 .tab-content {
     margin-top: 20px;
 }
