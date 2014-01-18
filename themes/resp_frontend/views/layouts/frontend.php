@@ -129,7 +129,7 @@
                         </li>
                         <li>
                             <?php
-                            echo CHtml::link("How It Works", $this->createUrl("/web/default/article", array("slug" => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-8")));
+                            echo CHtml::link("How It Works", $this->createUrl("/web/article/index", array("slug" => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-8")));
                             ?>                        
                         </li>
 
@@ -266,7 +266,7 @@
                     <ul class="footer-contain">
 
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/web/default/article/", array('slug' => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-9")); ?>"><?php echo Yii::t('link', 'How it works') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/article/article/", array('slug' => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-9")); ?>"><?php echo Yii::t('link', 'How it works') ?></a>
                         </li>
                         <li class="link">
                             <a href="<?php echo $this->createUrl("/web/blog/index"); ?>"><?php echo Yii::t('link', 'Blog') ?></a>
@@ -275,10 +275,10 @@
                             <a href="<?php echo $this->createUrl("/web/faq/index"); ?>"><?php echo Yii::t('link', 'FAQ') ?></a>
                         </li>
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/web/default/article/", array('slug' => !empty($articless[1]) ? $articless[1]->slug : "terms_condition-9")); ?>"><?php echo Yii::t('link', 'Term &amp; Conditions') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/article/index/", array('slug' => !empty($articless[1]) ? $articless[1]->slug : "terms_condition-9")); ?>"><?php echo Yii::t('link', 'Term &amp; Conditions') ?></a>
                         </li>
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/web/default/article/", array('slug' => !empty($articless[2]) ? $articless[2]->slug : "privacy-10")); ?>"><?php echo Yii::t('link', 'Privacy Policy') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/article/index/", array('slug' => !empty($articless[2]) ? $articless[2]->slug : "privacy-10")); ?>"><?php echo Yii::t('link', 'Privacy Policy') ?></a>
                         </li>
                         <li class="link link-flag"><a href="javascript:void(0)" onclick="window.location = '<?php echo "http://" . "en." . "thepuzzzle.com/" . Yii::app()->request->getPathInfo(); ?>'"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/en.png"  alt="Language Flag EN"/></a></li>
                         <li class="link link-flag"><a href="javascript:void(0)" onclick="window.location = '<?php echo "http://" . "de." . "thepuzzzle.com/" . Yii::app()->request->getPathInfo(); ?>'"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/de.png" alt="Language Flag DE"/></a></li>
