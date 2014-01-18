@@ -1492,3 +1492,47 @@ div.w-header.w-shadow button.k-button-green:hover {
     margin-top: 3px;
     width: 15px;
 }
+
+/**---- blog **/
+.blogger {
+    margin-bottom: 15px;
+    display: block;
+    height: 330px;
+}
+.blog-title {
+    color: #414141;
+}
+.blog-title a {
+    color: #414141;
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.blog-title  .span-detail {
+    color: #42B4F3;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 45px;
+}
+.clear-title {
+    clear: both;
+    height: 10px;
+}
+
+.blog-title span, .line-time, .title-detail span, .font-color {
+    color: #666666;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.blog-des img {
+    float: right;
+}
+.blog-title .content-detail {
+    border-top: 1px solid #CCCCCC;
+    color: #414141;
+    font-size: 15px;
+    line-height: 25px;
+    padding: 40px 0;
+}

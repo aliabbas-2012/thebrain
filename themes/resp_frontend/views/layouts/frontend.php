@@ -201,7 +201,7 @@
                             echo $form->textField($model, 'location', array("class" => "form-control", "placeholder" => "f.e 10245 Berlin..."));
                             echo $form->hiddenField($model, 'lat');
                             echo $form->hiddenField($model, 'lng');
-                            
+
                             //other fields as search
                             echo $form->hiddenField($model, 'special_deal');
                             echo $form->hiddenField($model, 'withVideo');
@@ -347,8 +347,9 @@
                                         // Bias the SearchBox results towards places that are within the bounds of the
 
                                     }
-
-                                    google.maps.event.addDomListener(window, 'load', initialize);
+                                    if (typeof(google) != "undefined") {
+                                        google.maps.event.addDomListener(window, 'load', initialize);
+                                    }
 
         </script>
         <style>

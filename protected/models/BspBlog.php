@@ -18,6 +18,8 @@
  */
 class BspBlog extends DTActiveRecord {
 
+    public $slug;
+
     /**
      * @return string the associated database table name
      */
@@ -39,6 +41,7 @@ class BspBlog extends DTActiveRecord {
             array('title, ', 'length', 'max' => 255),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('description, detail, date_create', 'safe'),
+            array('slug', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, user_id, title, img, description, detail, date_create, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
@@ -126,6 +129,23 @@ class BspBlog extends DTActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    /**
+     * slug 
+     */
+    public function afterFind() {
+        $this->setSlug();
+        return parent::afterFind();
+    }
+
+    /**
+     * set slug for 
+     * urls
+     */
+    public function setSlug() {
+        $this->slug = $this->primaryKey . "-" . str_replace(Yii::app()->params['notallowdCharactorsUrl'], "", trim($this->title));
+        $this->slug = strtolower(str_replace(" ", "-", trim($this->slug)));
     }
 
 }

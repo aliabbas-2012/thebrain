@@ -12,6 +12,7 @@ $rules_web = array(
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
     '' => '/web/default/index',
     '<slug:[\w-\.]+>/article' => '/web/default/article',
+    '<slug:[\w-\.]+>/blog-detail' => '/web/blog/detail',
     'blog' => '/web/blog/index',
     'faq' => '/web/faq/index',
     'dashboard' => '/web/user/dashboard',
