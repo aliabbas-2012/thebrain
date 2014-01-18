@@ -143,10 +143,11 @@
                     <?php
                     $model = new OfferSearch();
                     $form = $this->beginWidget('CActiveForm', array(
-                        'id' => 'users-form',
+                        'id' => 'search-form',
                         'enableAjaxValidation' => false,
+                        'action' => $this->createUrl("/web/offers/search"),
                         'htmlOptions' => array(
-                            'class' => 'form-horizontal'
+                            'class' => 'form-horizontal',
                         )
                     ));
                     ?>
@@ -161,22 +162,22 @@
                                 $data = BspCategory::model()->findAll(array('condition' => 'parent_id=0'));
                                 $i = 1;
                                 foreach ($data as $da) {
-                                    
+
                                     $cssClass = "";
                                     if ($da->name != "Services" && $da->name != "Rentals") {
                                         $cssClass = "clearleft";
                                     }
                                     echo '<li id="menu-item-' . $i . '" class=' . $cssClass . '>';
-                                    
-                                    echo CHtml::link($da->name,$this->createUrl("/web/offers/category",array("category"=>$da->slug)));
+
+                                    echo CHtml::link($da->name, $this->createUrl("/web/offers/category", array("category" => $da->slug)));
 
 
                                     echo CHtml::openTag("ul", array("class" => ""));
                                     $subcate = BspCategory::model()->findAll(array('condition' => 'parent_id=' . $da->id));
                                     foreach ($subcate as $sub) {
-                             
+
                                         echo '<li>';
-                                        echo CHtml::link($sub->name,$this->createUrl("/web/offers/category",array("category"=>$sub->slug)));
+                                        echo CHtml::link($sub->name, $this->createUrl("/web/offers/category", array("category" => $sub->slug)));
                                         echo '</li>';
                                     }
                                     echo CHtml::closeTag("ul");
@@ -198,6 +199,17 @@
                         <li class="location_search">
                             <?php
                             echo $form->textField($model, 'location', array("class" => "form-control", "placeholder" => "f.e 10245 Berlin..."));
+                            echo $form->hiddenField($model, 'lat');
+                            echo $form->hiddenField($model, 'lng');
+                            
+                            //other fields as search
+                            echo $form->hiddenField($model, 'special_deal');
+                            echo $form->hiddenField($model, 'withVideo');
+                            echo $form->hiddenField($model, 'withSound');
+                            echo $form->hiddenField($model, 'lowPrice');
+                            echo $form->hiddenField($model, 'highPrice');
+                            echo $form->hiddenField($model, 'popularity');
+                            echo $form->hiddenField($model, 'nearFirst');
                             ?>
                         </li>    
                         <li class="distant_search">
@@ -216,8 +228,15 @@
                             ?>
 
                         </li>
-
-
+                        <li class="btn-search">                            
+                            <div class="search-button">
+                                <a class="searchbt-top" href="javascript:void(0)" onclick="jQuery('#search-form').submit();">
+                                    <?php
+                                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/search_button.png");
+                                    ?>
+                                </a>
+                            </div>
+                        </li>
                     </ul>
                     <?php
                     $this->endWidget();
@@ -289,5 +308,99 @@
 
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/thepuzzleadmin.js"></script>
 
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+        <script>
+                                    // This example adds a search box to a map, using the Google Place Autocomplete
+                                    // feature. People can enter geographical searches. The search box will return a
+                                    // pick list containing a mix of places and predicted search terms.
+
+                                    function initialize() {
+
+                                        var markers = [];
+                                        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                                        });
+
+
+
+                                        //                // Create the search box and link it to the UI element.
+                                        var input = /** @type {HTMLInputElement} */(
+                                                document.getElementById('OfferSearch_location'));
+                                        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+                                        var searchBox = new google.maps.places.SearchBox(
+                                                /** @type {HTMLInputElement} */(input));
+
+                                        // [START region_getplaces]
+                                        // Listen for the event fired when the user selects an item from the
+                                        // pick list. Retrieve the matching places for that item.
+                                        google.maps.event.addListener(searchBox, 'places_changed', function() {
+                                            var places = searchBox.getPlaces();
+
+                                            jQuery("#OfferSearch_lat").val(places[0].geometry.location.nb);
+                                            jQuery("#OfferSearch_lng").val(places[0].geometry.location.ob);
+
+
+                                        });
+                                        // [END region_getplaces]
+
+                                        // Bias the SearchBox results towards places that are within the bounds of the
+
+                                    }
+
+                                    google.maps.event.addDomListener(window, 'load', initialize);
+
+        </script>
+        <style>
+            #target {
+                width: 345px;
+            }
+            .controls {
+                margin-top: 16px;
+                border: 1px solid transparent;
+                border-radius: 2px 0 0 2px;
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                height: 32px;
+                outline: none;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            #BspItem_loc_name {
+                background-color: #fff;
+                padding: 0 11px 0 13px;
+                width: 400px;
+                font-family: Roboto;
+                font-size: 15px;
+                font-weight: 300;
+                text-overflow: ellipsis;
+            }
+
+            #BspItem_loc_name:focus {
+                border-color: #4d90fe;
+                margin-left: -1px;
+                padding-left: 14px;  /* Regular padding-left + 1. */
+                width: 401px;
+            }
+
+            .pac-container {
+                font-family: Roboto;
+            }
+
+            #type-selector {
+                color: #fff;
+                background-color: #4d90fe;
+                padding: 5px 11px 0px 11px;
+            }
+
+            #type-selector label {
+                font-family: Roboto;
+                font-size: 13px;
+                font-weight: 300;
+            }
+
+
+        </style>
+        <div id="map-canvas"></div>
     </body>
 </html>

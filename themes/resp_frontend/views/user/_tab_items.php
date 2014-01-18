@@ -78,21 +78,22 @@ foreach ($segments as $items) {
                             else {
                                 $sItem.='<div class="catename">Rentals Offer</div>';
                             }
-                            if (!isset($item->currency->symbol)) {
-                                $item->currency->symbol = "&euro;";
+                            $currency_symbol = "&euro;";
+                            if (!empty($item->currency->symbol)) {
+                                $currency_symbol = $item->currency->symbol;
                             }
                             if ($item->special_deal == 1) {
                                 $price = ' 
                                 <div class="price-offer">
                                     <label class="item-discount">' . $item->price . '</label>
-                                    <font size="2" class="item-discount"> ' . $item->currency->symbol . '</font>
+                                    <font size="2" class="item-discount"> ' . $currency_symbol . '</font>
                                     <label>' . $item->discount_price . '</label>
-                                    <font size="2"> ' . $item->currency->symbol . '</font>
+                                    <font size="2"> ' . $currency_symbol . '</font>
                                     
                                 </div>
                                 ';
                             } else {
-                                $price = '<div class="price-offer">' . $item->price . '<font size="2"> ' . ($item->currency->symbol) . '</font></div>';
+                                $price = '<div class="price-offer">' . $item->price . '<font size="2"> ' . $currency_symbol . '</font></div>';
                             }
                             $sItem.= $price;
                             $sItem.='</div>';

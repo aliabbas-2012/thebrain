@@ -62,6 +62,7 @@
                 <div id="grid_content">
                     <div id="recentOrder" class="list-view">
                         <?php
+                        $total_likes = BspItemLike::model()->count();
                         $items = $dataProvider->getData();
                         foreach ($items as $item):
                             $likes = BspItemLike::model()->count(array('condition' => "item_id='$item->id'"));
@@ -119,7 +120,7 @@
                                             ?>
                                             <div class="itemPrice">
                                                 <span class="span-price" style="color: #000;"><?php echo isset($item->price) ? $item->price : 0; ?></span>
-                                                <label><?php echo $item->currency->symbol; ?></label>
+                                                <label><?php echo isset($item->currency)?$item->currency->symbol:""; ?></label>
                                             </div>
                                             <?php
                                         }

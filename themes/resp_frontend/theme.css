@@ -89,23 +89,26 @@ ul.dropdown-menu li a {
         padding-left: 20px;
     }
     .navbar ul li.keword_search input {
-        width: 340px;
+        width: 280px;
     }
     .navbar ul li.location_search {    
         padding-left:35px;
     }
     .navbar ul li.location_search input {
-        width: 240px;
+        width: 200px;
     }
     .navbar ul li.distant_search  {
         padding-left:35px;
     }
+    .navbar ul li.btn-search  {
+        padding-left:35px;
+    }
+
     .navbar ul li.distant_search select {
         /*        opacity:0;*/
         color:#414141;
         width: 100px;
         float: left;
-        position: absolute;
     }
 
     .styled {
