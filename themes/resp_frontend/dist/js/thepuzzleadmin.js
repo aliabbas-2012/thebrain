@@ -70,6 +70,7 @@ var thepuzzleadmin = {
             data:
                     {
                         resource_elem_id: resource_elem_id != "" ? jQuery("#" + resource_elem_id).val() : "",
+                        "ajax": "1",
                     }
         }).done(function(response) {
             if (update_element_id != "") {
@@ -112,7 +113,7 @@ var thepuzzleadmin = {
 
     },
     onSuccess: function(e) {
-               
+
         jQuery("#" + e.response.attribute).val(e.response.file);
         jQuery("#loading").hide();
     },
@@ -179,14 +180,14 @@ var thepuzzleadmin = {
 
         }
     },
-    showAlertBox: function(msg,type) {
-        jQuery(".alert-"+type).html(msg);
-        jQuery(".alert-"+type).show();
-      
-        jQuery(window).scrollTop(".alert-"+type);
+    showAlertBox: function(msg, type) {
+        jQuery(".alert-" + type).html(msg);
+        jQuery(".alert-" + type).show();
+
+        jQuery(window).scrollTop(".alert-" + type);
         setTimeout(function() {
-            jQuery(".alert-"+type).html("");
-            jQuery(".alert-"+type).fadeOut();
+            jQuery(".alert-" + type).html("");
+            jQuery(".alert-" + type).fadeOut();
         }, 1000);
 
     }

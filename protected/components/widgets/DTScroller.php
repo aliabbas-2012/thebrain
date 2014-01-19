@@ -23,7 +23,7 @@ class DTScroller extends CLinkPager {
 
         Yii::app()->clientScript->registerScript('DTScroller', "
          var total_no_of_pages = '" . $this->pages->getPageCount() . "';
-         $('#list_featured').scrollPagination({
+         $('#content_container').scrollPagination({
                     'contentPage': 'democontent.html', // the url you are fetching the results
                     'contentData': {}, // these are the variables you can pass to the request, for example: children().size() to know which page you are
                     'scrollTarget': $(window), // who gonna scroll? in this example, the full window
