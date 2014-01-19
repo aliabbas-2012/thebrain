@@ -1254,6 +1254,11 @@ div.w-header.w-shadow button.k-button-green:hover {
     height: 34px;
     width: 100px;
 }
+.search-button a{
+    height: 100%;
+    width: 100%;
+    display: block;
+}
 
 .search-button img {
     cursor: pointer;
@@ -1493,7 +1498,7 @@ div.w-header.w-shadow button.k-button-green:hover {
     width: 15px;
 }
 
-/**---- blog **/
+/**---- blog ** article **/
 .blogger {
     margin-bottom: 15px;
     display: block;
@@ -1535,4 +1540,22 @@ div.w-header.w-shadow button.k-button-green:hover {
     font-size: 15px;
     line-height: 25px;
     padding: 40px 0;
+}
+.space-des {
+    height: 10px;
+    margin-bottom: 25px;
+}
+/**---- article  ---**/
+.faq {
+    margin-bottom: 50px;
+    display: block;
+    padding-bottom: 35px;
+}
+
+.des-faq {
+    color: #505050;
+    font-size: 15px;
+    line-height: 18px;
+    margin-bottom: 0;
+    margin-top: 0;
 }

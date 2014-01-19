@@ -64,11 +64,7 @@ class OffersController extends Controller {
         $criteria = new CDbCriteria();
         if (isset($_POST['OfferSearch'])) {
             $model->attributes = $_POST['OfferSearch'];
-            $criteria->compare("name", $model->keyword, false, "OR");
-            $criteria->compare("description", $model->keyword, false, "OR");
-            $criteria->compare("seo_title", $model->keyword, false, "OR");
-            $criteria->compare("seo_description", $model->keyword, false, "OR");
-            $criteria->compare("seo_keywords", $model->keyword, false, "OR");
+            $criteria->compare("name", $model->keyword);
             $criteria->compare("lat", $model->lat);
             $criteria->compare("lng", $model->lng);
             //new attribute

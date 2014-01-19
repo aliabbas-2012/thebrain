@@ -26,5 +26,6 @@ $rules_web = array(
     'view/profile/user' => '/web/user/profileview',
     'edit/profile/user' => '/web/user/profile',
     '/offers/category/<category:[\w-\.]+>/' => '/web/offers/category',
+    '/offers/search-result' => '/web/offers/search',
 );
 ?>
