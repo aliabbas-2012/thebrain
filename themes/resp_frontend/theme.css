@@ -22,7 +22,7 @@ body {
     background-image: -webkit-gradient(linear, left bottom, left top, from(#fafcfc), color-stop(0.536, #f3f5f9), to(#ffffff));
     background-image: -moz-linear-gradient(90deg, #fafcfc 0%, #f3f5f9 53.6%, #ffffff 100%);
     border:0;
-    min-height: 120px ;
+    min-height: 127px ;
     margin-bottom: 0;
 
 }
@@ -1559,3 +1559,11 @@ div.w-header.w-shadow button.k-button-green:hover {
     margin-bottom: 0;
     margin-top: 0;
 }
+
+.form-nav { position:fixed; z-index:1; }
+
+@media (max-width: 768px) {
+	
+	.keword_search, .location_search, .distant_search { margin-bottom:10px !important; }
+	
+	}

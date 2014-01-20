@@ -137,9 +137,9 @@
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
-            <div class="container">
+            <div class="container" style="background:#fafcfc;>
 
-                <div class="navbar-collapse collapse">
+                <div class="navbar-collapse form-nav">
                     <?php
                     $model = new OfferSearch();
                     $form = $this->beginWidget('CActiveForm', array(
