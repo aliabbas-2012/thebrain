@@ -2127,14 +2127,25 @@ a.detail-addlike:hover {
     width: 100%;
     height: auto;
     display: block;
-    min-height: 310px;
+    min-height: 505px;
 }
 #price_detail p {
     font-size: 15px;
     font-weight: bold;
     margin-bottom: 25px
 }
-
+#price-form >div.col-lg-12 {
+    height: 36px;
+    padding-left: 0;
+}
+#price_detail input {
+    margin-left: 0;
+    width: 50%;
+}
+#price_detail select {
+    margin-left: 0;
+    width: 50%;
+}
 #buttonCalculate {
     background-color: #F1F1F1;
     border: 1px solid #BCBBBB;

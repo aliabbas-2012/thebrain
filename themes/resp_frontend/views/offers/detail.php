@@ -22,7 +22,7 @@
             <div class="valued">
                 <?php
                 $total_rating = 5;
-                
+
                 for ($i = 1; $i <= $total_rating - $model->avgRating; $i++) {
                     echo CHtml::image(Yii::app()->theme->baseUrl . "/images/star2.jpg", '', array(
                         "id" => "star" . $i, "class" => "starclick"
@@ -56,37 +56,47 @@
 <div class="space-blog"></div>
 
 <div class="col-lg-3">
-    <div id="Portfolio" >Images & Videos</div>
+    <div id="Portfolio" ><?php echo Yii::t('detailOffer', 'Images & Videos') ?></div>
 </div>
 <div class="clear"></div>
 <div class="space-blog"></div>
 <div class="clear"></div>
 <div>
     <div class="col-lg-12 detail-image-video">
-        <div>
-            <a href='<?php echo Yii::app()->theme->baseUrl . "/images/port-1.jpg" ?>'>
-                <?php
-                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/port-1.jpg", '', array("height" => "200px"));
-                ?>
-            </a>
-
-
-        </div>
-        <div>
-            <a href='<?php echo Yii::app()->theme->baseUrl . "/images/port-2.jpg" ?>'>
-                <?php
-                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/port-2.jpg", '', array("height" => "200px"));
-                ?>
-            </a>
-
-        </div>
-
+        <?php
+        foreach ($model->image_items as $item_img):
+            ?>
+            <div>
+                <a href='<?php echo Yii::app()->theme->baseUrl . "/images/port-1.jpg" ?>'>
+                    <?php
+                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/port-1.jpg", '', array("height" => "200px"));
+                    ?>
+                </a>
+            </div>
+            <?php
+        endforeach;
+        if (count($model->image_items) == 0) {
+            echo "No Image Found";
+        }
+        ?>
     </div>
     <div class='clear'></div>
     <div class="space-blog"></div>
     <div id='soundcloud'>
-        sounds List
+        <?php
+        echo Yii::t('detailOffer', 'Sounds List');
+        if (empty($model->item_related_sounds)) {
+            echo "<div class='clear'></div>";
+            echo "No Sound Found";
+        }
+        ?>
+
     </div>
+    <?php
+    foreach ($model->item_related_sounds as $sound):
+        echo '<div class="col-lg-12" >' . $sound->url . '</div>';
+    endforeach;
+    ?>
     <div class='clear'></div>
     <div class="space-blog"></div>
     <div>
@@ -94,13 +104,15 @@
             <div id="detail_sub">
                 <div class='detail-tab-part'>
                     <div class='col-lg-4 actived' tab-no='1'>
-                        Description
+
+                        <?php echo Yii::t('detailOffer', 'Description'); ?> 
                         <?php
                         echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("width" => "23"));
                         ?>
                     </div>
                     <div class='col-lg-4' tab-no='2'>
-                        Conditions
+
+                        <?php echo Yii::t('detailOffer', 'Conditions'); ?> 
                         <?php
                         echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("width" => "23"));
                         ?>
@@ -108,10 +120,13 @@
                     <div class='col-lg-4' tab-no='3'>
                         <strong>
                             (
-                            <span id="comments_count" style="color:#000000;">0</span>
+                            <span id="comments_count" style="color:#000000;">
+                                <?php echo $model->numComments; ?>
+                            </span>
                             ) 
                         </strong>
-                        Reviews
+
+                        <?php echo Yii::t('detailOffer', 'Reviews'); ?> 
                         <?php
                         echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("width" => "23"));
                         ?>
@@ -122,20 +137,28 @@
                 <div class='tab-1-data tab-data' >
                     <div>
                         <div class='col-lg-10 des-title'>
-                            here
+                            <?php echo $model->name ?>
                         </div>
                         <div class='col-lg-2'>
-                            <div class='unit-price'>€</div>
-                            <div class='des-price'>10</div>
+                            <?php
+                            $currency_symbol = "&euro;";
+                            $price = 0;
+                            if (!empty($model->currency->symbol)) {
+                                $currency_symbol = $model->currency->symbol;
+                            }
+                            if ($model->special_deal == 1) {
+                                $price = $model->discount_price;
+                            } else {
+                                $price = $model->price;
+                            }
+                            ?>
+                            <div class='unit-price'><?php echo $currency_symbol; ?></div>
+                            <div class='des-price'><?php echo $price; ?></div>
                         </div>
                     </div>
                     <div class='clear'></div>
                     <div class='col-lg-12 des-content'>
-                        Guten Tag. Ich bin ein vernarrter Hude-Liebhaber und freue mich
-                        deinen Hund Gassi zu führen. Maximal werden 10 Hunde gemeinsam ausgeführt - 
-                        Gerne kann ich Ihren Hund auch für spezielle Fälle einzeln spazieren führen. 
-                        einfach mich kontaktieren um gegebene Einzelheiten zu besprechen. Bis dahin alles Gute. 
-                        Viele Grüsse Martin
+                        <?php echo $model->description ?>
                     </div>
                 </div>
                 <div class='tab-2-data tab-data' style='display:none'>
@@ -149,28 +172,82 @@
                             </div>
                             <div class='hour-day'>
                                 <span class='col-lg-6'>Tu.</span>
-                                <span class='col-lg-6'>-</span>
+                                <span class='col-lg-6'>
+                                    -
+                                    <?php if (isset($priceCal[0]) && $priceCal[0]->active != 1) { ?>
+                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <?php
+                                    } else {
+                                        echo (isset($priceCal[0])) ? number_format($priceCal[0]->price) : '' . '&nbsp;' . $currency_symbol;
+                                    }
+                                    ?>
+                                </span>
                             </div>
                             <div class='hour-day'>
                                 <span class='col-lg-6'>We.</span>
-                                <span class='col-lg-6'>-</span>
+                                <span class='col-lg-6'>
+                                    -
+                                    <?php if (isset($priceCal[1]) && $priceCal[1]->active != 1) { ?>
+                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <?php
+                                    } else {
+                                        echo (isset($priceCal[1])) ? number_format($priceCal[1]->price) : '' . '&nbsp;' . $currency_symbol;
+                                    }
+                                    ?>
+                                </span>
                             </div>
                             <div class='hour-day'>
                                 <span class='col-lg-6'>Th.</span>
-                                <span class='col-lg-6'>-</span>
+                                <span class='col-lg-6'>
+                                    -
+                                    <?php if (isset($priceCal[2]) && $priceCal[1]->active != 2) { ?>
+                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <?php
+                                    } else {
+                                        echo (isset($priceCal[2])) ? number_format($priceCal[2]->price) : '' . '&nbsp;' . $currency_symbol;
+                                    }
+                                    ?>
+                                </span>
                             </div>
                             <div class='hour-day'>
                                 <span class='col-lg-6'>Fr.</span>
-                                <span class='col-lg-6'>-</span>
+                                <span class='col-lg-6'>
+                                    -
+                                    <?php if (isset($priceCal[3]) && $priceCal[3]->active != 1) { ?>
+                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <?php
+                                    } else {
+                                        echo (isset($priceCal[4])) ? number_format($priceCal[4]->price) : '' . '&nbsp;' . $currency_symbol;
+                                    }
+                                    ?>
+                                </span>
 
                             </div>
                             <div class='hour-day'>
                                 <span class='col-lg-6'>Sa.</span>
-                                <span class='col-lg-6'>-</span>
+                                <span class='col-lg-6'>
+                                    -
+                                    <?php if (isset($priceCal[5]) && $priceCal[5]->active != 1) { ?>
+                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <?php
+                                    } else {
+                                        echo (isset($priceCal[5])) ? number_format($priceCal[5]->price) : '' . '&nbsp;' . $currency_symbol;
+                                    }
+                                    ?>
+                                </span>
                             </div>
                             <div class='hour-day'>
                                 <span class='col-lg-6'>Su.</span>
-                                <span class='col-lg-6'>-</span>
+                                <span class='col-lg-6'>
+                                    -
+                                    <?php if (isset($priceCal[6]) && $priceCal[6]->active != 1) { ?>
+                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <?php
+                                    } else {
+                                        echo (isset($priceCal[6])) ? number_format($priceCal[6]->price) : '' . '&nbsp;' . $currency_symbol;
+                                    }
+                                    ?>
+                                </span>
                             </div>
 
                         </div>
@@ -192,7 +269,7 @@
         </div>
         <div class='col-lg-4'>
             <div class="yelow-bg">
-                <label>Check out my price offers</label>
+                <label><?php echo Yii::t('detailOffer', 'Check out my price offers') ?></label>
             </div>
             <div id='price_detail'>
                 <p>Price Offers</p>
@@ -211,19 +288,42 @@
                     <div class='col-lg-2'>€ 6</div>
                 </div>
                 <div class='clear'></div>
-
+                <?php
+                $priceCalF = new PriceCalculation();
+                $form = $this->beginWidget('CActiveForm', array(
+                    'id' => 'price-form',
+                    'enableAjaxValidation' => false,
+                    'action' => $this->createUrl("/web/offers/calculatePrice"),
+                    'htmlOptions' => array(
+                        'class' => 'form-horizontal',
+                    )
+                ));
+                $time_arr = array();
+                for($i=0;$i<=23;$i++){
+                    $time_arr["0".$i.":00:00"] = "0".$i.":00";
+                }
+                ?>
                 <div class='col-lg-12'>
                     <div class='col-lg-6'>
-
+                        <?php echo $form->textField($priceCalF, "start_date",array('style'=>"width:120px;")); ?>
                     </div>
-                    <div class='col-lg-6'>b</div>
+                    <div class='col-lg-6'>
+                        <?php echo $form->dropDownList($priceCalF, "start_time",$time_arr,array('style'=>"width:120px;")); ?>
+                    </div>
                 </div>
                 <div class='col-lg-12'>
-                    <div class='col-lg-6'>c</div>
-                    <div class='col-lg-6'>d</div>
+                    <div class='col-lg-6'>
+                        <?php echo $form->textField($priceCalF, "end_date",array('style'=>"width:120px;")); ?>
+                    </div>
+                    <div class='col-lg-6'>
+                        <?php echo $form->dropDownList($priceCalF, "end_time",$time_arr,array('style'=>"width:120px;")); ?>
+                    </div>
                 </div>
 
                 <div id="buttonCalculate">Calculate Price</div>
+                <?php
+                $this->endWidget();
+                ?>
                 <div class='clear'></div>
                 <div id="priceTotal" class="col-lg-12">
                     <div class="col-lg-3 price-label" style=''>
@@ -252,6 +352,15 @@
 <div class="red-bg">
     <label>Check out my other offers</label>
 </div>
+<div class="clear"></div>
+<?php
+$criteria = new CDbCriteria();
+$criteria->limit = "16";
+$criteria->order = "id DESC";
+$criteria->addCondition('id <> ' . $model->id . ' AND category_id =' . $model->category_id);
+$items = BspItem::model()->findAll($criteria);
+$this->renderPartial("//user/_tab_items", array("items" => $items));
+?>
 <script>
     jQuery(function() {
         jQuery(".detail-tab-part>div").click(function() {
@@ -283,7 +392,10 @@
                 thepuzzleadmin.showAlertBox("Added to favourate list ", "success");
             }
         })
-
+        jQuery("#PriceCalculation_start_date").kendoDatePicker({format: "dd-mm-yyyy"});
+        jQuery("#PriceCalculation_end_date").kendoDatePicker({format: "dd-mm-yyyy"});
+        $("#PriceCalculation_start_time").kendoDropDownList();
+        $("#PriceCalculation_end_time").kendoDropDownList();
     })
 </script>
 <style>

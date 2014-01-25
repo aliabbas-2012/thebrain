@@ -133,8 +133,9 @@ class OffersController extends Controller {
     public function actionDetail($slug = "") {      
         $slug_arr = explode("-",$slug);
         $model = BspItem::model()->findByPk($slug_arr[0]);
+        $priceCal = BspItemConditionHour::model()->findAll("item_id = ".$slug_arr[0]);
         $this->item = $model;
-        $this->render("//offers/detail",array("model"=>$model));
+        $this->render("//offers/detail",array("model"=>$model,"priceCal"=>$priceCal));
     }
 
 }
