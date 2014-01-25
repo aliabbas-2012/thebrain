@@ -38,7 +38,7 @@ foreach ($segments as $items) {
                 ?>
                 <div class="col-lg-3">
                     <div class="saved-offers-img">
-                        <a href="javascript:void(0)" class="thumbnail">
+                        <a href="<?php echo $this->createUrl("/web/offers/detail",array("slug"=>$item->slug)); ?>" class="thumbnail">
                             <?php
                             if (!empty($item->image_offer->image_url)):
                                 echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, '');

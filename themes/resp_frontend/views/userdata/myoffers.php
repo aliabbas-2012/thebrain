@@ -32,7 +32,11 @@
                     ),
                     'columns' => array(
                         array('name' => 'category_id', 'value' => 'isset($data->category)?$data->category->name:""'),
-                        array('name' => 'name', 'value' => '$data->name'),
+                        array(
+                            'name' => 'name', 
+                            'value' => '$data->slug_link',
+                            'type'=>"raw"
+                        ),
                         array(
                             'name' => 'description', 'value' => '$data->description',
                             'headerHtmlOptions' => array("class" => "not_responsive"),

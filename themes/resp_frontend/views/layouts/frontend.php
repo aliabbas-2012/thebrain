@@ -248,8 +248,8 @@
             <?php
             if ($this->id == "default" && $this->action->id == "index") {
                 $this->renderPartial("//default/_slider");
-            } else if ($this->id == "offers" && $this->action->id == "detail") {
-                $this->renderPartial("//offers/_top_detail");
+            } else if ($this->id == "offers" && $this->action->id == "detail" && !empty($this->item)) {
+                $this->renderPartial("//offers/_top_detail",array("model"=>$this->item));
             }
             ?> 
         </div>

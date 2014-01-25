@@ -28,7 +28,12 @@
                 ?>
             </div>
             <div class="review-content col-lg-6">
-                <div class="review-content-item"><?php echo isset($item->name) ? substr($item->name, 0, 20) . '...' : "No Name"; ?></div>
+                <div class="review-content-item">
+                    <a href='<?php echo $this->createUrl("/web/offers/detail",array('slug'=>$item->slug)); ?>'>
+                         <?php echo isset($item->name) ? substr($item->name, 0, 20) . '...' : "No Name"; ?>
+                    </a>
+                   
+                </div>
                 <div class="review-content-desc"><?php echo isset($item->description) ? substr($item->description, 0, 20) . '...' : "Not Available"; ?></div>
                 <div class="review-content-other">
 

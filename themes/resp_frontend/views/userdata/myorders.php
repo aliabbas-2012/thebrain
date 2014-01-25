@@ -33,7 +33,9 @@
                     'columns' => array(
                         array('name' => 'date_order', 'value' => '$data->date_order'),
                         array(
-                            'name' => 'item_id', 'value' => 'isset($data->item)?$data->item->name:""',
+                            'name' => 'item_id', 
+                            'value' => 'isset($data->item)?$data->item->slug_link:""',
+                            "type"=>"raw",
                             'headerHtmlOptions' => array("class" => "not_responsive"),
                             'htmlOptions' => array("class" => "not_responsive")
                         ),

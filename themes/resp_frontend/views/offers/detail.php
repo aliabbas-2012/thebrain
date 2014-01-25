@@ -193,6 +193,19 @@
                     <div class='col-lg-10'>4 Hours (per Hour) </div>
                     <div class='col-lg-2'>€ 6</div>
                 </div>
+                <div class='clear'></div>
+                
+                <div class='col-lg-12'>
+                    <div class='col-lg-6'>
+                        
+                    </div>
+                    <div class='col-lg-6'>b</div>
+                </div>
+                <div class='col-lg-12'>
+                    <div class='col-lg-6'>c</div>
+                    <div class='col-lg-6'>d</div>
+                </div>
+                
                 <div id="buttonCalculate">Calculate Price</div>
                 <div class='clear'></div>
                 <div id="priceTotal" class="col-lg-12">

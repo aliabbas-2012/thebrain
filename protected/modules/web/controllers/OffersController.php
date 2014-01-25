@@ -14,6 +14,12 @@ class OffersController extends Controller {
             'postOnly + delete', // we only allow deletion via POST request
         );
     }
+    /**
+     * Item model
+     * @var type 
+     * used in widget
+     */
+    public $item;
 
     /**
      * Specifies the access control rules.
@@ -124,8 +130,11 @@ class OffersController extends Controller {
      * 
      * @param type $slug
      */
-    public function actionDetail($slug = "") {       
-        $this->render("//offers/detail");
+    public function actionDetail($slug = "") {      
+        $slug_arr = explode("-",$slug);
+        $model = BspItem::model()->findByPk($slug_arr[0]);
+        $this->item = $model;
+        $this->render("//offers/detail",array("model"=>$model));
     }
 
 }

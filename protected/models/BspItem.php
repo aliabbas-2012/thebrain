@@ -49,6 +49,7 @@ class BspItem extends DTActiveRecord {
      * @var type 
      */
     public $is_extra, $loc_name;
+    public $slug,$slug_link;
     public $background_image_name, $background_path, $_per_price;
     public $_per_price_options = array(
         1 => "Price fix",
@@ -107,6 +108,7 @@ class BspItem extends DTActiveRecord {
             array('start_price,end_price', 'safe'),
             array('offer_name,username', 'safe'),
             array('most_visited,most_bought', 'safe'),
+            array('slug', 'safe'),
             array('loc_name,_per_price,background_path,background_image_name,description, date_create', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -126,8 +128,8 @@ class BspItem extends DTActiveRecord {
             'group' => array(self::BELONGS_TO, 'BspCategory', 'group_id'),
             'category' => array(self::BELONGS_TO, 'BspCategory', 'category_id'),
             'sub_category' => array(self::BELONGS_TO, 'BspCategory', 'sub_category_id'),
-            'item_video' => array(self::HAS_MANY, 'BspItemVideo', 'item_id','condition' => 'is_image = 0'),
-            'image_items' => array(self::HAS_MANY, 'BspItemImage', 'item_id','condition' => 'is_image = 1'),
+            'item_video' => array(self::HAS_MANY, 'BspItemVideo', 'item_id', 'condition' => 'is_image = 0'),
+            'image_items' => array(self::HAS_MANY, 'BspItemImage', 'item_id', 'condition' => 'is_image = 1'),
             'image_offer' => array(self::HAS_ONE, 'BspItemImage', 'item_id', 'condition' => 'is_offer = 1'),
             'image_log' => array(self::HAS_ONE, 'BspItemLog', 'item_id', 'condition' => 'log_type = "viewed"'),
             'item_related_sounds' => array(self::HAS_MANY, 'BspItemSoundUrl', 'item_id'),
@@ -368,6 +370,25 @@ class BspItem extends DTActiveRecord {
         $model->log_type = "viewed";
         $model->ip_address = $ip_address;
         $model->save();
+    }
+
+    /**
+     * set slug for 
+     * urls
+     */
+    public function setSlug() {
+        $this->slug = $this->primaryKey . "-" . str_replace(Yii::app()->params['notallowdCharactorsUrl'], "", trim($this->name));
+        $this->slug = strtolower(str_replace(" ", "-", trim($this->slug)));
+        
+        $this->slug_link = CHtml::link($this->name,Yii::app()->controller->createUrl("/web/offers/detail",array("slug"=>$this->slug)));
+    }
+
+    /**
+     * slug 
+     */
+    public function afterFind() {
+        $this->setSlug();
+        return parent::afterFind();
     }
 
 }

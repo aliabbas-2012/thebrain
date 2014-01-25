@@ -64,7 +64,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
                     ?>
                 </div>
                 <div class="review-content col-lg-6">
-                    <div class="review-content-item"><?php echo isset($order->item) ? $order->item->name : "No Name"; ?></div>
+                    <div class="review-content-item"><?php echo isset($order->item) ? $order->item->slug_link : "No Name"; ?></div>
                     <div class="review-content-amount"><?php echo $order->amount; ?> &euro;</div>
                 </div>
                 <div class="review-stats col-lg-2">
