@@ -39,7 +39,7 @@ foreach ($segments as $items) {
 
             $sItem.='<div class="watch"><a href="offer-detail/' . $item->id . '-' . MyHelper::convert_no_sign($item->name) . '">Watching</a></div>';
 
-
+           
             $sItem.='<div class="delete"><a title="rand' . $item->id . '" href="javascript:;"><img class="star" src="' . Yii::app()->theme->baseUrl . '/images/x.png" /></a></div>';
             $sItem.='<div class="clear"></div>';
             $sItem.='</div>';

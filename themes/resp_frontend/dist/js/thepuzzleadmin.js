@@ -75,8 +75,8 @@ var thepuzzleadmin = {
         }).done(function(response) {
             if (update_element_id != "") {
                 jQuery("#" + update_element_id).html(response);
-                jQuery("#loading").hide();
             }
+            jQuery("#loading").hide();
         });
 
     },

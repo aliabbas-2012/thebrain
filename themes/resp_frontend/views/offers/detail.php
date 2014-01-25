@@ -2,8 +2,18 @@
 <div class='col-lg-12'>
     <div class="col-lg-3">
         <div class="detail-Likes">
-            <div class="labeled">Likes</div>
-            <div class="valued">0</div>
+            <?php
+            $total_likes = BspItemLike::model()->count();
+            $likes = BspItemLike::model()->count(array('condition' => "item_id='$model->id'"));
+            $percent = 0;
+            if ($likes == 0) {
+                $likes = '0000';
+            } else {
+                $percent = ($likes * 100) / $total_likes;
+            }
+            ?>
+            <div class="labeled"><?php echo Yii::t('detailOffer', 'Likes'); ?></div>
+            <div class="valued"><?php echo $likes; ?></div>
         </div>
     </div>
     <div class="col-lg-3">
@@ -22,8 +32,8 @@
     </div>
     <div class="col-lg-3">
         <div class="detail-Likes">
-            <div class="labeled">Orders</div>
-            <div class="valued">0</div>
+            <div class="labeled"><?php echo Yii::t('detailOffer', 'Orders'); ?></div>
+            <div class="valued"><?php echo count($model->item_orders); ?></div>
         </div>
     </div>
     <div class="col-lg-1">
@@ -194,10 +204,10 @@
                     <div class='col-lg-2'>€ 6</div>
                 </div>
                 <div class='clear'></div>
-                
+
                 <div class='col-lg-12'>
                     <div class='col-lg-6'>
-                        
+
                     </div>
                     <div class='col-lg-6'>b</div>
                 </div>
@@ -205,7 +215,7 @@
                     <div class='col-lg-6'>c</div>
                     <div class='col-lg-6'>d</div>
                 </div>
-                
+
                 <div id="buttonCalculate">Calculate Price</div>
                 <div class='clear'></div>
                 <div id="priceTotal" class="col-lg-12">
