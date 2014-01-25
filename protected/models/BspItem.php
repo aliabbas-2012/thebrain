@@ -142,6 +142,10 @@ class BspItem extends DTActiveRecord {
             'item_price_offers_day' => array(self::HAS_MANY, 'BspItemPriceOfferDay', 'item_id', 'condition' => 'period = 3'),
             'item_price_offers_week' => array(self::HAS_MANY, 'BspItemPriceOfferWeek', 'item_id', 'condition' => 'period = 4'),
             'item_price_offers_month' => array(self::HAS_MANY, 'BspItemPriceOfferMonth', 'item_id', 'condition' => 'period = 5'),
+            
+            'numOrders' => array(self::STAT, 'BspOrder', 'item_id'),
+            'numComments' => array(self::STAT, 'BspComment', 'item_id'),
+            'avgRating' => array(self::STAT, 'BspComment', 'item_id', 'select' => 'AVG(rating)'),
         );
     }
 

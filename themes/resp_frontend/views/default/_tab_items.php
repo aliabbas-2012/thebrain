@@ -7,7 +7,7 @@ foreach ($segments as $items) {
         <?php
         foreach ($items as $item):
             $avatar = "";
-            $link = Yii::app()->baseUrl . '/offer-detail/' . $item->id . '-' . MyHelper::convert_no_sign($item->name);
+            $link = $this->createUrl("/web/offers/detail",array("slug"=>$item->slug));
             $user = Users::model()->findByPk($item->user_id);
             //getting no of lykes
             $likes = BspItemLike::model()->count(array('condition' => "item_id='$item->id'"));
@@ -37,7 +37,7 @@ foreach ($segments as $items) {
             $sItem.='</div>'; // end of info-item
             $sItem.='<div class="hover-option hover-content">';
 
-            $sItem.='<div class="watch"><a href="offer-detail/' . $item->id . '-' . MyHelper::convert_no_sign($item->name) . '">Watching</a></div>';
+            $sItem.='<div class="watch"><a href="'.$this->createUrl("/web/offers/detail",array("slug"=>$item->slug)).'">Watching</a></div>';
 
            
             $sItem.='<div class="delete"><a title="rand' . $item->id . '" href="javascript:;"><img class="star" src="' . Yii::app()->theme->baseUrl . '/images/x.png" /></a></div>';

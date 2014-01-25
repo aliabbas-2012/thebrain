@@ -3,14 +3,17 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
             <div class="puzzle-top text-center">
-                <a href="#">The Puzzzle I ALPHA</a>
+                <a href="javascript:void(0)">The Puzzzle I ALPHA</a>
                 <div style="width:30px; float: right;cursor: pointer;" class="newfeed-close"><span class="k-icon k-i-close" id="newsfeed-close"></span></div>
             </div>
         </div>
         <div class="col-lg-2"></div>
     </div>
 </div>
-<div class="offer_item-top" style="width:100%;height:450px;background: url('<?php echo Yii::app()->theme->baseUrl . "/images/newdetail.png" ?>')">
+<?php
+$background = !empty($model->background_image)?Yii::app()->baseUrl . "/uploads/BspItemImage/" . $model->id . "/" . $model->background_image:"";
+?>
+<div class="offer_item-top" style="width:100%;height:450px;background: url('<?php echo $background ?>')">
     <div class="container ">
         <div class="col-lg-12 offer_item">
             <div class="col-lg-8 offer_item-left">
@@ -32,7 +35,7 @@
                     </div>
                     <div class="col-lg-7">
                         <div class="contactLink">
-                            <a id="contact-me">Contact Me</a>
+                            <a id="contact-me"><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
                         </div>
                         <div class="clear"></div>
                         <div id="offerDetail">

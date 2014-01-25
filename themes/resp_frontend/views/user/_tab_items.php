@@ -51,7 +51,7 @@ foreach ($segments as $items) {
                         <div style="display: none">
                             <div class="info-item hover-content">
                                 <div class="offer_name">
-                                    <a href="/offer-detail/598-1-stunde-gassi-f-hren"><?php echo substr($item->name, 0, 51) . '...'; ?></a>
+                                    <a href="<?php echo $this->createUrl("/web/offers/detail",array("slug"=>$item->slug)) ?>"><?php echo substr($item->name, 0, 51) . '...'; ?></a>
                                 </div>
                                 <div class="offer_address">
                                     <?php echo $avatar . $city ?>
@@ -61,7 +61,7 @@ foreach ($segments as $items) {
                             </div>
                             <div class="hover-option hover-content">
                                 <div class="watch">
-                                    <a href="offer-detail/598-1-stunde-gassi-f-hren">More...</a>
+                                    <a href="<?php echo $this->createUrl("/web/offers/detail",array("slug"=>$item->slug)) ?>">More...</a>
                                 </div>
                                 <div class="delete">
                                     <a href="javascript:;" title="598">

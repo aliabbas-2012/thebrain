@@ -18,11 +18,18 @@
     </div>
     <div class="col-lg-3">
         <div class="detail-Likes">
-            <div class="labeled">Ratings </div>
+            <div class="labeled"><?php echo Yii::t('detailOffer', 'Ratings'); ?> </div>
             <div class="valued">
                 <?php
-                for ($i = 1; $i <= 5; $i++) {
+                $total_rating = 5;
+                
+                for ($i = 1; $i <= $total_rating - $model->avgRating; $i++) {
                     echo CHtml::image(Yii::app()->theme->baseUrl . "/images/star2.jpg", '', array(
+                        "id" => "star" . $i, "class" => "starclick"
+                    ));
+                }
+                for ($i = 1; $i <= $model->avgRating; $i++) {
+                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/images.jpg", '', array(
                         "id" => "star" . $i, "class" => "starclick"
                     ));
                 }
@@ -33,15 +40,15 @@
     <div class="col-lg-3">
         <div class="detail-Likes">
             <div class="labeled"><?php echo Yii::t('detailOffer', 'Orders'); ?></div>
-            <div class="valued"><?php echo count($model->item_orders); ?></div>
+            <div class="valued"><?php echo $model->numOrders; ?></div>
         </div>
     </div>
     <div class="col-lg-1">
-        <img class="add-wishlist" src="<?php echo Yii::app()->theme->baseUrl ?>/images/addtowishlist.png" 
+        <img item_id ="<?php echo $model->id ?>" class="add-wishlist" src="<?php echo Yii::app()->theme->baseUrl ?>/images/addtowishlist.png" 
              alt="add to wishlist" original-title="Save this offer">
     </div>
     <div class="col-lg-2">
-        <a id="addlike" class="detail-addlike" href="javascript:void(0);" status="2">+1 like</a>
+        <a id="addlike" item_id ='<?php echo $model->id; ?>' class="detail-addlike" href="javascript:void(0);" status="2">+1 like</a>
     </div>
 
 </div>
@@ -254,5 +261,33 @@
             jQuery(".tab-" + jQuery(this).attr("tab-no") + "-data").show();
         })
         $("#calendar").kendoCalendar();
+
+        jQuery("#addlike").click(function() {
+            if ("<?php echo Yii::app()->user->id ?>" == "") {
+                thepuzzleadmin.showAlertBox("Please login First to like ", "warning");
+            }
+            else {
+                item_id = jQuery(this).attr("item_id");
+                thepuzzleadmin.updateElementAjax("<?php echo $this->createUrl("/web/user/saveItemLog", array("action" => "like")) ?>?item_id=" + item_id, "", "");
+                thepuzzleadmin.showAlertBox("Added to like list ", "success");
+            }
+        })
+
+        jQuery(".add-wishlist").click(function() {
+            if ("<?php echo Yii::app()->user->id ?>" == "") {
+                thepuzzleadmin.showAlertBox("Please login First to like ", "warning");
+            }
+            else {
+                item_id = jQuery(this).attr("item_id");
+                thepuzzleadmin.updateElementAjax("<?php echo $this->createUrl("/web/user/saveItemLog", array("action" => "favrout")) ?>?item_id=" + item_id, "", "");
+                thepuzzleadmin.showAlertBox("Added to favourate list ", "success");
+            }
+        })
+
     })
 </script>
+<style>
+    .add-wishlist {
+        cursor: pointer;
+    }
+</style>    
