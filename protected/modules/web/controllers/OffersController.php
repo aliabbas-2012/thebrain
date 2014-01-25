@@ -24,6 +24,7 @@ class OffersController extends Controller {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
+                    'detail'
                 ),
                 'users' => array('@'),
             ),
@@ -117,6 +118,14 @@ class OffersController extends Controller {
                 "dataProvider" => $dataProvider
             ));
         }
+    }
+
+    /**
+     * 
+     * @param type $slug
+     */
+    public function actionDetail($slug = "") {       
+        $this->render("//offers/detail");
     }
 
 }

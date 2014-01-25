@@ -43,7 +43,7 @@
 
         </div>
         <!-- Fixed navbar -->
-        <div class="navbar navbar-inverse" role="navigation">
+        <div class="navbar navbar-inverse first-nav" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -137,7 +137,7 @@
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
-            <div class="container" style="background:#fafcfc;>
+            <div class="container search-bar" style="background:#fafcfc;">
 
                 <div class="navbar-collapse form-nav">
                     <?php
@@ -248,6 +248,8 @@
             <?php
             if ($this->id == "default" && $this->action->id == "index") {
                 $this->renderPartial("//default/_slider");
+            } else if ($this->id == "offers" && $this->action->id == "detail") {
+                $this->renderPartial("//offers/_top_detail");
             }
             ?> 
         </div>
@@ -403,5 +405,22 @@
 
         </style>
         <div id="map-canvas"></div>
+        <script>
+            $(function() {
+                $(window).scroll(function() {
+                    var aTop = $('.first-nav').height();
+                    if ($(this).scrollTop() >= aTop) {
+
+                        $('.search-bar').css('position', 'fixed');
+                        $('.search-bar').css('top', '0px');
+                        $('.search-bar').css('z-index', '99999');
+                    }
+                    else {
+                        $('.search-bar').css('position', 'relative');
+                        $('.search-bar').css('z-index', '1');
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
