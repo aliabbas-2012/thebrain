@@ -49,7 +49,7 @@ class BspItem extends DTActiveRecord {
      * @var type 
      */
     public $is_extra, $loc_name;
-    public $slug,$slug_link;
+    public $slug, $slug_link;
     public $background_image_name, $background_path, $_per_price;
     public $_per_price_options = array(
         1 => "Price fix",
@@ -137,12 +137,12 @@ class BspItem extends DTActiveRecord {
             'item_orders' => array(self::HAS_MANY, 'BspOrder', 'item_id'),
             'item_logs' => array(self::HAS_MANY, 'BspItemLog', 'item_id'),
             //item of week
+            "offerPrices" => array(self::HAS_MANY, 'BspItemPriceOffer', 'item_id'),
             'item_price_offers_fix' => array(self::HAS_MANY, 'BspItemPriceOffer', 'item_id'),
             'item_price_offers_hour' => array(self::HAS_MANY, 'BspItemPriceOfferHour', 'item_id', 'condition' => 'period = 2'),
             'item_price_offers_day' => array(self::HAS_MANY, 'BspItemPriceOfferDay', 'item_id', 'condition' => 'period = 3'),
             'item_price_offers_week' => array(self::HAS_MANY, 'BspItemPriceOfferWeek', 'item_id', 'condition' => 'period = 4'),
             'item_price_offers_month' => array(self::HAS_MANY, 'BspItemPriceOfferMonth', 'item_id', 'condition' => 'period = 5'),
-            
             'numOrders' => array(self::STAT, 'BspOrder', 'item_id'),
             'numComments' => array(self::STAT, 'BspComment', 'item_id'),
             'avgRating' => array(self::STAT, 'BspComment', 'item_id', 'select' => 'AVG(rating)'),
@@ -383,8 +383,8 @@ class BspItem extends DTActiveRecord {
     public function setSlug() {
         $this->slug = $this->primaryKey . "-" . str_replace(Yii::app()->params['notallowdCharactorsUrl'], "", trim($this->name));
         $this->slug = strtolower(str_replace(" ", "-", trim($this->slug)));
-        
-        $this->slug_link = CHtml::link($this->name,Yii::app()->controller->createUrl("/web/offers/detail",array("slug"=>$this->slug)));
+
+        $this->slug_link = CHtml::link($this->name, Yii::app()->controller->createUrl("/web/offers/detail", array("slug" => $this->slug)));
     }
 
     /**
@@ -393,6 +393,42 @@ class BspItem extends DTActiveRecord {
     public function afterFind() {
         $this->setSlug();
         return parent::afterFind();
+    }
+
+    /**
+     * 
+     * @param type $per_price
+     * @return type
+     */
+    public static function getPeriod($per_price) {
+        $period = '';
+        switch ($per_price) {
+            case '1' :
+                $period = Yii::t('detailOffer', 'Fix');
+                break;
+            case '2' :
+                $period = Yii::t('detailOffer', 'Hour');
+                break;
+            case '3' :
+                $period = Yii::t('detailOffer', 'Day');
+                break;
+            case '4' :
+                $period = Yii::t('detailOffer', 'Week');
+                break;
+            case '5' :
+                $period = Yii::t('detailOffer', 'Month');
+                break;
+        }
+        return $period;
+    }
+
+    /**
+     * get all periods for some where
+     * to access to convert in  json
+     *  like _pricing.php iew
+     */
+    public function getAllPeriods() {
+        return CJSON::encode(array("1" => "Fix", "2" => "Hour", "3" => "Day", "4" => "Week", "5" => "Month"));
     }
 
 }

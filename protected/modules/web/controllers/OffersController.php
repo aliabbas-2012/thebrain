@@ -14,6 +14,7 @@ class OffersController extends Controller {
             'postOnly + delete', // we only allow deletion via POST request
         );
     }
+
     /**
      * Item model
      * @var type 
@@ -37,7 +38,8 @@ class OffersController extends Controller {
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
                     'category',
-                    'search'
+                    'search',
+                    'calculatePrice'
                 ),
                 'users' => array('*'),
             ),
@@ -130,12 +132,70 @@ class OffersController extends Controller {
      * 
      * @param type $slug
      */
-    public function actionDetail($slug = "") {      
-        $slug_arr = explode("-",$slug);
+    public function actionDetail($slug = "") {
+        $slug_arr = explode("-", $slug);
         $model = BspItem::model()->findByPk($slug_arr[0]);
-        $priceCal = BspItemConditionHour::model()->findAll("item_id = ".$slug_arr[0]);
+        $priceCal = BspItemConditionHour::model()->findAll("item_id = " . $slug_arr[0]);
         $this->item = $model;
-        $this->render("//offers/detail",array("model"=>$model,"priceCal"=>$priceCal));
+        $this->render("//offers/detail", array("model" => $model, "priceCal" => $priceCal));
+    }
+    
+    /**
+     * Price calculation
+     */
+    public function actionCalculatePrice() {
+        $model = new PriceCalculation();
+        if(isset($_POST['PriceCalculation'])){
+            $model->attributes = $_POST['PriceCalculation'];
+        }
+        $item = BspItem::model()->findByPk($model->item_id);
+        
+        $periodmain = BspItem::getPeriod($item->per_price);
+  
+        $periods = $model->time_since($model->start_date . ' ' . $model->start_time, true, $model->end_date . ' ' . $model->end_time, $periodmain);
+        $time = '';
+        foreach ($periods as $label => $value) {
+            $time .= $value . " " . $label . " ";
+        }
+
+
+        $prices = $item->offerPrices;
+        $sum = 0;
+
+        foreach ($prices as $price) {
+            $period = BspItem::getPeriod($price->period);
+            if (in_array($period, array_keys($periods))) {
+                if ($periods[$period] > 0) {
+
+                    if ($price->option == "abs") {
+                        if ($price->start <= $periods[$period]) {
+                            $sum += $price->start * $price->price;
+                            $periods[$period] -= $price->start;
+                        }
+                    }
+                    if ($price->option == "range") {
+                        if ($price->end <= $periods[$period]) {
+                            $range = ($price->end - $price->start) + 1;
+                            $sum += $range * $price->price;
+                            $periods[$period] -= $range;
+                        } else {
+                            $sum += $periods[$period] * $price->price;
+                        }
+                    }
+                    if ($price->option == "extra" && $periods[$period] > 0) {
+                        $sum += ($periods[$period]) * $price->price;
+                    }
+                }
+            }
+        }
+        if (in_array($periodmain, array_keys($periods))) {
+            if ($periods[$periodmain] > 0) {
+                $price = $item->special_deal == 1 ? $item->discount_price : $item->price;
+                $sum += $periods[$periodmain] * $price;
+            }
+        }
+
+        echo CJSON::encode(array("period" => $time, "price" => $sum));
     }
 
 }

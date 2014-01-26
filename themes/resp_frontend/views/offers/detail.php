@@ -266,6 +266,10 @@
 
             </div>
 
+            <?php
+            $this->renderPartial("//offers/_advertising");
+            ?>
+
         </div>
         <div class='col-lg-4'>
             <div class="yelow-bg">
@@ -299,24 +303,25 @@
                     )
                 ));
                 $time_arr = array();
-                for($i=0;$i<=23;$i++){
-                    $time_arr["0".$i.":00:00"] = "0".$i.":00";
+                for ($i = 0; $i <= 23; $i++) {
+                    $time_arr["0" . $i . ":00:00"] = "0" . $i . ":00";
                 }
+                echo $form->hiddenField($priceCalF,"item_id",array("value"=>$model->id));
                 ?>
                 <div class='col-lg-12'>
                     <div class='col-lg-6'>
-                        <?php echo $form->textField($priceCalF, "start_date",array('style'=>"width:120px;")); ?>
+                        <?php echo $form->textField($priceCalF, "start_date", array('style' => "width:120px;")); ?>
                     </div>
                     <div class='col-lg-6'>
-                        <?php echo $form->dropDownList($priceCalF, "start_time",$time_arr,array('style'=>"width:120px;")); ?>
+                        <?php echo $form->dropDownList($priceCalF, "start_time", $time_arr, array('style' => "width:120px;")); ?>
                     </div>
                 </div>
                 <div class='col-lg-12'>
                     <div class='col-lg-6'>
-                        <?php echo $form->textField($priceCalF, "end_date",array('style'=>"width:120px;")); ?>
+                        <?php echo $form->textField($priceCalF, "end_date", array('style' => "width:120px;")); ?>
                     </div>
                     <div class='col-lg-6'>
-                        <?php echo $form->dropDownList($priceCalF, "end_time",$time_arr,array('style'=>"width:120px;")); ?>
+                        <?php echo $form->dropDownList($priceCalF, "end_time", $time_arr, array('style' => "width:120px;")); ?>
                     </div>
                 </div>
 
@@ -336,7 +341,7 @@
                     </div>
                 </div>
                 <div class='col-lg-12' style='color: #b5b5b5; padding-bottom: 10px; text-align: right'>
-                    Time selection:-
+                    Time selection:-<span id="time-selection"></span>
                 </div>
             </div>
             <div class='clear'></div>
@@ -392,10 +397,28 @@ $this->renderPartial("//user/_tab_items", array("items" => $items));
                 thepuzzleadmin.showAlertBox("Added to favourate list ", "success");
             }
         })
-        jQuery("#PriceCalculation_start_date").kendoDatePicker({format: "dd-mm-yyyy"});
-        jQuery("#PriceCalculation_end_date").kendoDatePicker({format: "dd-mm-yyyy"});
+        jQuery("#PriceCalculation_start_date").kendoDatePicker({format: "yyyy/MM/dd",});
+        jQuery("#PriceCalculation_end_date").kendoDatePicker({format: "yyyy/MM/dd",});
         $("#PriceCalculation_start_time").kendoDropDownList();
         $("#PriceCalculation_end_time").kendoDropDownList();
+
+        jQuery("#buttonCalculate").click(function() {
+            jQuery("#loading").show();
+            jQuery.ajax({
+                type: "POST",
+                url: jQuery("#price-form").attr("action") + "?ajax=1",
+                data: jQuery("#price-form").serialize(),
+                dataType: "JSON",
+                success: function(data)
+                {
+                    console.log(data);
+                    jQuery("#kqtinh").html(data.price);
+                    jQuery("#time-selection").html(data.period);
+                    jQuery("#loading").hide();
+
+                }
+            });
+        })
     })
 </script>
 <style>

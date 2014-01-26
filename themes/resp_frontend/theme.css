@@ -2159,6 +2159,9 @@ a.detail-addlike:hover {
     padding: 10px;
     text-align: center;
 }
+#buttonCalculate:hover {
+      background-color: #F1F1a1;
+}
 #priceTotal {
     border-top: 1px solid #CCCCCC;
     margin-right: 5px;
