@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="select-bg-img">
-                        <span><a href="#">Select your background image</a></span>
+                        <span><a href="javascript:void(0)">Select your background image</a></span>
                     </div>
                 </div>
                 <div class="row">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-lg-10">
                         <div class="select-avatar-img">
-                            <span><a href="#">Select your avatar</a></span>
+                            <span><a href="javascript:void(0)">Select your avatar</a></span>
                         </div>
                     </div>
                 </div>

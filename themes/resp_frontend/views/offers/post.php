@@ -1,6 +1,16 @@
 <link href="<?php echo Yii::app()->theme->baseUrl ?>/style/detail.css" rel="stylesheet">
 <div class="alert alert-warning" style="display: none"></div>
 <div class="alert alert-success" style="display: none"></div>
+<?php
+$form = $this->beginWidget('CActiveForm', array(
+    'id' => 'post-form',
+    //'enableClientValidation' => true,
+    'htmlOptions' => array('enctype' => 'multipart/form-data',),
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+    ),
+        ));
+?>
 <?php $this->renderPartial("//offers/_post_offer", array("model" => $model)) ?>
 <div class="clear"></div>
 <div class="container">
@@ -302,7 +312,7 @@
             <span class="k-invalid-msg" data-for="public_offer"></span>
             <label class="fontsize_title floatLeft" style="width: 85%; margin-left: 13px; margin-bottom: 13px;" for="public_offer">
                 I confirm that I am able to deliver this service to Buyers within the delivery time specified.I will update or pause my Hourlie if I can no longer meet this delivery time. I understand that late delivery will adversely affect my rankings on ThePuzzzle and will entitle the Buyer to a refund. See
-                <a class="tncs" href="#">T&Cs </a>
+                <a class="tncs" href="javascript:void(0)">T&Cs </a>
             </label>
         </div>
     </div>
@@ -316,10 +326,12 @@
         </div>
         <div class="col-lg-12">
             <div align="center">
-                <a href="#top">
+                <a href="javascript:void(0)" onclick="$(window).scrollTop();">
                     <img id="returnTop" src="<?php echo Yii::app()->theme->baseUrl ?>/images/returnTop.jpg">
                 </a>
             </div>
         </div>
     </div>
 </div>
+
+<?php $this->endWidget(); ?>
