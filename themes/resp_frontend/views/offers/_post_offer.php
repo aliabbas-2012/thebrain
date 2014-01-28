@@ -10,19 +10,21 @@
                 </div>
                 <div class="col-lg-4">
                     <div id="offer2">
-                        <select class="select1">
-                            <option>Price fix</option>
-                            <option>Price fix</option>
-                            <option>Price fix</option>
-                            <option>Price fix</option>
-                            <option>Price fix</option>
-                        </select>
-                        <select class="select2">
-                            <option>€</option>
-                            <option>€</option>
-                            <option>€</option>
-                        </select>
-                        <input id="txtprice" class="k-textbox" type="text" placeholder="Your Price?..." pattern="\d{1,11}" style="width: 34%; height: 39px !important; margin-top: 15px">
+                        <?php
+                        echo $form->dropDownList($model, 'per_price', $model->_per_price_options, array("class" => "select1"));
+                        ?>
+
+                        <?php echo zHtml::activeDropDownList($model, 'currency_id', (BspCurrency::model()->getCurrencies()), array('class' => 'select2', 'encode' => true)); ?>
+                        
+                        <?php
+                        echo $form->textField($model, 'price', array(
+                            'class' => 'k-textbox',
+                            "id" => "txtprice",
+                            'placeholder' => "Your Price?...",
+                            "pattern" => "\d{1,11}",
+                            "style" => "width: 34%; height: 39px !important; margin-top: 15px"
+                        ));
+                        ?>
                     </div>
                 </div>
                 <div class="col-lg-12">

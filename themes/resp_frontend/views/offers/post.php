@@ -2,6 +2,7 @@
 <div class="alert alert-warning" style="display: none"></div>
 <div class="alert alert-success" style="display: none"></div>
 <?php
+header('Content-Type: text/html; charset=utf-8');
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'post-form',
     //'enableClientValidation' => true,
@@ -11,7 +12,7 @@ $form = $this->beginWidget('CActiveForm', array(
     ),
         ));
 ?>
-<?php $this->renderPartial("//offers/_post_offer", array("model" => $model)) ?>
+<?php $this->renderPartial("//offers/_post_offer", array("model" => $model, "form" => $form)) ?>
 <div class="clear"></div>
 <div class="container">
     <div class="row">

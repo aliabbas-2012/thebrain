@@ -10,6 +10,7 @@ $conf_component_db = array(
     'username' => 'sfakhar1_yii',
     'password' => 'abc123AB',
     'charset' => 'utf8',
+
 );
 
 ?>

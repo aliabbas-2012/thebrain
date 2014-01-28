@@ -120,6 +120,9 @@ class BspCurrency extends DTActiveRecord {
     public function afterFind() {
         if (Yii::app()->controller->id == 'bspItem') {
             $this->symbol = html_entity_decode($this->symbol);
+        } else if (get_class(Yii::app()->controller->getModule()) == "WebModule" && 
+                Yii::app()->controller->id == "offers" && Yii::app()->controller->action->id =="post") {
+            
         }
         return parent::afterFind();
     }
