@@ -132,6 +132,11 @@
                             echo CHtml::link("How It Works", $this->createUrl("/web/article/index", array("slug" => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-8")));
                             ?>                        
                         </li>
+                        <li >
+                            <?php
+                            echo CHtml::link("Post Offer", $this->createUrl("/web/offers/post", array("action" => "create")), array("class" => "offer"));
+                            ?>                        
+                        </li>
 
 
                     </ul>
@@ -249,18 +254,24 @@
             if ($this->id == "default" && $this->action->id == "index") {
                 $this->renderPartial("//default/_slider");
             } else if ($this->id == "offers" && $this->action->id == "detail" && !empty($this->item)) {
-                $this->renderPartial("//offers/_top_detail",array("model"=>$this->item));
+                $this->renderPartial("//offers/_top_detail", array("model" => $this->item));
             }
             ?> 
         </div>
-        <div id="content_container" class="container theme-showcase">
-            <div class="alert alert-warning" style="display: none"></div>
-            <div class="alert alert-success" style="display: none"></div>
-
-            <?php echo $content; ?>
-
-        </div> <!-- /container -->
-
+        <?php
+        //post offer offer
+        if ($this->id == "offers" && $this->action->id == "post") {
+                echo $content;
+        } else {
+            ?>
+            <div id="content_container" class="container theme-showcase">
+                <div class="alert alert-warning" style="display: none"></div>
+                <div class="alert alert-success" style="display: none"></div>
+                <?php echo $content; ?>
+            </div> <!-- /container -->
+            <?php
+        }
+        ?>
         <div class="clear"></div>
         <div id="footer" class="container">
             <nav class="navbar-default">

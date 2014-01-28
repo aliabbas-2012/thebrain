@@ -74,7 +74,7 @@ class SiteController extends Controller {
     public function actionLogin() {
         $this->layout = "//layouts/column1";
         $model = new LoginForm;
-
+        
         // if it is ajax validation request
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
             echo CActiveForm::validate($model);
@@ -85,8 +85,9 @@ class SiteController extends Controller {
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->login())
+            if ($model->validate() && $model->login()) {
                 $this->redirect(Yii::app()->user->returnUrl);
+            }
         }
         // display the login form
         $this->render('login', array('model' => $model));
@@ -140,8 +141,8 @@ class SiteController extends Controller {
                         $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("temp", Yii::app()->user->id, $module));
                     }
                     if (!empty($img_file)) {
-                        $img_file->saveAs($upload_path . str_replace(" ","_",$img_file->name));
-                        echo json_encode(array('file' => str_replace(" ","_",$img_file->name), "path" => $upload_path, "attribute" => $attribute));
+                        $img_file->saveAs($upload_path . str_replace(" ", "_", $img_file->name));
+                        echo json_encode(array('file' => str_replace(" ", "_", $img_file->name), "path" => $upload_path, "attribute" => $attribute));
                     }
                 }
             }

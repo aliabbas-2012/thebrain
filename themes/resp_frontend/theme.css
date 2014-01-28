@@ -1453,6 +1453,9 @@ div.w-header.w-shadow button.k-button-green:hover {
         display: block;
         margin-top: 10px
     }
+    .search-bar {
+        position: inherit;
+    } 
 }
 
 /* Landscape phones and down */
@@ -1461,6 +1464,7 @@ div.w-header.w-shadow button.k-button-green:hover {
         display: block;
         margin-top: 10px
     }
+
 }
 .filterbar .view-style {
     width: 35%;
@@ -2160,7 +2164,7 @@ a.detail-addlike:hover {
     text-align: center;
 }
 #buttonCalculate:hover {
-      background-color: #F1F1a1;
+    background-color: #F1F1a1;
 }
 #priceTotal {
     border-top: 1px solid #CCCCCC;
@@ -2216,4 +2220,30 @@ a.detail-addlike:hover {
 .price-type>div {
     font-weight: bold;
     margin-top: 2px;
+}
+
+.navbar-nav li a.offer{
+    color: #414141;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    padding: 7px 10px;
+    width: auto;
+    font-weight: bold;
+    font-size: 12px;
+    border: 1px solid #b4b4b4;
+    background: -moz-linear-gradient(90deg, #fdd538 0%, #fbe83c 100%) #fce156;
+    background: -webkit-gradient(linear, left bottom, left top, from(#fdd538), to(#fbe83c)) #fce156;
+    -moz-box-shadow: 4px 4px 4px #d3d1d1;
+    -webkit-box-shadow: 4px 4px 4px #d3d1d1;
+    box-shadow: 4px 4px 4px #d3d1d1;
+    letter-spacing: 1px;
+    margin-top: 8px;
+}
+.navbar-nav li a:hover{
+    opacity: 0.8;
+}
+.navbar-nav li  a.offer:hover{
+    background-color: #ff851f;
+    opacity: 1;
 }

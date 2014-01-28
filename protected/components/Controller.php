@@ -53,6 +53,9 @@ class Controller extends CController {
 
     public function beforeAction($action) {
 
+        if (strstr(Yii::app()->request->url, "admin")) {
+            Yii::app()->homeUrl = $this->createUrl("/users/index");
+        }
         parent::beforeAction($action);
 
         $this->registerWidget();
@@ -71,6 +74,9 @@ class Controller extends CController {
             Yii::app()->language = "en";
             Yii::app()->theme = "resp_frontend";
             $this->layout = "//layouts/frontend";
+        } else {
+            Yii::app()->user->loginUrl = "/site/login";
+            Yii::app()->homeUrl = $this->createUrl("/users/index");
         }
 
 

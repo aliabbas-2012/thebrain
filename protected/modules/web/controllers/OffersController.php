@@ -31,7 +31,7 @@ class OffersController extends Controller {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
-                    'detail'
+                    'post'
                 ),
                 'users' => array('@'),
             ),
@@ -39,7 +39,8 @@ class OffersController extends Controller {
                 'actions' => array(
                     'category',
                     'search',
-                    'calculatePrice'
+                    'calculatePrice',
+                    'detail'
                 ),
                 'users' => array('*'),
             ),
@@ -139,19 +140,33 @@ class OffersController extends Controller {
         $this->item = $model;
         $this->render("//offers/detail", array("model" => $model, "priceCal" => $priceCal));
     }
-    
+
+    /**
+     * post offer to create post 
+     * @param type $id
+     * @param type $action
+     */
+    public function actionPost($id = 0, $action = "create") {
+        $model = new BspItem;
+        if (isset($_POST['BspItem'])) {
+            $model->attributes = $_POST['BspItem'];
+        }
+        
+        $this->render("//offers/post", array("model" => $model));
+    }
+
     /**
      * Price calculation
      */
     public function actionCalculatePrice() {
         $model = new PriceCalculation();
-        if(isset($_POST['PriceCalculation'])){
+        if (isset($_POST['PriceCalculation'])) {
             $model->attributes = $_POST['PriceCalculation'];
         }
         $item = BspItem::model()->findByPk($model->item_id);
-        
+
         $periodmain = BspItem::getPeriod($item->per_price);
-  
+
         $periods = $model->time_since($model->start_date . ' ' . $model->start_time, true, $model->end_date . ' ' . $model->end_time, $periodmain);
         $time = '';
         foreach ($periods as $label => $value) {

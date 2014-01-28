@@ -28,5 +28,7 @@ $rules_web = array(
     '/offers/category/<category:[\w-\.]+>/' => '/web/offers/category',
     '/offers/search-result' => '/web/offers/search',
     '/offers/detail/<slug:[\w-\.]+>' => '/web/offers/detail',
+    '/offers/post/<action:[\w-\.]+>' => '/web/offers/post',
+    '/offers/post/<action:[\w-\.]+>/<slug:[\w-\.]+>' => '/web/offers/post',
 );
 ?>
