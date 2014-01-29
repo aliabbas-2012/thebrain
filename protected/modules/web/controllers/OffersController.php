@@ -147,9 +147,9 @@ class OffersController extends Controller {
      * @param type $action
      */
     public function actionPost($id = 0, $action = "create") {
-        $model = new BspItem;
-        if (isset($_POST['BspItem'])) {
-            $model->attributes = $_POST['BspItem'];
+        $model = new BspItemFrontEnd();
+        if (isset($_POST['BspItemFrontEnd'])) {
+            $model->attributes = $_POST['BspItemFrontEnd'];
         }
         
         $this->render("//offers/post", array("model" => $model));

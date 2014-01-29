@@ -15,7 +15,7 @@
                         ?>
 
                         <?php echo zHtml::activeDropDownList($model, 'currency_id', (BspCurrency::model()->getCurrencies()), array('class' => 'select2', 'encode' => true)); ?>
-                        
+
                         <?php
                         echo $form->textField($model, 'price', array(
                             'class' => 'k-textbox',
@@ -30,6 +30,11 @@
                 <div class="col-lg-12">
                     <div class="select-bg-img">
                         <span><a href="javascript:void(0)">Select your background image</a></span>
+                        <?php
+                        $uploadTemp = new UploadTemp();
+                        echo zHtml::activeFileField($uploadTemp, '[' . 1 . ']upload_temp_image');
+                        ?>
+                        <?php echo $form->hiddenField($model, 'background_image'); ?>
                     </div>
                 </div>
                 <div class="row">
@@ -43,6 +48,11 @@
                     <div class="col-lg-10">
                         <div class="select-avatar-img">
                             <span><a href="javascript:void(0)">Select your avatar</a></span>
+                            <?php
+                            $uploadTemp = new UploadTemp();
+                            echo zHtml::activeFileField($uploadTemp, '[' . 2 . ']upload_temp_image');
+                            ?>
+                            <?php echo $form->hiddenField($model, 'avatar_image'); ?>
                         </div>
                     </div>
                 </div>

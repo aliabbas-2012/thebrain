@@ -34,9 +34,9 @@
     border-radius: 3px;
     box-shadow: 5px 5px 5px #E2E0E0;
     clear: both;
-	margin-top: 25px;
+    margin-top: 25px;
     color: #414141;
-    font: bold 1.9em/25px Arial;
+    font: bold 1.1em/16px Arial;
     min-height: 82px;
     margin-right: 25px;
     padding: 56px 10px 10px;
@@ -91,24 +91,24 @@ input#txtprice.k-textbox {
     width: 40%;
 }
 
-.select1 { width:40%; }
+.select1 { width:20%; }
 
 .select2 { width:20%; }
 
 .select-bg-img { background: none repeat scroll 0 0 #FFFFFF !important;
-    border: 1px solid #BFBFBF !important;
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px #E2E0E0;
-    font-size: 16px;
-    font-weight: bold;
-    height: 30px !important;
-    line-height: 30px;
-    padding: 0 !important;
-    position: relative;
-    right: 3px;
-    text-align: center;
-    width: 330px;
-    z-index: 50; margin: 0 auto; }
+                 border: 1px solid #BFBFBF !important;
+                 border-radius: 5px;
+                 box-shadow: 5px 5px 5px #E2E0E0;
+                 font-size: 16px;
+                 font-weight: bold;
+                 height: 30px !important;
+                 line-height: 30px;
+                 padding: 0 !important;
+                 position: relative;
+                 right: 3px;
+                 text-align: center;
+                 width: 330px;
+                 z-index: 50; margin: 0 auto; }
 
 .select-bg-img span {}
 
@@ -119,23 +119,23 @@ input#txtprice.k-textbox {
     box-shadow: 5px 5px 5px #E2E0E0;
     height: 140px;
     width: 140px;
-	margin-left:35px;
+    margin-left:35px;
 }
 
 .select-avatar-img { background: none repeat scroll 0 0 #FFFFFF !important;
-    border: 1px solid #BFBFBF !important;
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px #E2E0E0;
-    font-size: 16px;
-    font-weight: bold;
-    height: 30px !important;
-    line-height: 30px;
-    padding: 0 !important;
-    position: relative;
-    right: 3px;
-    text-align: center;
-    width: 330px;
-    z-index: 50; margin-top:10px; }
+                     border: 1px solid #BFBFBF !important;
+                     border-radius: 5px;
+                     box-shadow: 5px 5px 5px #E2E0E0;
+                     font-size: 16px;
+                     font-weight: bold;
+                     height: 30px !important;
+                     line-height: 30px;
+                     padding: 0 !important;
+                     position: relative;
+                     right: 3px;
+                     text-align: center;
+                     width: 330px;
+                     z-index: 50; margin-top:10px; }
 
 .select-avatar-img span a { color: #F51E65; }
 
@@ -203,11 +203,12 @@ input#txtprice.k-textbox {
 
 .categorie {
     float: left;
-    height: 40px;
+/*    height: 40px;
     margin-right: 40px;
-	margin-top: 10px;
+    margin-top: 10px;
     padding: 20px 0;
-    width: 310px;
+    width: 310px;*/
+ margin-right: 40px;
 }
 
 #changePrice {
@@ -331,8 +332,8 @@ input#address.k-textbox, input#city.k-textbox, input#last_name.k-textbox, input#
 .req-f {
     color: #CB0E30;
     position: relative;
-	width:100%; float:left;
-	margin-top:5px;
+    width:100%; float:left;
+    margin-top:5px;
 }
 #description { width:100%; float:left; }
 
@@ -511,7 +512,7 @@ div.k-button.k-upload-button {
     color: #FFFFFF;
     font: bold 22px Arial;
     width: 370px;
-	padding-top:10px !important;
+    padding-top:10px !important;
 }
 
 
@@ -540,7 +541,7 @@ p.font18 {
     color: #414141;
     font-size: 18px;
     font-weight: bold;
-	margin-left:20px;
+    margin-left:20px;
 }
 
 input#txtSound1.soundCloudLink.font18.k-textbox, input#txtSound2.soundCloudLink.font18.k-textbox, input#txtSound3.soundCloudLink.font18.k-textbox, textarea#textDecription.font18.k-textbox, textarea#textStart.font18.k-textbox, input#key-word.font15.k-textbox {
@@ -576,7 +577,7 @@ input.k-textbox {
     margin: 30px 0;
     padding: 5px;
     width: 100%;
-	font-size: 18px;
+    font-size: 18px;
 }
 
 #immediately { width:300px !important; padding:5px; border:none; border: 1px solid #B8B8B8; border-radius:5px; float:left; margin-top:20px; }
@@ -587,7 +588,7 @@ input.k-textbox {
     margin-top: 30px;
     padding-left: 5px;
     width: 100%;
-	font-style: italic;
+    font-style: italic;
 }
 
 div#tcs {
@@ -630,5 +631,80 @@ div.submit {
 #returnTop {
     clear: both;
     width: 25px;
-	margin-bottom:50px;
+    margin-bottom:50px;
+}
+
+p#price_offer.font18.fontArial {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+p.font18 {
+    color: #414141;
+    font-weight: bold;
+}
+
+.font-red {
+    color: #F51E65;
+    font-weight: bold;
+}
+
+.div50percent.floatLeft.PriceOffer {
+    position: relative;
+}
+.div50percent {
+    background-color: #FFFFFF;
+    border: 1px solid #D0D0D0;
+    border-radius: 3px;
+    box-shadow: 0 1px 5px rgba(168, 168, 168, 0.56);
+    float: left;
+    padding: 20px;
+}
+
+button.k-button.row-add {
+    padding-right: 0;
+    position: absolute;
+    right: 20px;
+}
+
+.k-button, .k-textbox, .k-timepicker, .k-datepicker, .k-datetimepicker {
+    display: inline-block;
+    vertical-align: middle;
+}
+.k-button {
+    -moz-box-sizing: border-box;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1.66em;
+    outline: 0 none;
+    text-align: center;
+    text-decoration: none;
+}
+
+.k-button, .k-button.k-state-disabled:hover, .k-state-disabled .k-button:hover, .k-draghandle {
+    background-color: #FFFFFF;
+    border-color: #DADADA;
+}
+.k-button {
+    color: #777777;
+}
+
+.k-button, .k-button.k-state-disabled:hover, .k-state-disabled .k-button:hover, .k-draghandle {
+    background-color: #FFFFFF;
+    border-color: #DADADA;
+}
+.k-button {
+    color: #777777;
+}
+
+.k-block, .k-widget, .k-inline-block, .k-textbox > input, .k-input[type="text"], .k-input[type="number"], .k-textbox, .k-picker-wrap .k-input, .k-button, .k-draghandle {
+    border-style: solid;
+    border-width: 1px;
+    font-size: 100%;
+}
+.k-dropdown.select1  {
+    width: 40% !important;
+}
+.k-dropdown.select2  {
+    width: 20% !important;
 }

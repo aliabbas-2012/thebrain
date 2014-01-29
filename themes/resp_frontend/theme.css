@@ -2247,3 +2247,11 @@ a.detail-addlike:hover {
     background-color: #ff851f;
     opacity: 1;
 }
+
+/*------ post offer page ----- **/
+.select-bg-img div.k-widget {
+    display: none;
+}
+.select-avatar-img div.k-widget {
+     display: none;
+}

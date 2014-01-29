@@ -21,6 +21,40 @@ var thepuzzleadmin = {
         }
 
     },
+    fillKendoDropDown: function(obj, url, elem_id, a) {
+        if (jQuery(obj).val() != "") {
+            jQuery("#loading").show();
+            url += "?id=" + jQuery(obj).val();
+            jQuery.getJSON(url, function(data) {
+                savobj = jQuery("#" + elem_id);
+                del_parent = savobj.parent()
+                append_parent = savobj.parent().parent();
+                var items = [];
+                counter = 0;
+                items.push('<option value="">Select</option>');
+                del_parent.remove();
+                jQuery.each(data, function(key, val) {
+                    items.push('<option value="' + key + '">' + val + '</option>');
+                    counter++;
+                });
+
+                del_parent.remove();
+                if (a == false) {
+                    append_parent.prepend(savobj);
+                }
+                else {
+                    append_parent.append(savobj);
+                }
+
+                jQuery("#loading").hide();
+
+                jQuery("#" + elem_id).html(items.join(''));
+                jQuery("#" + elem_id).show();
+                jQuery("#" + elem_id).kendoDropDownList();
+            });
+        }
+
+    },
     /**
      * to update element on ajax all
      * @param {type} ajax_url

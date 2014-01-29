@@ -411,7 +411,7 @@ $this->renderPartial("//user/_tab_items", array("items" => $items));
                 dataType: "JSON",
                 success: function(data)
                 {
-                    console.log(data);
+                    
                     jQuery("#kqtinh").html(data.price);
                     jQuery("#time-selection").html(data.period);
                     jQuery("#loading").hide();
