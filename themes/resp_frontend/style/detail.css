@@ -203,12 +203,12 @@ input#txtprice.k-textbox {
 
 .categorie {
     float: left;
-/*    height: 40px;
+    /*    height: 40px;
+        margin-right: 40px;
+        margin-top: 10px;
+        padding: 20px 0;
+        width: 310px;*/
     margin-right: 40px;
-    margin-top: 10px;
-    padding: 20px 0;
-    width: 310px;*/
- margin-right: 40px;
 }
 
 #changePrice {
@@ -662,9 +662,7 @@ p.font18 {
 }
 
 button.k-button.row-add {
-    padding-right: 0;
-    position: absolute;
-    right: 20px;
+
 }
 
 .k-button, .k-textbox, .k-timepicker, .k-datepicker, .k-datetimepicker {
@@ -707,4 +705,8 @@ button.k-button.row-add {
 }
 .k-dropdown.select2  {
     width: 20% !important;
+}
+.header-row>div {
+    font-size: 15px;
+    font-weight: bold;
 }

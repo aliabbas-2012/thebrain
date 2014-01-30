@@ -17,63 +17,13 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="clear"></div>
 <div class="container">
     <div class="row">
-        <p id="price_offer" class="font18 fontArial" style="margin-top: 70px;">
-            <input id="price-offer" type="checkbox" style="width:20px; height: 20px;" value="1" name="priceOption">
-            I want to offer additional prices per 
-            <span id="period" class="font-red">Hour</span>
-        </p>
-        <div id="PriceOffer-2" class="div50percent floatLeft PriceOffer" style="width: 100%; margin-bottom: 50px;">
-            <span style="margin-left:10px; margin-right:150px; float:left;; margin-bottom:80px; font-size: 15px;">
-                <input class="optionType" type="radio" value="abs" name="hour">
-                Absolute Rate:
-            </span>
-            <span style="margin-left:10px; margin-right:150px; float:left;; margin-bottom:80px; font-size: 15px;">
-                <input class="optionType" type="radio" value="abs" name="hour">
-                Breakdown Rate:
-            </span>
-            <button class="k-button row-add" style=" float:left; margin-right: 40px; margin-top: 15px; margin-bottom: 80px;">Add new Rate</button>
-            <div class="clear1"></div>
-            <div class="header-row" style="float:left;">
-                <div style="float:left;margin-left:15px; margin-top:0px; width:240px; font-weight:bold; font-size: 15px;">
-                    Time
-                    <span class="end" style=""> start</span>
-                </div>
-                <span class="end" style="float: left; margin-left: 5px; margin-top: 0px; width: 100px; font-weight: bold; font-size: 15px;">Time end</span>
-                <span style="float:right;margin-right:200px; margin-top:0px;width:100px; font-weight:bold; margin-left: 165px;; font-size: 15px; margin-bottom:20px;">Price</span>
-                <span style="float:right;margin-left:65px; margin-top:0px;width:100px; font-weight:bold; font-size: 15px;">Period</span>
-            </div>
-            <div id="price-row" style="display: block;">
-<!--                <span class="start">
-                    <span class="k-numeric-wrap k-state-default">
-                        <input class="k-formatted-value fontstyleItalic floatLeft start k-input" type="text" style="float: left; margin-left: 20px; margin-top: 0px; margin-right: 170px; display: block; width:70px;">
-                        <span class="k-select">
-                        </span>
-                    </span>
-                </span>-->
-                </span>
-                <span class="end" style="width: 55px; float: left; margin-left: 0px; margin-right: 110px;">
-                    <span class="k-numeric-wrap k-state-default">
-                        <input class="k-formatted-value fontstyleItalic floatLeft end k-input" type="text" style="float: left; margin-top: 0px; margin-left: 0px; display: block; width:70px;">
-                        <span class="k-select">
-                        </span>
-                    </span>
-                </span>
-                <span class="end" style="width: 55px; float: left; margin-left: 0px;">
-                    <span class="k-numeric-wrap k-state-default">
-                        <input class="k-formatted-value fontstyleItalic floatLeft end k-input" type="text" style="float: left; margin-top: 0px; margin-left: 0px; display: block; width:70px;">
-                        <span class="k-select">
-                        </span>
-                    </span>
-                </span>
-                <input class="floatLeft fontstyleItalic price" type="text" placeholder="0000,00" style="float: left; margin-right: 50px; height: 36px; border-radius: 3px; margin-bottom: 30px; margin-left: 200px; width: 180px;" size="17" name="price[]">
-                <button class="k-button remove" style="float:right; clear: right; " type="button">Remove</button>
-            </div>
-        </div>
+        <?php $this->renderPartial("//offers/price_offers/item_price_offers_day"); ?>
     </div>
-    <div class="row">
-        <div class="lineseperation">
-        </div>
+</div>
+<div class="row">
+    <div class="lineseperation">
     </div>
+</div>
 </div>
 <div class="container">
     <div class="row">
@@ -239,7 +189,7 @@ $form = $this->beginWidget('CActiveForm', array(
                                 $index++;
                             }
                             ?>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -306,15 +256,15 @@ $form = $this->beginWidget('CActiveForm', array(
         </div>
         <div class="col-lg-12">
             <textarea id="textDecription" class="font18 k-textbox" placeholder="Type here your Description. Be as detailed as posible..."></textarea>
-<?php
-echo $form->textArea(
-        $model, 'description', array(
-    'class' => 'font18 k-textbox',
-    "id" => "textDecription",
-    'placeholder' => 'Type here your Description. Be as detailed as posible...',
-        )
-);
-?>
+            <?php
+            echo $form->textArea(
+                    $model, 'description', array(
+                'class' => 'font18 k-textbox',
+                "id" => "textDecription",
+                'placeholder' => 'Type here your Description. Be as detailed as posible...',
+                    )
+            );
+            ?>
         </div>
         <div class="for-margin">
             <p class="font18">
@@ -322,16 +272,16 @@ echo $form->textArea(
             </p>
         </div>
         <div class="col-lg-12">
-<?php
-echo $form->textArea(
-        $model, 'seo_description', array(
-    'class' => 'font18 k-textbox',
-    "id" => "textStart",
-    "style" => "font-size: 20px; padding-right: 10px; color: #414141",
-    'placeholder' => 'TyType here what all you need from the buyer to get started: ',
-        )
-);
-?>
+            <?php
+            echo $form->textArea(
+                    $model, 'seo_description', array(
+                'class' => 'font18 k-textbox',
+                "id" => "textStart",
+                "style" => "font-size: 20px; padding-right: 10px; color: #414141",
+                'placeholder' => 'TyType here what all you need from the buyer to get started: ',
+                    )
+            );
+            ?>
         </div>
     </div>
 </div>
@@ -353,8 +303,8 @@ echo $form->textArea(
         </div>
         <div class="col-lg-12">
 
-<?php echo $form->dropDownList($model, 'is_public', $model->_ready_to_deliver, array('class' => 'isshow', 'id' => 'immediately'));
-?>
+            <?php echo $form->dropDownList($model, 'is_public', $model->_ready_to_deliver, array('class' => 'isshow', 'id' => 'immediately'));
+            ?>
         </div>
     </div>
 </div>
@@ -375,16 +325,16 @@ echo $form->textArea(
         </div>
         <div class="col-lg-12">
 
-<?php
-echo $form->textField(
-        $model, 'seo_description', array(
-    'class' => 'font15 k-textbox',
-    "id" => "key-word",
-    "style" => "font-size: 20px; padding-right: 10px; color: #414141",
-    'placeholder' => 'Type here your keyword, separated by comma. Words which describe your offer the best...',
-        )
-);
-?>
+            <?php
+            echo $form->textField(
+                    $model, 'seo_description', array(
+                'class' => 'font15 k-textbox',
+                "id" => "key-word",
+                "style" => "font-size: 20px; padding-right: 10px; color: #414141",
+                'placeholder' => 'Type here your keyword, separated by comma. Words which describe your offer the best...',
+                    )
+            );
+            ?>
         </div>
     </div>
 </div>
@@ -399,9 +349,9 @@ echo $form->textField(
     <div class="row">
         <div id="tcs" style="margin: 50px 0 50px;">
 
-<?php
-echo $form->checkBox($model, '_is_confirm', array("id" => "public_offer", "class" => "floatLeft", "margin" => "margin: 3px;"));
-?>
+            <?php
+            echo $form->checkBox($model, '_is_confirm', array("id" => "public_offer", "class" => "floatLeft", "margin" => "margin: 3px;"));
+            ?>
             <span class="k-invalid-msg" data-for="public_offer"></span>
             <label class="fontsize_title floatLeft" style="width: 85%; margin-left: 13px; margin-bottom: 13px;" for="public_offer">
                 I confirm that I am able to deliver this service to Buyers within the delivery time specified.I will update or pause my Hourlie if I can no longer meet this delivery time. I understand that late delivery will adversely affect my rankings on ThePuzzzle and will entitle the Buyer to a refund. See
