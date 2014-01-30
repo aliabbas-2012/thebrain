@@ -9,7 +9,7 @@
 $params = array(
     // this is used in contact page
 
-    'dateformat' => 'y/m/d',
+    'dateformat' => 'd/m/y',
     'site_logo' => '/img/logo.png',
     'adminEmail' => 'no_reply@thepuzzzle.com',
     'defaultFrom' => 'no_reply@thepuzzzle.com',

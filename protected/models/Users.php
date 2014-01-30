@@ -41,6 +41,8 @@
  */
 class Users extends DTActiveRecord {
 
+    public $pwd_repeat;
+
     /**
      * @return string the associated database table name
      */
@@ -274,6 +276,7 @@ class Users extends DTActiveRecord {
 
     public function beforeSave() {
         $this->birthday = !empty($this->birthday) ? ItstFunctions::dateFormatForSave($this->birthday) : "";
+
         return parent::beforeSave();
     }
 
@@ -297,7 +300,7 @@ class Users extends DTActiveRecord {
 
     /**
      * 
-     */ 
+     */
     public function uploadAvtar($path) {
         $path.= "Users_avatar" . DIRECTORY_SEPARATOR;
 

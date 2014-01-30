@@ -88,7 +88,7 @@ $form = $this->beginWidget('CActiveForm', array(
             <div id="choose_radio">
                 <?php
                 echo $form->radioButtonList($model, 'group_id', BspCategory::model()->getRootCategories(), array(
-                    'onchange' => 'thepuzzleadmin.fillKendoDropDown(this,"' . $this->createUrl("/bspItem/getChildrenCategories") . '","BspItem_category_id",false)',
+                    'onchange' => 'thepuzzleadmin.fillKendoDropDown(this,"' . $this->createUrl("/bspItem/getChildrenCategories") . '","BspItemFrontEnd_category_id",false)',
                     'separator' => '', 'labelOptions' => array('class' => 'group_choose')), array(
                 ));
                 ?>
@@ -124,7 +124,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
             echo $form->dropDownList($model, 'category_id', $category_list, array(
                 'class' => 'categorie',
-                'onchange' => 'thepuzzleadmin.fillKendoDropDown(this,"' . $this->createUrl("/bspItem/getChildrenCategories") . '","BspItem_sub_category_id",true)'
+                'onchange' => 'thepuzzleadmin.fillKendoDropDown(this,"' . $this->createUrl("/bspItem/getChildrenCategories") . '","BspItemFrontEnd_sub_category_id",true)'
             ));
             ?>
             <?php
@@ -191,38 +191,9 @@ $form = $this->beginWidget('CActiveForm', array(
     </div>
 </div>
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <label class="titleOption">
-                My Profile
-                <img src="<?php echo Yii::app()->theme->baseUrl ?>/images/saydiv.png">
-            </label>
-            <label class="obligatory">(obligatory)</label>
-        </div>
-        <div class="row" id="profile">
-            <div class="col-lg-6">
-                <input id="first_name" class="k-textbox floatLeft profileBottom profileText" type="text" value="Test" placeholder="Type here your First Name...">
-                <label class="req-f font-req">(obligatory)</label>
-                <input id="description" class="k-textbox floatLeft profileBottom profileText" type="text" value="Test ttzsdsdtszd testtttt" placeholder="Type here your occupation, what describes you or your work...">
-                <input id="country" class="k-textbox floatLeft profileBottom profileText" type="text" value="Germany" placeholder="Type here your Country...">
-                <input id="pass" class="k-textbox floatLeft profileText" type="password" placeholder="Type here your Password...">
-                <label class="floatLeft">* To change your Password, Just enter your new Password</label>
-                <input id="re_pass" class="k-textbox floatLeft profileText" type="password" placeholder="Repeat here your Password...">
-                <label class="floatLeft">* and confirm it here</label>
-            </div>
-            <div class="col-lg-6">
-                <div id="choose_radio">
-                    <input id="first_name" class="k-textbox floatLeft profileBottom profileText" type="text" value="Test" placeholder="Type here your First Name...">
-                    <label class="req-s font-req">(obligatory)</label>
-                    <input id="description" class="k-textbox floatLeft profileBottom profileText" type="text" value="Munich" placeholder="Type here your occupation, what describes you or your work...">
-                    <input id="phone" class="k-textbox floatRight profileBottom profileText" type="text" value="900912121" placeholder="Type here your Phone Number...">
-                    <input id="zipcode" class="k-textbox floatRight profileBottom profileText" type="text" value="80469" placeholder="Type here your Zip Code...">
-                    <input id="paypal_mail" class="k-textbox floatRight profileBottom profileText" type="text" value="kontakt@1348.eu" placeholder="Type here your Pay Pal Email...">
-                    <label class="req-m font-req">(obligatory)</label>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php
+    $this->renderPartial("//offers/_user_offer", array("model" => $user, "form" => $form));
+    ?>
 </div>
 <div class="clear"></div>
 <div class="container">
@@ -252,11 +223,23 @@ $form = $this->beginWidget('CActiveForm', array(
                                     </div>
                                 </div>
                             </div>
-                            <input id="txtvideo1" class="textLink k-textbox" type="text" placeholder="Youtube/Vimeo Video Link...">
-                            <input id="txtvideo2" class="textLink k-textbox" type="text" placeholder="Youtube/Vimeo Video Link...">
-                            <input id="txtvideo3" class="textLink k-textbox" type="text" placeholder="Youtube/Vimeo Video Link...">
-                            <input id="txtvideo4" class="textLink k-textbox" type="text" placeholder="Youtube/Vimeo Video Link...">
-                            <input id="txtvideo5" class="textLink k-textbox" type="text" placeholder="Youtube/Vimeo Video Link...">
+                            <?php
+                            if ($model->isNewRecord) {
+                                $m_video = array();
+                                for ($i = 0; $i <= 4; $i++) {
+                                    $sound = new BspItemVideo;
+                                    //$catM->category_id = $cat->id;
+                                    $m_video[] = $sound;
+                                }
+                                $model->item_video = $m_video;
+                            }
+                            $index = 0;
+                            foreach ($model->item_video as $vid_model) {
+                                $this->renderPartial("//offers/_offer_videos", array("model" => $vid_model, "index" => $index));
+                                $index++;
+                            }
+                            ?>
+                           
                         </div>
                     </div>
                 </div>
@@ -285,16 +268,24 @@ $form = $this->beginWidget('CActiveForm', array(
         </div>
         <div class="row">
             <p class="font18" style="margin-top: 30px">Here you can add your Sounds</p>
-            <div class="col-lg-4">
-                <input id="txtSound1" class="soundCloudLink font18 k-textbox" type="text" placeholder="Soundcloud Link...">
-            </div>
-            <div class="col-lg-4">
-                <input id="txtSound2" class="soundCloudLink font18 k-textbox" type="text" placeholder="Soundcloud Link...">
-            </div>
-            <div class="col-lg-4">
-                <input id="txtSound2" class="soundCloudLink font18 k-textbox" type="text" placeholder="Soundcloud Link...">
-            </div>
+            <?php
+            if ($model->isNewRecord) {
+                $m_sound = array();
+                for ($i = 0; $i <= 2; $i++) {
+                    $sound = new BspItemSoundUrl;
+                    //$catM->category_id = $cat->id;
+                    $m_sound[] = $sound;
+                }
+                $model->item_related_sounds = $m_sound;
+            }
+            $index = 0;
+            foreach ($model->item_related_sounds as $sound_model) {
+                $this->renderPartial("//offers/_offer_sound", array("model" => $sound_model, "index" => $index));
+                $index++;
+            }
+            ?>
         </div>
+
     </div>
 </div>
 <div class="clear"></div>
@@ -315,15 +306,15 @@ $form = $this->beginWidget('CActiveForm', array(
         </div>
         <div class="col-lg-12">
             <textarea id="textDecription" class="font18 k-textbox" placeholder="Type here your Description. Be as detailed as posible..."></textarea>
-            <?php
-            echo $form->textArea(
-                    $model, 'description', array(
-                'class' => 'font18 k-textbox',
-                "id" => "textDecription",
-                'placeholder' => 'Type here your Description. Be as detailed as posible...',
-                    )
-            );
-            ?>
+<?php
+echo $form->textArea(
+        $model, 'description', array(
+    'class' => 'font18 k-textbox',
+    "id" => "textDecription",
+    'placeholder' => 'Type here your Description. Be as detailed as posible...',
+        )
+);
+?>
         </div>
         <div class="for-margin">
             <p class="font18">
@@ -331,16 +322,16 @@ $form = $this->beginWidget('CActiveForm', array(
             </p>
         </div>
         <div class="col-lg-12">
-            <?php
-            echo $form->textArea(
-                    $model, 'seo_description', array(
-                'class' => 'font18 k-textbox',
-                "id" => "textStart",
-                "style" => "font-size: 20px; padding-right: 10px; color: #414141",
-                'placeholder' => 'TyType here what all you need from the buyer to get started: ',
-                    )
-            );
-            ?>
+<?php
+echo $form->textArea(
+        $model, 'seo_description', array(
+    'class' => 'font18 k-textbox',
+    "id" => "textStart",
+    "style" => "font-size: 20px; padding-right: 10px; color: #414141",
+    'placeholder' => 'TyType here what all you need from the buyer to get started: ',
+        )
+);
+?>
         </div>
     </div>
 </div>
@@ -362,8 +353,8 @@ $form = $this->beginWidget('CActiveForm', array(
         </div>
         <div class="col-lg-12">
 
-            <?php echo $form->dropDownList($model, 'is_public', $model->_ready_to_deliver, array('class' => 'isshow', 'id' => 'immediately'));
-            ?>
+<?php echo $form->dropDownList($model, 'is_public', $model->_ready_to_deliver, array('class' => 'isshow', 'id' => 'immediately'));
+?>
         </div>
     </div>
 </div>
@@ -384,16 +375,16 @@ $form = $this->beginWidget('CActiveForm', array(
         </div>
         <div class="col-lg-12">
 
-            <?php
-            echo $form->textField(
-                    $model, 'seo_description', array(
-                'class' => 'font15 k-textbox',
-                "id" => "key-word",
-                "style" => "font-size: 20px; padding-right: 10px; color: #414141",
-                'placeholder' => 'Type here your keyword, separated by comma. Words which describe your offer the best...',
-                    )
-            );
-            ?>
+<?php
+echo $form->textField(
+        $model, 'seo_description', array(
+    'class' => 'font15 k-textbox',
+    "id" => "key-word",
+    "style" => "font-size: 20px; padding-right: 10px; color: #414141",
+    'placeholder' => 'Type here your keyword, separated by comma. Words which describe your offer the best...',
+        )
+);
+?>
         </div>
     </div>
 </div>
@@ -407,10 +398,10 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="container">
     <div class="row">
         <div id="tcs" style="margin: 50px 0 50px;">
-            
-            <?php
-                echo $form->checkBox($model,'_is_confirm',array("id"=>"public_offer","class"=>"floatLeft","margin"=>"margin: 3px;"));
-            ?>
+
+<?php
+echo $form->checkBox($model, '_is_confirm', array("id" => "public_offer", "class" => "floatLeft", "margin" => "margin: 3px;"));
+?>
             <span class="k-invalid-msg" data-for="public_offer"></span>
             <label class="fontsize_title floatLeft" style="width: 85%; margin-left: 13px; margin-bottom: 13px;" for="public_offer">
                 I confirm that I am able to deliver this service to Buyers within the delivery time specified.I will update or pause my Hourlie if I can no longer meet this delivery time. I understand that late delivery will adversely affect my rankings on ThePuzzzle and will entitle the Buyer to a refund. See
@@ -442,20 +433,20 @@ $form = $this->beginWidget('CActiveForm', array(
                     var background_url = "<?php
 echo $this->createUrl("/site/uploadTemp", array(
     "index" => 1,
-    "model" => get_class($model), "attribute" => "BspItem_background_image")
+    "model" => get_class($model), "attribute" => "BspItemFrontEnd_background_image")
 );
 ?>";
                     var avatar_url = "<?php
 echo $this->createUrl("/site/uploadTemp", array(
     "index" => 2,
-    "model" => get_class($model), "attribute" => "BspItem_avatar_image")
+    "model" => get_class($model), "attribute" => "BspItemFrontEnd_avatar_image")
 );
 ?>";
                     jQuery(function() {
-                        jQuery("#BspItem_per_price").kendoDropDownList();
-                        jQuery("#BspItem_currency_id").kendoDropDownList();
-                        jQuery("#BspItem_category_id").kendoDropDownList();
-                        jQuery("#BspItem_sub_category_id").kendoDropDownList();
+                        jQuery("#BspItemFrontEnd_per_price").kendoDropDownList();
+                        jQuery("#BspItemFrontEnd_currency_id").kendoDropDownList();
+                        jQuery("#BspItemFrontEnd_category_id").kendoDropDownList();
+                        jQuery("#BspItemFrontEnd_sub_category_id").kendoDropDownList();
                         jQuery("#immediately").kendoDropDownList();
 
                         // select upload background
@@ -492,9 +483,9 @@ echo $this->createUrl("/site/uploadTemp", array(
                             },
                             success: function(e) {
 
-                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItem/BspItem_background_image/" ?>" + e.response.file;
+                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItem/BspItemFrontEnd_background_image/" ?>" + e.response.file;
                                 jQuery("#loading").hide();
-                                jQuery("#BspItem_background_image").val(e.response.file);
+                                jQuery("#BspItemFrontEnd_background_image").val(e.response.file);
 
                                 jQuery(".i_offer").attr("style", "background: url(" + path + ")");
 
@@ -540,9 +531,9 @@ echo $this->createUrl("/site/uploadTemp", array(
                             },
                             success: function(e) {
 
-                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItem/BspItem_avatar_image/" ?>" + e.response.file;
+                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItem/BspItemFrontEnd_avatar_image/" ?>" + e.response.file;
                                 jQuery("#loading").hide();
-                                jQuery("#BspItem_avatar_image").val(e.response.file);
+                                jQuery("#BspItemFrontEnd_avatar_image").val(e.response.file);
 
                                 jQuery(".over-post-avata").attr("src", path);
 

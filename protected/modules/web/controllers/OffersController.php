@@ -148,11 +148,19 @@ class OffersController extends Controller {
      */
     public function actionPost($id = 0, $action = "create") {
         $model = new BspItemFrontEnd();
+        $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
+        
+        $offerSound = BspItemSoundUrl::model()->find("item_id =".$id);
+        
+        if(empty($offerSound)){
+            $offerSound = new BspItemSoundUrl;
+        }
         if (isset($_POST['BspItemFrontEnd'])) {
             $model->attributes = $_POST['BspItemFrontEnd'];
+            $user->attributes = $_POST['ChangeUser'];
         }
         
-        $this->render("//offers/post", array("model" => $model));
+        $this->render("//offers/post", array("model" => $model,"user"=>$user,"offerSound"=>$offerSound));
     }
 
     /**

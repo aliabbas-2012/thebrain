@@ -516,7 +516,7 @@ div.k-button.k-upload-button {
 }
 
 
-input#txtvideo1.textLink.k-textbox, input#txtvideo2.textLink.k-textbox, input#txtvideo3.textLink.k-textbox, input#txtvideo4.textLink.k-textbox, input#txtvideo5.textLink.k-textbox {
+input.txtvideo1.textLink.k-textbox, input#txtvideo2.textLink.k-textbox, input#txtvideo3.textLink.k-textbox, input#txtvideo4.textLink.k-textbox, input#txtvideo5.textLink.k-textbox {
     border: 1px solid #D2D2D2;
     width: 385px;
 }
@@ -527,7 +527,7 @@ input.k-textbox {
     padding: 2px 0.3em;
 }
 
-#txtvideo1, #txtvideo2, #txtvideo3, #txtvideo4, #txtvideo5 { margin-top:10px !important; }
+.txtvideo1, #txtvideo2, #txtvideo3, #txtvideo4, #txtvideo5 { margin-top:10px !important; }
 
 div#loadimgvideo.floatRight {
     background-color: #FFFFFF;
@@ -544,7 +544,7 @@ p.font18 {
     margin-left:20px;
 }
 
-input#txtSound1.soundCloudLink.font18.k-textbox, input#txtSound2.soundCloudLink.font18.k-textbox, input#txtSound3.soundCloudLink.font18.k-textbox, textarea#textDecription.font18.k-textbox, textarea#textStart.font18.k-textbox, input#key-word.font15.k-textbox {
+input.txtSound1.soundCloudLink.font18.k-textbox, input#txtSound2.soundCloudLink.font18.k-textbox, input#txtSound3.soundCloudLink.font18.k-textbox, textarea#textDecription.font18.k-textbox, textarea#textStart.font18.k-textbox, input#key-word.font15.k-textbox {
     border: 1px solid #B8B8B8;
     box-shadow: 5px 5px 5px #E2E0E0;
 }
@@ -555,7 +555,7 @@ input.k-textbox {
     padding: 2px 0.3em;
 }
 
-#txtSound1 , #txtSound2, #txtSound3 { width:100% !important; float:left !important; }
+.txtSound1 , #txtSound2, #txtSound3 { width:100% !important; float:left !important; }
 
 #textDecription {
     font-size: 18px !important;
