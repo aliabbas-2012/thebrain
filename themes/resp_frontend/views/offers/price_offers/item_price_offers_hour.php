@@ -15,7 +15,7 @@
                 Breakdown Rate:
             </span>
             <span class="col-lg-6">
-                <input type="button" class="k-button row-add" style="float:right" partial="_price_offer_day_row" value="Add new Rate">
+                <input type="button" class="k-button row-add" style="float:right" partial="_price_offer_hour_row" value="Add new Rate">
             </span>
 
         </div>

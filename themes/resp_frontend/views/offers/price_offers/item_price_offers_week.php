@@ -15,7 +15,7 @@
                 Breakdown Rate:
             </span>
             <span class="col-lg-6">
-                <input type="button" class="k-button row-add" style="float:right" partial="_price_offer_day_row" value="Add new Rate">
+                <input type="button" class="k-button row-add" style="float:right" partial="_price_offer_week_row" value="Add new Rate">
             </span>
 
         </div>
@@ -41,17 +41,17 @@
         <div class="clear"></div>
         <?php
         /* Hide or show this div */
-        if (!isset($_POST['BspItemPriceOfferDay']) && $model->isNewRecord) {
-            $offer_type [] = new BspItemPriceOfferDay;
-            $model->item_price_offers_day = $offer_type;
+        if (!isset($_POST['BspItemPriceOfferWeek']) && $model->isNewRecord) {
+            $offer_type [] = new BspItemPriceOfferWeek;
+            $model->item_price_offers_week = $offer_type;
         }
         ?>
         <?php
         /* for loading with js */
 
-        if (isset($_POST['BspItemPriceOfferDay']) || (count($model->item_price_offers_day) > 0)) {
-            foreach ($model->item_price_offers_day as $key => $relationModel) {
-                $this->renderPartial("//offers/price_offers/_price_offer_day_row", array("model" => $relationModel, 'index' => $key));
+        if (isset($_POST['BspItemPriceOfferWeek']) || (count($model->item_price_offers_week) > 0)) {
+            foreach ($model->item_price_offers_week as $key => $relationModel) {
+                $this->renderPartial("//offers/price_offers/_price_offer_week_row", array("model" => $relationModel, 'index' => $key));
             }
         }
         ?>
