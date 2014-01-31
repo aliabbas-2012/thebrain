@@ -51,7 +51,7 @@
 
         if (isset($_POST['BspItemPriceOfferMonth']) || (count($model->item_price_offers_month) > 0)) {
             foreach ($model->item_price_offers_month as $key => $relationModel) {
-                $this->renderPartial("//offers/price_offers/_price_offer_month_row", array("model" => $relationModel, 'index' => $key));
+                $this->renderPartial("//offers/price_offers/_price_offer_month_row", array("model" => $relationModel, 'index' => $key), false, true);
             }
         }
         ?>

@@ -243,7 +243,7 @@ class OffersController extends Controller {
                 default:
                     break;
             }
-            $this->renderPartial("//offers/price_offers/" . $_POST['partial'],array("model"=>$model,"index"=>$_POST['index']));
+            $this->renderPartial("//offers/price_offers/" . $_POST['partial'],array("model"=>$model,"index"=>$_POST['index']),false, true);
         }
     }
 

@@ -51,7 +51,7 @@
 
         if (isset($_POST['BspItemPriceOfferWeek']) || (count($model->item_price_offers_week) > 0)) {
             foreach ($model->item_price_offers_week as $key => $relationModel) {
-                $this->renderPartial("//offers/price_offers/_price_offer_week_row", array("model" => $relationModel, 'index' => $key));
+                $this->renderPartial("//offers/price_offers/_price_offer_week_row", array("model" => $relationModel, 'index' => $key), false, true);
             }
         }
         ?>

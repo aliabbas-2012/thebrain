@@ -12,7 +12,7 @@
     </div>
     <div class="col-lg-2">
         <?php
-        echo CHtml::hiddenField("current_index", $index,array("class"=>"current_index"));
+        echo CHtml::hiddenField("current_index", $index, array("class" => "current_index"));
         echo CHtml::activeDropDownList($model, '[' . $index . ']period', array("3" => "Day"), array("class" => "form-control"));
         ?>
     </div>
@@ -27,10 +27,11 @@
             class="k-button remove" style="float:right; clear: right; " 
             type="button" onclick="jQuery(this).parent().parent().remove()">Remove</button>
     </div>
-</div
+    <div class="clear"></div>
+</div>
 <script>
                 jQuery(function() {
-                    jQuery("#"<?php echo get_class($model) . "_".$index."_period" ?>).kendoDropDownList();
+                    jQuery("#<?php echo get_class($model) . "_" . $index . "_period" ?>").kendoDropDownList();
                     jQuery("#<?php echo get_class($model); ?>_<?php echo $index; ?>_start").kendoNumericTextBox({min: 1});
                     jQuery("#<?php echo get_class($model); ?>_<?php echo $index; ?>_end").kendoNumericTextBox({min: 1});
                 })
