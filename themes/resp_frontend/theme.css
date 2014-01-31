@@ -2255,3 +2255,6 @@ a.detail-addlike:hover {
 .select-avatar-img div.k-widget {
      display: none;
 }
+a.btn-submit {
+    cursor: pointer;
+}

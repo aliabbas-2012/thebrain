@@ -114,6 +114,28 @@ var thepuzzleadmin = {
         });
 
     },
+    /**
+     * update through post and parameers
+     * @param {type} ajax_url
+     * @param {type} update_element_id
+     * @param {type} resource_elem_id
+     * @returns {undefined}
+     */
+    updateElementAjaxParameter: function(ajax_url, update_element_obj, req_params) {
+        jQuery("#loading").show();
+        jQuery.ajax({
+            type: "POST",
+            url: ajax_url,
+            async: false,
+            data: req_params,
+        }).done(function(response) {
+
+            jQuery(update_element_obj).append(response);
+
+            jQuery("#loading").hide();
+        });
+
+    },
     kendoUpload: function(elem_id, url) {
 
         jQuery("#" + elem_id).kendoUpload({

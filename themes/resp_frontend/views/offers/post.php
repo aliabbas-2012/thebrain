@@ -17,7 +17,17 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="clear"></div>
 <div class="container">
     <div class="row">
-        <?php $this->renderPartial("//offers/price_offers/item_price_offers_day"); ?>
+        <?php $this->renderPartial("//offers/price_offers/item_price_offers_day", array("model" => $model)); ?>
+        <div class="clear"></div>
+        <?php $this->renderPartial("//offers/price_offers/item_price_offers_hour", array("model" => $model)); ?>
+        <div class="clear"></div>
+
+        <?php $this->renderPartial("//offers/price_offers/item_price_offers_month", array("model" => $model)); ?>
+        <div class="clear"></div>
+
+        <?php $this->renderPartial("//offers/price_offers/item_price_offers_week", array("model" => $model)); ?>
+        <div class="clear"></div>
+
     </div>
 </div>
 <div class="row">
@@ -364,7 +374,7 @@ $form = $this->beginWidget('CActiveForm', array(
     <div class="row">
         <div class="col-lg-12">
             <div class="submit" align="center">
-                <a id="btn-submit" class="floatRight">Publish for free</a>
+                <a id="btn-submit" class="floatRight" href="javascript:void(0)" onclick="jQuery('#post-form').submit()">Publish for free</a>
             </div>
         </div>
         <div class="col-lg-12">
@@ -392,13 +402,86 @@ echo $this->createUrl("/site/uploadTemp", array(
     "model" => get_class($model), "attribute" => "BspItemFrontEnd_avatar_image")
 );
 ?>";
+                    var addPartial = "<?php
+echo $this->createUrl("/web/offers/addpartial");
+?>";
+                    /**
+                     *  change price option
+                     * @param {type} obj 
+                     * @returns {undefined}
+                     */
+                    function change_price_option(obj) {
+                        jQuery(obj).parent().parent().parent().find(".change_price_option").val(jQuery(obj).val());
+
+                        if (jQuery(obj).val() == "range") {
+                            jQuery(obj).parent().parent().parent().find(".start_time_label").show();
+                            jQuery(obj).parent().parent().parent().find(".end_time_label").show();
+                            jQuery(obj).parent().parent().parent().find(".end_field").show();
+                        }
+                        else {
+                            jQuery(obj).parent().parent().parent().find(".start_time_label").hide();
+                            jQuery(obj).parent().parent().parent().find(".end_time_label").hide();
+                            jQuery(obj).parent().parent().parent().find(".end_field").hide();
+
+                        }
+                        //.find(".change_price_option")
+                    }
                     jQuery(function() {
+                        //CASE IS DIFFERNT NOW
+                        //WITH HOUR ONLY HOUR
+                        //WITH DAY IS HOUR AND DAY
+                        //WITH WEEK IS HOUR , DAY , WEEK
+                        // WITH MONTH IS HOUR , DAY, WEEK AND MONTH
+
+                        jQuery("#BspItemFrontEnd_per_price").change(function() {
+                            elem_id = jQuery(this).val();
+                            jQuery(".type_offer").hide();
+                            if (elem_id == 2) {
+                                jQuery("#type_offer_" + elem_id).show();
+                            }
+                            else if (elem_id == 3) {
+                                jQuery("#type_offer_2").show();
+                                jQuery("#type_offer_3").show();
+                            }
+                            else if (elem_id == 4) {
+                                jQuery("#type_offer_2").show();
+                                jQuery("#type_offer_3").show();
+                                jQuery("#type_offer_4").show();
+                            }
+                            else if (elem_id == 5) {
+                                jQuery("#type_offer_2").show();
+                                jQuery("#type_offer_3").show();
+                                jQuery("#type_offer_4").show();
+                                jQuery("#type_offer_5").show();
+                            }
+
+                        })
+                        jQuery("#BspItemFrontEnd_per_price").trigger("change");
                         jQuery("#BspItemFrontEnd_per_price").kendoDropDownList();
                         jQuery("#BspItemFrontEnd_currency_id").kendoDropDownList();
                         jQuery("#BspItemFrontEnd_category_id").kendoDropDownList();
                         jQuery("#BspItemFrontEnd_sub_category_id").kendoDropDownList();
                         jQuery("#immediately").kendoDropDownList();
 
+
+                        jQuery(".row-add").click(function() {
+                            data_params = {};
+                            data_params ['partial'] = jQuery(this).attr("partial");
+                            data_params ['ajax'] = 1;
+
+                            parent = jQuery(this).parent().parent().parent();
+                            data_params ['index'] = parseInt(parent.find(".current_index:last").val()) + 1;
+                            if (typeof(parent.find(".current_index:last").val()) == "undefined") {
+                                data_params ['index'] = 0;
+                            }
+
+                            thepuzzleadmin.updateElementAjaxParameter(addPartial, parent, data_params);
+                        })
+
+                        //getting which price offer is open
+                        if (typeof(jQuery("#type_offer_" + jQuery("#BspItemFrontEnd_per_price").val())) != "undefined") {
+                            jQuery("#type_offer_" + jQuery("#BspItemFrontEnd_per_price").val()).show();
+                        }
                         // select upload background
 
                         jQuery(".select-bg-img span a").click(function() {

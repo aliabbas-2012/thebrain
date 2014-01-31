@@ -701,7 +701,7 @@ button.k-button.row-add {
     font-size: 100%;
 }
 .k-dropdown.select1  {
-    width: 40% !important;
+    width: 50% !important;
 }
 .k-dropdown.select2  {
     width: 20% !important;
@@ -709,4 +709,7 @@ button.k-button.row-add {
 .header-row>div {
     font-size: 15px;
     font-weight: bold;
+}
+.type_offer {
+    display:none;
 }

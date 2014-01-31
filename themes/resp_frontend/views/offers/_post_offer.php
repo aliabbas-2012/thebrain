@@ -22,7 +22,7 @@
                             "id" => "txtprice",
                             'placeholder' => "Your Price?...",
                             "pattern" => "\d{1,11}",
-                            "style" => "width: 34%; height: 39px !important; margin-top: 15px"
+                            "style" => "width: 24%; height: 39px !important; margin-top: 15px"
                         ));
                         ?>
                     </div>

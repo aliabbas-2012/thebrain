@@ -31,7 +31,8 @@ class OffersController extends Controller {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
-                    'post'
+                    'post',
+                    'addpartial',
                 ),
                 'users' => array('@'),
             ),
@@ -149,18 +150,18 @@ class OffersController extends Controller {
     public function actionPost($id = 0, $action = "create") {
         $model = new BspItemFrontEnd();
         $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
-        
-        $offerSound = BspItemSoundUrl::model()->find("item_id =".$id);
-        
-        if(empty($offerSound)){
+
+        $offerSound = BspItemSoundUrl::model()->find("item_id =" . $id);
+
+        if (empty($offerSound)) {
             $offerSound = new BspItemSoundUrl;
         }
-        if (isset($_POST['BspItemFrontEnd'])) {
+        if (isset($_POST['BspItemFrontEnd']) && isset($_POST['Users'])) {
             $model->attributes = $_POST['BspItemFrontEnd'];
-            $user->attributes = $_POST['ChangeUser'];
+            $user->attributes = $_POST['Users'];
         }
         
-        $this->render("//offers/post", array("model" => $model,"user"=>$user,"offerSound"=>$offerSound));
+        $this->render("//offers/post", array("model" => $model, "user" => $user, "offerSound" => $offerSound));
     }
 
     /**
@@ -219,6 +220,31 @@ class OffersController extends Controller {
         }
 
         echo CJSON::encode(array("period" => $time, "price" => $sum));
+    }
+
+    /**
+     * render partial for ajax
+     */
+    public function actionAddpartial() {
+        if (isset($_POST['partial']) && isset($_POST['ajax'])) {
+            switch ($_POST['partial']) {
+                case "_price_offer_day_row":
+                    $model = new BspItemPriceOfferDay;
+                    break;
+                case "_price_offer_hour_row":
+                    $model = new BspItemPriceOfferHour;
+                    break;
+                case "_price_offer_week_row":
+                    $model = new BspItemPriceOfferWeek;
+                    break;
+                case "_price_offer_month_row":
+                    $model = new BspItemPriceOfferMonth;
+                    break;
+                default:
+                    break;
+            }
+            $this->renderPartial("//offers/price_offers/" . $_POST['partial'],array("model"=>$model,"index"=>$_POST['index']));
+        }
     }
 
 }
