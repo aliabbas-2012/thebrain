@@ -27,4 +27,11 @@
             class="k-button remove" style="float:right; clear: right; " 
             type="button" onclick="jQuery(this).parent().parent().remove()">Remove</button>
     </div>
-</div>
+</div
+<script>
+                jQuery(function() {
+                    jQuery("#"<?php echo get_class($model) . "_".$index."_period" ?>).kendoDropDownList();
+                    jQuery("#<?php echo get_class($model); ?>_<?php echo $index; ?>_start").kendoNumericTextBox({min: 1});
+                    jQuery("#<?php echo get_class($model); ?>_<?php echo $index; ?>_end").kendoNumericTextBox({min: 1});
+                })
+</script>  
