@@ -150,17 +150,25 @@ class OffersController extends Controller {
     public function actionPost($id = 0, $action = "create") {
         $model = new BspItemFrontEnd();
         $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
-       
+
         if (isset($_POST['BspItemFrontEnd']) && isset($_POST['ChangeUser'])) {
             $model->attributes = $_POST['BspItemFrontEnd'];
-            $user->attributes = $_POST['ChangeUser'];    
+            $user->attributes = $_POST['ChangeUser'];
+            //set user avatar 
+
             $this->checkCilds($model);
             $isvalid = 1;
-            if(!$model->validate()){
+            if (!$model->validate()) {
                 $isvalid = 0;
             }
-            if(!$user->validate()){
+            if (!$user->validate()) {
                 $isvalid = 0;
+            }
+            if ($isvalid == 1) {
+                if ($model->save()) {
+                    $user->password = md5($model->password_new);
+                    $user->save(false);
+                }
             }
         }
         $this->render("//offers/post", array("model" => $model, "user" => $user));

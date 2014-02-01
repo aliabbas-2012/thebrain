@@ -411,7 +411,7 @@ echo $this->createUrl("/site/uploadTemp", array(
                     var avatar_url = "<?php
 echo $this->createUrl("/site/uploadTemp", array(
     "index" => 2,
-    "model" => get_class($model), "attribute" => "BspItemFrontEnd_avatar_image")
+    "model" => get_class($user), "attribute" => "Users_avatar")
 );
 ?>";
                     var upload_images_url = "<?php
@@ -584,7 +584,7 @@ echo $this->createUrl("/web/offers/addpartial");
 
                                 path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_avatar_image/" ?>" + e.response.file;
                                 jQuery("#loading").hide();
-                                jQuery("#BspItemFrontEnd_avatar_image").val(e.response.file);
+                                jQuery("#ChangeUser_avatar").val(e.response.file);
 
 
                                 jQuery(".over-post-avata").attr("src", path);

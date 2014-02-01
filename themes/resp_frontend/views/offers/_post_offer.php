@@ -78,7 +78,7 @@ if ($model->background_image != "") {
                             $uploadTemp = new UploadTemp();
                             echo zHtml::activeFileField($uploadTemp, '[' . 2 . ']upload_temp_image');
                             ?>
-                            <?php echo $form->hiddenField($model, 'avatar_image'); ?>
+                            <?php echo $form->hiddenField($user, 'avatar'); ?>
                         </div>
                     </div>
                 </div>
