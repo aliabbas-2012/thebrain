@@ -150,12 +150,14 @@ class OffersController extends Controller {
     public function actionPost($id = 0, $action = "create") {
         $model = new BspItemFrontEnd();
         $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
-
+      
         if (isset($_POST['BspItemFrontEnd']) && isset($_POST['ChangeUser'])) {
             $model->attributes = $_POST['BspItemFrontEnd'];
             $user->attributes = $_POST['ChangeUser'];    
-            
             $this->checkCilds($model);
+            if($model->save()){
+                
+            }
         }
         
         //CVarDumper::dump($model->attributes,10,true);

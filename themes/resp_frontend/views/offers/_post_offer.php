@@ -1,11 +1,25 @@
-<div class="i_offer">
+<?php
+$background = "";
+if ($model->background_image != "") {
+    if (!$model->isNewRecord) {
+        $background = Yii::app()->baseUrl . "/uploads/BspItem/" . $model->id . "/" . $model->background_image;
+    }
+    if ($model->hasErrors()) {
+        $background = Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_background_image/" . $model->background_image;
+    }
+}
+?>
+<div class="i_offer" style="background:url(<?php echo $background ?>)">
     <div class="container">
         <div class="row">
             <div class="offer_wrap">
                 <div class="col-lg-8">
                     <div id="offer1">
                         <p class="floatLeft">I offer  </p>
-                        <input id="txtoffer" class="k-textbox floatLeft" type="text" placeholder="Type here your offer" name="txtoffer">
+
+                        <?php
+                        echo $form->textField($model, 'name', array('id' => 'txtoffer', "class" => "k-textbox floatLeft", 'placeholder' => "Type here your offer"));
+                        ?>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -28,6 +42,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12">
+
                     <div class="select-bg-img">
                         <span><a href="javascript:void(0)">Select your background image</a></span>
                         <?php
@@ -41,7 +56,23 @@
                     <div class="col-lg-2">
                         <div>
                             <p>
-                                <img src="<?php echo Yii::app()->theme->baseUrl ?>/images/avtar.png" alt="Avatar" class="over-post-avata" />
+                            <?php
+                            $avatar = "";
+                           
+                            if ($model->avatar_image != "") {
+                                if (!$model->isNewRecord) {
+                                    $avatar = Yii::app()->baseUrl . "/uploads/BspItem/" . $model->id . "/" . $model->avatar_image;
+                                }
+                                if ($model->hasErrors()) {
+                                    $avatar = Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_avatar_image/" . $model->avatar_image;
+                                }
+                                
+                            }
+                            else {
+                                $avatar = Yii::app()->theme->baseUrl."/images/avtar.png";
+                            }
+                            ?>
+                                <img src="<?php echo $avatar ?>" alt="Avatar" class="over-post-avata" />
                             </p> 
                         </div>
                     </div>

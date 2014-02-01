@@ -191,7 +191,7 @@ $form = $this->beginWidget('CActiveForm', array(
                                 </div>
                             </div>
                             <?php
-                            if ($model->isNewRecord) {
+                            if (!isset($_POST['BspItemVideo']) && $model->isNewRecord) {
                                 $m_video = array();
                                 for ($i = 0; $i <= 4; $i++) {
                                     $sound = new BspItemVideo;
@@ -237,7 +237,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <div class="row">
             <p class="font18" style="margin-top: 30px">Here you can add your Sounds</p>
             <?php
-            if ($model->isNewRecord) {
+            if (!isset($_POST['BspItemSoundUrl']) && $model->isNewRecord) {
                 $m_sound = array();
                 for ($i = 0; $i <= 2; $i++) {
                     $sound = new BspItemSoundUrl;
@@ -580,7 +580,8 @@ echo $this->createUrl("/web/offers/addpartial");
 
                                 path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_avatar_image/" ?>" + e.response.file;
                                 jQuery("#loading").hide();
-                                jQuery("#loadimgvideo").append(e.response.file);
+                                jQuery("#BspItemFrontEnd_avatar_image").val(e.response.file);
+
 
                                 jQuery(".over-post-avata").attr("src", path);
 
@@ -590,7 +591,7 @@ echo $this->createUrl("/web/offers/addpartial");
                             },
                         });
 
-                      
+
                     })
 
 
