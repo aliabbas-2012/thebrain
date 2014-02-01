@@ -12,12 +12,12 @@ $form = $this->beginWidget('CActiveForm', array(
         'validateOnSubmit' => true,
     ),
         ));
+//showing error summary
+$this->renderPartial("//offers/offer_errors/_offer_errors",array("model"=>$model,"user"=>$user));
 ?>
-<div class="col-lg-12 post_error_list">
-     <?php echo CHtml::errorSummary(array($model,$user)); ?>
-</div>
+
 <div class="clear"></div>
-<?php $this->renderPartial("//offers/_post_offer", array("model" => $model, "form" => $form)) ?>
+<?php $this->renderPartial("//offers/_post_offer", array("model" => $model, "form" => $form,"user"=>$user)) ?>
 <div class="clear"></div>
 <div class="container">
     <div class="row">

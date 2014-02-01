@@ -10,6 +10,7 @@
         <div class="col-lg-6">
 
             <?php
+            //CVarDumper::dump($model->attributes,10,true);
             echo $form->textField($model, 'first_name', array(
                 'class' => 'k-textbox floatLeft profileBottom profileText',
                 'id' => 'first_name',

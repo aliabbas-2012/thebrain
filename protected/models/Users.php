@@ -271,12 +271,13 @@ class Users extends DTActiveRecord {
      */
     public function afterFind() {
         $this->birthday = !empty($this->birthday) ? ItstFunctions::dateFormatForView($this->birthday) : "";
+        
         return parent::afterFind();
     }
 
     public function beforeSave() {
         $this->birthday = !empty($this->birthday) ? ItstFunctions::dateFormatForSave($this->birthday) : "";
-
+        
         return parent::beforeSave();
     }
 

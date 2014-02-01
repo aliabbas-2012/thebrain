@@ -14,7 +14,8 @@ class ChangeUser extends Users {
                 // The following rule is used by search().
                 // Please remove those attributes that should not be searched.
         );
-        return $rules + parent::rules();
+        $rules = array_merge(parent::rules(),$rules);
+        return $rules;
     }
 
     /**
