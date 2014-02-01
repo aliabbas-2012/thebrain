@@ -30,7 +30,7 @@
                 'placeholder' => "Type here your Country..."));
             ?> 
             <?php
-            echo $form->passwordField($model, 'password', array(
+            echo $form->passwordField($model, 'password_new', array(
                 'class' => 'k-textbox floatLeft profileBottom profileText',
                 'id' => 'country',
                 'placeholder' => "Type here your Password..."));

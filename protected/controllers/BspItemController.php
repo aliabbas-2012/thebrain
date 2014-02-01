@@ -228,10 +228,6 @@ class BspItemController extends Controller {
         if (isset($_POST['BspItemPriceOfferWeek'])) {
             $model->setRelationRecords('item_price_offers_week', is_array($_POST['BspItemPriceOfferWeek']) ? $_POST['BspItemPriceOfferWeek'] : array());
         }
-
-
-
-
         return true;
     }
 

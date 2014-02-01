@@ -151,17 +151,18 @@ class OffersController extends Controller {
         $model = new BspItemFrontEnd();
         $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
 
-        $offerSound = BspItemSoundUrl::model()->find("item_id =" . $id);
-
-        if (empty($offerSound)) {
-            $offerSound = new BspItemSoundUrl;
-        }
-        if (isset($_POST['BspItemFrontEnd']) && isset($_POST['Users'])) {
+        if (isset($_POST['BspItemFrontEnd']) && isset($_POST['ChangeUser'])) {
             $model->attributes = $_POST['BspItemFrontEnd'];
-            $user->attributes = $_POST['Users'];
+            $user->attributes = $_POST['ChangeUser'];    
+            
+            $this->checkCilds($model);
         }
         
-        $this->render("//offers/post", array("model" => $model, "user" => $user, "offerSound" => $offerSound));
+        //CVarDumper::dump($model->attributes,10,true);
+        
+        //CVarDumper::dump($user->attributes,10,true);
+
+        $this->render("//offers/post", array("model" => $model, "user" => $user));
     }
 
     /**
@@ -243,8 +244,41 @@ class OffersController extends Controller {
                 default:
                     break;
             }
-            $this->renderPartial("//offers/price_offers/" . $_POST['partial'],array("model"=>$model,"index"=>$_POST['index']),false, true);
+            $this->renderPartial("//offers/price_offers/" . $_POST['partial'], array("model" => $model, "index" => $_POST['index']), false, true);
         }
+    }
+
+    /**
+     * managing recrods
+     * @param type $model
+     * @return boolean
+     */
+    private function checkCilds($model) {
+        if (isset($_POST['BspItemImage'])) {
+            $model->setRelationRecords('image_items', is_array($_POST['BspItemImage']) ? $_POST['BspItemImage'] : array());
+        }
+        if (isset($_POST['BspItemVideo'])) {
+            $model->setRelationRecords('item_video', is_array($_POST['BspItemVideo']) ? $_POST['BspItemVideo'] : array());
+        }
+        if (isset($_POST['BspItemSoundUrl'])) {
+            $model->setRelationRecords('item_related_sounds', is_array($_POST['BspItemSoundUrl']) ? $_POST['BspItemSoundUrl'] : array());
+        }
+        /**
+         * offer prices
+         */
+        if (isset($_POST['BspItemPriceOfferHour'])) {
+            $model->setRelationRecords('item_price_offers_hour', is_array($_POST['BspItemPriceOfferHour']) ? $_POST['BspItemPriceOfferHour'] : array());
+        }
+        if (isset($_POST['BspItemPriceOfferDay'])) {
+            $model->setRelationRecords('item_price_offers_day', is_array($_POST['BspItemPriceOfferDay']) ? $_POST['BspItemPriceOfferDay'] : array());
+        }
+        if (isset($_POST['BspItemPriceOfferMonth'])) {
+            $model->setRelationRecords('item_price_offers_month', is_array($_POST['BspItemPriceOfferMonth']) ? $_POST['BspItemPriceOfferMonth'] : array());
+        }
+        if (isset($_POST['BspItemPriceOfferWeek'])) {
+            $model->setRelationRecords('item_price_offers_week', is_array($_POST['BspItemPriceOfferWeek']) ? $_POST['BspItemPriceOfferWeek'] : array());
+        }
+        return true;
     }
 
 }

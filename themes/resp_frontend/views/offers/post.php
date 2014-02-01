@@ -3,7 +3,7 @@
 <div class="alert alert-success" style="display: none"></div>
 
 <?php
-header('Content-Type: text/html; charset=utf-8');
+//header('Content-Type: text/html; charset=utf-8');
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'post-form',
     //'enableClientValidation' => true,
