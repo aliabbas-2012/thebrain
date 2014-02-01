@@ -15,6 +15,7 @@ class ChangeUser extends Users {
                 // Please remove those attributes that should not be searched.
         );
         $rules = array_merge(parent::rules(),$rules);
+        #CVarDumper::dump($rules,10,true);
         return $rules;
     }
 

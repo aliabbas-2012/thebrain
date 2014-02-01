@@ -155,15 +155,14 @@ class OffersController extends Controller {
             $model->attributes = $_POST['BspItemFrontEnd'];
             $user->attributes = $_POST['ChangeUser'];    
             $this->checkCilds($model);
-            if($model->validate() && $user->validate()){
-                
+            $isvalid = 1;
+            if(!$model->validate()){
+                $isvalid = 0;
+            }
+            if(!$user->validate()){
+                $isvalid = 0;
             }
         }
-        
-        //CVarDumper::dump($model->attributes,10,true);
-        
-        //CVarDumper::dump($user->attributes,10,true);
-
         $this->render("//offers/post", array("model" => $model, "user" => $user));
     }
 

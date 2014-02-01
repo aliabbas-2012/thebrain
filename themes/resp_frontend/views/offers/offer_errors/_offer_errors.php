@@ -1,6 +1,6 @@
 <div class="col-lg-12 post_error_list">
     <?php
-    if ($model->hasErrors()) {
+    if ($model->hasErrors() || $user->hasErrors()) {
         echo "<ul>";
         foreach ($model->errors as $key => $error) {
             if ($model->hasRelated($key)) {
@@ -22,6 +22,7 @@
                 echo "</li>";
             }
         }
+        
         foreach ($user->errors as $key => $error) {
             echo "<li>";
             echo $error[0];
