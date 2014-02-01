@@ -58,8 +58,6 @@ if ($model->background_image != "") {
                             <p>
                                 <?php
                                 $avatar = "";
-
-                                
                                 if ($model->avatar_image != "" && $model->hasErrors()) {
                                     echo CHtml::image(Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_avatar_image/" . $model->avatar_image, '', array("class" => "over-post-avata"));
                                 } else if (!empty($user->avatar)) {
