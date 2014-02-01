@@ -164,10 +164,21 @@ class OffersController extends Controller {
             if (!$user->validate()) {
                 $isvalid = 0;
             }
+            if($this->setOfferImage($model)){
+                
+            }
             if ($isvalid == 1) {
                 if ($model->save()) {
-                    $user->password = md5($user->password_new);
-                    $user->save(false);
+                    //incase of !empty password then the login 
+                    if (!empty($user->password_new)) {
+                        $user->password = md5($user->password_new);
+                        $user->save(false);
+                    }
+                    foreach ($model->image_items as $modelImg) {
+                        $modelImg->item_id = $model->id;
+                        $modelImg->save();
+                    }
+                    
                     $item = BspItem::model()->findByPk($model->id);
                     $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
                 }
@@ -260,14 +271,40 @@ class OffersController extends Controller {
     }
 
     /**
+     *  set offer images
+     * @param type $model
+     */
+    public function setOfferImage($model) {
+        $is_valid = 0 ;
+        if (isset($_POST['BspItemImage'])) {
+            $bspItem_imag = array();
+            foreach ($_POST['BspItemImage'] as $key => $bspItemImg) {
+
+                if (!empty($bspItemImg['id'])) {
+                    $modelItemImg = BspItemImage::model()->findByPk($bspItemImg['id']);
+                } else {
+                    $modelItemImg = new BspItemImage;
+                }
+                $modelItemImg->attributes = $bspItemImg;
+                if($modelItemImg->validate()){
+                    $is_valid = 1;
+                }
+                $bspItem_imag [] = $modelItemImg;
+            }
+            $model->image_items = $bspItem_imag;
+        }
+        return $is_valid;
+    }
+
+    /**
      * managing recrods
      * @param type $model
      * @return boolean
      */
     private function checkCilds($model) {
-        if (isset($_POST['BspItemImage'])) {
-            $model->setRelationRecords('image_items', is_array($_POST['BspItemImage']) ? $_POST['BspItemImage'] : array());
-        }
+        /**
+         * Bsp Item Image
+         */
         if (isset($_POST['BspItemVideo'])) {
             $model->setRelationRecords('item_video', is_array($_POST['BspItemVideo']) ? $_POST['BspItemVideo'] : array());
         }

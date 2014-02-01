@@ -1,6 +1,5 @@
 <div class="col-lg-12 post_error_list">
     <?php
-    CVarDumper::dump($model->errors,10,true);
     if ($model->hasErrors() || $user->hasErrors()) {
         echo "<ul>";
         foreach ($model->errors as $key => $error) {
@@ -23,7 +22,7 @@
                 echo "</li>";
             }
         }
-        
+
         foreach ($user->errors as $key => $error) {
             echo "<li>";
             echo $error[0];

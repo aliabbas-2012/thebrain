@@ -608,7 +608,7 @@ echo $this->createUrl("/web/offers/addpartial");
                             },
                             success: function(e) {
 
-                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_avatar_image/" ?>" + e.response.file;
+                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/ChangeUser/Users_avatar/" ?>" + e.response.file;
                                 jQuery("#loading").hide();
                                 jQuery("#ChangeUser_avatar").val(e.response.file);
 

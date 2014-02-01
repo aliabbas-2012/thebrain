@@ -9,7 +9,7 @@ class ChangeUser extends Users {
 
 
         $rules = array(
-            array('password_new, pwd_repeat', 'required'),
+            
             array('password_new', 'compare', 'compareAttribute' => 'pwd_repeat'),
                 // The following rule is used by search().
                 // Please remove those attributes that should not be searched.
@@ -25,6 +25,8 @@ class ChangeUser extends Users {
     public function tableName() {
         return 'bsp_user';
     }
+    
+    
 
     /**
      * Returns the static model of the specified AR class.

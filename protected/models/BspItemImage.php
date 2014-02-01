@@ -136,13 +136,29 @@ class BspItemImage extends DTActiveRecord {
         parent::afterSave();
         $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($this)));
         if (is_file($path . $this->image_url)) {
-            
+
             $id = Yii::app()->db->getLastInsertID();
 
-            copy($path . $this->image_url, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this),$id)) . $this->image_url);
+            copy($path . $this->image_url, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $id)) . $this->image_url);
             unlink($path . $this->image_url);
         }
+        $this->uploadImageFromFrontEnd();
         return true;
+    }
+
+    /**
+     * upload image from front end
+     */
+    public function uploadImageFromFrontEnd() {
+        $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, "BspItemFrontEnd","BspItemFrontEnd_upload_images"));
+       
+        if (is_file($path . $this->image_url)) {
+
+            $id = Yii::app()->db->getLastInsertID();
+
+            copy($path . $this->image_url, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $id)) . $this->image_url);
+            unlink($path . $this->image_url);
+        }
     }
 
     /**
