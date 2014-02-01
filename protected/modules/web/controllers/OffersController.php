@@ -166,10 +166,10 @@ class OffersController extends Controller {
             }
             if ($isvalid == 1) {
                 if ($model->save()) {
-                    $user->password = md5($model->password_new);
+                    $user->password = md5($user->password_new);
                     $user->save(false);
                     $item = BspItem::model()->findByPk($model->id);
-                    $this->redirect($this->createUrl("/web/offers/detail",array("slug"=>$item->slug)));
+                    $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
                 }
             }
         }
@@ -277,19 +277,70 @@ class OffersController extends Controller {
         /**
          * offer prices
          */
+        if ($model->per_price == 2) {
+            $this->setOfferHour($model);
+        } else if ($model->per_price == 3) {
+            $this->setOfferDay($model);
+        } else if ($model->per_price == 4) {
+            $this->setOfferWeek($model);
+        } else if ($model->per_price == 5) {
+            $this->setOfferMonth($model);
+        }
+        return true;
+    }
+
+    /**
+     * set price hour
+     */
+    public function setOfferHour($model) {
+        if (isset($_POST['BspItemPriceOfferHour'])) {
+            $model->setRelationRecords('item_price_offers_hour', is_array($_POST['BspItemPriceOfferHour']) ? $_POST['BspItemPriceOfferHour'] : array());
+        }
+    }
+
+    /**
+     * set price DAy
+     */
+    public function setOfferDay($model) {
         if (isset($_POST['BspItemPriceOfferHour'])) {
             $model->setRelationRecords('item_price_offers_hour', is_array($_POST['BspItemPriceOfferHour']) ? $_POST['BspItemPriceOfferHour'] : array());
         }
         if (isset($_POST['BspItemPriceOfferDay'])) {
             $model->setRelationRecords('item_price_offers_day', is_array($_POST['BspItemPriceOfferDay']) ? $_POST['BspItemPriceOfferDay'] : array());
         }
-        if (isset($_POST['BspItemPriceOfferMonth'])) {
-            $model->setRelationRecords('item_price_offers_month', is_array($_POST['BspItemPriceOfferMonth']) ? $_POST['BspItemPriceOfferMonth'] : array());
+    }
+
+    /**
+     * set price Week
+     */
+    public function setOfferWeek($model) {
+        if (isset($_POST['BspItemPriceOfferHour'])) {
+            $model->setRelationRecords('item_price_offers_hour', is_array($_POST['BspItemPriceOfferHour']) ? $_POST['BspItemPriceOfferHour'] : array());
+        }
+        if (isset($_POST['BspItemPriceOfferDay'])) {
+            $model->setRelationRecords('item_price_offers_day', is_array($_POST['BspItemPriceOfferDay']) ? $_POST['BspItemPriceOfferDay'] : array());
         }
         if (isset($_POST['BspItemPriceOfferWeek'])) {
             $model->setRelationRecords('item_price_offers_week', is_array($_POST['BspItemPriceOfferWeek']) ? $_POST['BspItemPriceOfferWeek'] : array());
         }
-        return true;
+    }
+
+    /**
+     * set price Month
+     */
+    public function setOfferMonth($model) {
+        if (isset($_POST['BspItemPriceOfferHour'])) {
+            $model->setRelationRecords('item_price_offers_hour', is_array($_POST['BspItemPriceOfferHour']) ? $_POST['BspItemPriceOfferHour'] : array());
+        }
+        if (isset($_POST['BspItemPriceOfferDay'])) {
+            $model->setRelationRecords('item_price_offers_day', is_array($_POST['BspItemPriceOfferDay']) ? $_POST['BspItemPriceOfferDay'] : array());
+        }
+        if (isset($_POST['BspItemPriceOfferWeek'])) {
+            $model->setRelationRecords('item_price_offers_week', is_array($_POST['BspItemPriceOfferWeek']) ? $_POST['BspItemPriceOfferWeek'] : array());
+        }
+        if (isset($_POST['BspItemPriceOfferMonth'])) {
+            $model->setRelationRecords('item_price_offers_month', is_array($_POST['BspItemPriceOfferMonth']) ? $_POST['BspItemPriceOfferMonth'] : array());
+        }
     }
 
 }
