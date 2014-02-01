@@ -29,8 +29,21 @@ class BspItemFrontEnd extends BspItem {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         $rules = array(array("_is_confirm", "required"), array('upload_images', 'safe'));
-        $rules = array_merge(parent::rules(),$rules);
+        $rules = array_merge(parent::rules(), $rules);
         return parent::rules();
+    }
+
+    /**
+     * saving it for front end
+     * @return type
+     */
+    public function afterSave() {
+        $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($this),"BspItem_background_image"));
+        if (is_file($path . $this->background_image)) {
+            copy($path . $this->background_image, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey)) . $this->background_image);
+            unlink($path . $this->background_image);
+        }
+        return parent::afterSave();
     }
 
 }
