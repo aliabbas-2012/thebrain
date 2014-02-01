@@ -29,9 +29,8 @@ class BspItemFrontEnd extends BspItem {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         $rules = array(array("_is_confirm", "required"), array('upload_images', 'safe'));
-        $rules = $rules + parent::rules();
-        
-        return $rules;
+        $rules = array_merge(parent::rules(),$rules);
+        return parent::rules();
     }
 
 }

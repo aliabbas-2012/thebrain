@@ -723,3 +723,12 @@ button.k-button.row-add {
 #loadimgvideo >div {
     margin-top:10px;
 }
+.post_error_list {
+    background: #dfd0d0;
+     color: #7f5050;
+}
+.post_error_list ul li {
+    color: #7f5050;
+    font-size: 12px;
+    font-weight: bold;
+}

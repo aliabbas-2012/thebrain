@@ -1,15 +1,27 @@
 <div id="loadimgvideo" class="floatLeft" style="width:100%; height: 320px; overflow-x: scroll;">
+    <?php
+    $this->renderPartial("//offers/offer_images/_offer_images", array("model" => $model));
+    echo CHtml::hiddenField("curren_index_img", count($model->image_items));
+    ?>
+
 </div>
 
 <script>
-    function doOfferCheckBox(obj){
+    function doOfferCheckBox(obj) {
         if (jQuery(obj).is(':checked')) {
-                jQuery("#loadimgvideo>div input[type='checkbox']").prop("checked", false);
-                jQuery(obj).prop("checked", true);
-            }
+            jQuery("#loadimgvideo>div input[type='checkbox']").each(function() {
+                if (jQuery(obj).attr("name") != jQuery(this).attr("name")) {
+                    jQuery(this).prop("checked", false);
+                    jQuery(this).prev().val(0);
+                }
+                else {
+                    jQuery(obj).prev().val(1);
+                }
+            })
+        }
     }
     jQuery(function() {
-        
+
         jQuery("#upload-image-trigger").click(function() {
             jQuery("#UploadTemp_3_upload_temp_image").trigger("click");
         })
@@ -45,16 +57,19 @@
                 path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_upload_images/" ?>" + e.response.file;
                 jQuery("#loading").hide();
 
-                index = 0;
+                index = parseInt(jQuery("#curren_index_img").val());
 
-                if (jQuery("#loadimgvideo>div").length > 0) {
-                    index = jQuery("#loadimgvideo>div").length;
+                if (jQuery("#loadimgvideo>div").length == 0) {
+                    index = 0;
                 }
 
+                jQuery("#curren_index_img").val(index + 1);
+
                 html = "<div class='col-lg-4'>";
-                html += "<input type='hidden' name='BspItemImage_" + index + "_image_url' value='" + e.response.file + "' >";
+                html += "<input type='hidden' name='BspItemImage[" + index + "][image_url]' value='" + e.response.file + "' >";
                 html += "<img style='width:100%' src='" + path + "' >";
-                html += "<input type='checkbox' onclick='doOfferCheckBox(this)' name='BspItemImage_" + index + "_is_offer' value= '' >";
+                html += '<input id="ytBspItemImage_' + index + '_is_offer" type="hidden" name="BspItemImage[' + index + '][is_offer]" value="0">';
+                html += "<input type='checkbox' onclick='doOfferCheckBox(this)' name='BspItemImage=[" + index + "][is_offer]' >";
                 html += "</div>";
                 jQuery("#loadimgvideo").append(html);
                 //jQuery(".over-post-avata").attr("src", path);

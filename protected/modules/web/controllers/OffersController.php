@@ -155,7 +155,7 @@ class OffersController extends Controller {
             $model->attributes = $_POST['BspItemFrontEnd'];
             $user->attributes = $_POST['ChangeUser'];    
             $this->checkCilds($model);
-            if($model->save()){
+            if($model->validate() && $user->validate()){
                 
             }
         }

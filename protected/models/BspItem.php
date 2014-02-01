@@ -96,7 +96,7 @@ class BspItem extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('seo_title,category_id,group_id, seo_description, seo_keywords, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('name,seo_title,category_id,group_id, seo_description, seo_keywords, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('category_id, sub_category_id, group_id, num_star, user_id, sound_id, video_id, showlocation, num_orders, my_condition, my_other_price, iStatus, iPayment, special_deal, currency_id, per_price', 'numerical', 'integerOnly' => true),
             array('price, lat, lng', 'numerical'),
             array('name', 'length', 'max' => 200),
