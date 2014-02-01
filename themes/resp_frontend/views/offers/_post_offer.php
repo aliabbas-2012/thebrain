@@ -56,23 +56,20 @@ if ($model->background_image != "") {
                     <div class="col-lg-2">
                         <div>
                             <p>
-                            <?php
-                            $avatar = "";
-                           
-                            if ($model->avatar_image != "") {
-                                if (!$model->isNewRecord) {
-                                    $avatar = Yii::app()->baseUrl . "/uploads/BspItem/" . $model->id . "/" . $model->avatar_image;
+                                <?php
+                                $avatar = "";
+
+                                $user = Users::model()->findByPk(Yii::app()->user->id);
+                                if ($model->avatar_image != "" && $model->hasErrors()) {
+                                    echo CHtml::image(Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_avatar_image/" . $model->avatar_image, '', array("class" => "over-post-avata"));
+                                } else if (!empty($user->avatar)) {
+                                    $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, '', array("class" => "over-post-avata"));
+                                } else {
+                                    $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', '', array("class" => "over-post-avata"));
                                 }
-                                if ($model->hasErrors()) {
-                                    $avatar = Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_avatar_image/" . $model->avatar_image;
-                                }
-                                
-                            }
-                            else {
-                                $avatar = Yii::app()->theme->baseUrl."/images/avtar.png";
-                            }
-                            ?>
-                                <img src="<?php echo $avatar ?>" alt="Avatar" class="over-post-avata" />
+                                echo $avatar;
+                                ?>
+
                             </p> 
                         </div>
                     </div>
