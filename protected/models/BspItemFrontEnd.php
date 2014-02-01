@@ -3,6 +3,7 @@
 class BspItemFrontEnd extends BspItem {
 
     public $_is_confirm;
+    public $upload_images;
 
     /**
      * @return string the associated database table name
@@ -17,7 +18,7 @@ class BspItemFrontEnd extends BspItem {
     public function rules() {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
-        $rules = array(array("_is_confirm", "required"));
+        $rules = array(array("_is_confirm", "required"),array('upload_images','safe'));
         return $rules + parent::rules();
     }
 

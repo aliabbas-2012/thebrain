@@ -174,12 +174,19 @@ $form = $this->beginWidget('CActiveForm', array(
             <div id="image">
                 <div class="col-lg-6">
                     <div class="floatLeft" style="width: 100%; height: 313px; background-color: #CCC; border: 5px solid #fff;">
+                        <div class="hidden_elment">
+
+                            <?php
+                            $uploadTemp = new UploadTemp();
+                            echo zHtml::activeFileField($uploadTemp, '[' . 3 . ']upload_temp_image');
+                            ?>
+                        </div>
                         <div style="margin: 5px auto 0; width: 80%; height: 300px; overflow: hidden; ">
                             <div class="k-widget k-upload btChangeimagepp">
                                 <div class="k-dropzone">
                                     <div class="k-button k-upload-button">
-                                        <input id="imagepp" type="file" name="your-img" data-role="upload" autocomplete="off">
-                                        <span>Upload your Images</span>
+
+                                        <span id="upload-image-trigger">Upload your Images</span>
                                     </div>
                                 </div>
                             </div>
@@ -204,8 +211,9 @@ $form = $this->beginWidget('CActiveForm', array(
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div id="loadimgvideo" class="floatLeft" style="width:100%; height: 320px; overflow-x: scroll;">
-                    </div>
+                    <?php
+                    $this->renderPartial("//offers/_load_image_urls", array("model" => $model));
+                    ?>
                 </div>
             </div>
         </div>
@@ -402,6 +410,12 @@ echo $this->createUrl("/site/uploadTemp", array(
     "model" => get_class($model), "attribute" => "BspItemFrontEnd_avatar_image")
 );
 ?>";
+                    var upload_images_url = "<?php
+echo $this->createUrl("/site/uploadTemp", array(
+    "index" => 3,
+    "model" => get_class($model), "attribute" => "BspItemFrontEnd_upload_images")
+);
+?>";
                     var addPartial = "<?php
 echo $this->createUrl("/web/offers/addpartial");
 ?>";
@@ -516,7 +530,7 @@ echo $this->createUrl("/web/offers/addpartial");
                             },
                             success: function(e) {
 
-                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItem/BspItemFrontEnd_background_image/" ?>" + e.response.file;
+                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_background_image/" ?>" + e.response.file;
                                 jQuery("#loading").hide();
                                 jQuery("#BspItemFrontEnd_background_image").val(e.response.file);
 
@@ -541,7 +555,7 @@ echo $this->createUrl("/web/offers/addpartial");
                                 autoUpload: true
                             },
                             localization: {
-                                "select": "Select your avatar"
+                                "select": "Select Your avatar"
                             },
                             cancel: function(e) {
 
@@ -564,9 +578,9 @@ echo $this->createUrl("/web/offers/addpartial");
                             },
                             success: function(e) {
 
-                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItem/BspItemFrontEnd_avatar_image/" ?>" + e.response.file;
+                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_avatar_image/" ?>" + e.response.file;
                                 jQuery("#loading").hide();
-                                jQuery("#BspItemFrontEnd_avatar_image").val(e.response.file);
+                                jQuery("#loadimgvideo").append(e.response.file);
 
                                 jQuery(".over-post-avata").attr("src", path);
 
@@ -575,5 +589,10 @@ echo $this->createUrl("/web/offers/addpartial");
 
                             },
                         });
+
+                      
                     })
+
+
+
 </script>

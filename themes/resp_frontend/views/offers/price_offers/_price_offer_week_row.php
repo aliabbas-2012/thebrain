@@ -13,7 +13,7 @@
     <div class="col-lg-2">
         <?php
         echo CHtml::hiddenField("current_index", $index, array("class" => "current_index"));
-        echo CHtml::activeDropDownList($model, '[' . $index . ']period', array("3" => "Day"), array("class" => "form-control"));
+        echo CHtml::activeDropDownList($model, '[' . $index . ']period', array("4" => "Week"), array("class" => "form-control"));
         ?>
     </div>
     <div class="col-lg-3">

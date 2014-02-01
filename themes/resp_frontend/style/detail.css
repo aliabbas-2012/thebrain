@@ -471,6 +471,7 @@ html .k-upload {
 .btChangeimagepp .k-dropzone, .btChangevideopp .k-dropzone {
     padding: 0;
     width: 60%;
+
 }
 .k-dropzone {
     background-color: rgba(0, 0, 0, 0);
@@ -479,7 +480,9 @@ html .k-upload {
     padding: 4px;
 }
 
+.btChangeimagepp {
 
+}
 .btChangeimagepp .k-dropzone .k-upload-button, .btChangevideopp .k-dropzone .k-upload-button {
     background-color: #000000;
     border: medium none;
@@ -488,6 +491,7 @@ html .k-upload {
     height: 35px;
     text-align: center;
     width: 385px;
+
 }
 div.k-button.k-upload-button {
     border-radius: 3px;
@@ -712,4 +716,10 @@ button.k-button.row-add {
 }
 .type_offer {
     display:none;
+}
+.hidden_elment {
+    display:none;
+}
+#loadimgvideo >div {
+    margin-top:10px;
 }
