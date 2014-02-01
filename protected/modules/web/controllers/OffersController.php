@@ -168,6 +168,8 @@ class OffersController extends Controller {
                 if ($model->save()) {
                     $user->password = md5($model->password_new);
                     $user->save(false);
+                    $item = BspItem::model()->findByPk($model->id);
+                    $this->redirect($this->createUrl("/web/offers/detail",array("slug"=>$item->slug)));
                 }
             }
         }

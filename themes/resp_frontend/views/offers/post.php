@@ -277,7 +277,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors",array("model"=>$model
             <label class="obligatory">(obligatory)</label>
         </div>
         <div class="col-lg-12">
-            <textarea id="textDecription" class="font18 k-textbox" placeholder="Type here your Description. Be as detailed as posible..."></textarea>
+            
             <?php
             echo $form->textArea(
                     $model, 'description', array(
@@ -344,6 +344,32 @@ $this->renderPartial("//offers/offer_errors/_offer_errors",array("model"=>$model
                 Keywords/Tags
                 <img src="<?php echo Yii::app()->theme->baseUrl ?>/images/saydiv.png">
             </label>
+        </div>
+        <div class="col-lg-12">
+
+            <?php
+            echo $form->textField(
+                    $model, 'seo_title', array(
+                'class' => 'font15 k-textbox',
+                "id" => "key-word",
+                "style" => "font-size: 20px; padding-right: 10px; color: #414141",
+                'placeholder' => 'Seo Title',
+                    )
+            );
+            ?>
+        </div>
+        <div class="col-lg-12">
+
+            <?php
+            echo $form->textField(
+                    $model, 'seo_keywords', array(
+                'class' => 'font15 k-textbox',
+                "id" => "key-word",
+                "style" => "font-size: 20px; padding-right: 10px; color: #414141",
+                'placeholder' => 'Seo Keywords',
+                    )
+            );
+            ?>
         </div>
         <div class="col-lg-12">
 
