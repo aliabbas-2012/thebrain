@@ -30,6 +30,7 @@ class BspItemController extends Controller {
                     'delete', 'getChildrenCategories',
                     'loadChildByAjax', 'editChild', 'deleteChildByAjax'),
                 'users' => array('@'),
+                'expression'=>'isset($user->user->type) && ($user->user->type==="admin")'
             ),
             array('deny', // deny all users
                 'users' => array('*'),

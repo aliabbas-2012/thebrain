@@ -28,6 +28,7 @@ class BspArticlaController extends Controller {
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('create', 'update', 'index', 'view', 'delete'),
                 'users' => array('@'),
+                'expression'=>'isset($user->user->type) && ($user->user->type==="admin")'
             ),
             array('deny', // deny all users
                 'users' => array('*'),
