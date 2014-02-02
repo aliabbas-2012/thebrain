@@ -144,7 +144,8 @@ class Users extends DTActiveRecord {
                     AND (bsp_comment.user_id = bsp_order.buyer_id)
                   WHERE
                     (bsp_comment.user_id = :user_id)
-            ')
+            '),
+            'avgRating' => array(self::STAT, 'BspComment', 'user_id', 'select' => 'AVG(rating)'),
         );
     }
 

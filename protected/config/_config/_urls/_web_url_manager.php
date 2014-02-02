@@ -21,6 +21,7 @@ $rules_web = array(
     'my-orders' => '/web/userdata/myorders',
     'my-settings' => '/web/userdata/settings',
     '<type:[\w-\.]+>/my-payments' => '/web/userdata/payment',
+    '<storeurl:[\w-\.]+>/store/<id:[\w-\.]+>' => '/web/userdata/store',
     'my-payments' => '/web/userdata/payment',
     'ratings' => '/web/userdata/ratings',
     'view/profile/user' => '/web/user/profileview',

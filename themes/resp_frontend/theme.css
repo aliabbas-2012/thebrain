@@ -1791,7 +1791,34 @@ offer detail page
     margin-top: 127px;
     margin-left: 10px;
 }
+.user-detail {
+    margin-top: 127px;
+    margin-left: 40%;;
 
+}
+.user-detail-container{
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+.user-store-Avata{
+
+    width: 160px;
+
+}
+.user-store-Avata img{
+    background-color: #FFFFFF;
+    border-radius: 3px;
+    box-shadow: 5px 5px 5px #B0AEAE;
+    float: left;
+    height: 160px;
+    overflow: hidden;
+    padding: 5px;
+    visibility: visible;
+    z-index: 500;
+    width: 160px;
+    border-radius: 150px;
+}
 .itemAvata {
     background-color: #FFFFFF;
     border-radius: 3px;

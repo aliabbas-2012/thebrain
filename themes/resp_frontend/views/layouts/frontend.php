@@ -256,6 +256,9 @@
             } else if ($this->id == "offers" && $this->action->id == "detail" && !empty($this->item)) {
                 $this->renderPartial("//offers/_top_detail", array("model" => $this->item));
             }
+             if ($this->id == "userdata" && $this->action->id == "store" && !empty($this->_user)) {
+                $this->renderPartial("//userdata/_user_store_top", array("model" => $this->_user));
+            }
             ?> 
         </div>
         <?php

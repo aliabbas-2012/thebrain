@@ -65,11 +65,13 @@
     <div class="col-lg-12 detail-image-video">
         <?php
         foreach ($model->image_items as $item_img):
+
+            $path = Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item_img->id . "/" . $item_img->image_url;
             ?>
             <div>
-                <a href='<?php echo Yii::app()->theme->baseUrl . "/images/port-1.jpg" ?>'>
+                <a href='<?php echo $path ?>'>
                     <?php
-                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/port-1.jpg", '', array("height" => "200px"));
+                    echo CHtml::image($path, '', array("height" => "200px"));
                     ?>
                 </a>
             </div>
@@ -306,7 +308,7 @@
                 for ($i = 0; $i <= 23; $i++) {
                     $time_arr["0" . $i . ":00:00"] = "0" . $i . ":00";
                 }
-                echo $form->hiddenField($priceCalF,"item_id",array("value"=>$model->id));
+                echo $form->hiddenField($priceCalF, "item_id", array("value" => $model->id));
                 ?>
                 <div class='col-lg-12'>
                     <div class='col-lg-6'>
@@ -397,8 +399,8 @@ $this->renderPartial("//user/_tab_items", array("items" => $items));
                 thepuzzleadmin.showAlertBox("Added to favourate list ", "success");
             }
         })
-        jQuery("#PriceCalculation_start_date").kendoDatePicker({format: "yyyy/MM/dd",});
-        jQuery("#PriceCalculation_end_date").kendoDatePicker({format: "yyyy/MM/dd",});
+        jQuery("#PriceCalculation_start_date").kendoDatePicker({format: "yyyy/MM/dd", });
+        jQuery("#PriceCalculation_end_date").kendoDatePicker({format: "yyyy/MM/dd", });
         $("#PriceCalculation_start_time").kendoDropDownList();
         $("#PriceCalculation_end_time").kendoDropDownList();
 
@@ -411,7 +413,7 @@ $this->renderPartial("//user/_tab_items", array("items" => $items));
                 dataType: "JSON",
                 success: function(data)
                 {
-                    
+
                     jQuery("#kqtinh").html(data.price);
                     jQuery("#time-selection").html(data.period);
                     jQuery("#loading").hide();

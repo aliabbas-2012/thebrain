@@ -5,6 +5,7 @@
  */
 class UserdataController extends Controller {
 
+    public $_user;
     /**
      * @return array action filters
      */
@@ -29,6 +30,7 @@ class UserdataController extends Controller {
                     'settings',
                     'payment',
                     'ratings',
+                    'store',
                     'paymentdetail'
                 ),
                 'users' => array('@'),
@@ -58,7 +60,7 @@ class UserdataController extends Controller {
      */
     public function actionSettings() {
         $model = Users::model()->findByPK(Yii::app()->user->id);
-        
+
         if (isset($_POST['Users'])) {
             $model->attributes = $_POST['Users'];
 
@@ -148,7 +150,7 @@ class UserdataController extends Controller {
     public function actionRatings() {
         $sellerComments = BspComment::model()->getSellerComments(Yii::app()->user->id)->getData();
         $buyerComments = BspComment::model()->getBuyerComments(Yii::app()->user->id)->getData();
-        $this->render("//userdata/ratings",array("sellerComments"=>$sellerComments,"buyerComments"=>$buyerComments));
+        $this->render("//userdata/ratings", array("sellerComments" => $sellerComments, "buyerComments" => $buyerComments));
     }
 
     /**
@@ -159,6 +161,17 @@ class UserdataController extends Controller {
 
         $dataProvider = BspOrder::model()->getPaymentDetail($type);
         $this->renderPartial("//userdata/_payment_detail", array("dataProvider" => $dataProvider));
+    }
+
+    /**
+     * 
+     * @param type $storeurl
+     * @param type $id
+     * store url 
+     */
+    public function actionStore($storeurl, $id) {
+        $this->_user = $model = Users::model()->findByPk($id);
+        $this->render("//userdata/store",array("model"=>$model));
     }
 
 }

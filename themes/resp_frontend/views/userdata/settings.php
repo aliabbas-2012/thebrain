@@ -174,6 +174,13 @@
                         <div class="col-lg-5">
                             <?php echo $form->textField($model, 'store_url', array('class' => 'form-control')); ?> 
                             <?php echo $form->error($model, 'store_url', array("class" => 'alert alert-error')); ?>
+                            <?php
+                            if (!empty($model->store_url)) {
+                                $store_url = str_replace(" ", "-", $model->store_url);
+                                $store_url = $this->createUrl("/web/userdata/store", array("id" => $model->id, "storeurl" => $store_url));
+                                echo CHtml::link(Yii::app()->request->hostInfo.$store_url, $store_url);
+                            }
+                            ?>
                         </div>
                     </div>
 
