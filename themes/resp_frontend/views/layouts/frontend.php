@@ -256,7 +256,7 @@
             } else if ($this->id == "offers" && $this->action->id == "detail" && !empty($this->item)) {
                 $this->renderPartial("//offers/_top_detail", array("model" => $this->item));
             }
-             if ($this->id == "userdata" && $this->action->id == "store" && !empty($this->_user)) {
+            if ($this->id == "userdata" && $this->action->id == "store" && !empty($this->_user)) {
                 $this->renderPartial("//userdata/_user_store_top", array("model" => $this->_user));
             }
             ?> 
@@ -264,7 +264,7 @@
         <?php
         //post offer offer
         if ($this->id == "offers" && $this->action->id == "post") {
-                echo $content;
+            echo $content;
         } else {
             ?>
             <div id="content_container" class="container theme-showcase">
@@ -352,9 +352,22 @@
                                         // pick list. Retrieve the matching places for that item.
                                         google.maps.event.addListener(searchBox, 'places_changed', function() {
                                             var places = searchBox.getPlaces();
+                                            
+                                            if (typeof(places[0].geometry.location.nb) != "undefined") {
+                                                jQuery("#OfferSearch_lat").val(places[0].geometry.location.nb);
+                                            }
+                                            if (typeof(places[0].geometry.location.ob) != "undefined") {
+                                                jQuery("#OfferSearch_lng").val(places[0].geometry.location.ob);
+                                            }
 
-                                            jQuery("#OfferSearch_lat").val(places[0].geometry.location.nb);
-                                            jQuery("#OfferSearch_lng").val(places[0].geometry.location.ob);
+                                            if (typeof(places[0].geometry.location.d) != "undefined") {
+                                                jQuery("#OfferSearch_lat").val(places[0].geometry.location.d);
+                                            }
+                                            if (typeof(places[0].geometry.location.e) != "undefined") {
+                                                jQuery("#OfferSearch_lng").val(places[0].geometry.location.d);
+                                            }
+
+
 
 
                                         });

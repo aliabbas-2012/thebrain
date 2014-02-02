@@ -114,6 +114,19 @@ class OffersController extends Controller {
             if ($model->highPrice == 1) {
                 $criteria->addCondition("(price IS NOT NULL OR price !='')");
             }
+
+            if ($model->lat != "" && $model->lng != "" && $model->distance != "") {
+                $users = $model->getLantLongUser();
+                $search_users = array();
+                foreach ($users as $user) {
+                    if ($model->getDistantByLocation($model->lat, $model->lng, $user->lat, $user->lng, $model->distance) > 0) {
+                        $search_users[$user->id] = $user->id;
+                    }
+                }
+                if (!empty($search_users)) {
+                    $criteria->addInCondition("user_id", $search_users);
+                }
+            }
         }
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
@@ -154,7 +167,7 @@ class OffersController extends Controller {
      * @param type $id
      */
     public function actionDeleteOffer($id) {
-        
+
         BspItem::model()->deleteByPk($id);
         Yii::app()->user->setFlash("offer-status", 'You have deleted offer');
         $this->redirect($this->createUrl("/web/userdata/myoffers"));
