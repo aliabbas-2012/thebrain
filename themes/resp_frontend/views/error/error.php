@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
 
 
 
-<div class="error">
+<div class="error" style="font-size:14px">
     <?php
     echo '.';
     ?>

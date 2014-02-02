@@ -5,6 +5,13 @@ class DefaultController extends Controller {
     public function actionIndex() {
         $this->render('//default/index');
     }
+
+    public function actionError() {
+        if ($error = Yii::app()->errorHandler->error)
+            $this->render('//error/error', array("error"=>$error));
+     
+    }
+
     /**
      * ajax based login
      */
@@ -21,8 +28,7 @@ class DefaultController extends Controller {
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->login())
-            {
+            if ($model->validate() && $model->login()) {
                 
             }
         }
