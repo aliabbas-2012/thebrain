@@ -16,7 +16,7 @@ IndexIgnore /test/*
 IndexIgnore /video_devices/*
 IndexIgnore /waqas/*
 IndexIgnore /yii/*
-#AddHandler x-httpd-php5-4 .php
+AddHandler application/x-httpd-php54 .php .php5 .php4 .php3
 
 #php_flag display_startup_errors ON
 #php_flag display_errors ON
