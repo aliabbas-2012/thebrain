@@ -86,7 +86,14 @@ class SiteController extends Controller {
             $model->attributes = $_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
             if ($model->validate() && $model->login()) {
-                $this->redirect(Yii::app()->user->returnUrl);
+                $return = Yii::app()->user->returnUrl;
+                if(strstr(Yii::app()->request->url,"admin") && !empty($return)){
+                    $this->redirect($this->createUrl("/bspItem/index"));
+                }
+                else {
+                    $this->redirect($return);
+                }
+                
             }
         }
         // display the login form
