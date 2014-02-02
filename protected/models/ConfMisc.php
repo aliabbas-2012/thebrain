@@ -14,11 +14,11 @@
  * @property string $update_time
  * @property string $update_user_id
  */
-class ConfMisc extends ItstActiveRecord {
+class ConfMisc extends DtActiveRecord {
 
     public $confViewName = 'confMisc/Misc';
     public $paramsOptions = array(
-        "dateformat" => array("m/d/y" => "m/d/y", "Y-m-d", "Y-m-d"),
+        "date_formate" => array("m/d/y" => "m/d/y", "Y-m-d", "Y-m-d"),
         "smtp" => array("1" => "Enabled", "0" => "Disabled"),
     );
 

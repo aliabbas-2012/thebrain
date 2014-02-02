@@ -1,7 +1,6 @@
 <?php
 
-class ConfigurationsController extends Controller
-{
+class ConfigurationsController extends Controller {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -12,8 +11,7 @@ class ConfigurationsController extends Controller
     /**
      * @return array action filters
      */
-    public function filters()
-    {
+    public function filters() {
         return array(
             'accessControl', // perform access control for CRUD operations
         );
@@ -24,8 +22,7 @@ class ConfigurationsController extends Controller
      * This method is used by the 'accessControl' filter.
      * @return array access control rules
      */
-    public function accessRules()
-    {
+    public function accessRules() {
         return array(
 //            array('allow', // allow all users to perform 'index' and 'view' actions
 //                'actions' => array(),
@@ -48,8 +45,7 @@ class ConfigurationsController extends Controller
     /**
      * Conf default page.
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $this->render('index');
     }
 
@@ -59,8 +55,7 @@ class ConfigurationsController extends Controller
      * @param <string> $m (Model name without Conf)
      * @param <int> $id
      */
-    public function actionLoad($m, $id = 0, $module = '')
-    {
+    public function actionLoad($m, $id = 0, $module = '') {
         /* Complete Model name */
         $model_name = 'Conf' . $m;
 //        echo $model_name;die;   
@@ -68,8 +63,7 @@ class ConfigurationsController extends Controller
         /* For add new or update */
         $model = new $model_name;
 
-        if ($id != 0)
-        {
+        if ($id != 0) {
             $model = $model->findByPk($id);
         }
 //        echo $model->confViewName;
@@ -78,10 +72,12 @@ class ConfigurationsController extends Controller
 //        $this->performAjaxValidation($model);
 
         /* if form is posted */
-        if (isset($_POST[$model_name]))
-        {
+  
+        if (isset($_POST[$model_name])) {
             /* Assign attributes */
+             print_r($_POST);
             $model->attributes = $_POST[$model_name];
+           
             /* Save record */
             if ($model->save())
                 $this->redirect(array('load', 'm' => $m, 'module' => $module));
@@ -94,12 +90,10 @@ class ConfigurationsController extends Controller
      * Performs the AJAX validation.
      * @param CModel the model to be validated
      */
-    protected function performAjaxValidation($model)
-    {
+    protected function performAjaxValidation($model) {
 
 
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'project-form')
-        {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'project-form') {
             //echo CActiveForm::validate($model);
             Yii::app()->end();
         }
@@ -108,8 +102,7 @@ class ConfigurationsController extends Controller
     /**
      * Set comments for appSettng action 
      */
-    public function actionAppSettings()
-    {
+    public function actionAppSettings() {
         /* Complete Model name */
         $model = new ConfMisc();
 
