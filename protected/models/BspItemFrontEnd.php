@@ -38,9 +38,10 @@ class BspItemFrontEnd extends BspItem {
      * @return type
      */
     public function afterSave() {
-        $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($this),"BspItem_background_image"));
+        $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($this), "BspItemFrontEnd_background_image",));
         if (is_file($path . $this->background_image)) {
-            copy($path . $this->background_image, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey)) . $this->background_image);
+
+            copy($path . $this->background_image, DTUploadedFile::creeatRecurSiveDirectories(array("BspItem", $this->primaryKey)) . $this->background_image);
             unlink($path . $this->background_image);
         }
         return parent::afterSave();

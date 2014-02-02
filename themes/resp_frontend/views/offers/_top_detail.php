@@ -11,7 +11,7 @@
     </div>
 </div>
 <?php
-$background = !empty($model->background_image)?Yii::app()->baseUrl . "/uploads/BspItemImage/" . $model->id . "/" . $model->background_image:"";
+$background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads/BspItem/" . $model->id . "/" . $model->background_image : "";
 ?>
 <div class="offer_item-top" style="width:100%;height:450px;background: url('<?php echo $background ?>')">
     <div class="container ">
@@ -23,12 +23,13 @@ $background = !empty($model->background_image)?Yii::app()->baseUrl . "/uploads/B
                     <div class="itemAvata col-lg-2">
                         <?php
                         $user = Users::model()->findByPk($model->user_id);
-                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/noavatar.jpg", '', array("width" => "110"));
+                        $avatar = CHtml::image(Yii::app()->theme->baseUrl . "/images/noavatar.jpg", '', array("width" => "110"));
                         if (!empty($user->avatar)) {
                             $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, '', array("width" => "110"));
                         } else {
                             $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', '', array("width" => "110"));
                         }
+                        echo $avatar;
                         ?>
 
                         <div class="over-item-avata"></div>

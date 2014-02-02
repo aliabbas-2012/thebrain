@@ -60,11 +60,11 @@ class ChangeUser extends Users {
      */
     public function uploadBgAvtar() {
         $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($this)));
-        $path.="Users_background" . DIRECTORY_SEPARATOR;
+        $path.="Users_avatar" . DIRECTORY_SEPARATOR;
 
         if (is_file($path . $this->avatar)) {
 
-            copy($path . $this->avatar, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey, "avatar")) . $this->avatar);
+            copy($path . $this->avatar, DTUploadedFile::creeatRecurSiveDirectories(array("Users", $this->primaryKey, "avatar")) . $this->avatar);
             unlink($path . $this->avatar);
         }
     }

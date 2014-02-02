@@ -147,9 +147,15 @@ class OffersController extends Controller {
      * @param type $id
      * @param type $action
      */
-    public function actionPost($id = 0, $action = "create") {
+    public function actionPost($slug = "", $action = "create") {
         $model = new BspItemFrontEnd();
         $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
+        
+        if ($slug != "") {
+            $slug_arr = explode("-",$slug);
+            $id = $slug_arr[0];
+            $model = BspItemFrontEnd::model()->findByPk($id);
+        }
 
         if (isset($_POST['BspItemFrontEnd']) && isset($_POST['ChangeUser'])) {
             $model->attributes = $_POST['BspItemFrontEnd'];
@@ -164,7 +170,7 @@ class OffersController extends Controller {
             if (!$user->validate()) {
                 $isvalid = 0;
             }
-            if($this->setOfferImage($model)){
+            if ($this->setOfferImage($model)) {
                 
             }
             if ($isvalid == 1) {
@@ -172,13 +178,13 @@ class OffersController extends Controller {
                     //incase of !empty password then the login 
                     if (!empty($user->password_new)) {
                         $user->password = md5($user->password_new);
-                        $user->save(false);
                     }
+                    $user->save(false);
                     foreach ($model->image_items as $modelImg) {
                         $modelImg->item_id = $model->id;
                         $modelImg->save();
                     }
-                    
+
                     $item = BspItem::model()->findByPk($model->id);
                     $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
                 }
@@ -275,7 +281,7 @@ class OffersController extends Controller {
      * @param type $model
      */
     public function setOfferImage($model) {
-        $is_valid = 0 ;
+        $is_valid = 0;
         if (isset($_POST['BspItemImage'])) {
             $bspItem_imag = array();
             foreach ($_POST['BspItemImage'] as $key => $bspItemImg) {
@@ -286,7 +292,7 @@ class OffersController extends Controller {
                     $modelItemImg = new BspItemImage;
                 }
                 $modelItemImg->attributes = $bspItemImg;
-                if($modelItemImg->validate()){
+                if ($modelItemImg->validate()) {
                     $is_valid = 1;
                 }
                 $bspItem_imag [] = $modelItemImg;
