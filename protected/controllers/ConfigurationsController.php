@@ -75,7 +75,7 @@ class ConfigurationsController extends Controller {
   
         if (isset($_POST[$model_name])) {
             /* Assign attributes */
-             print_r($_POST);
+             
             $model->attributes = $_POST[$model_name];
            
             /* Save record */
