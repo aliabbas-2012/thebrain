@@ -13,7 +13,7 @@
 // ----------------------------------------------------------------------------------------
 //http://localhost/test/test2/socialconnect/hybridauth-2.1.2/
 
-$siteModel = SelfSite::model()->getSiteInfo(Yii::app()->request->hostInfo.Yii::app()->baseUrl);
+$conf = ConfMisc::model()->findAll("param = 'fb_key' AND param ='fb_secret'");
 
 
 return
@@ -22,19 +22,19 @@ return
             "providers" => array(
                 "Google" => array(
                     "enabled" => true,
-                    "keys" => array("id" => $siteModel['google_key'], "secret" => $siteModel['google_secret'])
+                    "keys" => array("id" => "", "secret" => "")
                 ),
                 "Facebook" => array(
                     "enabled" => true,
-                    "keys" => array("id" => $siteModel['fb_key'], "secret" => $siteModel['fb_secret'])
+                    "keys" => array("id" => $conf[0]['value'], "secret" => $conf[1]['value'])
                 ),
                 "Twitter" => array(
                     "enabled" => true,
-                    "keys" => array("key" => $siteModel['twitter_key'], "secret" => $siteModel['twitter_secret'])
+                    "keys" => array("key" => "", "secret" => "")
                 ),
                 "LinkedIn" => array(
                     "enabled" => true,
-                    "keys" => array("key" => $siteModel['linkedin_key'], "secret" => $siteModel['linkedin_secret'])
+                    "keys" => array("key" => "", "secret" => "")
                 ),
             ),
             // if you want to enable logging, set 'debug_mode' to true  then provide a writable file by the web server on "debug_file"
