@@ -33,6 +33,8 @@ class OffersController extends Controller {
                 'actions' => array(
                     'post',
                     'addpartial',
+                    'changeStatus',
+                    'deleteOffer',
                 ),
                 'users' => array('@'),
             ),
@@ -132,6 +134,34 @@ class OffersController extends Controller {
 
     /**
      * 
+     * @param type $id
+     */
+    public function actionChangeStatus($id) {
+        $offer = BspItem::model()->findByPk($id);
+        if ($offer->iStatus == 0) {
+            BspItem::model()->updateByPk($id, array("iStatus" => 1));
+            Yii::app()->user->setFlash("offer-status", 'Offer Status has been Active Now');
+        } else if ($offer->iStatus == 1) {
+            BspItem::model()->updateByPk($id, array("iStatus" => 0));
+            Yii::app()->user->setFlash("offer-status", 'Offer Status has been In-Active Now');
+        }
+
+        $this->redirect($this->createUrl("/web/userdata/myoffers"));
+    }
+
+    /**
+     * 
+     * @param type $id
+     */
+    public function actionDeleteOffer($id) {
+        
+        BspItem::model()->deleteByPk($id);
+        Yii::app()->user->setFlash("offer-status", 'You have deleted offer');
+        $this->redirect($this->createUrl("/web/userdata/myoffers"));
+    }
+
+    /**
+     * 
      * @param type $slug
      */
     public function actionDetail($slug = "") {
@@ -150,9 +180,9 @@ class OffersController extends Controller {
     public function actionPost($slug = "", $action = "create") {
         $model = new BspItemFrontEnd();
         $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
-        
+
         if ($slug != "") {
-            $slug_arr = explode("-",$slug);
+            $slug_arr = explode("-", $slug);
             $id = $slug_arr[0];
             $model = BspItemFrontEnd::model()->findByPk($id);
         }

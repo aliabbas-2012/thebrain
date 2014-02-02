@@ -14,7 +14,18 @@
             echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("class" => "line-blog"));
             ?>
             <div class="space-blog"></div>
-
+            <?php
+            //check any status
+            if (Yii::app()->user->hasFlash('offer-status')):
+                ?>
+                <div class="alert alert-success">
+                    <?php
+                        echo Yii::app()->user->getFlash('offer-status');
+                    ?>  
+                </div>
+                <?php
+            endif;
+            ?>
             <div>
                 <?php
                 $criteria = new CDbCriteria();
@@ -33,9 +44,9 @@
                     'columns' => array(
                         array('name' => 'category_id', 'value' => 'isset($data->category)?$data->category->name:""'),
                         array(
-                            'name' => 'name', 
+                            'name' => 'name',
                             'value' => '$data->slug_link',
-                            'type'=>"raw"
+                            'type' => "raw"
                         ),
                         array(
                             'name' => 'description', 'value' => '$data->description',
@@ -50,6 +61,38 @@
                         ),
                         array(
                             'class' => 'CButtonColumn',
+                            'template' => '{edit}{cdelete}{in-active}{active}',
+                            'buttons' => array(
+                                'edit' => array
+                                    (
+                                    'label' => 'edit',
+                                    'options' => array('class' => 'k-button k-button-icontext k-grid-Edit'),
+                                    'url' => 'Yii::app()->controller->createUrl("/web/offers/post", array("action"=>"update","slug"=>$data->slug))',
+                                ),
+                                'cdelete' => array
+                                    (
+                                    'label' => '<span class="k-icon k-delete"></span>Delete',
+                                    'options' => array(
+                                        'class' => 'k-button k-button-icontext k-grid-delete',
+                                        'onclick' => 'if(confirm("Are you sure to want to delete")){return true;} else {return false;}'
+                                    ),
+                                    'url' => 'Yii::app()->createUrl("/web/offers/deleteOffer", array("id"=>$data->id,))',
+                                ),
+                                'active' => array
+                                    (
+                                    'label' => 'Active',
+                                    'options' => array('class' => 'k-button k-button-icontext k-grid-Active'),
+                                    'url' => 'Yii::app()->createUrl("/web/offers/changeStatus", array("id"=>$data->id,))',
+                                    'visible' => '$data->iStatus==0?true:false'
+                                ),
+                                'in-active' => array
+                                    (
+                                    'label' => 'In Active',
+                                    'options' => array('class' => 'k-button k-button-icontext k-grid-Active', 'style' => 'background-color: rgb(102, 102, 102);'),
+                                    'url' => 'Yii::app()->createUrl("/web/offers/changeStatus", array("id"=>$data->id))',
+                                    'visible' => '$data->iStatus <>0?true:false'
+                                ),
+                            ),
                         ),
                     ),
                 ));

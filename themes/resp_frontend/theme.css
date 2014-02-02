@@ -368,7 +368,33 @@ div.error,div.errorMessage {
     width: 15px;
     cursor: pointer;
 }
-
+/** grid css **/
+.table-bordered tr.odd  {
+    background: #fff;
+}
+.table-bordered td.button-column a {
+    text-decoration: none;
+}
+.table-bordered td.button-column a.k-grid-Edit:hover {
+    background-color: #16acea;
+    color: #ffffff;
+}
+.table-bordered td.button-column a.k-grid-delete:hover {
+    background-color: #d30f0f;
+    color: #ffffff;
+}
+.table-bordered td.button-column a.k-grid-Active:hover {
+    background-color: #68bc45;
+    color: #ffffff;
+}
+.table-bordered td.button-column a {
+    margin-right: 5px;
+    font-size: 12px;
+}
+.table-bordered td.button-column {
+    width: 20%;
+}
+/* end grid */
 .percentLike {
     color: #414141;
     float: left;
@@ -2253,7 +2279,7 @@ a.detail-addlike:hover {
     display: none;
 }
 .select-avatar-img div.k-widget {
-     display: none;
+    display: none;
 }
 a.btn-submit {
     cursor: pointer;
