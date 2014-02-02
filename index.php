@@ -7,6 +7,7 @@ else {
     error_reporting(0);
 }
 
+
 // change the following paths if necessary
 $yii = dirname(__FILE__) . '/../../frameworks/yii-1.1.14.f0fee9/framework/yii.php';
 $config = dirname(__FILE__) . '/protected/config/main.php';
