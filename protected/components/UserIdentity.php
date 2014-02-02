@@ -19,9 +19,9 @@ class UserIdentity extends CUserIdentity {
         if ($user === null)
             $this->errorCode = self::ERROR_USERNAME_INVALID;
 
-        else if ($user->password!=md5($this->password))
+        else if ($user->password != md5($this->password))
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
-       
+
         else {
 
 
@@ -34,6 +34,31 @@ class UserIdentity extends CUserIdentity {
 
             $this->errorCode = self::ERROR_NONE;
         }
+        return $this->errorCode == self::ERROR_NONE;
+    }
+
+    /**
+     * authicate with social 
+     * @return type
+     */
+    public function authenticateWith() {
+        //$this->setState("isSuperAdmin", Yii::app()->user->isSuperAdmin);
+        $user = Users::model()->find("user_email = '" . $this->username . "'");
+        if ($user === null)
+            $this->errorCode = self::ERROR_USERNAME_INVALID;
+        else if ($user->status_id != '1')
+            $this->errorCode = self::ERROR_PASSWORD_INVALID;
+        else {
+            $this->id = $user->id;
+            //$this->username=$user->user_name;
+            $this->setState('user_email', $user->user_email);
+            $this->setState('name', $user->username);
+            $this->setState('user_id', $user->id);
+
+            $this->errorCode = self::ERROR_NONE;
+        }
+
+
         return $this->errorCode == self::ERROR_NONE;
     }
 

@@ -13,8 +13,7 @@
 // ----------------------------------------------------------------------------------------
 //http://localhost/test/test2/socialconnect/hybridauth-2.1.2/
 
-$conf = ConfMisc::model()->findAll("param = 'fb_key' AND param ='fb_secret'");
-
+$conf = ConfMisc::model()->findAll("param = 'fb_key' OR param ='fb_secret'");
 
 return
         array(

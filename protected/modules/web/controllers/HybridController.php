@@ -12,13 +12,11 @@ class HybridController extends Controller {
      */
     public function actionLogin($provider = "facebook", $blog = "") {
 
-        $this->initConfigurations();
-
         /**
          * in case of already login
          */
         if (!empty(Yii::app()->user->id)) {
-            $this->redirect($this->createUrl("/site/index"));
+            $this->redirect($this->createUrl("/web/default/index"));
         }
 
 
@@ -61,13 +59,7 @@ class HybridController extends Controller {
             if (!empty($user_profile->email)) {
                 $user = $dtSocial->manageUser($user_profile, $provider);
                 $this->autoLogin($user);
-                /**
-                 * saving cart information
-                 */
-                $cart = new Cart();
-                $cart->addCartByUser();
-                $wishlist = new WishList();
-                $wishlist->addWishlistByUser();
+
 
                 $this->redirect(Yii::app()->user->returnUrl);
             } else {
@@ -76,13 +68,7 @@ class HybridController extends Controller {
 
                 if (!empty($user)) {
                     $this->autoLogin($user);
-                    /**
-                     * saving cart information
-                     */
-                    $cart = new Cart();
-                    $cart->addCartByUser();
-                    $wishlist = new WishList();
-                    $wishlist->addWishlistByUser();
+
                     $this->redirect(Yii::app()->user->returnUrl);
                 } else {
                     Yii::app()->user->setFlash('hybrid', "Please sign up , your social network didn't provide any email");
@@ -160,7 +146,7 @@ class HybridController extends Controller {
 
     public function initConfigurations() {
         $criteria = new CDbCriteria();
-        $criteria->addCondition("city_id='" . Yii::app()->session['city_id'] . "'");
+
         $selected = array("fb_key", "fb_secret", "google_key", "google_secret", "twitter_key", 'twitter_secret', 'linkedin_key', 'linkedin_secret');
         $criteria->addInCondition("param", $selected);
         $conf = ConfMisc::model()->findAll($criteria);

@@ -74,7 +74,7 @@ class SiteController extends Controller {
     public function actionLogin() {
         $this->layout = "//layouts/column1";
         $model = new LoginForm;
-        
+
         // if it is ajax validation request
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
             echo CActiveForm::validate($model);
@@ -87,13 +87,11 @@ class SiteController extends Controller {
             // validate user input and redirect to the previous page if valid
             if ($model->validate() && $model->login()) {
                 $return = Yii::app()->user->returnUrl;
-                if(strstr(Yii::app()->request->url,"admin") && !empty($return)){
+                if (strstr(Yii::app()->request->url, "admin") && !empty($return)) {
                     $this->redirect($this->createUrl("/bspItem/index"));
-                }
-                else {
+                } else {
                     $this->redirect($return);
                 }
-                
             }
         }
         // display the login form
@@ -177,6 +175,14 @@ class SiteController extends Controller {
     public function actionLogout() {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
+    }
+    /**
+     * call back action 
+     */
+    public function actionTestHybrid() {
+        Yii::import('application.extensions.hybridauth.Hybrid.Hybrid_Auth');
+        Yii::import('application.extensions.hybridauth.Hybrid.Hybrid_Endpoint');
+        Hybrid_Endpoint::process();
     }
 
 }

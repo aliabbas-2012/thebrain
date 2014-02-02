@@ -19,7 +19,7 @@ class DTSocialHandler {
      */
     public function getDbSocailUser($userProfile) {
         $criteria = new CDbCriteria();
-        $criteria->select = "user_id,user_email";
+        $criteria->select = "id,user_email";
         $criteria->addCondition("user_email='" . $userProfile->email . "'");
         $user = Users::model()->find($criteria);
 
@@ -109,7 +109,7 @@ class DTSocialHandler {
         $user = new Users;
 
         $user->user_email = !empty($userProfile->email) ? $userProfile->email : $userProfile->identifier . "@darussalampk.com";
-        $user->status_id = !empty($userProfile->email) ? 1 : 0;
+        
         $dt = new DTFunctions();
         $userPass = $dt->getRanddomeNo(10);
         $user->password = $userPass;

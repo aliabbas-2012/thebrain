@@ -152,6 +152,24 @@ class Users extends DTActiveRecord {
     }
 
     /**
+     * Behaviour
+     *
+     */
+    public function behaviors() {
+        return array(
+            'CSaveRelationsBehavior' => array(
+                'class' => 'CSaveRelationsBehavior',
+                'relations' => array(
+                    'basicFeatures' => array("message" => "Please, fill required fields"),
+                ),
+            ),
+            'CMultipleRecords' => array(
+                'class' => 'CMultipleRecords'
+            ),
+        );
+    }
+
+    /**
      * @return array customized attribute labels (name=>label)
      */
     public function attributeLabels() {
