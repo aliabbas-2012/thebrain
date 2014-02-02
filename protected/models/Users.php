@@ -122,6 +122,7 @@ class Users extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'social_accounts' => array(self::HAS_MANY, 'Social', 'yiiuser'),
             'bspNotifies' => array(self::HAS_MANY, 'BspNotify', 'user_id'),
             'messagesRecv' => array(self::HAS_MANY, 'BspMessage', 'user_receive'),
             'messagesSent' => array(self::HAS_MANY, 'BspMessage', 'user_send'),
