@@ -60,7 +60,7 @@ class HybridController extends Controller {
                 $user = $dtSocial->manageUser($user_profile, $provider);
                 $this->autoLogin($user);
 
-
+               
                 $this->redirect(Yii::app()->user->returnUrl);
             } else {
 

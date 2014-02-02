@@ -76,7 +76,7 @@ class Controller extends CController {
             $this->layout = "//layouts/frontend";
         } else {
             Yii::app()->user->loginUrl = "/site/login";
-            Yii::app()->homeUrl = $this->createUrl("/users/index");
+           
         }
 
 

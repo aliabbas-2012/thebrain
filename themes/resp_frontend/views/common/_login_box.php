@@ -1,9 +1,11 @@
 <div class="login-header">Log in</div>
 <div class="login-box">
     <div>
-        <?php
-        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/login_fb.png");
-        ?>
+        <a href="<?php echo $this->createUrl("/web/hybrid/login", array("provider" => "facebook")) ?>">
+            <?php
+            echo CHtml::image(Yii::app()->theme->baseUrl . "/images/login_fb.png");
+            ?>
+        </a>
     </div>
     <?php
     $form = $this->beginWidget('CActiveForm', array(

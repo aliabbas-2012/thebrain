@@ -13,6 +13,7 @@ $rules_web = array(
     '' => '/web/default/index',
     '<slug:[\w-\.]+>/article' => '/web/article/index',
     '<slug:[\w-\.]+>/blog-detail' => '/web/blog/detail',
+    '/social-login/<provider:[\w-\.]+>' => '/web/hybrid/login',
     'blog' => '/web/blog/index',
     'faq' => '/web/faq/index',
     'dashboard' => '/web/user/dashboard',

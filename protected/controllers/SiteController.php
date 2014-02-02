@@ -180,6 +180,7 @@ class SiteController extends Controller {
      * call back action 
      */
     public function actionTestHybrid() {
+        Yii::app()->homeUrl = $this->createUrl("/web/default/index");
         Yii::import('application.extensions.hybridauth.Hybrid.Hybrid_Auth');
         Yii::import('application.extensions.hybridauth.Hybrid.Hybrid_Endpoint');
         Hybrid_Endpoint::process();
