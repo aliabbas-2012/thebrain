@@ -40,6 +40,7 @@ class DTSocialHandler {
         } else {
             $user = $this->makeObjectNewSocialUser($userProfile, $provider);
             $user->save();
+            
             return $user;
         }
     }
@@ -108,8 +109,10 @@ class DTSocialHandler {
     public function makeObjectNewSocialUser($userProfile, $provider) {
         $user = new Users;
 
-        $user->user_email = !empty($userProfile->email) ? $userProfile->email : $userProfile->identifier . "@darussalampk.com";
-        
+        $user->user_email = !empty($userProfile->email) ? $userProfile->email : $userProfile->identifier . "@puzzzle.com";
+        $user->username = !empty($userProfile->email) ? $userProfile->email : $userProfile->identifier . "@puzzzle.com";
+        $user->store_url = $user->username;
+        $user->type = "non-admin";
         $dt = new DTFunctions();
         $userPass = $dt->getRanddomeNo(10);
         $user->password = $userPass;

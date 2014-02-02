@@ -50,7 +50,7 @@ class HybridController extends Controller {
             $adapter = $hybridauth->authenticate($provider);
 
             $user_profile = $adapter->getUserProfile();
-
+            Yii::app()->homeUrl = $this->createUrl("/web/default/index");
             /**
              * 
              */
