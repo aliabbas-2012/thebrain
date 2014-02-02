@@ -14,7 +14,7 @@
  * @property string $update_time
  * @property string $update_user_id
  */
-class ConfMisc extends DtActiveRecord {
+class ConfMisc extends DTActiveRecord {
 
     public $confViewName = 'confMisc/Misc';
     public $paramsOptions = array(
