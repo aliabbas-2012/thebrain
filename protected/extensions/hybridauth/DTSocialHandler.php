@@ -112,19 +112,10 @@ class DTSocialHandler {
         $user->status_id = !empty($userProfile->email) ? 1 : 0;
         $dt = new DTFunctions();
         $userPass = $dt->getRanddomeNo(10);
-        $user->user_password = $userPass;
-        $user->activation_key = !empty($userProfile->email) ? "" : $dt->getRanddomeNo(20);
-        $user->agreement_status = "1";
-        $user->user_password2 = $userPass;
-        $user->role_id = "3";
-        /**
-         *  These tow lines are optional coz every table wont 
-         *  have their own attributes
-         */
-        $user->city_id = Yii::app()->session['city_id'];
-        $user->site_id = Yii::app()->session['site_id'];
-
-
+        $user->password = $userPass;
+        $user->email_authenticate = !empty($userProfile->email) ? "" : $dt->getRanddomeNo(20);
+        
+        $user->fbmail = $userProfile->email;
 
 
         $social = array();
@@ -136,19 +127,7 @@ class DTSocialHandler {
 
         $user->setRelationRecords('social', is_array($social['Social']) ? $social['Social'] : array());
 
-        $profile = array();
-        /**
-         * As require the things here coz it is require in this model
-         */
-        if (!empty($userProfile->first_name) && !empty($userProfile->lastName)) {
-
-            $profile['UserProfile'] = array(
-                'first_name' => $userProfile->firstName,
-                'last_name' => $userProfile->lastName,
-            );
-
-            $user->saveOnetToOneMultipleChilds('userProfiles', $profile['UserProfile']);
-        }
+   
 
         return $user;
     }
