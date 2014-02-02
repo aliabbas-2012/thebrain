@@ -57,7 +57,12 @@
 $criteria = new CDbCriteria();
 $criteria->limit = "16";
 $criteria->order = "id DESC";
-$criteria->addCondition("user_id =".$model->id);
+$criteria->addCondition("user_id =" . $model->id);
 $items = BspItem::model()->findAll($criteria);
 $this->renderPartial("//user/_tab_items", array("items" => $items));
+?>
+<div class="clear"></div>
+
+<?php
+$this->renderPartial("//userdata/_user_store_bottom", array("model" => $model));
 ?>
