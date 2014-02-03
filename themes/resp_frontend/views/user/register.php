@@ -1,4 +1,4 @@
-<h3>Register Yourself</h3>
+<h3><?php Yii::t('user', "Register Yourself"); ?></h3>
 <?php
 if (Yii::app()->user->hasFlash('success')):
     echo CHtml::openTag("div", array("class" => "alert-success"));

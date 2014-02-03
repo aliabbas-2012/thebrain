@@ -255,7 +255,9 @@
                         </div>
                         <div class='clear'></div>
                         <div class="space-blog"></div>
-                        <span class="opening text-bold">To get started I will need from the buyer:</span>
+                        <span class="opening text-bold">
+                            <?php echo Yii::t('detailOffer', 'To get started I will need from the buyer:'); ?> 
+                        </span>
                     </div>
                 </div>
                 <div class='tab-3-data tab-data' style='display:none'>
@@ -279,7 +281,9 @@
             </div>
             <div id='price_detail'>
                 <p>Price Offers</p>
-                <p style="margin-top: 30px">Calculate Price</p>
+                <p style="margin-top: 30px">
+                    <?php echo Yii::t('detailOffer', 'Calculate Price'); ?> 
+                </p>
 
                 <div class='price-type'>
                     <div class='col-lg-10'>1 Hour </div>
@@ -327,7 +331,7 @@
                     </div>
                 </div>
 
-                <div id="buttonCalculate">Calculate Price</div>
+                <div id="buttonCalculate"><?php echo Yii::t('detailOffer', 'Calculate Price'); ?></div>
                 <?php
                 $this->endWidget();
                 ?>
@@ -357,7 +361,7 @@
 <div class="clear"></div>
 <div class="space-blog"></div>
 <div class="red-bg">
-    <label>Check out my other offers</label>
+    <label><?php echo Yii::t('detailOffer', 'Check out my other offers'); ?> </label>
 </div>
 <div class="clear"></div>
 <?php

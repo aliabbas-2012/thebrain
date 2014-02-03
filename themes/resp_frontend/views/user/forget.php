@@ -32,7 +32,7 @@
             ));
             ?>
 
-            <p class="note">Fields with <span class="required">*</span> are required.</p>
+            <p class="note"><?php echo Yii::t('user', 'Fields with'); ?> <span class="required">*</span> <?php echo Yii::t('user', 'are required'); ?>.</p>
 
             <div class="form-group">
                 <?php echo $form->labelEx($model, 'email', array('class' => 'control-label col-sm-2')); ?>

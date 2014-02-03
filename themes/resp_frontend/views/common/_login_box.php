@@ -26,7 +26,7 @@
      <?php echo $form->checkBox($model, 'rememberMe', array("style" => "float: left; margin-right: 10px;")); ?>
     <?php echo $form->label($model, 'rememberMe', array("class" => "string optional")); ?>
     <?php
-    echo CHtml::link("Forget Password ?", $this->createUrl("/web/user/forgetPass"), array("class" => "optional"));
+    echo CHtml::link(Yii::t('link', "Forget Password ?"), $this->createUrl("/web/user/forgetPass"), array("class" => "optional"));
     ?>
     <?php
     echo CHtml::submitButton('Login', array(
@@ -67,5 +67,5 @@
 
 </div>
 <div class="login-border-top">
-    Don't have an account ? <?php echo CHtml::link("Sign Up", $this->createUrl("/web/user/register")) ?>
+   <?php Yii::t('site', "Don't have an account"); ?> ? <?php echo CHtml::link(Yii::t('link', "Sign Up"), $this->createUrl("/web/user/register")) ?>
 </div>

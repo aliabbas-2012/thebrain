@@ -1,7 +1,7 @@
 <h2>
     Profile 
     <?php
-    echo CHtml::link(CHtml::button("Edit Profile", array("class" => "btn btn-default")), $this->createUrl("/web/user/profile"), array("style" => "float:right"));
+    echo CHtml::link(CHtml::button(Yii::t('user', "Edit Profile"), array("class" => "btn btn-default")), $this->createUrl("/web/user/profile"), array("style" => "float:right"));
     ?>
 </h2>
 <?php

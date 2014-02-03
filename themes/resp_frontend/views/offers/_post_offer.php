@@ -15,7 +15,7 @@ if ($model->background_image != "") {
             <div class="offer_wrap">
                 <div class="col-lg-8">
                     <div id="offer1">
-                        <p class="floatLeft">I offer  </p>
+                        <p class="floatLeft"><?php echo Yii::t('postOffer', 'I offer'); ?>  </p>
 
                         <?php
                         echo $form->textField($model, 'name', array('id' => 'txtoffer', "class" => "k-textbox floatLeft", 'placeholder' => "Type here your offer"));
@@ -44,7 +44,7 @@ if ($model->background_image != "") {
                 <div class="col-lg-12">
 
                     <div class="select-bg-img">
-                        <span><a href="javascript:void(0)">Select your background image</a></span>
+                        <span><a href="javascript:void(0)"><?php echo Yii::t('postOffer', 'Select your background image'); ?></a></span>
                         <?php
                         $uploadTemp = new UploadTemp();
                         echo zHtml::activeFileField($uploadTemp, '[' . 1 . ']upload_temp_image');
@@ -73,7 +73,7 @@ if ($model->background_image != "") {
                     </div>
                     <div class="col-lg-10">
                         <div class="select-avatar-img">
-                            <span><a href="javascript:void(0)">Select your avatar</a></span>
+                            <span><a href="javascript:void(0)"><?php echo Yii::t('postOffer', 'Select your avatar'); ?></a></span>
                             <?php
                             $uploadTemp = new UploadTemp();
                             echo zHtml::activeFileField($uploadTemp, '[' . 2 . ']upload_temp_image');

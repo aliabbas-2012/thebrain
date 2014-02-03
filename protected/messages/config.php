@@ -1,0 +1,31 @@
+<?php
+
+return array(
+    'sourceLanguage' => 'en',
+    'sourcePath' => dirname(__FILE__) . '/../',
+    'messagePath' => dirname(__FILE__) . '/../messages',
+    'languages' => array('en', 'de'),
+    'fileTypes' => array('php'),
+    'translator' => 'Yii::t',
+    'overwrite' => true,
+    'exclude' => array(
+        '/messages',
+        '/messages2',
+        '/config',
+        '/runtime',
+        '/vendors',
+        '/web/js',
+        '/yii',
+        '/extensions',
+        '/migrations',
+        '/views_org',
+        '/controllers',
+        '/tests',
+        '/widgets',
+        '/data',
+        '/components',
+        '/modules',
+    ),
+    'removeOld' => true,
+    'sort' => true,
+);

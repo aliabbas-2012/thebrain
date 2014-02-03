@@ -3,7 +3,7 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
             <div class="puzzle-top text-center">
-                <a href="javascript:void(0)">The Puzzzle I ALPHA</a>
+                <a href="javascript:void(0)"><?php echo Yii::t('site', 'The Puzzzle I ALPHA'); ?></a>
                 <div style="width:30px; float: right;cursor: pointer;" class="newfeed-close"><span class="k-icon k-i-close" id="newsfeed-close"></span></div>
             </div>
         </div>

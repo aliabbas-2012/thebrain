@@ -19,7 +19,7 @@
     ));
     ?>
 
-    <p class="note">Fields with <span class="required">*</span> are required.</p>
+    <p class="note"><?php echo Yii::t('user', 'Fields with'); ?> <span class="required">*</span> <?php echo Yii::t('user', 'are required'); ?>.</p>
 
     <?php
     if (Yii::app()->user->hasFlash('success')) {
@@ -53,7 +53,8 @@
         </div>
 
         <p class="hint">
-            Passwords must be minimum 6 characters and can contain alphabets, numbers and special characters.
+            <?php echo Yii::t('user', 'Passwords must be minimum 6'); ?>
+            <?php echo Yii::t('user', 'characters and can contain alphabets, numbers and special characters'); ?>.
         </p>
     </div>
 

@@ -71,7 +71,7 @@ class Controller extends CController {
         $this->layout = "//layouts/column1";
         if (get_class($this->getModule()) == "WebModule") {
 
-            Yii::app()->language = "en";
+            Yii::app()->language = "de";
             Yii::app()->theme = "resp_frontend";
             $this->layout = "//layouts/frontend";
         } else {

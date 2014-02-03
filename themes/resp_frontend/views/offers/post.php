@@ -13,11 +13,11 @@ $form = $this->beginWidget('CActiveForm', array(
     ),
         ));
 //showing error summary
-$this->renderPartial("//offers/offer_errors/_offer_errors",array("model"=>$model,"user"=>$user));
+$this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $model, "user" => $user));
 ?>
 
 <div class="clear"></div>
-<?php $this->renderPartial("//offers/_post_offer", array("model" => $model, "form" => $form,"user"=>$user)) ?>
+<?php $this->renderPartial("//offers/_post_offer", array("model" => $model, "form" => $form, "user" => $user)) ?>
 <div class="clear"></div>
 <div class="container">
     <div class="row">
@@ -43,7 +43,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors",array("model"=>$model
     <div class="row">
         <div class="col-lg-12">
             <label class="titleOption">
-                I offer
+                <?php echo Yii::t('postOffer', 'I offer'); ?>
                 <img src="<?php echo Yii::app()->theme->baseUrl ?>/images/saydiv.png">
             </label>
             <label class="obligatory">(obligatory)</label>
@@ -72,7 +72,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors",array("model"=>$model
     <div class="row">
         <div class="col-lg-12">
             <label class="titleOption">
-                My Categories
+                <?php echo Yii::t('postOffer', 'My Categories'); ?>
                 <img src="<?php echo Yii::app()->theme->baseUrl ?>/images/saydiv.png">
             </label>
             <label class="obligatory">(obligatory)</label>
@@ -119,12 +119,12 @@ $this->renderPartial("//offers/offer_errors/_offer_errors",array("model"=>$model
                     <?php echo $form->checkBox($model, 'special_deal', array("id" => "w-like")); ?>
                     <label class="font18" for="w-like"> I would like to post my offer as a special deal. For</label>
                     <div class="clear"></div>
-                    <span>
-                        *Choose this Option will cost you
+                    <span> 
+                        <?php echo Yii::t('postOffer', '*Choose this Option will cost you'); ?>
                         <sup style="position: relative; top: 5px">€</sup>
-                        by the of posting and the upper
+                         <?php echo Yii::t('postOffer', 'by the of posting and the upper'); ?>
                         <br>
-                        Price will be crosses out and your Discount-Price will be highlighted
+                        <?php echo Yii::t('postOffer', 'Price will be crosses out and your Discount-Price will be highlighted'); ?>
                     </span>
                 </div>
             </div>
@@ -277,7 +277,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors",array("model"=>$model
             <label class="obligatory">(obligatory)</label>
         </div>
         <div class="col-lg-12">
-            
+
             <?php
             echo $form->textArea(
                     $model, 'description', array(

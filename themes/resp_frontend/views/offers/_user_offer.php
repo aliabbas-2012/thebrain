@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-lg-12">
         <label class="titleOption">
-            My Profile
+            <?php echo Yii::t('postOffer', 'My Profile'); ?>
             <img src="<?php echo Yii::app()->theme->baseUrl ?>/images/saydiv.png">
         </label>
-        <label class="obligatory">(obligatory)</label>
+        <label class="obligatory">(<?php echo Yii::t('postOffer', 'obligatory'); ?>)</label>
     </div>
     <div class="row" id="profile">
         <div class="col-lg-6">
@@ -16,7 +16,7 @@
                 'id' => 'first_name',
                 'placeholder' => "Type here your First Name..."));
             ?> 
-            <label class="req-f font-req">(obligatory)</label>
+            <label class="req-f font-req">(<?php echo Yii::t('postOffer', 'obligatory'); ?>)</label>
 
             <?php
             echo $form->textField($model, 'description', array(
@@ -37,7 +37,7 @@
                 'placeholder' => "Type here your Password..."));
             ?> 
 
-            <label class="floatLeft">* To change your Password, Just enter your new Password</label>
+            <label class="floatLeft">* <?php echo Yii::t('postOffer', 'To change your Password, Just enter your new Password'); ?></label>
 
             <?php
             echo $form->passwordField($model, 'pwd_repeat', array(
@@ -45,11 +45,11 @@
                 'id' => 're_pass',
                 'placeholder' => "Repeat here your Password..."));
             ?> 
-            <label class="floatLeft">* and confirm it here</label>
+            <label class="floatLeft">* <?php echo Yii::t('postOffer', 'and confirm it here'); ?></label>
         </div>
         <div class="col-lg-6">
             <div id="choose_radio">
-               
+
                 <?php
                 echo $form->textField($model, 'second_name', array(
                     'class' => 'k-textbox floatLeft profileBottom profileText',
@@ -63,30 +63,30 @@
                     'id' => 'first_name',
                     'placeholder' => "Type City"));
                 ?> 
-           
-        
+
+
                 <?php
                 echo $form->textField($model, 'zipcode', array(
                     'class' => 'k-textbox floatLeft profileBottom profileText',
                     'id' => 'country',
                     'placeholder' => "Zip Code"));
                 ?> 
-               
-                
+
+
                 <?php
                 echo $form->textField($model, 'phone', array(
                     'class' => 'k-textbox floatLeft profileBottom profileText',
                     'id' => 'country',
                     'placeholder' => "Type here your Phone Number..."));
                 ?> 
-            
+
                 <?php
                 echo $form->textField($model, 'paypal_mail', array(
                     'class' => 'k-textbox floatLeft profileBottom profileText',
                     'id' => 'country',
                     'placeholder' => "Type here your Pay Pal Email..."));
                 ?> 
-                <label class="req-m font-req">(obligatory)</label>
+                <label class="req-m font-req">(<?php echo Yii::t('postOffer', 'obligatory'); ?>)</label>
             </div>
         </div>
     </div>

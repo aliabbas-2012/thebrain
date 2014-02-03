@@ -119,22 +119,22 @@
 
                         <li>
                             <?php
-                            echo CHtml::link("Home", $this->createUrl("/web/default/index"));
+                            echo CHtml::link(Yii::t('link', "Home"), $this->createUrl("/web/default/index"));
                             ?>
                         </li>
                         <li>
                             <?php
-                            echo CHtml::link("Blog", $this->createUrl("/web/blog/index"));
+                            echo CHtml::link(Yii::t('link', "Blog"), $this->createUrl("/web/blog/index"));
                             ?>                        
                         </li>
                         <li>
                             <?php
-                            echo CHtml::link("How It Works", $this->createUrl("/web/article/index", array("slug" => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-8")));
+                            echo CHtml::link(Yii::t('link', "How It Works"), $this->createUrl("/web/article/index", array("slug" => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-8")));
                             ?>                        
                         </li>
                         <li >
                             <?php
-                            echo CHtml::link("Post Offer", $this->createUrl("/web/offers/post", array("action" => "create")), array("class" => "offer"));
+                            echo CHtml::link(Yii::t('link', "Post Offer"), $this->createUrl("/web/offers/post", array("action" => "create")), array("class" => "offer"));
                             ?>                        
                         </li>
 
@@ -285,10 +285,10 @@
                             <a href="<?php echo $this->createUrl("/web/article/article/", array('slug' => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-9")); ?>"><?php echo Yii::t('link', 'How it works') ?></a>
                         </li>
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/web/blog/index"); ?>"><?php echo Yii::t('link', 'Blog') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/blog/index"); ?>"><?php echo Yii::t('link', 'Blog'); ?></a>
                         </li>
                         <li class="link">
-                            <a href="<?php echo $this->createUrl("/web/faq/index"); ?>"><?php echo Yii::t('link', 'FAQ') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/faq/index"); ?>"><?php echo Yii::t('link', 'FAQ'); ?></a>
                         </li>
                         <li class="link">
                             <a href="<?php echo $this->createUrl("/web/article/index/", array('slug' => !empty($articless[1]) ? $articless[1]->slug : "terms_condition-9")); ?>"><?php echo Yii::t('link', 'Term &amp; Conditions') ?></a>
