@@ -60,7 +60,7 @@
 
     <div class="form-group buttons">
         <div class="col-sm-offset-2 col-sm-10">
-            <?php echo CHtml::submitButton('Change Password', array('class' => 'btn-default')); ?>
+            <?php echo CHtml::submitButton(Yii::t("user",'Change Password'), array('class' => 'btn-default')); ?>
         </div>
 
     </div>

@@ -48,7 +48,7 @@
                 <div class="col-sm-offset-2 col-sm-10">
                     <?php echo CHtml::submitButton('Submit', array('class' => 'btn btn-default')); ?>
                     <?php
-                    echo CHtml::link("login", $this->createUrl("/web/user/login"));
+                    echo CHtml::link(Yii::t("user","login"), $this->createUrl("/web/user/login"));
                     ?>
                 </div>
 

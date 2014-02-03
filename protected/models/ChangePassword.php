@@ -37,6 +37,11 @@ class ChangePassword extends CFormModel {
         );
     }
 
+    /**
+     *  check old password
+     * @param type $attribute
+     * @param type $params
+     */
     public function checkOldPassword($attribute, $params) {
 
         $users = Users::model()->findBypk(Yii::app()->user->id);
@@ -46,6 +51,17 @@ class ChangePassword extends CFormModel {
         } else {
             $this->_model = $users;
         }
+    }
+
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels() {
+        return array(
+            'password' => Yii::t('models','Password'),
+            'old_pwd' => Yii::t('models','Old Password'),
+            'pwd_repeat' => Yii::t('models','Repeat Password'),
+        );
     }
 
 }

@@ -18,7 +18,7 @@ if ($model->background_image != "") {
                         <p class="floatLeft"><?php echo Yii::t('postOffer', 'I offer'); ?>  </p>
 
                         <?php
-                        echo $form->textField($model, 'name', array('id' => 'txtoffer', "class" => "k-textbox floatLeft", 'placeholder' => "Type here your offer"));
+                        echo $form->textField($model, 'name', array('id' => 'txtoffer', "class" => "k-textbox floatLeft", 'placeholder' => Yii::t('postOffer',"Type here your offer")));
                         ?>
                     </div>
                 </div>
@@ -34,7 +34,7 @@ if ($model->background_image != "") {
                         echo $form->textField($model, 'price', array(
                             'class' => 'k-textbox',
                             "id" => "txtprice",
-                            'placeholder' => "Your Price?...",
+                            'placeholder' => Yii::t('postOffer',"Your Price?..."),
                             "pattern" => "\d{1,11}",
                             "style" => "width: 24%; height: 39px !important; margin-top: 15px"
                         ));

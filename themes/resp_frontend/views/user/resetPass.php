@@ -41,7 +41,7 @@
     </div>
 
     <div class="row-fluid buttons wide-button">
-        <?php echo CHtml::submitButton('Change Password', array('class' => 'btn btn btn-primary')); ?>
+        <?php echo CHtml::submitButton(Yii::t("user",'Change Password'), array('class' => 'btn btn btn-primary')); ?>
     </div>
     <?php $this->endWidget(); ?>
     <?php $this->endWidget(); ?>
