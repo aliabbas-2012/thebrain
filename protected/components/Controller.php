@@ -329,8 +329,13 @@ class Controller extends CController {
      */
     public function createUrl($route, $params = array(), $ampersand = '&') {
 
-        if (!strstr(Yii::app()->request->url, "admin") && !isset($_GET['lang'])) {
-            $params = array_merge(array("lang" => Yii::app()->language), $params);
+        if (!strstr(Yii::app()->request->url, "admin")) {
+			if(!isset($_GET['lang'])){
+				$params = array_merge(array("lang" => Yii::app()->language), $params);
+			}
+			else {
+				$params = array_merge(array("lang" => $_GET['lang']), $params);
+			}
             return parent::createUrl($route, $params, $ampersand);
         }
         return parent::createUrl($route, $params, $ampersand);

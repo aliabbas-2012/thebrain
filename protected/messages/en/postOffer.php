@@ -81,7 +81,7 @@ return array (
   'Youtube/Vimeo Video Link' => '',
   'My Sounds' => '',
   'My Sounds' => '',
-  'Description' => '',,
+  'Description' => '',
   'Can not insert right now' => '',
   'Select your background image' => '',
   'Select your avatar image' => '',
