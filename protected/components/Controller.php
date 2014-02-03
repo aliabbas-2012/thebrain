@@ -70,13 +70,20 @@ class Controller extends CController {
         //$this->installConfig();
         $this->layout = "//layouts/column1";
         if (get_class($this->getModule()) == "WebModule") {
-
-            Yii::app()->language = "de";
+            
+            /**
+             * change language will be here
+             */
+            if (!empty($_GET['lang'])) {
+                Yii::app()->language =  $_GET['lang'];
+            }
+            else {
+                Yii::app()->language =  "en";
+            }
             Yii::app()->theme = "resp_frontend";
             $this->layout = "//layouts/frontend";
         } else {
             Yii::app()->user->loginUrl = "/site/login";
-           
         }
 
 
@@ -312,6 +319,21 @@ class Controller extends CController {
         if ($route[0] !== '/' && ($module = $this->getModule()) !== null)
             $route = $module->getId() . '/' . $route;
         return Yii::app()->createUrl(trim($route, '/'), $params, $ampersand);
+    }
+
+    /**
+     *  over riding url for 
+     * @param type $route
+     * @param type $params
+     * @param type $ampersand
+     */
+    public function createUrl($route, $params = array(), $ampersand = '&') {
+
+        if (!strstr(Yii::app()->request->url, "admin") && !isset($_GET['lang'])) {
+            $params = array_merge(array("lang" => Yii::app()->language), $params);
+            return parent::createUrl($route, $params, $ampersand);
+        }
+        return parent::createUrl($route, $params, $ampersand);
     }
 
     /*

@@ -3,9 +3,9 @@
 <div class="clear"></div>
 <div class="tabs-container">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#random_offers" data-toggle="tab">Random Offers</a></li>
-        <li><a href="#recent_offers" data-toggle="tab">Recent Offers</a></li>
-        <li><a href="#saved_offers" data-toggle="tab">Saved Offers</a></li>
+        <li class="active"><a href="#random_offers" data-toggle="tab"><?php echo Yii::t("site","Random Offers"); ?></a></li>
+        <li><a href="#recent_offers" data-toggle="tab"><?php echo Yii::t("site","Recent Offers"); ?></a></li>
+        <li><a href="#saved_offers" data-toggle="tab"><?php echo Yii::t("site","Saved Offers"); ?></a></li>
 
     </ul>
 
