@@ -30,7 +30,13 @@ class BspItemController extends Controller {
                     'delete', 'getChildrenCategories',
                     'loadChildByAjax', 'editChild', 'deleteChildByAjax'),
                 'users' => array('@'),
-                'expression'=>'isset($user->user->type) && ($user->user->type==="admin")'
+                'expression' => 'isset($user->user->type) && ($user->user->type==="admin")'
+            ),
+            array('allow', // allow authenticated user to perform 'create' and 'update' actions
+                'actions' => array(
+                    'getChildrenCategories',
+                ),
+                'users' => array('@'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),

@@ -3,7 +3,11 @@ var thepuzzleadmin = {
     filldropDownField: function(obj, url, elem_id) {
         if (jQuery(obj).val() != "") {
             jQuery("#loading").show();
-            url += "?id=" + jQuery(obj).val();
+			op = "?";
+			if(url.search("\\?")!=-1){
+				op = "&";
+			}
+            url += op+"id=" + jQuery(obj).val();
             jQuery.getJSON(url, function(data) {
 
                 var items = [];
@@ -24,7 +28,11 @@ var thepuzzleadmin = {
     fillKendoDropDown: function(obj, url, elem_id, a) {
         if (jQuery(obj).val() != "") {
             jQuery("#loading").show();
-            url += "?id=" + jQuery(obj).val();
+            op = "?";
+			if(url.search("\\?")!=-1){
+				op = "&";
+			}
+            url += op+"id=" + jQuery(obj).val();
             jQuery.getJSON(url, function(data) {
                 savobj = jQuery("#" + elem_id);
                 del_parent = savobj.parent()
