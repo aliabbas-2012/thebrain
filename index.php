@@ -6,7 +6,7 @@ if (strstr($_SERVER['SERVER_NAME'], "localhost")) {
 else {
     error_reporting(0);
 }
-
+error_reporting(E_ALL);
 
 // change the following paths if necessary
 $yii = dirname(__FILE__) . '/../../frameworks/yii-1.1.14.f0fee9/framework/yii.php';
