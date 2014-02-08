@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Message translations.
  *
@@ -18,30 +19,30 @@
  *
  * @version $Id: $
  */
-return array (
-  'Lastest Statistics' =>'',
-  'Actual Offers' => '',
-  'Lastest Statistics' => '',
-  'Saved Offers' => '',
-  'Posted Offers Total' => '',
-  'Random Offers' => '',
-  'Recently viewed' => '',
-  'Total Payments' => '',
-  'User' => '',
-  'Share your talents and equipment'=>'',
-  'I rent - Why to buy'=>'',
-  'Rent out your items which you, your drill is hardly used, like the head in the basement of your lawn mower 5 times a year to use comes at you used in 30 years of you not even more than 3 hours and everything else, whatever else with you most of the time lying around stowed. Why should buy the same when you have to give it to you and you can increase your household budget your environment? Join adjust is free and easy.'=>'',
-'Find perfect jobs'=>'',
-'Create, from students to retirees, a free profile that stands out. Be authentic, upload your photos, videos and introduce your self personally to your buyers. Create your individual offers, present your self and tell about your skills, work needs and get commissioned. Share interests, place special deals and offer your free capacities, so everyone can immediately find them. Thus you will save lengthy acquisition and you can devote yourself entirely your orders'=>'',
-'Earn extra money'=>'',
-'Only when your service is completed and you receive your money, you pay us 1€ for the listing.
-Our Payment Protection allows you to define a deposit for your rental equipment and guarantees your payment for all your accomplished services. Get positive reviews, create trust,generate thereby more sales and therefore earn more money.'=>'',
-'Find talents and equipment'=>'',
-'Rentals in your area'=>'',
-'How important is it for you to own things, if you can borrow you? For example, do you need a sewing machine for a few days, a camera for a few hours, a mobile home for a weekend, a projector, a grinder and and and ... In ThePuzzzle you can easily find people who possess something that you need for a day or longer. Here lend you the items that you need, because why buy? In this way, you meet new people in your area and worry at the same time for sustainability.'=>'',
-'Find collaborative service'=>'',
-"Here you'll find service offerings that can assist you with your upcoming projects. All kinds of offers are available here, from plumbers, to the babysitter, from IT technicians to beautician. You need someone that designs you a business card, someone who takes your dog for walkies? In this case and many others you have come to the right place, because at ThePuzzzle you can clearly discover offers from your city, make use of a collaborative work and share common interests.Join and Enjoy."=>'',
-'Pay only for the result'=>'',
-'Payment is made only after the service is met to your complete satisfaction. Offers are paid securely and conveniently via PayPal. Even if you should not have a PayPal account, you have the option through PayPal to pay by credit card or by direct debit.'=>''
-
+return array(
+    'Lastest Statistics' => '',
+    'Actual Offers' => '',
+    'Lastest Statistics' => '',
+    'Saved Offers' => '',
+    'Posted Offers Total' => '',
+    'Random Offers' => '',
+    'Recently viewed' => '',
+    'Total Payments' => '',
+    'User' => '',
+    "Don't have an account" => "Don't have an account",
+    'Share your talents and equipment' => '',
+    'I rent - Why to buy' => '',
+    'Rent out your items which you, your drill is hardly used, like the head in the basement of your lawn mower 5 times a year to use comes at you used in 30 years of you not even more than 3 hours and everything else, whatever else with you most of the time lying around stowed. Why should buy the same when you have to give it to you and you can increase your household budget your environment? Join adjust is free and easy.' => '',
+    'Find perfect jobs' => '',
+    'Create, from students to retirees, a free profile that stands out. Be authentic, upload your photos, videos and introduce your self personally to your buyers. Create your individual offers, present your self and tell about your skills, work needs and get commissioned. Share interests, place special deals and offer your free capacities, so everyone can immediately find them. Thus you will save lengthy acquisition and you can devote yourself entirely your orders' => '',
+    'Earn extra money' => '',
+    'Only when your service is completed and you receive your money, you pay us 1ï¿½ for the listing.
+Our Payment Protection allows you to define a deposit for your rental equipment and guarantees your payment for all your accomplished services. Get positive reviews, create trust,generate thereby more sales and therefore earn more money.' => '',
+    'Find talents and equipment' => '',
+    'Rentals in your area' => '',
+    'How important is it for you to own things, if you can borrow you? For example, do you need a sewing machine for a few days, a camera for a few hours, a mobile home for a weekend, a projector, a grinder and and and ... In ThePuzzzle you can easily find people who possess something that you need for a day or longer. Here lend you the items that you need, because why buy? In this way, you meet new people in your area and worry at the same time for sustainability.' => '',
+    'Find collaborative service' => '',
+    "Here you'll find service offerings that can assist you with your upcoming projects. All kinds of offers are available here, from plumbers, to the babysitter, from IT technicians to beautician. You need someone that designs you a business card, someone who takes your dog for walkies? In this case and many others you have come to the right place, because at ThePuzzzle you can clearly discover offers from your city, make use of a collaborative work and share common interests.Join and Enjoy." => '',
+    'Pay only for the result' => '',
+    'Payment is made only after the service is met to your complete satisfaction. Offers are paid securely and conveniently via PayPal. Even if you should not have a PayPal account, you have the option through PayPal to pay by credit card or by direct debit.' => ''
 );

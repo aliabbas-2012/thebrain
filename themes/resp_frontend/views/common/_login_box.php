@@ -67,5 +67,5 @@
 
 </div>
 <div class="login-border-top">
-   <?php Yii::t('site', "Don't have an account"); ?> ? <?php echo CHtml::link(Yii::t('link', "Sign Up"), $this->createUrl("/web/user/register")) ?>
+   <?php echo Yii::t('site', "Don't have an account"); ?> ? <?php echo CHtml::link(Yii::t('link', "Sign Up"), $this->createUrl("/web/user/register")) ?>
 </div>

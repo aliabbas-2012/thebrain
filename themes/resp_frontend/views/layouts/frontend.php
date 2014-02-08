@@ -35,6 +35,7 @@
         <?php
         header('Content-Type: text/html; charset="utf-8"', true);
         ?>
+
     </head>
 
     <body>
@@ -44,7 +45,7 @@
         </div>
         <!-- Fixed navbar -->
         <div class="navbar navbar-inverse first-nav" role="navigation">
-            <div class="container">
+            <div class="container container-top">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -66,36 +67,42 @@
                     $articless = BspArticla::model()->findAll($criteria);
                     ?>
                     <ul class="nav navbar-nav navbar-right"> 
-                        <li class="dropdown">
-                            <a  class="dropdown-toggle" data-toggle="dropdown">
-                                <?php
-                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/notify.png", '', array("height" => "20"));
-                                ?>
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
+                        <?php
+                        if (isset(Yii::app()->user->id)):
+                            ?>
+                            <li class="dropdown">
+                                <a  class="dropdown-toggle" data-toggle="dropdown">
                                     <?php
-                                    echo CHtml::link(Yii::t('link', "Dashboard"), $this->createUrl('/web/user/dashboard'));
+                                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/notify.png", '', array("height" => "20"));
                                     ?>
-                                </li>                                
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a  class="dropdown-toggle" data-toggle="dropdown">
-                                <?php
-                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/mail.png", '', array("height" => "20"));
-                                ?>
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <?php
+                                        echo CHtml::link(Yii::t('link', "Dashboard"), $this->createUrl('/web/user/dashboard'));
+                                        ?>
+                                    </li>                                
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a  class="dropdown-toggle" data-toggle="dropdown">
                                     <?php
-                                    echo CHtml::link(Yii::t('link', "View All Messages"), $this->createUrl('/web/user/messages'));
+                                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/mail.png", '', array("height" => "20"));
                                     ?>
-                                </li>                                
-                            </ul>
-                        </li>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <?php
+                                        echo CHtml::link(Yii::t('link', "View All Messages"), $this->createUrl('/web/user/messages'));
+                                        ?>
+                                    </li>                                
+                                </ul>
+                            </li>
+                            <?php
+                        endif;
+                        ?>
                         <li class="dropdown">
                             <?php
                             /**
@@ -142,7 +149,7 @@
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
-            <div class="container search-bar" style="background:#fafcfc;">
+            <div class="container search-bar" >
 
                 <div class="navbar-collapse form-nav">
                     <?php
@@ -296,10 +303,10 @@
                         <li class="link">
                             <a href="<?php echo $this->createUrl("/web/article/index/", array('slug' => !empty($articless[2]) ? $articless[2]->slug : "privacy-10")); ?>"><?php echo Yii::t('link', 'Privacy Policy') ?></a>
                         </li>
-                        
-                        <li class="link link-flag"><a href="<?php echo $this->createUrl("/web/default/index",array("lang"=>"en")); ?>" ><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/en.png"  alt="Language Flag EN"/></a></li>
-                        <li class="link link-flag"><a href="<?php echo $this->createUrl("/web/default/index",array("lang"=>"de")); ?>" ><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/de.png" alt="Language Flag DE"/></a></li>
-                        
+
+                        <li class="link link-flag"><a href="<?php echo $this->createUrl("/web/default/index", array("lang" => "en")); ?>" ><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/en.png"  alt="Language Flag EN"/></a></li>
+                        <li class="link link-flag"><a href="<?php echo $this->createUrl("/web/default/index", array("lang" => "de")); ?>" ><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/de.png" alt="Language Flag DE"/></a></li>
+
                         <li class="link link_right"><a href="javascript:void(0)"><img id="link_twitter" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/twitter.png" alt="twitter"/></a></li>
                         <li class="link link_right"><a href="javascript:void(0)"><img id="link_google" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/google.png" alt="google"/></a></li>
                         <li class="link link_right"><a href="#"><img id="link_facebook" src="<?php echo Yii::app()->theme->baseUrl; ?>/images/fb.png" alt="fb"/></a></li>
@@ -354,7 +361,7 @@
                                         // pick list. Retrieve the matching places for that item.
                                         google.maps.event.addListener(searchBox, 'places_changed', function() {
                                             var places = searchBox.getPlaces();
-                                            
+
                                             if (typeof(places[0].geometry.location.nb) != "undefined") {
                                                 jQuery("#OfferSearch_lat").val(places[0].geometry.location.nb);
                                             }
@@ -434,21 +441,33 @@
 
         </style>
         <div id="map-canvas"></div>
-        <script>
-            $(function() {
+        <script type="text/javascript">
+            function scrollUpdateSeachBar() {
                 $(window).scroll(function() {
-                    var aTop = $('.first-nav').height();
-                    if ($(this).scrollTop() >= aTop) {
+                    var scrolltop = $(window).scrollTop();
+                    console.log("ali");
+                    if (scrolltop >= 40)
+                    {
+                        $('.search-bar').addClass('navbar-fixed-top');
 
-                        $('.search-bar').css('position', 'fixed');
-                        $('.search-bar').css('top', '0px');
-                        $('.search-bar').css('z-index', '99999');
                     }
-                    else {
-                        $('.search-bar').css('position', 'relative');
-                        $('.search-bar').css('z-index', '1');
+                    else
+                    {
+                        $('.search-bar').removeClass('navbar-fixed-top');
                     }
                 });
+            }
+            $(document).ready(function() {
+                $(window).scroll(scrollUpdateSeachBar()).trigger("scroll");
+
+            });
+            $(document).scroll(function() {  // OR  $(window).scroll(function() {
+               $(window).scroll(scrollUpdateSeachBar()).trigger("scroll");
+            });
+            jQuery(window).load(function()
+            {
+                
+
             });
         </script>
     </body>
