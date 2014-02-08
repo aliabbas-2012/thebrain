@@ -301,10 +301,8 @@ class RAuthorizer extends CApplicationComponent {
      * @return boolean whether the user is a superuser.
      */
     public function isSuperuser($userId) {
-        echo $userId;
-       
         $assignments = $this->_authManager->getAuthAssignments($userId);
-       
+
         return isset($assignments[$this->superuserName]);
     }
 
@@ -394,6 +392,7 @@ class RAuthorizer extends CApplicationComponent {
             if (preg_match('/' . $lc . '\ *\(?\ *[\"\']+/', $code) > 0)
                 return null; // Language construct found, not safe for eval.
 
+
                 
 // Get a list of all defined functions
         $definedFunctions = get_defined_functions();
@@ -404,6 +403,7 @@ class RAuthorizer extends CApplicationComponent {
         foreach ($functions as $f)
             if (preg_match('/' . $f . '\ *\({1}/', $code) > 0)
                 return null; // Function call found, not safe for eval.
+
 
                 
 // Evaluate the safer code
