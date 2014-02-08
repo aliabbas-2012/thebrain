@@ -1495,7 +1495,9 @@ div.w-header.w-shadow button.k-button-green:hover {
     border-left: 0;
     border-right: 0;
 }
-
+.search-bar >div {
+    margin-top: 5px;
+}
 /** search bar **/
 @media (min-width: 768px) {
     .search-bar {
