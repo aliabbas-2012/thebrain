@@ -119,7 +119,17 @@
                                     array('label' => 'Forget Password', 'url' => array('/users/forget')),
                                 )),
                 );
-
+                if (Yii::app()->user->isSuperuser) {
+                    $items [] = array('label' => 'Rights <span class="caret"></span>',
+                        'url' => '#',
+                        'visible' => true,
+                        'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
+                        'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
+                        'items' => array(
+                            array('label' => 'Rights', 'url' => array('/rights')),
+                            
+                    ));
+                }
                 $this->widget('zii.widgets.CMenu', array(
                     'htmlOptions' => array('class' => 'nav navbar-nav'),
                     'submenuHtmlOptions' => array('class' => 'dropdown-menu'),

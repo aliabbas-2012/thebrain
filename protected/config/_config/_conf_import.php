@@ -16,5 +16,8 @@ $import = array(
     'application.extensions.ProDropDown.*',
     'application.extensions.colorbox.*',
     'ext.giix-components.*',
+    'application.modules.rights.*',
+    'application.modules.rights.components.*',
+    'application.modules.rights.models.*',
 );
 ?>

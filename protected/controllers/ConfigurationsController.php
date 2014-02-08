@@ -13,33 +13,22 @@ class ConfigurationsController extends Controller {
      */
     public function filters() {
         return array(
-            'accessControl', // perform access control for CRUD operations
+            // 'accessControl', // perform access control for CRUD operations
+            'rights',
         );
     }
 
-    /**
-     * Specifies the access control rules.
-     * This method is used by the 'accessControl' filter.
-     * @return array access control rules
-     */
-    public function accessRules() {
-        return array(
-//            array('allow', // allow all users to perform 'index' and 'view' actions
-//                'actions' => array(),
-//                'users' => array('*'),
-//            ),
-//            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-//                'actions' => array(),
-//                'users' => array('@'),
-//            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('index', 'load', 'delete', 'appSettings'),
-                'users' => array('@'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
-            ),
-        );
+    public function allowedActions() {
+        return '@';
+    }
+
+    public function beforeAction($action) {
+        parent::beforeAction($action);
+
+        $operations = array('create', 'update', 'index', 'delete');
+        parent::setPermissions($this->id, $operations);
+
+        return true;
     }
 
     /**
@@ -72,12 +61,12 @@ class ConfigurationsController extends Controller {
 //        $this->performAjaxValidation($model);
 
         /* if form is posted */
-  
+
         if (isset($_POST[$model_name])) {
             /* Assign attributes */
-             
+
             $model->attributes = $_POST[$model_name];
-           
+
             /* Save record */
             if ($model->save())
                 $this->redirect(array('load', 'm' => $m, 'module' => $module));

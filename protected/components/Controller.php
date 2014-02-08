@@ -4,7 +4,7 @@
  * Controller is the customized base controller class.
  * All controller classes for this application should extend from this base class.
  */
-class Controller extends CController {
+class Controller extends RController {
 
     /**
      * @var string the default layout for the controller view. Defaults to '//layouts/column1',
@@ -70,20 +70,21 @@ class Controller extends CController {
         //$this->installConfig();
         $this->layout = "//layouts/column1";
         if (get_class($this->getModule()) == "WebModule") {
-            
+
             /**
              * change language will be here
              */
             if (!empty($_GET['lang'])) {
-                Yii::app()->language =  $_GET['lang'];
-            }
-            else {
-                Yii::app()->language =  "en";
+                Yii::app()->language = $_GET['lang'];
+            } else {
+                Yii::app()->language = "en";
             }
             Yii::app()->theme = "resp_frontend";
             $this->layout = "//layouts/frontend";
         } else {
             Yii::app()->user->loginUrl = "/site/login";
+            
+            $this->setPermissions();
         }
 
 
@@ -330,12 +331,11 @@ class Controller extends CController {
     public function createUrl($route, $params = array(), $ampersand = '&') {
 
         if (!strstr(Yii::app()->request->url, "admin")) {
-			if(!isset($_GET['lang'])){
-				$params = array_merge(array("lang" => Yii::app()->language), $params);
-			}
-			else {
-				$params = array_merge(array("lang" => $_GET['lang']), $params);
-			}
+            if (!isset($_GET['lang'])) {
+                $params = array_merge(array("lang" => Yii::app()->language), $params);
+            } else {
+                $params = array_merge(array("lang" => $_GET['lang']), $params);
+            }
             return parent::createUrl($route, $params, $ampersand);
         }
         return parent::createUrl($route, $params, $ampersand);
@@ -401,6 +401,116 @@ class Controller extends CController {
         $lines[] = ($line = trim($line)) ? $line : $word;
 
         return $lines;
+    }
+
+    /** ---------------- This part will be permission ---------------------- * */
+    /* PCM: For Mohsin: Remove this code from here and manage it in a seprate compononet. */
+
+    /**
+     * property array, Holds all contorllers array
+     * @var type 
+     * 
+     */
+    public $controllers;
+
+    /**
+     * property array holds Operation's Permission
+     * @var type 
+     * 
+     */
+    public $OpPermission = array();
+
+    /**
+     * Set controller array
+     * 
+     */
+    public function setControllers() {
+        $this->controllers = array(
+            "BspAdvertising" => "View",
+            'Site' => 'Index',
+            'BspArticla' => 'View',
+            "BspBlog" => "View",
+            "BspCategory" => "View",
+            "BspFaq" => "View",
+            "BspItem" => "View",
+            "BspMessage" => "View",
+            "BspNewfeed" => "View",
+            "BspOrder" => "View",
+            "Users" => "View",
+            "Configurations" => "View",
+        );
+    }
+
+    /**
+     * Set Permissions 
+     * For menu and for individual child controller i.e. Project, Contact etc..
+     * 
+     * @param string $controller
+     * @param array $operations
+     * @return type 
+     */
+    public function setPermissions($controller = "", $operations = array()) {
+        /**
+         * In case of ajax call we don't need to send all queries to db and update
+         * OpPermission array.
+         */
+//        if (Yii::app()->request->isAjaxRequest)
+//            return false;
+
+        /* If call comes from this controller's before action */
+        if (empty($controller)) {
+            $this->setMinPermissions();
+        }
+        /* If call comes from child controller's before action */ else {
+            $this->setAllPermissions($controller, $operations);
+        }
+        return true;
+    }
+
+    /**
+     * Set minimum permissions
+     * And update OpPermissions Array
+     */
+    private function setMinPermissions() {
+        $this->setControllers();
+        $perm = array();
+        foreach ($this->controllers as $controller => $minPer) {
+            $operation = $controller . '.' . $minPer;
+
+            $perm[$operation] = Yii::app()->user->checkAccess($operation);
+        }
+
+        $this->OpPermission = $perm;
+
+        return true;
+    }
+
+    private function setAllPermissions($controller, $operations) {
+        $perm = array();
+        foreach ($operations as $operation) {
+            $op = ucfirst($controller) . "." . ucfirst($operation);
+            $perm[$op] = Yii::app()->user->checkAccess($op);
+        }
+
+        $this->OpPermission = $this->OpPermission + $perm;
+    }
+
+    /**
+     * Get Permission
+     * @param string $operation
+     * @return boolean 
+     */
+    public function getPermission($operation) {
+        return $this->OpPermission[ucfirst($operation)];
+    }
+
+    /**
+     * Check view access
+     * @param type $operation
+     * @return type 
+     */
+    public function checkViewAccess($operation) {
+        return Yii::app()->user->checkAccess($operation);
     }
 
 }

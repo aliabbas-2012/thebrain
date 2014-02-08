@@ -14,4 +14,7 @@ $conf_component_user = array(
     'class' => 'DTWebUser',
     'loginUrl'=>array('/web/default/index'),
 );
+$conf_component_authManager = array(
+    'class' => 'RDbAuthManager', // Provides support authorization item sorting. ...... 
+);
 ?>

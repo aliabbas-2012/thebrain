@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-class DTWebUser extends CWebUser {
+class DTWebUser extends RWebUser {
 
     private $_user;
 

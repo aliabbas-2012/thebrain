@@ -17,7 +17,7 @@ return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'The Puzzle',
     'theme' => 'adminb',
-    'homeUrl'=>array('/web/default/index'),
+    'homeUrl' => array('/web/default/index'),
     // preloading 'log' component
     'preload' => array('log'),
     // autoloading model and component classes
@@ -28,6 +28,7 @@ return array(
         'user' => $conf_component_user,
         'urlManager' => $url_manager,
         'db' => $conf_component_db,
+        'authManager' => $conf_component_authManager,
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'web/default/error', //error controoler/error actions
