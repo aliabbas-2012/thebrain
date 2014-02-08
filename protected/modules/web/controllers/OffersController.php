@@ -35,6 +35,7 @@ class OffersController extends Controller {
                     'addpartial',
                     'changeStatus',
                     'deleteOffer',
+                    'getChildrenCategories'
                 ),
                 'users' => array('@'),
             ),
@@ -197,9 +198,9 @@ class OffersController extends Controller {
         if ($slug != "") {
             $slug_arr = explode("-", $slug);
             $id = $slug_arr[0];
-            $model = BspItemFrontEnd::model()->findByPk($id,"user_id =".Yii::app()->user->id);
-            if(empty($model)){
-                throw new CHttpException(404,'The specified post cannot be found.');
+            $model = BspItemFrontEnd::model()->findByPk($id, "user_id =" . Yii::app()->user->id);
+            if (empty($model)) {
+                throw new CHttpException(404, 'The specified post cannot be found.');
             }
         }
 
@@ -223,13 +224,12 @@ class OffersController extends Controller {
                 if ($model->save()) {
                     //incase of !empty password then the login 
                     if (!empty($user->password_new)) {
-                        
+
                         $user->password = md5($user->password_new);
-                    }
-                    else {
+                    } else {
                         unset($user->password);
                     }
-                    
+
                     $user->save(false);
                     foreach ($model->image_items as $modelImg) {
                         $modelImg->item_id = $model->id;
@@ -435,6 +435,14 @@ class OffersController extends Controller {
         if (isset($_POST['BspItemPriceOfferMonth'])) {
             $model->setRelationRecords('item_price_offers_month', is_array($_POST['BspItemPriceOfferMonth']) ? $_POST['BspItemPriceOfferMonth'] : array());
         }
+    }
+
+    /**
+     * get children category
+     */
+    public function actionGetChildrenCategories() {
+        $data = BspCategory::model()->getChildrenCategories($_REQUEST['id']);
+        echo CJSON::encode($data);
     }
 
 }

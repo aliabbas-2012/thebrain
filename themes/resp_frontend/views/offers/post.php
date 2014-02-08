@@ -52,7 +52,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
             <div id="choose_radio">
                 <?php
                 echo $form->radioButtonList($model, 'group_id', BspCategory::model()->getRootCategories(), array(
-                    'onchange' => 'thepuzzleadmin.fillKendoDropDown(this,"' . $this->createUrl("/bspItem/getChildrenCategories") . '","BspItemFrontEnd_category_id",false)',
+                    'onchange' => 'thepuzzleadmin.fillKendoDropDown(this,"' . $this->createUrl("/web/offers/getChildrenCategories") . '","BspItemFrontEnd_category_id",false)',
                     'separator' => '', 'labelOptions' => array('class' => 'group_choose')), array(
                 ));
                 ?>
@@ -88,7 +88,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
 
             echo $form->dropDownList($model, 'category_id', $category_list, array(
                 'class' => 'categorie',
-                'onchange' => 'thepuzzleadmin.fillKendoDropDown(this,"' . $this->createUrl("/bspItem/getChildrenCategories") . '","BspItemFrontEnd_sub_category_id",true)'
+                'onchange' => 'thepuzzleadmin.fillKendoDropDown(this,"' . $this->createUrl("/web/offers/getChildrenCategories") . '","BspItemFrontEnd_sub_category_id",true)'
             ));
             ?>
             <?php

@@ -34,7 +34,7 @@ class UsersController extends Controller {
                     'profileview'
                 ),
                 'users' => array('@'),
-                'expression' => 'isset($user->user->type) && ($user->user->type==="admin")'
+                'expression' => 'isset(Yii::app()->user) && (Yii::app()->user->isSuperuser)'
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
