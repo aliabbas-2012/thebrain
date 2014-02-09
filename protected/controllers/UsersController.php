@@ -29,12 +29,17 @@ class UsersController extends Controller {
                 'actions' => array(
                     'create', 'update',
                     'index', 'view', 'delete',
+                ),
+                'users' => array('@'),
+                'expression' => 'isset(Yii::app()->user) && (Yii::app()->user->isSuperuser)'
+            ),
+            array('allow',
+                'actions' => array(
                     'changepass',
                     'profile',
                     'profileview'
                 ),
                 'users' => array('@'),
-                'expression' => 'isset(Yii::app()->user) && (Yii::app()->user->isSuperuser)'
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
