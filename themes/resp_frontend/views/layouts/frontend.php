@@ -445,7 +445,7 @@
             function scrollUpdateSeachBar() {
                 $(window).scroll(function() {
                     var scrolltop = $(window).scrollTop();
-                    console.log("ali");
+                   
                     if (scrolltop >= 40)
                     {
                         $('.search-bar').addClass('navbar-fixed-top');
@@ -457,18 +457,14 @@
                     }
                 });
             }
-            $(document).ready(function() {
-                $(window).scroll(scrollUpdateSeachBar()).trigger("scroll");
-
-            });
+//            $(document).ready(function() {
+//                $(window).scroll(scrollUpdateSeachBar()).trigger("scroll");
+//
+//            });
             $(document).scroll(function() {  // OR  $(window).scroll(function() {
                $(window).scroll(scrollUpdateSeachBar()).trigger("scroll");
             });
-            jQuery(window).load(function()
-            {
-                
-
-            });
+         
         </script>
     </body>
 </html>

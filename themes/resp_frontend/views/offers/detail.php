@@ -360,6 +360,22 @@
 </div>
 <div class="clear"></div>
 <div class="space-blog"></div>
+<div class="col-lg-12">
+    <div class="col-lg-10">
+
+        <div style="font-weight:bold;font-size:11px" id="keyword">
+            <?php echo Yii::t('detailOffer', 'Keywords'); ?>
+            <?php
+            $keyword = BspItemSearchKeyword::model()->find("item_id = " . $model->id);
+            echo $keyword->keyword;
+            ?>
+        </div>
+
+    </div>
+    <div class="col-lg-2">
+        <div style="font-weight:bold;font-size:11px" id="Nr"><?php echo Yii::t('detailOffer', 'Offer Nr:'); ?> <?php echo $model->offer_number; ?></div>
+    </div>
+</div>
 <div class="red-bg">
     <label><?php echo Yii::t('detailOffer', 'Check out my other offers'); ?> </label>
 </div>
