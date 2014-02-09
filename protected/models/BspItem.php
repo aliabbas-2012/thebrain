@@ -37,6 +37,7 @@
  * @property string $seo_keywords
  * @property double $lat
  * @property double $lng
+ * @property double $offer_number
  * @property string $create_time
  * @property string $create_user_id
  * @property string $update_time
@@ -58,6 +59,7 @@ class BspItem extends DTActiveRecord {
         4 => "Price per week",
         5 => "Price per month",
     );
+    
 
     /**
      *
@@ -107,7 +109,7 @@ class BspItem extends DTActiveRecord {
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('start_price,end_price', 'safe'),
             array('offer_name,username', 'safe'),
-            array('most_visited,most_bought', 'safe'),
+            array('offer_number,most_visited,most_bought', 'safe'),
             array('slug', 'safe'),
             array('loc_name,_per_price,background_path,background_image_name,description, date_create', 'safe'),
             // The following rule is used by search().
@@ -272,6 +274,7 @@ class BspItem extends DTActiveRecord {
         $criteria->compare('seo_title', $this->seo_title, true);
         $criteria->compare('seo_description', $this->seo_description, true);
         $criteria->compare('seo_keywords', $this->seo_keywords, true);
+        $criteria->compare('offer_number', $this->offer_number, true);
         $criteria->compare('lat', $this->lat);
         $criteria->compare('lng', $this->lng);
         $criteria->compare('create_time', $this->create_time, true);
@@ -336,6 +339,14 @@ class BspItem extends DTActiveRecord {
      */
     public function beforeValidate() {
         $this->user_id = Yii::app()->user->id;
+        /**
+         * offer number setting
+         */
+        if ($this->group_id == 9) {
+            $this->offer_number = $this->id + 1000000000000;
+        } else {
+            $this->offer_number = $this->id + 2000000000000;
+        }
         return parent::beforeValidate();
     }
 
@@ -393,6 +404,7 @@ class BspItem extends DTActiveRecord {
      */
     public function afterFind() {
         $this->setSlug();
+
         return parent::afterFind();
     }
 
