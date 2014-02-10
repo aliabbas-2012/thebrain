@@ -29,7 +29,7 @@ class OfferSearch extends CFormModel {
 
 
         return array(
-            array('keword, location,distance,lng,lat', 'safe'),
+            array('keyword, location,distance,lng,lat', 'safe'),
             array('special_deal, withVideo,withSound,lowPrice,highPrice,popularity,nearFirst', 'safe'),
         );
     }

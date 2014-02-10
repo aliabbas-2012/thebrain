@@ -81,7 +81,7 @@ class OffersController extends Controller {
             if (!empty($model->keyword)) {
                 $criteria->compare("name", $model->keyword, "OR");
                 $criteria->compare("id", $model->keyword, "OR");
-                $criteria->compare("offer_number", $model->offer_number, "OR");
+                $criteria->compare("offer_number", $model->keyword, "OR");
                 $criteria->compare("description", $model->keyword, "OR");
                 $criteria->compare("seo_keywords", $model->keyword, "OR");
                 $criteria->compare("seo_title", $model->keyword, "OR");
@@ -136,6 +136,9 @@ class OffersController extends Controller {
                 }
             }
         }
+//        CVarDumper::dump($model->attributes,10,true);
+//        CVarDumper::dump($_POST['OfferSearch'],10,true);
+//        CVarDumper::dump($criteria,10,true);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
         ));
