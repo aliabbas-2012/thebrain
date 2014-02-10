@@ -367,7 +367,7 @@
             <?php echo Yii::t('detailOffer', 'Keywords'); ?>
             <?php
             $keyword = BspItemSearchKeyword::model()->find("item_id = " . $model->id);
-            echo $keyword->keyword;
+            echo isset($keyword->keyword)?$keyword->keyword:"";
             ?>
         </div>
 
