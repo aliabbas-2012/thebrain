@@ -3,9 +3,13 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="my_offers">
-            <?php
-            $this->renderPartial("//offers/_category_tab_header_search", array("cat_arr" => $cat_arr));
-            ?>
+            <div class="">
+                <?php
+                $this->renderPartial("//offers/_category_tab_header_search", array("cat_arr" => $cat_arr,"total"=>$dataProvider->getTotalItemCount()));
+                ?>
+            </div>
+            
+
             <?php
             echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("class" => "line-blog-btm"));
             ?>` 
@@ -129,7 +133,7 @@
                         {
                            jQuery("#grid_content").html(data);
                            jQuery("#loading").hide();
-                            
+                           jQuery(".total span").html(jQuery("#grid_content #recentOrder .review").length) 
                         }
                   });
         })

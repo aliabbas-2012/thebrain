@@ -79,12 +79,12 @@ class OffersController extends Controller {
         if (isset($_POST['OfferSearch'])) {
             $model->attributes = $_POST['OfferSearch'];
             if (!empty($model->keyword)) {
-                $criteria->compare("name", $model->keyword, "OR");
-                $criteria->compare("id", $model->keyword, "OR");
-                $criteria->compare("offer_number", $model->keyword, "OR");
-                $criteria->compare("description", $model->keyword, "OR");
-                $criteria->compare("seo_keywords", $model->keyword, "OR");
-                $criteria->compare("seo_title", $model->keyword, "OR");
+                $criteria->compare("name", $model->keyword,true, "OR");
+                $criteria->compare("id", $model->keyword, true,"OR");
+                $criteria->compare("offer_number", $model->keyword, true,"OR");
+                $criteria->compare("description", $model->keyword, true,"OR");
+                $criteria->compare("seo_keywords", $model->keyword, true,"OR");
+                $criteria->compare("seo_title", $model->keyword, true,"OR");
             }
             $criteria->compare("lat", $model->lat);
             $criteria->compare("lng", $model->lng);
@@ -138,7 +138,7 @@ class OffersController extends Controller {
         }
 //        CVarDumper::dump($model->attributes,10,true);
 //        CVarDumper::dump($_POST['OfferSearch'],10,true);
-//        CVarDumper::dump($criteria,10,true);
+        //CVarDumper::dump($criteria,10,true);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
         ));

@@ -472,6 +472,14 @@
 //                $(window).scroll(scrollUpdateSeachBar()).trigger("scroll");
 //
 //            });
+
+            $(function() {
+                $("form#search-form input").keypress(function(e) {
+                    if (e.keyCode == 13) {
+                       $("form#search-form").submit();
+                    }
+                });
+            });
             $(document).scroll(function() {  // OR  $(window).scroll(function() {
                 $(window).scroll(scrollUpdateSeachBar()).trigger("scroll");
             });

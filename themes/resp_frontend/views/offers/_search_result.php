@@ -19,13 +19,15 @@
         ?>
         <div class="review">
             <div class="review-img col-lg-2">
-                <?php
-                if (!empty($item->image_offer->image_url)):
-                    echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, '');
-                else :
-                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png");
-                endif;
-                ?>
+                <a href='<?php echo $this->createUrl("/web/offers/detail", array('slug' => $item->slug)); ?>'>
+                    <?php
+                    if (!empty($item->image_offer->image_url)):
+                        echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, '');
+                    else :
+                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png");
+                    endif;
+                    ?>
+                </a>
             </div>
             <div class="review-content col-lg-6">
                 <div class="review-content-item">
