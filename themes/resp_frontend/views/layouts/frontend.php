@@ -44,23 +44,25 @@
 
         </div>
         <!-- Fixed navbar -->
-        <div class="navbar navbar-inverse first-nav" role="navigation">
-            <div class="container container-top">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-primary">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
                     <a class="navbar-brand" href="<?php echo $this->createUrl(Yii::app()->homeUrl[0]); ?>">
                         <?php
                         echo CHtml::image(Yii::app()->theme->baseUrl . "/images/logo.png", '', array("width" => "200"));
                         ?>
                     </a>
                 </div>
-                <div class="navbar-collapse collapse">
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div  id="menu-primary" class="collapse navbar-collapse navbar-left">
                     <?php
                     $criteria = new CDbCriteria();
                     $criteria->select = "ID,article_name,article_name_de,custom_url_de,custom_url";
@@ -146,116 +148,133 @@
                         </li>
 
 
-                    </ul>
-                </div><!--/.nav-collapse -->
+                    </ul>       
+                </div>
+            </div><!-- /.container -->
+        </nav>
+        <!-- navbar search -->
+        <nav id="navbar-search" class="navbar navbar-inverse" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-secondary">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             </div>
-            <div class="container search-bar" >
 
-                <div class="navbar-collapse form-nav">
-                    <?php
-                    $model = new OfferSearch();
-                    $form = $this->beginWidget('CActiveForm', array(
-                        'id' => 'search-form',
-                        'enableAjaxValidation' => false,
-                        'action' => $this->createUrl("/web/offers/search"),
-                        'htmlOptions' => array(
-                            'class' => 'form-horizontal',
-                        )
-                    ));
-                    ?>
-                    <ul class="nav navbar-nav"> 
-                        <li class="dropdown">
-                            <a  class="dropdown-toggle head_category" data-toggle="dropdown">
-                                <?php echo Yii::t('link', 'All Categories') ?>
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu category_head_menu">
-                                <?php
-                                $data = BspCategory::model()->findAll(array('condition' => 'parent_id=0'));
-                                $i = 1;
-                                foreach ($data as $da) {
-
-                                    $cssClass = "";
-                                    if ($da->name != "Services" && $da->name != "Rentals") {
-                                        $cssClass = "clearleft";
-                                    }
-                                    echo '<li id="menu-item-' . $i . '" class=' . $cssClass . '>';
-
-                                    echo CHtml::link($da->name, $this->createUrl("/web/offers/category", array("category" => $da->slug)));
-
-
-                                    echo CHtml::openTag("ul", array("class" => ""));
-                                    $subcate = BspCategory::model()->findAll(array('condition' => 'parent_id=' . $da->id));
-                                    foreach ($subcate as $sub) {
-
-                                        echo '<li>';
-                                        echo CHtml::link($sub->name, $this->createUrl("/web/offers/category", array("category" => $sub->slug)));
-                                        echo '</li>';
-                                    }
-                                    echo CHtml::closeTag("ul");
-                                    echo '</li>';
-
-                                    $i++;
-                                }
-                                ?>
-
-                            </ul>
-                        </li>
-
-                        <li class="keword_search">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="menu-secondary" class="collapse navbar-collapse navbar-left">
+                <ul class="nav navbar-nav">
+                    <div class="search-bar">
+                        <div class="navbar-collapse form-nav main-search-bar-2">
                             <?php
-                            echo $form->textField($model, 'keyword', array(
-                                "class" => "form-control", "placeholder" => "Search ..."));
+                            $model = new OfferSearch();
+                            $form = $this->beginWidget('CActiveForm', array(
+                                'id' => 'search-form',
+                                'enableAjaxValidation' => false,
+                                'action' => $this->createUrl("/web/offers/search"),
+                                'htmlOptions' => array(
+                                    'class' => 'form-horizontal',
+                                )
+                            ));
                             ?>
-                        </li>    
-                        <li class="location_search">
-                            <?php
-                            echo $form->textField($model, 'location', array("class" => "form-control", "placeholder" => "f.e 10245 Berlin..."));
-                            echo $form->hiddenField($model, 'lat');
-                            echo $form->hiddenField($model, 'lng');
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown">
+                                    <a  class="dropdown-toggle head_category" data-toggle="dropdown">
+                                        <?php echo Yii::t('link', 'All Categories') ?>
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu category_head_menu">
+                                        <?php
+                                        $data = BspCategory::model()->findAll(array('condition' => 'parent_id=0'));
+                                        $i = 1;
+                                        foreach ($data as $da) {
 
-                            //other fields as search
-                            echo $form->hiddenField($model, 'special_deal');
-                            echo $form->hiddenField($model, 'withVideo');
-                            echo $form->hiddenField($model, 'withSound');
-                            echo $form->hiddenField($model, 'lowPrice');
-                            echo $form->hiddenField($model, 'highPrice');
-                            echo $form->hiddenField($model, 'popularity');
-                            echo $form->hiddenField($model, 'nearFirst');
-                            ?>
-                        </li>    
-                        <li class="distant_search">
-                            <?php
-                            $distance_arr = array(
-                                "0" => "+/- km",
-                                "5" => "5km",
-                                "10" => "10km",
-                                "20" => "20km",
-                                "50" => "50km",
-                                "100" => "100km",
-                                "250" => "250km",
-                                "" => "All Over",
-                            );
-                            echo $form->dropDownList($model, 'distance', $distance_arr, array("class" => "form-control"));
-                            ?>
+                                            $cssClass = "";
+                                            if ($da->name != "Services" && $da->name != "Rentals") {
+                                                $cssClass = "clearleft";
+                                            }
+                                            echo '<li id="menu-item-' . $i . '" class=' . $cssClass . '>';
 
-                        </li>
-                        <li class="btn-search">                            
-                            <div class="search-button">
-                                <a class="searchbt-top" href="javascript:void(0)" onclick="jQuery('#search-form').submit();">
+                                            echo CHtml::link($da->name, $this->createUrl("/web/offers/category", array("category" => $da->slug)));
+
+
+                                            echo CHtml::openTag("ul", array("class" => ""));
+                                            $subcate = BspCategory::model()->findAll(array('condition' => 'parent_id=' . $da->id));
+                                            foreach ($subcate as $sub) {
+
+                                                echo '<li>';
+                                                echo CHtml::link($sub->name, $this->createUrl("/web/offers/category", array("category" => $sub->slug)));
+                                                echo '</li>';
+                                            }
+                                            echo CHtml::closeTag("ul");
+                                            echo '</li>';
+
+                                            $i++;
+                                        }
+                                        ?>
+
+                                    </ul>
+                                </li>
+
+                                <li class="keword_search">
                                     <?php
-                                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/search_button.png");
+                                    echo $form->textField($model, 'keyword', array(
+                                        "class" => "form-control", "placeholder" => "Search ..."));
                                     ?>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <?php
-                    $this->endWidget();
-                    ?>
-                </div><!--/.nav-collapse -->
+                                </li>    
+                                <li class="location_search">
+                                    <?php
+                                    echo $form->textField($model, 'location', array("class" => "form-control", "placeholder" => "f.e 10245 Berlin..."));
+                                    echo $form->hiddenField($model, 'lat');
+                                    echo $form->hiddenField($model, 'lng');
+
+                                    //other fields as search
+                                    echo $form->hiddenField($model, 'special_deal');
+                                    echo $form->hiddenField($model, 'withVideo');
+                                    echo $form->hiddenField($model, 'withSound');
+                                    echo $form->hiddenField($model, 'lowPrice');
+                                    echo $form->hiddenField($model, 'highPrice');
+                                    echo $form->hiddenField($model, 'popularity');
+                                    echo $form->hiddenField($model, 'nearFirst');
+                                    ?>
+                                </li>    
+                                <li class="distant_search">
+                                    <?php
+                                    $distance_arr = array(
+                                        "0" => "+/- km",
+                                        "5" => "5km",
+                                        "10" => "10km",
+                                        "20" => "20km",
+                                        "50" => "50km",
+                                        "100" => "100km",
+                                        "250" => "250km",
+                                        "" => "All Over",
+                                    );
+                                    echo $form->dropDownList($model, 'distance', $distance_arr, array("class" => "form-control"));
+                                    ?>
+
+                                </li>
+                                <li class="btn-search">                            
+                                    <div class="search-button">
+                                        <a class="searchbt-top" href="javascript:void(0)" onclick="jQuery('#search-form').submit();">
+                                            <?php
+                                            echo CHtml::image(Yii::app()->theme->baseUrl . "/images/search_button.png");
+                                            ?>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <?php
+                            $this->endWidget();
+                            ?>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </ul>           
             </div>
-        </div>
+        </nav>
         <div id="puzzle_slider">
             <?php
             if ($this->id == "default" && $this->action->id == "index") {
@@ -335,59 +354,53 @@
 
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
         <script>
-                                    // This example adds a search box to a map, using the Google Place Autocomplete
-                                    // feature. People can enter geographical searches. The search box will return a
-                                    // pick list containing a mix of places and predicted search terms.
+                                            // This example adds a search box to a map, using the Google Place Autocomplete
+                                            // feature. People can enter geographical searches. The search box will return a
+                                            // pick list containing a mix of places and predicted search terms.
 
-                                    function initialize() {
+                                            function initialize() {
 
-                                        var markers = [];
-                                        var map = new google.maps.Map(document.getElementById('map-canvas'), {
-                                            mapTypeId: google.maps.MapTypeId.ROADMAP
-                                        });
+                                                var markers = [];
+                                                var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                                                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                                                });
+                                                //                // Create the search box and link it to the UI element.
+                                                var input = /** @type {HTMLInputElement} */(
+                                                        document.getElementById('OfferSearch_location'));
+                                                map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                                                var searchBox = new google.maps.places.SearchBox(
+                                                        /** @type {HTMLInputElement} */(input));
+                                                // [START region_getplaces]
+                                                // Listen for the event fired when the user selects an item from the
+                                                // pick list. Retrieve the matching places for that item.
+                                                google.maps.event.addListener(searchBox, 'places_changed', function() {
+                                                    var places = searchBox.getPlaces();
+                                                    if (typeof(places[0].geometry.location.nb) != "undefined") {
+                                                        jQuery("#OfferSearch_lat").val(places[0].geometry.location.nb);
+                                                    }
+                                                    if (typeof(places[0].geometry.location.ob) != "undefined") {
+                                                        jQuery("#OfferSearch_lng").val(places[0].geometry.location.ob);
+                                                    }
+
+                                                    if (typeof(places[0].geometry.location.d) != "undefined") {
+                                                        jQuery("#OfferSearch_lat").val(places[0].geometry.location.d);
+                                                    }
+                                                    if (typeof(places[0].geometry.location.e) != "undefined") {
+                                                        jQuery("#OfferSearch_lng").val(places[0].geometry.location.d);
+                                                    }
 
 
 
-                                        //                // Create the search box and link it to the UI element.
-                                        var input = /** @type {HTMLInputElement} */(
-                                                document.getElementById('OfferSearch_location'));
-                                        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-                                        var searchBox = new google.maps.places.SearchBox(
-                                                /** @type {HTMLInputElement} */(input));
+                                                });
+                                                // [END region_getplaces]
 
-                                        // [START region_getplaces]
-                                        // Listen for the event fired when the user selects an item from the
-                                        // pick list. Retrieve the matching places for that item.
-                                        google.maps.event.addListener(searchBox, 'places_changed', function() {
-                                            var places = searchBox.getPlaces();
+                                                // Bias the SearchBox results towards places that are within the bounds of the
 
-                                            if (typeof(places[0].geometry.location.nb) != "undefined") {
-                                                jQuery("#OfferSearch_lat").val(places[0].geometry.location.nb);
                                             }
-                                            if (typeof(places[0].geometry.location.ob) != "undefined") {
-                                                jQuery("#OfferSearch_lng").val(places[0].geometry.location.ob);
+                                            if (typeof(google) != "undefined") {
+                                                google.maps.event.addDomListener(window, 'load', initialize);
                                             }
-
-                                            if (typeof(places[0].geometry.location.d) != "undefined") {
-                                                jQuery("#OfferSearch_lat").val(places[0].geometry.location.d);
-                                            }
-                                            if (typeof(places[0].geometry.location.e) != "undefined") {
-                                                jQuery("#OfferSearch_lng").val(places[0].geometry.location.d);
-                                            }
-
-
-
-
-                                        });
-                                        // [END region_getplaces]
-
-                                        // Bias the SearchBox results towards places that are within the bounds of the
-
-                                    }
-                                    if (typeof(google) != "undefined") {
-                                        google.maps.event.addDomListener(window, 'load', initialize);
-                                    }
 
         </script>
         <style>
@@ -445,15 +458,13 @@
             function scrollUpdateSeachBar() {
                 $(window).scroll(function() {
                     var scrolltop = $(window).scrollTop();
-                   
                     if (scrolltop >= 40)
                     {
-                        $('.search-bar').addClass('navbar-fixed-top');
-
+                        $('.search-bar').addClass('nav2-fix-bar');
                     }
                     else
                     {
-                        $('.search-bar').removeClass('navbar-fixed-top');
+                        $('.search-bar').removeClass('nav2-fix-bar');
                     }
                 });
             }
@@ -462,9 +473,9 @@
 //
 //            });
             $(document).scroll(function() {  // OR  $(window).scroll(function() {
-               $(window).scroll(scrollUpdateSeachBar()).trigger("scroll");
+                $(window).scroll(scrollUpdateSeachBar()).trigger("scroll");
             });
-         
+
         </script>
     </body>
 </html>
