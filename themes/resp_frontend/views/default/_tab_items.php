@@ -75,7 +75,7 @@ foreach ($segments as $items) {
             $sItem.='</div>';
             ?>
             <div class="col-xs-6 col-md-3">
-                <a href="javascript:void(0)" class="thumbnail">
+                <a href="<?php echo $this->createUrl("/web/offers/detail",array("slug"=>$item->slug)); ?>" class="thumbnail">
 
                     <?php
                     if (!empty($item->image_offer->image_url)):

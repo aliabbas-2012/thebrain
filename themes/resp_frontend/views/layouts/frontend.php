@@ -179,6 +179,10 @@
                                     'class' => 'form-horizontal',
                                 )
                             ));
+                            //offer search keywords
+                            if (isset($_POST['OfferSearch'])) {
+                                $model->attributes = $_POST['OfferSearch'];
+                            }
                             ?>
                             <ul class="nav navbar-nav">
                                 <li class="dropdown">
@@ -476,7 +480,7 @@
             $(function() {
                 $("form#search-form input").keypress(function(e) {
                     if (e.keyCode == 13) {
-                       $("form#search-form").submit();
+                        $("form#search-form").submit();
                     }
                 });
             });
