@@ -46,7 +46,16 @@ body {
 ul.dropdown-menu li a {
     color: #414141 !important;
 }
+.nav2-fix-bar {
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 1030;
+    top: 0;
+}
+@media (min-width: 768px) {
 
+}
 /** top container **/
 @media (min-width: 768px) {
     .container-top {
@@ -189,7 +198,7 @@ ul.dropdown-menu li a {
 
 }
 #footer {
-    min-height: 40px;
+    height: 60px;
     webkit-box-shadow:inset 0 0 10px 2px #fff,0 0 0 #000;
     box-shadow: inset 0 0 rgba(255, 255, 255, 0.7), 0 5px 10px rgba(121, 120, 120, 0.17);
     border-style: solid;
@@ -198,6 +207,7 @@ ul.dropdown-menu li a {
     border-bottom-color: #f3f2f2;
     border-bottom-width: 1px;
     opacity: 1;
+    height: 35px;
     /*min-width: 1110px;*/
     overflow: hidden;
     position: fixed;
@@ -234,10 +244,10 @@ ul.dropdown-menu li a {
     padding-top: 0;
 }
 .footer-contain li.link_right {
-    float: right; padding: 0; margin: 0;
+    float: right;
 }
 .footer-contain li.link_right a{
-    margin-right: 10px; padding: 0;
+    margin-right: 10px;
 }
 .footer-contain li.link a img{
     width: 20px;
@@ -245,18 +255,6 @@ ul.dropdown-menu li a {
 .footer-contain li.link_right a img{
     height: 25px;
     width: auto;
-}
-@media (max-width: 786px) {
-	
-	body { padding-bottom: 0 !important; }
-	
-	.link-flag { float:left !important; width:20%; display:inline !important; }
-	
-	.link_right { float:none !important; width:20%; display:inline !important; }
-	
-	#footer { position:relative; }
-.footer-contain li { float:left; width:100%; padding:2px; display:block !important; }
-
 }
 
 @media (max-width: 480px) { 
@@ -270,6 +268,7 @@ ul.dropdown-menu li a {
 
 @media (min-width: 768px) {
     .footer-contain li.link_right {
+        display: none;
     }
 
 }
@@ -1510,7 +1509,7 @@ div.w-header.w-shadow button.k-button-green:hover {
 #menu-primary { float:right !important; }
 /** search bar **/
 @media (min-width: 768px) {
-	
+
     .search-bar {
     }
 }
@@ -1540,16 +1539,16 @@ div.w-header.w-shadow button.k-button-green:hover {
 
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-	#menu-primary { float:left !important; }
+    #menu-primary { float:left !important; }
     .tab-content .filterbar .refine-search .itemsearch {
         display: block;
         margin-top: 10px
     }
     .search-bar {
         position: relative !important;
-		background: #FFF !important;
-		min-height:240px !important;
-		padding-top:20px;
+        background: #FFF !important;
+        min-height:240px !important;
+        padding-top:20px;
     } 
 }
 
