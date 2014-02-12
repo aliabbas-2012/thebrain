@@ -94,6 +94,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
     $criteria->limit = "16";
     $criteria->order = "id DESC";
     $criteria->addInCondition('id', $saved_items);
+     $criteria->condition = "is_public>0 AND iStatus = 1";
     $items = BspItem::model()->findAll($criteria);
     $this->renderPartial("//user/_tab_items", array("items" => $items));
     ?>
@@ -106,6 +107,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
     $criteria = new CDbCriteria();
     $criteria->limit = "16";
     $criteria->order = "id DESC";
+     $criteria->condition = "is_public>0 AND iStatus = 1";
     $items = BspItem::model()->findAll($criteria);
     $this->renderPartial("//user/_tab_items", array("items" => $items));
     ?>

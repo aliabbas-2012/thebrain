@@ -61,6 +61,7 @@ class OffersController extends Controller {
         $cat_arr = explode("-", $category);
         $criteria = new CDbCriteria();
         $criteria->addCondition("group_id = " . $cat_arr[count($cat_arr) - 1]);
+        $criteria->addCondition("iStatus = 1");
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
         ));
@@ -90,6 +91,7 @@ class OffersController extends Controller {
             $criteria->compare("lng", $model->lng);
             //new attribute
             $criteria->compare("special_deal", $model->special_deal);
+            $criteria->addCondition("iStatus = 1");
             $with = array();
             if ($model->withVideo == 1) {
                 $with = array(

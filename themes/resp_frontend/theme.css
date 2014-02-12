@@ -46,7 +46,16 @@ body {
 ul.dropdown-menu li a {
     color: #414141 !important;
 }
+.nav2-fix-bar {
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 1030;
+    top: 0;
+}
+@media (min-width: 768px) {
 
+}
 /** top container **/
 @media (min-width: 768px) {
     .container-top {

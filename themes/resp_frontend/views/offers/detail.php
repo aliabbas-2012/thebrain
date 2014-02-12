@@ -367,7 +367,7 @@
             <?php echo Yii::t('detailOffer', 'Keywords'); ?>
             <?php
             $keyword = BspItemSearchKeyword::model()->find("item_id = " . $model->id);
-            echo isset($keyword->keyword)?$keyword->keyword:"";
+            echo isset($keyword->keyword) ? $keyword->keyword : "";
             ?>
         </div>
 
@@ -385,7 +385,9 @@ $criteria = new CDbCriteria();
 $criteria->limit = "16";
 $criteria->order = "id DESC";
 $criteria->addCondition('id <> ' . $model->id . ' AND category_id =' . $model->category_id);
+$criteria->condition = "is_public>0 AND iStatus = 1";
 $items = BspItem::model()->findAll($criteria);
+
 $this->renderPartial("//user/_tab_items", array("items" => $items));
 ?>
 <script>

@@ -3,9 +3,9 @@
 <div class="clear"></div>
 <div class="tabs-container">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#random_offers" data-toggle="tab"><?php echo Yii::t("site","Random Offers"); ?></a></li>
-        <li><a href="#recent_offers" data-toggle="tab"><?php echo Yii::t("site","Recent Offers"); ?></a></li>
-        <li><a href="#saved_offers" data-toggle="tab"><?php echo Yii::t("site","Saved Offers"); ?></a></li>
+        <li class="active"><a href="#random_offers" data-toggle="tab"><?php echo Yii::t("site", "Random Offers"); ?></a></li>
+        <li><a href="#recent_offers" data-toggle="tab"><?php echo Yii::t("site", "Recent Offers"); ?></a></li>
+        <li><a href="#saved_offers" data-toggle="tab"><?php echo Yii::t("site", "Saved Offers"); ?></a></li>
 
     </ul>
 
@@ -15,7 +15,7 @@
             <?php
             $criteria = new CDbCriteria();
             $criteria->order = "rand()";
-            $criteria->condition = "is_public>0";
+            $criteria->condition = "is_public>0 AND iStatus = 1";
             $criteria->limit = "16";
             $items = BspItem::model()->findAll($criteria);
             $this->renderPartial("//default/_tab_items", array("items" => $items));
@@ -26,6 +26,7 @@
             $criteria = new CDbCriteria();
             $criteria->limit = "16";
             $criteria->order = "id DESC";
+            $criteria->condition = "is_public>0 AND iStatus = 1";
             $items = BspItem::model()->findAll($criteria);
             $this->renderPartial("//default/_tab_items", array("items" => $items));
             ?>
@@ -44,6 +45,7 @@
             $criteria->limit = "16";
             $criteria->order = "id DESC";
             $criteria->addInCondition('id', $saved_items);
+            $criteria->condition = "is_public>0 AND iStatus = 1";
             $items = BspItem::model()->findAll($criteria);
             $this->renderPartial("//default/_tab_items", array("items" => $items));
             ?>
