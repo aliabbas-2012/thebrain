@@ -57,9 +57,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
                 <div class="review-img col-lg-2">
                     <?php
                     if (!empty($order->item->image_offer->image_url)):
-                        echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $order->item->image_offer->id . "/" . $order->item->image_offer->image_url, '');
+                        echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $order->item->image_offer->id . "/" . $order->item->image_offer->image_url, $order->item->name,array("title"=>$order->item->name));
                     else :
-                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png");
+                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png","Offer",array("title"=>"Offer"));
                     endif;
                     ?>
                 </div>

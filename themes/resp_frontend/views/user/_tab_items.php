@@ -30,7 +30,7 @@ foreach ($segments as $items) {
                     $percent = ($likes * 100) / $total_likes;
                 }
                 if (!empty($user->avatar)) {
-                    $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, '', array("width" => "20"));
+                    $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array("width" => "20","title"=>'Avatar'));
                 } else {
                     $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', '', array("width" => "20"));
                 }
@@ -41,9 +41,9 @@ foreach ($segments as $items) {
                         <a href="<?php echo $this->createUrl("/web/offers/detail",array("slug"=>$item->slug)); ?>" class="thumbnail">
                             <?php
                             if (!empty($item->image_offer->image_url)):
-                                echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, '');
+                                echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, $item->name,array("title"=>$item->name));
                             else :
-                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png");
+                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png",$item->name,array("title"=>$item->name));
                             endif;
                             ?>
                         </a>

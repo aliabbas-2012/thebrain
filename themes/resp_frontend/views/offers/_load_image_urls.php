@@ -1,4 +1,4 @@
-<div id="loadimgvideo" class="floatLeft" style="width:100%; height: 320px; overflow-x: scroll;">
+<div id="loadimgvideo" class="floatLeft">
     <?php
     $this->renderPartial("//offers/offer_images/_offer_images", array("model" => $model));
     echo CHtml::hiddenField("curren_index_img", count($model->image_items));

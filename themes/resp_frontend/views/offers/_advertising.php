@@ -5,7 +5,7 @@ $items = BspAdvertising::model()->findAll($condition);
 $segments = array_chunk($items, 2);
 foreach ($segments as $items) {
     ?>
-    <div class="container marketing" style="margin-top: 10px;">
+    <div class="container marketing adver-marketing">
         <div class="row">
             <div class="col-lg-3">
             </div>

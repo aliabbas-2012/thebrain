@@ -23,11 +23,11 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                     <div class="itemAvata col-lg-2">
                         <?php
                         $user = Users::model()->findByPk($model->user_id);
-                        $avatar = CHtml::image(Yii::app()->theme->baseUrl . "/images/noavatar.jpg", '', array("width" => "110"));
+                        $avatar = CHtml::image(Yii::app()->theme->baseUrl . "/images/noavatar.jpg", 'Avatar', array("width" => "110","title"=>"Avatar"));
                         if (!empty($user->avatar)) {
-                            $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, '', array("width" => "110"));
+                            $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array("width" => "110","title"=>"Avatar"));
                         } else {
-                            $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', '', array("width" => "110"));
+                            $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', 'Avatar', array("width" => "110","title"=>"Avatar"));
                         }
                         echo $avatar;
                         ?>
