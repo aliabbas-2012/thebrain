@@ -19,7 +19,7 @@
  * @version $Id: $
  */
 return array (
-  'Do you want to delete this message'=>,
+  'Do you want to delete this message'=>'Do you want to delete this message',
   'Sorry cannot send message, try again later' => '',
   'hours ago' => '',
   'Date finish' => '',

@@ -56,7 +56,7 @@
                     </button>
                     <a class="navbar-brand" href="<?php echo $this->createUrl(Yii::app()->homeUrl[0]); ?>">
                         <?php
-                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/logo.png", 'Logo', array("width" => "200","title"=>'Logo'));
+                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/logo.png", 'Logo', array("width" => "200", "title" => 'Logo'));
                         ?>
                     </a>
                 </div>
@@ -75,7 +75,7 @@
                             <li class="dropdown">
                                 <a  class="dropdown-toggle" data-toggle="dropdown">
                                     <?php
-                                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/notify.png", 'Dashboard', array("height" => "20","title"=>'Dashboard'));
+                                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/notify.png", 'Dashboard', array("height" => "20", "title" => 'Dashboard'));
                                     ?>
                                     <b class="caret"></b>
                                 </a>
@@ -90,7 +90,7 @@
                             <li class="dropdown">
                                 <a  class="dropdown-toggle" data-toggle="dropdown">
                                     <?php
-                                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/mail.png", 'Mail', array("height" => "20","title"=>'Mail'));
+                                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/mail.png", 'Mail', array("height" => "20", "title" => 'Mail'));
                                     ?>
                                     <b class="caret"></b>
                                 </a>
@@ -265,7 +265,7 @@
                                     <div class="search-button">
                                         <a class="searchbt-top" href="javascript:void(0)" onclick="jQuery('#search-form').submit();">
                                             <?php
-                                            echo CHtml::image(Yii::app()->theme->baseUrl . "/images/search_button.png",'Search',array("title"=>"Search"));
+                                            echo CHtml::image(Yii::app()->theme->baseUrl . "/images/search_button.png", 'Search', array("title" => "Search"));
                                             ?>
                                         </a>
                                     </div>
@@ -279,6 +279,20 @@
                 </ul>           
             </div>
         </nav>
+        <div class="row notice-bar">
+            <div class="row-holder">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="puzzle-top text-center">
+                        <a href="javascript:void(0)"><?php echo Yii::t('site', 'The Puzzzle I ALPHA'); ?></a>
+                        <div style="width:30px; float: right;cursor: pointer;" class="newfeed-close">
+                            <span class="k-icon k-i-close" id="newsfeed-close" onclick="jQuery('.notice-bar').remove();"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
         <div id="puzzle_slider">
             <?php
             if ($this->id == "default" && $this->action->id == "index") {
@@ -291,6 +305,7 @@
             }
             ?> 
         </div>
+
         <?php
         //post offer offer
         if ($this->id == "offers" && $this->action->id == "post") {
@@ -300,6 +315,7 @@
             <div id="content_container" class="container theme-showcase">
                 <div class="alert alert-warning" style="display: none"></div>
                 <div class="alert alert-success" style="display: none"></div>
+
                 <?php echo $content; ?>
             </div> <!-- /container -->
             <?php

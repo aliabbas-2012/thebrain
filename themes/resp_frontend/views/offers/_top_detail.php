@@ -1,15 +1,4 @@
-<div class="row">
-    <div class="row-holder">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
-            <div class="puzzle-top text-center">
-                <a href="javascript:void(0)"><?php echo Yii::t('site', 'The Puzzzle I ALPHA'); ?></a>
-                <div style="width:30px; float: right;cursor: pointer;" class="newfeed-close"><span class="k-icon k-i-close" id="newsfeed-close"></span></div>
-            </div>
-        </div>
-        <div class="col-lg-2"></div>
-    </div>
-</div>
+
 <?php
 $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads/BspItem/" . $model->id . "/" . $model->background_image : "";
 ?>
