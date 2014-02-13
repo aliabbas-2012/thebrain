@@ -9,6 +9,7 @@ $rules_admin = array(
     /** admin url ** */
      'admin' => '/site/login',
      'login' => '/site/login',
+     'admin/config/<m:[\w-\.]+>' => '/configurations/load',
      /**----------- advertinsg -----------**/
      'admin/advertising/create' => '/bspAdvertising/create',
      'admin/advertising/update' => '/bspAdvertising/update',

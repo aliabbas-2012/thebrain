@@ -281,10 +281,13 @@
         </nav>
         <div class="row notice-bar">
             <div class="row-holder">
+                <?php
+                    $notice_bar = ConfMisc::model()->find("param = '".Yii::app()->language."_notice_bar'");
+                ?>
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
                     <div class="puzzle-top text-center">
-                        <a href="javascript:void(0)"><?php echo Yii::t('site', 'The Puzzzle I ALPHA'); ?></a>
+                        <a href="javascript:void(0)"><?php echo Yii::t('site', $notice_bar->value); ?></a>
                         <div style="width:30px; float: right;cursor: pointer;" class="newfeed-close">
                             <span class="k-icon k-i-close" id="newsfeed-close" onclick="jQuery('.notice-bar').remove();"></span>
                         </div>

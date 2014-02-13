@@ -58,6 +58,7 @@
                                 'items' => array(
                                     array('label' => 'Create', 'url' => array('/bspArticla/create'), 'visible' => !Yii::app()->user->isGuest),
                                     array('label' => 'List', 'url' => array('/bspArticla/index'), 'visible' => !Yii::app()->user->isGuest),
+                                    array('label' => 'Config', 'url' => array('/configurations/load?m=Misc'), 'visible' => !Yii::app()->user->isGuest),
                                 )),
                             array('label' => 'Category <span class="caret"></span>',
                                 'url' => '#', 'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
