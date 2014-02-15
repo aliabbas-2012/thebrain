@@ -30,7 +30,7 @@ foreach ($segments as $items) {
                     $percent = ($likes * 100) / $total_likes;
                 }
                 if (!empty($user->avatar)) {
-                    $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array("width" => "20","title"=>'Avatar'));
+                    $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array("width" => "20", "title" => 'Avatar'));
                 } else {
                     $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', '', array("width" => "20"));
                 }
@@ -38,12 +38,12 @@ foreach ($segments as $items) {
                 ?>
                 <div class="col-lg-3">
                     <div class="saved-offers-img">
-                        <a href="<?php echo $this->createUrl("/web/offers/detail",array("slug"=>$item->slug)); ?>" class="thumbnail">
+                        <a href="<?php echo $this->createUrl("/web/offers/detail", array("slug" => $item->slug)); ?>" class="thumbnail">
                             <?php
                             if (!empty($item->image_offer->image_url)):
-                                echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, $item->name,array("title"=>$item->name));
+                                echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, $item->name, array("title" => $item->name));
                             else :
-                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png",$item->name,array("title"=>$item->name));
+                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png", $item->name, array("title" => $item->name));
                             endif;
                             ?>
                         </a>
@@ -51,7 +51,7 @@ foreach ($segments as $items) {
                         <div style="display: none">
                             <div class="info-item hover-content">
                                 <div class="offer_name">
-                                    <a href="<?php echo $this->createUrl("/web/offers/detail",array("slug"=>$item->slug)) ?>"><?php echo substr($item->name, 0, 51) . '...'; ?></a>
+                                    <a href="<?php echo $this->createUrl("/web/offers/detail", array("slug" => $item->slug)) ?>"><?php echo substr($item->name, 0, 51) . '...'; ?></a>
                                 </div>
                                 <div class="offer_address">
                                     <?php echo $avatar . $city ?>
@@ -61,7 +61,7 @@ foreach ($segments as $items) {
                             </div>
                             <div class="hover-option hover-content">
                                 <div class="watch">
-                                    <a href="<?php echo $this->createUrl("/web/offers/detail",array("slug"=>$item->slug)) ?>">More...</a>
+                                    <a href="<?php echo $this->createUrl("/web/offers/detail", array("slug" => $item->slug)) ?>">More...</a>
                                 </div>
                                 <div class="delete">
                                     <a href="javascript:;" title="598">
@@ -113,3 +113,11 @@ foreach ($segments as $items) {
     <?php
 }//end of segments
 ?>
+<script>
+    jQuery(".col-lg-3>div.saved-offers-img").hover(
+            function() {
+                jQuery(this).children().eq(2).show();
+            }, function() {
+        jQuery(this).children().eq(2).hide();
+    });
+</script>    

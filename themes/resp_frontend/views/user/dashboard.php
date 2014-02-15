@@ -24,7 +24,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
         <?php echo Yii::t('user', 'and atract more interest') ?>
         <a class="del_box" href="javascript:void(0)" onclick="jQuery(this).parent().remove();">x</a>
     </div>
-    <div class="noteleft"><a href="<?php echo $this->createUrl('/web/offer/'); ?>" class="post"><?php echo Yii::t('user', 'Post your offer') ?></a></div>
+    <div class="noteleft"><a href="<?php echo $this->createUrl("/web/offers/post", array("action" => "create")); ?>" class="post"><?php echo Yii::t('user', 'Post your offer') ?></a></div>
     <div class="container marketing">
         <div class="row">
             <div class="tabContent">
@@ -49,8 +49,12 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
         <?php
         $criteria = new CDbCriteria();
         $criteria->order = "id DESC";
-        $criteria->limit = "10";
-        $orders = BspOrder::model()->findAll($criteria);
+
+        $dataProvider = new CActiveDataProvider('BspOrder', array(
+            'criteria' => $criteria,
+            'pagination' => array('pageSize' => 2)
+        ));
+        $orders = $dataProvider->getData();
         foreach ($orders as $order):
             ?>
             <div class="review">
@@ -77,7 +81,14 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
             <div class="clear"></div>
             <?php
         endforeach;
+        $this->widget('CLinkPager', array(
+            'pages' => $dataProvider->pagination,
+            'header' => '',
+            'htmlOptions' => array("class" => "pager")
+                )
+        );
         ?>
+        <div class="clear"></div>
     </div>
 
 </div>
@@ -91,7 +102,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
 
     $saved_items = CHtml::listData(BspFarvorite::model()->findAll($criteria), 'item_id', 'item_id');
     $criteria = new CDbCriteria();
-   
+
     $criteria->order = "id DESC";
     $criteria->addInCondition('id', $saved_items);
     $criteria->condition = "is_public>0 AND iStatus = 1";
@@ -100,13 +111,34 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
         'criteria' => $criteria,
         'pagination' => array('pageSize' => 15)
     ));
+    echo "<div id='saved_offers_content'>";
     $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
+    echo "</div>";
+
+    if ($dataProvider->pagination->pageCount > 1) {
+        $jsMethods = "thepuzzleadmin.appendElementAjax('" . $this->createUrl('/web/default/renderUserItems') . "','saved_offers_content'," . CJSON::encode($criteria) . ",this);return false;";
+
+        echo "<div class='clear'></div>";
+
+        $this->widget('DTScroller', array(
+            'pages' => $dataProvider->pagination,
+            'ajax' => true,
+            'header' => '',
+            'jsMethod' => $jsMethods,
+                )
+        );
+        echo "<div class='col-lg-12 load_more_div'>";
+        echo CHtml::link("Load More", 'javascript:void(0)', array("class" => "load_more", "onclick" => "thepuzzleadmin.loadNextPage('saved_offers')"));
+        echo "</div>";
+    }
     ?>
 
 
 
+
+
 </div>
-<div id="recently_viewed">
+<div id="recently_viewed" style="display:none">
     <?php
     $criteria = new CDbCriteria();
     $criteria->limit = "16";
@@ -116,7 +148,25 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
         'criteria' => $criteria,
         'pagination' => array('pageSize' => 15)
     ));
+    echo "<div id='recently_viewed_content'>";
     $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
+    echo "</div>";
+    if ($dataProvider->pagination->pageCount > 1) {
+        $jsMethods = "thepuzzleadmin.appendElementAjax('" . $this->createUrl('/web/default/renderUserItems') . "','recently_viewed_content'," . CJSON::encode($criteria) . ",this);return false;";
+
+        echo "<div class='clear'></div>";
+
+        $this->widget('DTScroller', array(
+            'pages' => $dataProvider->pagination,
+            'ajax' => true,
+            'header' => '',
+            'jsMethod' => $jsMethods,
+                )
+        );
+        echo "<div class='col-lg-12 load_more_div'>";
+        echo CHtml::link("Load More", 'javascript:void(0)', array("class" => "load_more", "onclick" => "thepuzzleadmin.loadNextPage('recently_viewed')"));
+        echo "</div>";
+    }
     ?>
 </div>
 <?php
@@ -142,4 +192,6 @@ Yii::app()->clientScript->registerScript('dashobard', '
                 );
         })
 ', CClientScript::POS_END);
+
+
 

@@ -8,6 +8,7 @@ class DefaultController extends Controller {
 
     /**
      * ajax data fetching
+     * for offers
      */
     public function actionRenderTabItems() {
 
@@ -27,6 +28,29 @@ class DefaultController extends Controller {
         ));
 
         $this->renderPartial("//default/_tab_items", array("items" => $dataProvider->getData()));
+    }
+    /**
+     * ajax data fetching
+     * for offers
+     */
+    public function actionRenderUserItems() {
+
+        $criteria = new CDbCriteria();
+        $keys = array("limit", "select", "conditions", "order");
+        foreach ($_POST['criteria'] as $key => $value) {
+            if (in_array($key, $keys)) {
+                $criteria->$key = $value;
+            }
+        }
+        $criteria->distinct = FALSE;
+
+
+        $dataProvider = new CActiveDataProvider('BspItem', array(
+            'criteria' => $criteria,
+            'pagination' => array('pageSize' => 15)
+        ));
+
+        $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
     }
 
     public function actionError() {

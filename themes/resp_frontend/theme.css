@@ -2427,3 +2427,10 @@ div> ul.yiiPager {
 a.load_more:hover {
     color: #fff;
 }
+.cpager {
+    display: block !important;
+    margin-bottom: 50px;
+}
+ul.pager li.selected a{
+    background: #dddddd;
+}
