@@ -164,6 +164,7 @@ class OffersController extends Controller {
         //CVarDumper::dump($criteria,10,true);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
+             'pagination' => array('pageSize' => 1000)
         ));
 
         if (isset($_GET['ajax'])) {
