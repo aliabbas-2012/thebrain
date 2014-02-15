@@ -5,10 +5,10 @@
         <div class="tab-pane active" id="my_offers">
             <div class="">
                 <?php
-                $this->renderPartial("//offers/_category_tab_header_search", array("cat_arr" => $cat_arr,"total"=>$dataProvider->getTotalItemCount()));
+                $this->renderPartial("//offers/_category_tab_header_search", array("cat_arr" => $cat_arr, "total" => $dataProvider->getTotalItemCount()));
                 ?>
             </div>
-            
+
 
             <?php
             echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("class" => "line-blog-btm"));
@@ -136,6 +136,25 @@
                            jQuery(".total span").html(jQuery("#grid_content #recentOrder .review").length) 
                         }
                   });
+        })
+        jQuery(".tab-header a").click(function(){
+                jQuery("#loading").show();
+                 grp_id = jQuery(this).attr("category_id");
+                 jQuery(".tab-header a").removeClass("active");
+                 jQuery(this).addClass("active");
+                 $.ajax({
+                    type: "POST",
+                    url: jQuery("#search-form").attr("action")+"?ajax=1&grp_id="+grp_id,
+                    data: jQuery("#search-form").serialize(), 
+                        success: function(data)
+                        {
+                           jQuery("#grid_content").html(data);
+                           jQuery("#loading").hide();
+                           jQuery(".total span").html(jQuery("#grid_content #recentOrder .review").length) 
+                        }
+                  });
+                  
+                  return false;
         })
         
          jQuery(".col jQuery-xs-6").hover(

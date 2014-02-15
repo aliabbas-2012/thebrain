@@ -159,12 +159,18 @@ class OffersController extends Controller {
                 }
             }
         }
+        /**
+         * group id setting
+         */
+        if (!empty($_GET['grp_id'])) {
+            $criteria->addCondition("group_id = " . $_GET['grp_id']);
+        }
 //        CVarDumper::dump($model->attributes,10,true);
 //        CVarDumper::dump($_POST['OfferSearch'],10,true);
         //CVarDumper::dump($criteria,10,true);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
-             'pagination' => array('pageSize' => 1000)
+            'pagination' => array('pageSize' => 1000)
         ));
 
         if (isset($_GET['ajax'])) {
