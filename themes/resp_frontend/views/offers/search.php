@@ -122,7 +122,7 @@
                    jQuery("#"+elem_target).val(1)
                 }
                 else {
-                    jQuery("#"+elem_target).removeAttr("val")
+                    jQuery("#"+elem_target).removeAttr("value")
                 }
                 
                  $.ajax({

@@ -102,7 +102,7 @@ class OffersController extends Controller {
             $model->attributes = $_POST['OfferSearch'];
             if (!empty($model->keyword)) {
                 $criteria->compare("name", $model->keyword, true, "OR");
-                $criteria->compare("id", $model->keyword, true, "OR");
+                $criteria->compare("t.id", $model->keyword, true, "OR");
                 $criteria->compare("offer_number", $model->keyword, true, "OR");
                 $criteria->compare("description", $model->keyword, true, "OR");
                 $criteria->compare("seo_keywords", $model->keyword, true, "OR");
