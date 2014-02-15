@@ -64,11 +64,32 @@ class OffersController extends Controller {
         $criteria->addCondition("iStatus = 1");
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
+            'pagination' => array('pageSize' => 15)
         ));
-        $this->render("//offers/category", array(
-            "cat_arr" => $cat_arr,
-            "dataProvider" => $dataProvider
-        ));
+        if (isset($_POST['ajax']) && isset($_POST['update_element_id'])) {
+            if ($_POST['update_element_id'] == "grid-view-div") {
+                $this->renderPartial("//offers/_grid_offers", array(
+                    "cat_arr" => $cat_arr,
+                    "dataProvider" => $dataProvider,
+                    'criteria' => $criteria,
+                ));
+            } else {
+
+                $this->renderPartial("//user/_tab_items", array(
+                    "cat_arr" => $cat_arr,
+                    "dataProvider" => $dataProvider,
+                    'criteria' => $criteria,
+                    "items" => $dataProvider->getData(),
+                ));
+                //thumb-view-div
+            }
+        } else {
+            $this->render("//offers/category", array(
+                "cat_arr" => $cat_arr,
+                "dataProvider" => $dataProvider,
+                'criteria' => $criteria,
+            ));
+        }
     }
 
     /**
@@ -80,12 +101,12 @@ class OffersController extends Controller {
         if (isset($_POST['OfferSearch'])) {
             $model->attributes = $_POST['OfferSearch'];
             if (!empty($model->keyword)) {
-                $criteria->compare("name", $model->keyword,true, "OR");
-                $criteria->compare("id", $model->keyword, true,"OR");
-                $criteria->compare("offer_number", $model->keyword, true,"OR");
-                $criteria->compare("description", $model->keyword, true,"OR");
-                $criteria->compare("seo_keywords", $model->keyword, true,"OR");
-                $criteria->compare("seo_title", $model->keyword, true,"OR");
+                $criteria->compare("name", $model->keyword, true, "OR");
+                $criteria->compare("id", $model->keyword, true, "OR");
+                $criteria->compare("offer_number", $model->keyword, true, "OR");
+                $criteria->compare("description", $model->keyword, true, "OR");
+                $criteria->compare("seo_keywords", $model->keyword, true, "OR");
+                $criteria->compare("seo_title", $model->keyword, true, "OR");
             }
             $criteria->compare("lat", $model->lat);
             $criteria->compare("lng", $model->lng);

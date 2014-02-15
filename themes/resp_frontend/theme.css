@@ -2402,3 +2402,28 @@ a.btn-submit {
     color: #717171;
     margin-top:20px;
 }
+
+div> ul.yiiPager {
+    display: none;
+}
+.load_more_div {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.load_more {
+    background-color: #ff851f;
+    background: #ff901f;
+    color: #fff;
+    padding: 10px 30px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font: bolder 12px Arial;
+    text-transform: uppercase;
+}
+a.load_more:hover {
+    color: #fff;
+}

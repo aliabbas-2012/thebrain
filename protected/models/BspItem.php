@@ -59,7 +59,6 @@ class BspItem extends DTActiveRecord {
         4 => "Price per week",
         5 => "Price per month",
     );
-    
 
     /**
      *
@@ -395,8 +394,9 @@ class BspItem extends DTActiveRecord {
     public function setSlug() {
         $this->slug = $this->primaryKey . "-" . str_replace(Yii::app()->params['notallowdCharactorsUrl'], "", trim($this->name));
         $this->slug = strtolower(str_replace(" ", "-", trim($this->slug)));
-
-        $this->slug_link = CHtml::link($this->name, Yii::app()->controller->createUrl("/web/offers/detail", array("slug" => $this->slug)));
+        if (php_sapi_name() != "cli") {
+            $this->slug_link = CHtml::link($this->name, Yii::app()->controller->createUrl("/web/offers/detail", array("slug" => $this->slug)));
+        }
     }
 
     /**

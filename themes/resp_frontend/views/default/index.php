@@ -12,42 +12,112 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="random_offers">
+            <div id="random_offers_content">
+                <?php
+                $criteria = new CDbCriteria();
+                $criteria->order = "rand()";
+                $criteria->condition = "is_public>0 AND iStatus = 1";
+
+                $dataProvider = new CActiveDataProvider('BspItem', array(
+                    'criteria' => $criteria,
+                    'pagination' => array('pageSize' => 15)
+                ));
+
+                $this->renderPartial("//default/_tab_items", array("items" => $dataProvider->getData()));
+                ?>
+            </div>
             <?php
-            $criteria = new CDbCriteria();
-            $criteria->order = "rand()";
-            $criteria->condition = "is_public>0 AND iStatus = 1";
-            $criteria->limit = "16";
-            $items = BspItem::model()->findAll($criteria);
-            $this->renderPartial("//default/_tab_items", array("items" => $items));
+            if ($dataProvider->pagination->pageCount > 1) {
+                $jsMethods = "thepuzzleadmin.appendElementAjax('" . $this->createUrl('/web/default/renderTabItems') . "','random_offers_content'," . CJSON::encode($criteria) . ",this);return false;";
+
+                echo "<div class='clear'></div>";
+
+                $this->widget('DTScroller', array(
+                    'pages' => $dataProvider->pagination,
+                    'ajax' => true,
+                    'header' => '',
+                    'jsMethod' => $jsMethods,
+                        )
+                );
+                echo "<div class='col-lg-12 load_more_div'>";
+                echo CHtml::link("Load More", 'javascript:void(0)', array("class" => "load_more", "onclick" => "thepuzzleadmin.loadNextPage('random_offers')"));
+                echo "</div>";
+            }
             ?>
         </div>
         <div class="tab-pane" id="recent_offers">
+            <div id="recent_offers_content">
+                <?php
+                $criteria = new CDbCriteria();
+                $criteria->limit = "16";
+                $criteria->order = "id DESC";
+                $criteria->condition = "is_public>0 AND iStatus = 1";
+                $dataProvider = new CActiveDataProvider('BspItem', array(
+                    'criteria' => $criteria,
+                    'pagination' => array('pageSize' => 15)
+                ));
+                $this->renderPartial("//default/_tab_items", array("items" => $dataProvider->getData()));
+                ?>
+            </div>
             <?php
-            $criteria = new CDbCriteria();
-            $criteria->limit = "16";
-            $criteria->order = "id DESC";
-            $criteria->condition = "is_public>0 AND iStatus = 1";
-            $items = BspItem::model()->findAll($criteria);
-            $this->renderPartial("//default/_tab_items", array("items" => $items));
+            if ($dataProvider->pagination->pageCount > 1) {
+                $jsMethods = "thepuzzleadmin.appendElementAjax('" . $this->createUrl('/web/default/renderTabItems') . "','recent_offers_content'," . CJSON::encode($criteria) . ",this);return false;";
+
+                echo "<div class='clear'></div>";
+
+                $this->widget('DTScroller', array(
+                    'pages' => $dataProvider->pagination,
+                    'ajax' => true,
+                    'header' => '',
+                    'jsMethod' => $jsMethods,
+                        )
+                );
+                echo "<div class='col-lg-12 load_more_div'>";
+                echo CHtml::link("Load More", 'javascript:void(0)', array("class" => "load_more", "onclick" => "thepuzzleadmin.loadNextPage('recent_offers')"));
+                echo "</div>";
+            }
             ?>
 
         </div>
         <div class="tab-pane" id="saved_offers">
-            <?php
-            $criteria = new CDbCriteria();
-            $criteria->select = "item_id";
-            $criteria->order = "id DESC";
-            $criteria->limit = "16";
-            $criteria->distinct = "item_id";
+            <div id="saved_offers_content">
+                <?php
+                $criteria = new CDbCriteria();
+                $criteria->select = "item_id";
+                $criteria->order = "id DESC";
+                $criteria->limit = "16";
+                $criteria->distinct = "item_id";
 
-            $saved_items = CHtml::listData(BspFarvorite::model()->findAll($criteria), 'item_id', 'item_id');
-            $criteria = new CDbCriteria();
-            $criteria->limit = "16";
-            $criteria->order = "id DESC";
-            $criteria->addInCondition('id', $saved_items);
-            $criteria->condition = "is_public>0 AND iStatus = 1";
-            $items = BspItem::model()->findAll($criteria);
-            $this->renderPartial("//default/_tab_items", array("items" => $items));
+                $saved_items = CHtml::listData(BspFarvorite::model()->findAll($criteria), 'item_id', 'item_id');
+                $criteria = new CDbCriteria();
+                $criteria->limit = "16";
+                $criteria->order = "id DESC";
+                $criteria->addInCondition('id', $saved_items);
+                $criteria->condition = "is_public>0 AND iStatus = 1";
+                $dataProvider = new CActiveDataProvider('BspItem', array(
+                    'criteria' => $criteria,
+                    'pagination' => array('pageSize' => 15)
+                ));
+                $this->renderPartial("//default/_tab_items", array("items" => $dataProvider->getData()));
+                ?>
+            </div>
+            <?php
+            if ($dataProvider->pagination->pageCount > 1) {
+                $jsMethods = "thepuzzleadmin.appendElementAjax('" . $this->createUrl('/web/default/renderTabItems') . "','saved_offers_content'," . CJSON::encode($criteria) . ",this);return false;";
+
+                echo "<div class='clear'></div>";
+
+                $this->widget('DTScroller', array(
+                    'pages' => $dataProvider->pagination,
+                    'ajax' => true,
+                    'header' => '',
+                    'jsMethod' => $jsMethods,
+                        )
+                );
+                echo "<div class='col-lg-12 load_more_div'>";
+                echo CHtml::link("Load More", 'javascript:void(0)', array("class" => "load_more", "onclick" => "thepuzzleadmin.loadNextPage('saved_offers')"));
+                echo "</div>";
+            }
             ?>
 
         </div>

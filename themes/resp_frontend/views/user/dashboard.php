@@ -57,9 +57,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
                 <div class="review-img col-lg-2">
                     <?php
                     if (!empty($order->item->image_offer->image_url)):
-                        echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $order->item->image_offer->id . "/" . $order->item->image_offer->image_url, $order->item->name,array("title"=>$order->item->name));
+                        echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $order->item->image_offer->id . "/" . $order->item->image_offer->image_url, $order->item->name, array("title" => $order->item->name));
                     else :
-                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png","Offer",array("title"=>"Offer"));
+                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png", "Offer", array("title" => "Offer"));
                     endif;
                     ?>
                 </div>
@@ -86,17 +86,21 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
     $criteria = new CDbCriteria();
     $criteria->select = "item_id";
     $criteria->order = "id DESC";
-    $criteria->limit = "16";
+
     $criteria->distinct = "item_id";
 
     $saved_items = CHtml::listData(BspFarvorite::model()->findAll($criteria), 'item_id', 'item_id');
     $criteria = new CDbCriteria();
-    $criteria->limit = "16";
+   
     $criteria->order = "id DESC";
     $criteria->addInCondition('id', $saved_items);
-     $criteria->condition = "is_public>0 AND iStatus = 1";
-    $items = BspItem::model()->findAll($criteria);
-    $this->renderPartial("//user/_tab_items", array("items" => $items));
+    $criteria->condition = "is_public>0 AND iStatus = 1";
+
+    $dataProvider = new CActiveDataProvider('BspItem', array(
+        'criteria' => $criteria,
+        'pagination' => array('pageSize' => 15)
+    ));
+    $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
     ?>
 
 
@@ -107,9 +111,12 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
     $criteria = new CDbCriteria();
     $criteria->limit = "16";
     $criteria->order = "id DESC";
-     $criteria->condition = "is_public>0 AND iStatus = 1";
-    $items = BspItem::model()->findAll($criteria);
-    $this->renderPartial("//user/_tab_items", array("items" => $items));
+    $criteria->condition = "is_public>0 AND iStatus = 1";
+    $dataProvider = new CActiveDataProvider('BspItem', array(
+        'criteria' => $criteria,
+        'pagination' => array('pageSize' => 15)
+    ));
+    $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
     ?>
 </div>
 <?php

@@ -3,11 +3,11 @@ var thepuzzleadmin = {
     filldropDownField: function(obj, url, elem_id) {
         if (jQuery(obj).val() != "") {
             jQuery("#loading").show();
-			op = "?";
-			if(url.search("\\?")!=-1){
-				op = "&";
-			}
-            url += op+"id=" + jQuery(obj).val();
+            op = "?";
+            if (url.search("\\?") != -1) {
+                op = "&";
+            }
+            url += op + "id=" + jQuery(obj).val();
             jQuery.getJSON(url, function(data) {
 
                 var items = [];
@@ -29,10 +29,10 @@ var thepuzzleadmin = {
         if (jQuery(obj).val() != "") {
             jQuery("#loading").show();
             op = "?";
-			if(url.search("\\?")!=-1){
-				op = "&";
-			}
-            url += op+"id=" + jQuery(obj).val();
+            if (url.search("\\?") != -1) {
+                op = "&";
+            }
+            url += op + "id=" + jQuery(obj).val();
             jQuery.getJSON(url, function(data) {
                 savobj = jQuery("#" + elem_id);
                 del_parent = savobj.parent()
@@ -117,6 +117,47 @@ var thepuzzleadmin = {
         }).done(function(response) {
             if (update_element_id != "") {
                 jQuery("#" + update_element_id).html(response);
+            }
+            jQuery("#loading").hide();
+        });
+
+    },
+    loadNextPage: function(parent) {
+        if (jQuery("#" + parent + " .yiiPager li.page.selected").next().hasClass("page") == true) {
+            current = jQuery("#" + parent + " .yiiPager li.page.selected")
+            current.next().children().eq(0).trigger("click");
+            current.removeClass("selected");
+            current.next().addClass("selected");
+            
+             if (jQuery("#" + parent + " .yiiPager li.page.selected").next().hasClass("page") == false) {
+                 jQuery("#" + parent + " .load_more").remove();
+             }
+        }
+    },
+    /**
+     * to update element on ajax all
+     * @param {type} ajax_url
+     * @param {type} update_element_id
+     * @param {type} resource_elem_id
+     * @returns {undefined}
+     */
+    appendElementAjax: function(ajax_url, update_element_id, criteria, obj) {
+        jQuery("#loading").show();
+        ajax_url = ajax_url + "?BspItem_page=" + jQuery(obj).html();
+        console.log(ajax_url);
+        jQuery.ajax({
+            type: "POST",
+            url: ajax_url,
+            async: false,
+            data:
+                    {
+                        criteria: criteria,
+                        "ajax": "1",
+                        "update_element_id":update_element_id
+                    }
+        }).done(function(response) {
+            if (update_element_id != "") {
+                jQuery("#" + update_element_id).append(response);
             }
             jQuery("#loading").hide();
         });

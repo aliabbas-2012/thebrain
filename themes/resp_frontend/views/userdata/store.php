@@ -55,11 +55,14 @@
 <div class="clear"></div>
 <?php
 $criteria = new CDbCriteria();
-$criteria->limit = "16";
+
 $criteria->order = "id DESC";
 $criteria->addCondition("user_id =" . $model->id);
-$items = BspItem::model()->findAll($criteria);
-$this->renderPartial("//user/_tab_items", array("items" => $items));
+$dataProvider = new CActiveDataProvider('BspItem', array(
+    'criteria' => $criteria,
+    'pagination' => array('pageSize' => 15)
+        ));
+$this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
 ?>
 <div class="clear"></div>
 

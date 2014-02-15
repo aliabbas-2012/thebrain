@@ -26,16 +26,16 @@ class DTActiveRecord extends CActiveRecord {
     public $_current_module;
 
     public function __construct($scenario = 'insert') {
-
-        $this->_action = isset(Yii::app()->controller->action) ? Yii::app()->controller->action->id : "";
-        $this->_controller = Yii::app()->controller->id;
-        $this->_current_module = get_class(Yii::app()->controller->getModule());
-
+        if (php_sapi_name() != "cli") {
+            $this->_action = isset(Yii::app()->controller->action) ? Yii::app()->controller->action->id : "";
+            $this->_controller = Yii::app()->controller->id;
+            $this->_current_module = get_class(Yii::app()->controller->getModule());
+        }
         parent::__construct($scenario);
     }
 
     public function afterFind() {
-        if (isset(Yii::app()->controller->action->id)) {
+        if (php_sapi_name() != "cli" && isset(Yii::app()->controller->action->id)) {
             $this->_action = Yii::app()->controller->action->id;
         }
 
@@ -169,8 +169,6 @@ class DTActiveRecord extends CActiveRecord {
         parent::updateByPk($pk, $attributes, $condition, $params);
         return true;
     }
-
-   
 
 }
 

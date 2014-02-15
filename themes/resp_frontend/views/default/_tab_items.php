@@ -7,7 +7,7 @@ foreach ($segments as $items) {
         <?php
         foreach ($items as $item):
             $avatar = "";
-            $link = $this->createUrl("/web/offers/detail",array("slug"=>$item->slug));
+            $link = $this->createUrl("/web/offers/detail", array("slug" => $item->slug));
             $user = Users::model()->findByPk($item->user_id);
             //getting no of lykes
             $likes = BspItemLike::model()->count(array('condition' => "item_id='$item->id'"));
@@ -19,9 +19,9 @@ foreach ($segments as $items) {
             }
 
             if (!empty($user->avatar)) {
-                $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array("width" => "20","title"=>'Avatar'));
+                $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array("width" => "20", "title" => 'Avatar'));
             } else {
-                $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', 'Avatar', array("width" => "20","title"=>'Avatar'));
+                $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', 'Avatar', array("width" => "20", "title" => 'Avatar'));
             }
             $city = isset($user->city) ? $user->city : "";
 
@@ -37,9 +37,9 @@ foreach ($segments as $items) {
             $sItem.='</div>'; // end of info-item
             $sItem.='<div class="hover-option hover-content">';
 
-            $sItem.='<div class="watch"><a href="'.$this->createUrl("/web/offers/detail",array("slug"=>$item->slug)).'">Watching</a></div>';
+            $sItem.='<div class="watch"><a href="' . $this->createUrl("/web/offers/detail", array("slug" => $item->slug)) . '">Watching</a></div>';
 
-           
+
             $sItem.='<div class="delete"><a title="rand' . $item->id . '" href="javascript:;"><img alt="star" title="star" class="star" src="' . Yii::app()->theme->baseUrl . '/images/x.png" /></a></div>';
             $sItem.='<div class="clear"></div>';
             $sItem.='</div>';
@@ -51,13 +51,12 @@ foreach ($segments as $items) {
             else {
                 $sItem.='<div class="catename">Rentals Offer</div>';
             }
-			$currency = "&euro;";
+            $currency = "&euro;";
             if (!isset($item->currency->symbol)) {
                 $currency = "&euro;";
+            } else {
+                $currency = $item->currency->symbol;
             }
-			else {
-				$currency = $item->currency->symbol;
-			}
             if ($item->special_deal == 1) {
                 $price = ' 
                                 <div class="price-offer">
@@ -75,26 +74,35 @@ foreach ($segments as $items) {
             $sItem.='</div>';
             ?>
             <div class="col-xs-6 col-md-3">
-                <a href="<?php echo $this->createUrl("/web/offers/detail",array("slug"=>$item->slug)); ?>" class="thumbnail">
+                <a href="<?php echo $this->createUrl("/web/offers/detail", array("slug" => $item->slug)); ?>" class="thumbnail">
 
-                    <?php
-                    if (!empty($item->image_offer->image_url)):
-                        echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, $item->name,array("title"=>$item->name));
-                    else :
-                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png", $item->name,array("title"=>$item->name));
-                    endif;
-                    ?>
-                </a>
-                <?php
-                echo $sItem;
-
-                //die;
-                ?>
-            </div>
-            <?php
-        endforeach;
+        <?php
+        if (!empty($item->image_offer->image_url)):
+            echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, $item->name, array("title" => $item->name));
+        else :
+            echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png", $item->name, array("title" => $item->name));
+        endif;
         ?>
+                </a>
+                    <?php
+                    echo $sItem;
+
+                    //die;
+                    ?>
+            </div>
+                <?php
+            endforeach;
+            ?>
     </div>
-    <?php
-}
-?>
+        <?php
+    }
+    ?>
+<script>
+    jQuery(".col-xs-6").hover(
+            function() {
+                jQuery(this).children().eq(1).children().eq(0).show();
+            }, function() {
+        jQuery(this).children().eq(1).children().eq(0).hide();
+    }
+    );
+</script>

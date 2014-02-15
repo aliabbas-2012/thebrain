@@ -6,10 +6,32 @@ class DefaultController extends Controller {
         $this->render('//default/index');
     }
 
+    /**
+     * ajax data fetching
+     */
+    public function actionRenderTabItems() {
+
+        $criteria = new CDbCriteria();
+        $keys = array("limit", "select", "conditions", "order");
+        foreach ($_POST['criteria'] as $key => $value) {
+            if (in_array($key, $keys)) {
+                $criteria->$key = $value;
+            }
+        }
+        $criteria->distinct = FALSE;
+
+
+        $dataProvider = new CActiveDataProvider('BspItem', array(
+            'criteria' => $criteria,
+            'pagination' => array('pageSize' => 15)
+        ));
+
+        $this->renderPartial("//default/_tab_items", array("items" => $dataProvider->getData()));
+    }
+
     public function actionError() {
         if ($error = Yii::app()->errorHandler->error)
-            $this->render('//error/error', array("error"=>$error));
-     
+            $this->render('//error/error', array("error" => $error));
     }
 
     /**
