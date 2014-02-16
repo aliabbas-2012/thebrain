@@ -176,6 +176,7 @@ class SiteController extends Controller {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
     }
+
     /**
      * call back action 
      */
@@ -184,6 +185,19 @@ class SiteController extends Controller {
         Yii::import('application.extensions.hybridauth.Hybrid.Hybrid_Auth');
         Yii::import('application.extensions.hybridauth.Hybrid.Hybrid_Endpoint');
         Hybrid_Endpoint::process();
+    }
+
+    /**
+     * test email
+     */
+    public function actionTestEmail() {
+        $email['From'] = Yii::app()->params->adminEmail;
+        $email['FromName'] = Yii::app()->name;
+        $email['To'] = $_GET['to'];
+        $email['Subject'] = "Reset your link";
+        $email['Body'] = "HI";
+        $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
+        $this->sendEmail2($email);
     }
 
 }
