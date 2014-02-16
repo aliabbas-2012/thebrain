@@ -82,6 +82,10 @@ class Controller extends RController {
             } else {
                 Yii::app()->language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
             }
+            //for bug its has to resolve
+            if(Yii::app()->language == "en_us"){
+                Yii::app()->language = "en";
+            }
             Yii::app()->theme = "resp_frontend";
             $this->layout = "//layouts/frontend";
         } else {
