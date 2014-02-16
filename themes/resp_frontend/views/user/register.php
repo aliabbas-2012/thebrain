@@ -252,7 +252,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <div class="form-group buttons">
     <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default"><?php Yii::t("button","Registry"); ?></button>
+        <button type="submit" class="btn btn-default"><?php echo Yii::t("button","Registry"); ?></button>
     </div>
 </div>
 
