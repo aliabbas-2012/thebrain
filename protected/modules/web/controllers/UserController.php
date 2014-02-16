@@ -206,7 +206,7 @@ class UserController extends Controller {
      */
     public function actionResetPass($id, $key) {
         $user = Users::model()->findByPk($id);
-
+        
         if ($user->email_authenticate == $key) {
             $model = new ResetPassword;
             if (isset($_POST['ResetPassword'])) {
@@ -217,7 +217,7 @@ class UserController extends Controller {
                     $user->password = md5($model->password);
                     $user->updateByPk($user->id, array("password" => $user->password, "email_authenticate" => "1"));
                     Yii::app()->user->setFlash("success", "Password changed succesfully");
-                    $this->redirect($this->createUrl("/site/login"));
+                    $this->redirect($this->createUrl("/web/default/index"));
                 }
             }
             $this->render('//user/resetPass', array('model' => $model));

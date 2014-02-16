@@ -206,7 +206,7 @@
 
     </div>
     <div class="form-group buttons">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-offset-2 col-sm-1">
             <?php echo CHtml::submitButton('Update', array('class' => 'btn btn btn-default')); ?>
         </div>
     </div>

@@ -29,6 +29,7 @@ class DefaultController extends Controller {
 
         $this->renderPartial("//default/_tab_items", array("items" => $dataProvider->getData()));
     }
+
     /**
      * ajax data fetching
      * for offers
@@ -80,6 +81,14 @@ class DefaultController extends Controller {
         }
         // display the login form
         $this->renderPartial('//common/_login_box', array('model' => $model));
+    }
+
+    /**
+     * test email
+     */
+    public function actionTest() {
+        $model = new ResetPassword;
+        $this->render('//user/resetPass', array('model' => $model));
     }
 
 }
