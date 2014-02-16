@@ -63,6 +63,8 @@ class Controller extends RController {
         if (strstr($this->basePath, "protected")) {
             $this->basePath = realPath($this->basePath . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR);
         }
+        
+        
 
         /**
          * install configurations
@@ -74,16 +76,17 @@ class Controller extends RController {
             /**
              * change language will be here
              */
+            
             if (!empty($_GET['lang'])) {
                 Yii::app()->language = $_GET['lang'];
             } else {
-                Yii::app()->language = "en";
+                Yii::app()->language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
             }
             Yii::app()->theme = "resp_frontend";
             $this->layout = "//layouts/frontend";
         } else {
             Yii::app()->user->loginUrl = "/site/login";
-            
+
             $this->setPermissions();
         }
 
@@ -513,5 +516,6 @@ class Controller extends RController {
         return Yii::app()->user->checkAccess($operation);
     }
 
+    
 }
 
