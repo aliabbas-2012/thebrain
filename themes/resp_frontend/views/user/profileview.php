@@ -9,7 +9,7 @@ $store_url = "";
 if (!empty($model->store_url)) {
     $store_url = str_replace(" ", "-", $model->store_url);
     $store_url = $this->createUrl("/web/userdata/store", array("id" => $model->id, "storeurl" => $store_url));
-    echo CHtml::link(Yii::app()->request->hostInfo . $store_url, $store_url);
+    
 }
 $this->widget('zii.widgets.CDetailView', array(
     'data' => $model,
