@@ -263,7 +263,10 @@ class Controller extends RController {
 
 
             $mailer->FromName = (isset($email['FromName']) && !empty($email['FromName']) ? $email['FromName'] : Yii::app()->name); //Yii::app()->user->name;
-
+            $misc = ConfMisc::model()->find("param = 'smtp'");
+            if(!empty($misc->value)){
+                Yii::app()->params['smtp'] = $misc->value;
+            }
             if (Yii::app()->params['smtp'] == 1) {
                 $mailer->IsSMTP();
 
