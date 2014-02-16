@@ -40,4 +40,22 @@ class RegisterUsers extends Users {
         return true;
     }
 
+    /**
+     * 
+     * @return type
+     */
+    public function afterSave() {
+        $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", "RegisterUsers"));
+
+        $path.="RegisterUsers_avatar" . DIRECTORY_SEPARATOR;
+
+        if (is_file($path . $this->avatar)) {
+
+            copy($path . $this->avatar, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $this->primaryKey, "avatar")) . $this->avatar);
+            unlink($path . $this->avatar);
+        }
+
+        return parent::afterSave();
+    }
+
 }
