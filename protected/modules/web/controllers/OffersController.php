@@ -223,6 +223,7 @@ class OffersController extends Controller {
         $model = BspItem::model()->findByPk($slug_arr[0]);
         $priceCal = BspItemConditionHour::model()->findAll("item_id = " . $slug_arr[0]);
         $this->item = $model;
+        $model->saveViewerForLog();
         $this->render("//offers/detail", array("model" => $model, "priceCal" => $priceCal));
     }
 
@@ -239,6 +240,7 @@ class OffersController extends Controller {
             $slug_arr = explode("-", $slug);
             $id = $slug_arr[0];
             $model = BspItemFrontEnd::model()->findByPk($id, "user_id =" . Yii::app()->user->id);
+            $model->saveViewerForLog();
             if (empty($model)) {
                 throw new CHttpException(404, 'The specified post cannot be found.');
             }

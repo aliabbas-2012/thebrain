@@ -4,7 +4,7 @@
 <div class="tabs-container">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#random_offers" data-toggle="tab"><?php echo Yii::t("site", "Random Offers"); ?></a></li>
-        <li><a href="#recent_offers" data-toggle="tab"><?php echo Yii::t("site", "Recent Offers"); ?></a></li>
+        <li><a href="#recent_offers" data-toggle="tab"><?php echo Yii::t("site", "Recently viewed"); ?></a></li>
         <li><a href="#saved_offers" data-toggle="tab"><?php echo Yii::t("site", "Saved Offers"); ?></a></li>
 
     </ul>
@@ -48,10 +48,20 @@
         <div class="tab-pane" id="recent_offers">
             <div id="recent_offers_content">
                 <?php
+                //recently viewed
+                $criteria_view = new CDbCriteria();
+                $criteria_view->select = "item_id";
+                $criteria_view->order = "id DESC";
+                $criteria_view->limit = "16";
+                $criteria_view->distinct = "item_id";
+
+                $viwed_items = CHtml::listData(BspItemLog::model()->findAll($criteria_view), 'item_id', 'item_id');
+                
                 $criteria = new CDbCriteria();
                 $criteria->limit = "16";
                 $criteria->order = "id DESC";
                 $criteria->condition = "is_public>0 AND iStatus = 1";
+                $criteria->addInCondition('id', $viwed_items);
                 $dataProvider = new CActiveDataProvider('BspItem', array(
                     'criteria' => $criteria,
                     'pagination' => array('pageSize' => 15)
@@ -82,16 +92,17 @@
         <div class="tab-pane" id="saved_offers">
             <div id="saved_offers_content">
                 <?php
-                $criteria = new CDbCriteria();
-                $criteria->select = "item_id";
-                $criteria->order = "id DESC";
-                $criteria->limit = "16";
-                $criteria->distinct = "item_id";
+                $criteria_fav = new CDbCriteria();
+                $criteria_fav->select = "item_id";
+                $criteria_fav->order = "id DESC";
+                $criteria_fav->limit = "16";
+                $criteria_fav->distinct = "item_id";
 
-                $saved_items = CHtml::listData(BspFarvorite::model()->findAll($criteria), 'item_id', 'item_id');
+                $saved_items = CHtml::listData(BspFarvorite::model()->findAll($criteria_fav), 'item_id', 'item_id');
                 $criteria = new CDbCriteria();
                 $criteria->limit = "16";
                 $criteria->order = "id DESC";
+               
                 $criteria->addInCondition('id', $saved_items);
                 $criteria->condition = "is_public>0 AND iStatus = 1";
                 $dataProvider = new CActiveDataProvider('BspItem', array(
@@ -135,21 +146,21 @@
             <h2><?php echo Yii::t('site', 'Share your talents and equipment') ?></h2>
 
             <ul class="grid clearfix">
-                <li class="first">
+                <li class="first col-lg-4">
                     <a href="#top">
                         <div id="img1" class="indexoverimg"></div>
                         <h2><?php echo Yii::t('site', 'I rent - Why to buy') ?>?</h2>
                         <p><?php echo Yii::t('site', 'Rent out your items which you, your drill is hardly used, like the head in the basement of your lawn mower 5 times a year to use comes at you used in 30 years of you not even more than 3 hours and everything else, whatever else with you most of the time lying around stowed. Why should buy the same when you have to give it to you and you can increase your household budget your environment? Join adjust is free and easy.') ?></p>
                     </a>
                 </li>
-                <li>
+                <li class="col-lg-4">
                     <a href="#top">
                         <div id="img2" class="indexoverimg"></div>
                         <h2><?php echo Yii::t('site', 'Find perfect jobs') ?></h2>
                         <p><?php echo Yii::t('site', 'Create, from students to retirees, a free profile that stands out. Be authentic, upload your photos, videos and introduce your self personally to your buyers. Create your individual offers, present your self and tell about your skills, work needs and get commissioned. Share interests, place special deals and offer your free capacities, so everyone can immediately find them. Thus you will save lengthy acquisition and you can devote yourself entirely your orders') ?></p>
                     </a>
                 </li>
-                <li>
+                <li class="col-lg-4">
                     <a href="#top">
                         <div id="img3" class="indexoverimg"></div>
                         <h2><?php echo Yii::t('site', 'Earn extra money') ?></h2>
@@ -161,11 +172,11 @@
         </div>
 
 
-        <div class="feature1">
+        <div class="feature1 ">
             <h2><?php echo Yii::t('site', 'Find talents and equipment') ?></h2>
 
             <ul class="grid clearfix">
-                <li class="first">
+                <li class="first col-lg-4">
                     <a href="#top">
                         <div id="img4" class="indexoverimg"></div>
                         <h2><?php echo Yii::t('site', 'Rentals in your area') ?></h2>
@@ -173,14 +184,14 @@
                         </p>
                     </a>
                 </li>
-                <li>
+                <li class="col-lg-4">
                     <a href="#top">
                         <div id="img5" class="indexoverimg"></div>
                         <h2><?php echo Yii::t('site', 'Find collaborative service') ?></h2>
                         <p><?php echo Yii::t('site', "Here you'll find service offerings that can assist you with your upcoming projects. All kinds of offers are available here, from plumbers, to the babysitter, from IT technicians to beautician. You need someone that designs you a business card, someone who takes your dog for walkies? In this case and many others you have come to the right place, because at ThePuzzzle you can clearly discover offers from your city, make use of a collaborative work and share common interests.Join and Enjoy.") ?></p>
                     </a>
                 </li>
-                <li>
+                <li class="col-lg-4">
                     <a href="#top">
                         <div id="img6" class="indexoverimg"></div>
                         <h2><?php echo Yii::t('site', 'Pay only for the result') ?></h2>

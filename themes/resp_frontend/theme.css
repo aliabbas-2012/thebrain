@@ -610,9 +610,8 @@ ul.grid.clearfix {
     margin-left: 0;
 }
 .feature1 .grid li {
-    float: left;
-    margin-left: 50px;
-    width: 322px;
+  
+  
     list-style: none;
 }
 #features a {
@@ -636,6 +635,21 @@ ul.grid.clearfix {
 }
 #img3 {
     background: url("images/index_info_images/03.jpg") no-repeat scroll 0 0 #F5F5F5;
+    height: 210px;
+    width: 340px;
+}
+#img4 {
+    background: url("images/index_info_images/04.jpg") no-repeat scroll 0 0 #F5F5F5;
+    height: 210px;
+    width: 340px;
+}
+#img5 {
+    background: url("images/index_info_images/05.jpg") no-repeat scroll 0 0 #F5F5F5;
+    height: 210px;
+    width: 340px;
+}
+#img6 {
+    background: url("images/index_info_images/06.jpg") no-repeat scroll 0 0 #F5F5F5;
     height: 210px;
     width: 340px;
 }
@@ -676,13 +690,7 @@ ul.grid.clearfix {
         float: none;
         border:none !important;
     }
-    .feature1 .grid {
-        text-align: center !important;
-    }
-    .feature1 .grid li {
-        margin-left: 0 !important;
-        margin-top: 10px !important;
-    }
+   
     .delete {
         margin-top: 0;
     }
