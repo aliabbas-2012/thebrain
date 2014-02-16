@@ -25,6 +25,6 @@ return array (
   'Login' => '',
   'Pay' => '',
   'Post your offer' => '',
-  'Registry' => '',
+  'Registry' => 'Register',
   'more...' => '',
 );
