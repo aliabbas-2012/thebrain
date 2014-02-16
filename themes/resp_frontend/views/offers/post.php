@@ -1,4 +1,4 @@
-<link href="<?php echo Yii::app()->theme->baseUrl ?>/style/detail.css" rel="stylesheet">
+<link href="<?php echo Yii::app()->theme->baseUrl ?>/style/detail.css" rel="stylesheet" />
 <div class="alert alert-warning" style="display: none"></div>
 <div class="alert alert-success" style="display: none"></div>
 
@@ -121,8 +121,8 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
                     <div class="clear"></div>
                     <span> 
                         <?php echo Yii::t('postOffer', '*Choose this Option will cost you'); ?>
-                        <sup style="position: relative; top: 5px">€</sup>
-                         <?php echo Yii::t('postOffer', 'by the of posting and the upper'); ?>
+                        <sup>€</sup>
+                        <?php echo Yii::t('postOffer', 'by the of posting and the upper'); ?>
                         <br>
                         <?php echo Yii::t('postOffer', 'Price will be crosses out and your Discount-Price will be highlighted'); ?>
                     </span>
@@ -177,7 +177,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
         <div class="row">
             <div id="image">
                 <div class="col-lg-6">
-                    <div class="floatLeft" style="width: 100%; height: 313px; background-color: #CCC; border: 5px solid #fff;">
+                    <div class="floatLeft my-image">
                         <div class="hidden_elment">
 
                             <?php
@@ -185,7 +185,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
                             echo zHtml::activeFileField($uploadTemp, '[' . 3 . ']upload_temp_image');
                             ?>
                         </div>
-                        <div style="margin: 5px auto 0; width: 80%; height: 300px; overflow: hidden; ">
+                        <div class="offer-vidoes">
                             <div class="k-widget k-upload btChangeimagepp">
                                 <div class="k-dropzone">
                                     <div class="k-button k-upload-button">
@@ -239,7 +239,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
             </label>
         </div>
         <div class="row">
-            <p class="font18" style="margin-top: 30px">Here you can add your Sounds</p>
+            <p class="font18 mysounds"><?php Yii::t('postOffer', "Here you can add your Sounds"); ?></p>
             <?php
             if (!isset($_POST['BspItemSoundUrl']) && $model->isNewRecord) {
                 $m_sound = array();
@@ -290,7 +290,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
         </div>
         <div class="for-margin">
             <p class="font18">
-                <span style="">To get started I will need from the buyer: </span>
+                <span>To get started I will need from the buyer: </span>
             </p>
         </div>
         <div class="col-lg-12">
@@ -299,7 +299,6 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
                     $model, 'seo_description', array(
                 'class' => 'font18 k-textbox',
                 "id" => "textStart",
-                "style" => "font-size: 20px; padding-right: 10px; color: #414141",
                 'placeholder' => 'TyType here what all you need from the buyer to get started: ',
                     )
             );
@@ -350,9 +349,8 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
             <?php
             echo $form->textField(
                     $model, 'seo_title', array(
-                'class' => 'font15 k-textbox',
+                'class' => 'font15 k-textbox post-offer-txtbox',
                 "id" => "key-word",
-                "style" => "font-size: 20px; padding-right: 10px; color: #414141",
                 'placeholder' => 'Seo Title',
                     )
             );
@@ -363,9 +361,8 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
             <?php
             echo $form->textField(
                     $model, 'seo_keywords', array(
-                'class' => 'font15 k-textbox',
+                'class' => 'font15 k-textbox post-offer-txtbox',
                 "id" => "key-word",
-                "style" => "font-size: 20px; padding-right: 10px; color: #414141",
                 'placeholder' => 'Seo Keywords',
                     )
             );
@@ -376,9 +373,8 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
             <?php
             echo $form->textField(
                     $model, 'seo_description', array(
-                'class' => 'font15 k-textbox',
+                'class' => 'font15 k-textbox post-offer-txtbox',
                 "id" => "key-word",
-                "style" => "font-size: 20px; padding-right: 10px; color: #414141",
                 'placeholder' => 'Type here your keyword, separated by comma. Words which describe your offer the best...',
                     )
             );
@@ -395,13 +391,13 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
 </div>
 <div class="container">
     <div class="row">
-        <div id="tcs" style="margin: 50px 0 50px;">
+        <div id="tcs>
 
             <?php
             echo $form->checkBox($model, '_is_confirm', array("id" => "public_offer", "class" => "floatLeft", "margin" => "margin: 3px;"));
             ?>
             <span class="k-invalid-msg" data-for="public_offer"></span>
-            <label class="fontsize_title floatLeft" style="width: 85%; margin-left: 13px; margin-bottom: 13px;" for="public_offer">
+            <label class="fontsize_title floatLeft"  for="public_offer">
                 I confirm that I am able to deliver this service to Buyers within the delivery time specified.I will update or pause my Hourlie if I can no longer meet this delivery time. I understand that late delivery will adversely affect my rankings on ThePuzzzle and will entitle the Buyer to a refund. See
                 <a class="tncs" href="javascript:void(0)">T&Cs </a>
             </label>

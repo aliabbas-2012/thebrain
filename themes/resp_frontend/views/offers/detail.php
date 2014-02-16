@@ -122,7 +122,7 @@
                     <div class='col-lg-4' tab-no='3'>
                         <strong>
                             (
-                            <span id="comments_count" style="color:#000000;">
+                            <span id="comments_count">
                                 <?php echo $model->numComments; ?>
                             </span>
                             ) 
@@ -177,7 +177,7 @@
                                 <span class='col-lg-6'>
                                     -
                                     <?php if (isset($priceCal[0]) && $priceCal[0]->active != 1) { ?>
-                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
                                         <?php
                                     } else {
                                         echo (isset($priceCal[0])) ? number_format($priceCal[0]->price) : '' . '&nbsp;' . $currency_symbol;
@@ -190,7 +190,7 @@
                                 <span class='col-lg-6'>
                                     -
                                     <?php if (isset($priceCal[1]) && $priceCal[1]->active != 1) { ?>
-                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
                                         <?php
                                     } else {
                                         echo (isset($priceCal[1])) ? number_format($priceCal[1]->price) : '' . '&nbsp;' . $currency_symbol;
@@ -203,7 +203,7 @@
                                 <span class='col-lg-6'>
                                     -
                                     <?php if (isset($priceCal[2]) && $priceCal[1]->active != 2) { ?>
-                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
                                         <?php
                                     } else {
                                         echo (isset($priceCal[2])) ? number_format($priceCal[2]->price) : '' . '&nbsp;' . $currency_symbol;
@@ -216,7 +216,7 @@
                                 <span class='col-lg-6'>
                                     -
                                     <?php if (isset($priceCal[3]) && $priceCal[3]->active != 1) { ?>
-                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
                                         <?php
                                     } else {
                                         echo (isset($priceCal[4])) ? number_format($priceCal[4]->price) : '' . '&nbsp;' . $currency_symbol;
@@ -230,7 +230,7 @@
                                 <span class='col-lg-6'>
                                     -
                                     <?php if (isset($priceCal[5]) && $priceCal[5]->active != 1) { ?>
-                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
                                         <?php
                                     } else {
                                         echo (isset($priceCal[5])) ? number_format($priceCal[5]->price) : '' . '&nbsp;' . $currency_symbol;
@@ -243,7 +243,7 @@
                                 <span class='col-lg-6'>
                                     -
                                     <?php if (isset($priceCal[6]) && $priceCal[6]->active != 1) { ?>
-                                        <span style="color: red; font-weight: bold;"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
+                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
                                         <?php
                                     } else {
                                         echo (isset($priceCal[6])) ? number_format($priceCal[6]->price) : '' . '&nbsp;' . $currency_symbol;
@@ -281,7 +281,7 @@
             </div>
             <div id='price_detail'>
                 <p>Price Offers</p>
-                <p style="margin-top: 30px">
+                <p class="price-detail-label">
                     <?php echo Yii::t('detailOffer', 'Calculate Price'); ?> 
                 </p>
 
@@ -346,7 +346,7 @@
                         <sup class='col-lg-2'> €</sup>
                     </div>
                 </div>
-                <div class='col-lg-12' style='color: #b5b5b5; padding-bottom: 10px; text-align: right'>
+                <div class='col-lg-12' class="time-selection-container" >
                     Time selection:-<span id="time-selection"></span>
                 </div>
             </div>
@@ -363,7 +363,7 @@
 <div class="col-lg-12">
     <div class="col-lg-10">
 
-        <div style="font-weight:bold;font-size:11px" id="keyword">
+        <div id="keyword">
             <?php echo Yii::t('detailOffer', 'Keywords'); ?>
             <?php
             $keyword = BspItemSearchKeyword::model()->find("item_id = " . $model->id);
@@ -373,7 +373,7 @@
 
     </div>
     <div class="col-lg-2">
-        <div style="font-weight:bold;font-size:11px" id="Nr"><?php echo Yii::t('detailOffer', 'Offer Nr:'); ?> <?php echo $model->offer_number; ?></div>
+        <div  id="Nr"><?php echo Yii::t('detailOffer', 'Offer Nr:'); ?> <?php echo $model->offer_number; ?></div>
     </div>
 </div>
 <div class="red-bg">
@@ -448,8 +448,4 @@ $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getDat
         })
     })
 </script>
-<style>
-    .add-wishlist {
-        cursor: pointer;
-    }
-</style>    
+    

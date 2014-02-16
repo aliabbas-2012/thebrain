@@ -13,9 +13,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
     ?>
     <!-- Tab panes -->
 
-    <div class="clear" style="height: 20px;"></div>
+    <div class="clear clear-height"></div>
     <label class="hellotext"><?php echo Yii::t('user', 'Hello again') ?> <?php echo Yii::app()->user->user->username; ?>!</label>
-    <div class="clear" style="height: 20px;"></div>
+    <div class="clear clear-height"></div>
 
     <div class="noteleft">
         <a href="<?php echo $this->createUrl('/web/user/profile'); ?>">

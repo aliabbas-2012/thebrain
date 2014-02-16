@@ -1,0 +1,187 @@
+.login-box #LoginForm_username {
+    margin-top:15px;
+    size:30;
+}
+.login-box #LoginForm_password {
+    margin-bottom:15px
+}
+.login-box #LoginForm_rememberMe {
+    float: left; margin-right: 10px;
+}
+.login-box #btn {
+    clear: left; width: 100%; height: 32px; font-size: 13px;
+}
+
+div#content_container >div.error {
+    font-size:14px;
+}
+.newfeed-close {
+    width:30px; float: right;cursor: pointer;
+}
+
+/*part of front end style tag */
+
+#target {
+    width: 345px;
+}
+.controls {
+    margin-top: 16px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#BspItem_loc_name {
+    background-color: #fff;
+    padding: 0 11px 0 13px;
+    width: 400px;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    text-overflow: ellipsis;
+}
+
+#BspItem_loc_name:focus {
+    border-color: #4d90fe;
+    margin-left: -1px;
+    padding-left: 14px;  /* Regular padding-left + 1. */
+    width: 401px;
+}
+
+.pac-container {
+    font-family: Roboto;
+}
+
+#type-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+/*now other offers related*/
+.itemPrice .span-price {
+    color: #000;
+}
+.load_image_style {
+    width:100%;
+}
+
+#offer2 #txtprice{
+    width: 24% !important; 
+    height: 39px !important; margin-top: 15px;
+}
+.item_offer_price .item_offer_price_span {
+    text-decoration: line-through;
+}
+#detail_sub #comments_count {
+    color:#000000;
+}
+#detail_sub .offer-day {
+    color: red; font-weight: bold;
+}
+
+#detail_sub #price_detail #PriceCalculation_start_date {
+    width:120px;
+}
+#detail_sub #price_detail .time-selection-container {
+    color: #b5b5b5; padding-bottom: 10px; text-align: right;
+}
+#keyword {
+    font-weight:bold;font-size:11px;
+}
+div#Nr {
+    font-weight:bold;font-size:11px
+}
+.add-wishlist {
+    cursor: pointer;
+}
+.offer_image {
+    width:100%;
+}
+
+/*post offer*/ 
+#changePrice sup {
+    position: relative; top: 5px;
+}
+#changePrice .my-image {
+    width: 100%; 
+    height: 313px; 
+    background-color: #CCC; 
+    border: 5px solid #fff;
+}
+#changePrice .offer-vidoes {
+    margin: 5px auto 0; width: 80%; 
+    height: 300px; overflow: hidden; 
+}
+.mysounds {
+    margin-top: 30px
+}
+#post-form #textStart {
+    font-size: 20px; 
+    padding-right: 10px; 
+    color: #414141;
+}
+#post-form .post-offer-txtbox {
+    font-size: 20px; 
+    padding-right: 10px; 
+    color: #414141;
+}
+#post-form #tcs {
+    margin: 50px 0 50px;
+}
+#post-form #tcs .fontsize_title {
+    width: 85%; 
+    margin-left: 13px; 
+    margin-bottom: 13px;
+}
+#post-form .price-row {
+    display: block;
+}
+#post-form .price-row input.price {
+    height: 36px; border-radius: 3px;
+}
+#post-form .price-row button.remove {
+    float:right; 
+    clear: right; 
+}
+p#price_offer {
+    margin-top: 70px;;
+}
+.type_offer .abs-type {
+    font-size: 15px;
+}
+.type_offer .range-type {
+    margin-bottom:80px; 
+    font-size: 15px;
+}
+.type_offer .row-add {
+    float:right;
+}
+.tab-items {
+    margin-top: 10px;
+}
+.clear-height {
+    height: 20px;;
+}
+.profile-view .btn ,.profile-btn {
+    float:right;
+}
+.user-stor-top {
+    width:100%;height:450px;
+}
+.my-grid-button {
+    background-color: rgb(102, 102, 102);
+}
+.url-custom-setting {
+    font-size:13px; margin-left:10px; 
+}

@@ -1,4 +1,4 @@
-<div id="price-row" style="display: block;">
+<div id="price-row" class="price-row">
     <div class="col-lg-2">
         <?php
         echo CHtml::activeTextField($model, '[' . $index . ']start', array("class" => "form-control"));
@@ -19,12 +19,12 @@
     <div class="col-lg-3">
 
         <?php
-        echo CHtml::activeTextField($model, '[' . $index . ']price', array("style" => "height: 36px; border-radius: 3px;", "class" => "floatLeft fontstyleItalic price"));
+        echo CHtml::activeTextField($model, '[' . $index . ']price', array("class" => "floatLeft fontstyleItalic price"));
         ?>
     </div>
     <div class="col-lg-3">
         <button 
-            class="k-button remove" style="float:right; clear: right; " 
+            class="k-button remove"  
             type="button" onclick="jQuery(this).parent().parent().remove()">Remove</button>
     </div>
     <div class="clear"></div>

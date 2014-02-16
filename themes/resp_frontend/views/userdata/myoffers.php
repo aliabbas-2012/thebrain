@@ -88,7 +88,7 @@
                                 'in-active' => array
                                     (
                                     'label' => 'In Active',
-                                    'options' => array('class' => 'k-button k-button-icontext k-grid-Active', 'style' => 'background-color: rgb(102, 102, 102);'),
+                                    'options' => array('class' => 'k-button k-button-icontext k-grid-Active my-grid-button'),
                                     'url' => 'Yii::app()->createUrl("/web/offers/changeStatus", array("id"=>$data->id))',
                                     'visible' => '$data->iStatus <>0?true:false'
                                 ),

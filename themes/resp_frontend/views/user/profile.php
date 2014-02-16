@@ -1,8 +1,9 @@
-<div class="row-fluid">
+<div class="row-fluid profile-view">
     <h2>
         Profile
         <?php
-        echo CHtml::link(CHtml::button("View Profile", array("class" => "btn btn-default")), $this->createUrl("/web/user/profileview"), array("style" => "float:right"));
+        echo CHtml::link(CHtml::button("View Profile", array("class" => "btn btn-default")), 
+                $this->createUrl("/web/user/profileview"));
         ?>
     </h2>
     <?php

@@ -1,19 +1,7 @@
-<div class="row">
-    <div class="row-holder">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
-            <div class="puzzle-top text-center">
-                <a href="javascript:void(0)">The Puzzzle I ALPHA</a>
-                <div style="width:30px; float: right;cursor: pointer;" class="newfeed-close"><span class="k-icon k-i-close" id="newsfeed-close"></span></div>
-            </div>
-        </div>
-        <div class="col-lg-2"></div>
-    </div>
-</div>
 <?php
 $background = !empty($model->background) ? Yii::app()->baseUrl . "/uploads/Users/" . $model->id . "/background/" . $model->background : "";
 ?>
-<div class="offer_item-top" style="width:100%;height:450px;background: url('<?php echo $background ?>')">
+<div class="offer_item-top user-stor-top" style="background: url('<?php echo $background ?>')">
     <div class="container ">
         <div class="col-lg-12 user-detail-container">
             <div class="user-detail">

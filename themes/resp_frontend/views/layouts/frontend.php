@@ -23,6 +23,8 @@
 
         <!-- Custom styles for this template -->
         <link href="<?php echo Yii::app()->theme->baseUrl ?>/theme.css" rel="stylesheet">
+<!--        convert inline to external style-->
+        <link href="<?php echo Yii::app()->theme->baseUrl ?>/style.css" rel="stylesheet">
 
         <!-- Just for debugging purposes. Don't actually copy this line! -->
         <!--[if lt IE 9]><script src="<?php echo Yii::app()->theme->baseUrl ?>/docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -288,7 +290,7 @@
                 <div class="col-lg-8">
                     <div class="puzzle-top text-center">
                         <a href="javascript:void(0)"><?php echo Yii::t('site', $notice_bar->value); ?></a>
-                        <div style="width:30px; float: right;cursor: pointer;" class="newfeed-close">
+                        <div  class="newfeed-close">
                             <span class="k-icon k-i-close" id="newsfeed-close" onclick="jQuery('.notice-bar').remove();"></span>
                         </div>
                     </div>
@@ -426,56 +428,6 @@
                                             }
 
         </script>
-        <style>
-            #target {
-                width: 345px;
-            }
-            .controls {
-                margin-top: 16px;
-                border: 1px solid transparent;
-                border-radius: 2px 0 0 2px;
-                box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                height: 32px;
-                outline: none;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-            }
-
-            #BspItem_loc_name {
-                background-color: #fff;
-                padding: 0 11px 0 13px;
-                width: 400px;
-                font-family: Roboto;
-                font-size: 15px;
-                font-weight: 300;
-                text-overflow: ellipsis;
-            }
-
-            #BspItem_loc_name:focus {
-                border-color: #4d90fe;
-                margin-left: -1px;
-                padding-left: 14px;  /* Regular padding-left + 1. */
-                width: 401px;
-            }
-
-            .pac-container {
-                font-family: Roboto;
-            }
-
-            #type-selector {
-                color: #fff;
-                background-color: #4d90fe;
-                padding: 5px 11px 0px 11px;
-            }
-
-            #type-selector label {
-                font-family: Roboto;
-                font-size: 13px;
-                font-weight: 300;
-            }
-
-
-        </style>
         <div id="map-canvas"></div>
         <script type="text/javascript">
             function scrollUpdateSeachBar() {

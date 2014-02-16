@@ -3,7 +3,7 @@ $total_likes = BspItemLike::model()->count();
 $segments = array_chunk($items, 4);
 foreach ($segments as $items) {
     ?>
-    <div class="container marketing" style="margin-top: 10px;">
+    <div class="container marketing tab-items">
         <div class="row">
             <div class="col-lg-3">
             </div>

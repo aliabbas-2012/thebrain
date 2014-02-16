@@ -15,7 +15,7 @@ foreach ($model->image_items as $child_model):
             }
         }
         echo CHtml::activeHiddenField($child_model, '[' . $index . ']image_url', array("class" => "form-control"));
-        echo CHtml::image($path, '', array("style" => "width:100%"));
+        echo CHtml::image($path, 'Offer Image', array("class"=>"offer_image","title"=>"Offer Image"));
         echo CHtml::activeCheckBox($child_model, '[' . $index . ']is_offer', array("onclick" => "doOfferCheckBox(this)"));
         ?>
     </div>

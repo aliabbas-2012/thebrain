@@ -67,7 +67,7 @@
 
                 html = "<div class='col-lg-4'>";
                 html += "<input type='hidden' name='BspItemImage[" + index + "][image_url]' value='" + e.response.file + "' >";
-                html += "<img style='width:100%' src='" + path + "' >";
+                html += "<img class='load_image_style' src='" + path + "' >";
                 html += '<input id="ytBspItemImage_' + index + '_is_offer" type="hidden" name="BspItemImage[' + index + '][is_offer]" value="0">';
                 html += "<input type='checkbox' onclick='doOfferCheckBox(this)' name='BspItemImage=[" + index + "][is_offer]' >";
                 html += "</div>";

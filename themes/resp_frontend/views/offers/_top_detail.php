@@ -2,7 +2,7 @@
 <?php
 $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads/BspItem/" . $model->id . "/" . $model->background_image : "";
 ?>
-<div class="offer_item-top" style="width:100%;height:450px;background: url('<?php echo $background ?>')">
+<div class="offer_item-top" style="background: url('<?php echo $background ?>')">
     <div class="container ">
         <div class="col-lg-12 offer_item">
             <div class="col-lg-8 offer_item-left">
@@ -80,7 +80,7 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                         }
                         if ($model->special_deal == 1) {
                             $price = ' 
-                                    <span style="text-decoration: line-through">' . $model->price . '</span>
+                                    <span class="item_offer_price_span">' . $model->price . '</span>
                                     <font size="2" class="item-discount"> ' . $currency_symbol . '</font>
                                     <span>' . $model->discount_price . '</span>
                                     

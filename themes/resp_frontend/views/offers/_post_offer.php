@@ -36,7 +36,7 @@ if ($model->background_image != "") {
                             "id" => "txtprice",
                             'placeholder' => Yii::t('postOffer',"Your Price?..."),
                             "pattern" => "\d{1,11}",
-                            "style" => "width: 24%; height: 39px !important; margin-top: 15px"
+                            
                         ));
                         ?>
                     </div>

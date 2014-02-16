@@ -48,7 +48,7 @@ foreach ($items as $item):
                     <div class="itemPrice">
                         <span class="span-price dis-price"><?php echo $item->price; ?></span>
                         <label class="dis-price"><?php echo $item->currency->symbol; ?></label>
-                        <span class="span-price" style="color: #000;">
+                        <span class="span-price">
                             <?php echo!empty($item->discount_price) ? $item->discount_price : 0; ?>
                         </span>
                         <label><?php echo $item->currency->symbol; ?></label>
@@ -57,7 +57,7 @@ foreach ($items as $item):
                 } else {
                     ?>
                     <div class="itemPrice">
-                        <span class="span-price" style="color: #000;"><?php echo isset($item->price) ? $item->price : 0; ?></span>
+                        <span class="span-price"><?php echo isset($item->price) ? $item->price : 0; ?></span>
                         <label><?php echo isset($item->currency) ? $item->currency->symbol : ""; ?></label>
                     </div>
                     <?php

@@ -122,7 +122,7 @@
 
             </div>
             <div class="form_2nd_part_container">
-                <div id="storefront_bigimagecontent" style="z-index: 1">
+                <div id="storefront_bigimagecontent">
                     <?php
                     if (!empty($model->background)) {
                         $background = Yii::app()->baseUrl . "/uploads/Users/" . $model->id . "/background/" . $model->background;
@@ -133,7 +133,7 @@
                     ?>
 
                 </div>
-                <div style="">
+                <div>
                     <?php
                     if (!empty($model->background)) {
                         $avatar = Yii::app()->baseUrl . "/uploads/Users/" . $model->id . "/avatar/" . $model->avatar;
@@ -161,9 +161,9 @@
 
                 <div class="col-md-10">
                     <div class="form-group">
-                        <label style="color: #16acea;" class="col-sm-3"><?php echo Yii::t('user', 'Your Storefront Name') ?></label>
+                        <label class="col-sm-3 store-name"><?php echo Yii::t('user', 'Your Storefront Name') ?></label>
                         <div class="clear"></div>
-                        <p style="font-size:13px; margin-left:10px; ">
+                        <p class="url-custom-setting">
                             <?php echo Yii::t('user', 'This will be your custom ') ?> <strong> The Puzzzle</strong><?php echo Yii::t('user', 'link and shoild reflect the service or goods you sell ') ?> 
                             <br />
                             <strong><?php echo Yii::t('user', ' You can create a username only one time when saving your Settings') ?></strong><br />
@@ -188,7 +188,7 @@
                         <?php echo $form->labelEx($model, 'description', array('class' => 'control-label col-sm-2')); ?>
                         <div class="clear"></div>
                         <div class="col-lg-9">
-                            <?php echo $form->textArea($model, 'description', array('class' => 'form-control', 'style' => 'height:250px')); ?> 
+                            <?php echo $form->textArea($model, 'description', array('class' => 'form-control',)); ?> 
                             <?php echo $form->error($model, 'description', array("class" => 'alert alert-error')); ?>
                         </div>
                     </div>
