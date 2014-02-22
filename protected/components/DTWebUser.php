@@ -27,6 +27,38 @@ class DTWebUser extends RWebUser {
     }
 
     /**
+     * get User Profile percentage
+     * will tell us how many profile has 
+     * completed 
+     */
+    public function getUserProfilePercentage() {
+        $countper = 10;
+
+        if ($this->user->first_name == '')
+            $countper--;
+        if ($this->user->second_name == '')
+            $countper--;
+        if ($this->user->phone == '')
+            $countper--;
+        if ($this->user->birthday == '0000-00-00')
+            $countper--;
+        if ($this->user->description == '')
+            $countper--;
+        if (Yii::app()->user->user->city == '')
+            $countper--;
+        if ($this->user->country == '')
+            $countper--;
+        if ($this->user->zipcode == '')
+            $countper--;
+        if ($this->user->avatar == '' || $this->user->avatar == 'no_image')
+            $countper--;
+        if ($this->user->background == '' || $this->user->background == 'no_image')
+            $countper;
+        
+        return $countper;
+    }
+
+    /**
      * 
      * @return boolean
      */

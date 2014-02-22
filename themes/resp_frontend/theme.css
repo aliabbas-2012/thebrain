@@ -2454,3 +2454,34 @@ a.load_more:hover {
 ul.pager li.selected a{
     background: #dddddd;
 }
+
+.avatar-top { background:#f7f8fc; float:left; width: 300px; padding: 0 10px; }
+
+.avatar-main-top { float:left; width:100%; }
+.avatar-top a{ color:#000; }
+
+.avtar-img { float:left; width:30px; padding-top:20px; }
+
+.avtar-text { float:left; padding: 0 10px; width:100px; }
+
+.avtar-percentage { color:#FFF; padding-top:16px; padding-left:11px; float:right; background: url("images/percentage-bg_03.jpg") no-repeat; width:50px; height:49px; } 
+
+.avatar-main-edit { float:left; width:100%; }
+
+.avatar-main-text { float:left; width:100%; padding:10px 0; }
+
+.avatar-main-text-left { width:45%; float:left; }
+
+.avatar-main-text-right { width:55%; float:left; }
+
+.avatar-scroll { width:100%; float:left; padding: 0 10px; overflow:scroll; height:150px; overflow-x:hidden; }
+
+.avatar-scroll p { padding:10px 0 0 0;}
+
+.avatar-bottom { float:left; width:100%; padding: 17px 0 0 0; }
+
+.avatar-setting { float:left; }
+
+.avatar-signout { float:right; }
+
+.avatar-signout a { padding: 5px 10px; background:#ededed; border: 1px solid #cecece; border-radius:3px; color:#41414d }

@@ -1,26 +1,5 @@
 <?php
-$countper = 10;
-
-if (Yii::app()->user->user->first_name == '')
-    $countper--;
-if (Yii::app()->user->user->second_name == '')
-    $countper--;
-if (Yii::app()->user->user->phone == '')
-    $countper--;
-if (Yii::app()->user->user->birthday == '0000-00-00')
-    $countper--;
-if (Yii::app()->user->user->description == '')
-    $countper--;
-if (Yii::app()->user->user->city == '')
-    $countper--;
-if (Yii::app()->user->user->country == '')
-    $countper--;
-if (Yii::app()->user->user->zipcode == '')
-    $countper--;
-if (Yii::app()->user->user->avatar == '' || Yii::app()->user->user->avatar == 'no_image')
-    $countper--;
-if (Yii::app()->user->user->background == '' || Yii::app()->user->user->background == 'no_image')
-    $countper--;
+$countper = Yii::app()->user->UserProfilePercentage;
 ?>
 <ul class="nav nav-tabs">
     <li class="<?php echo $this->action->id == "messages" ? "active" : ""; ?>">
@@ -28,13 +7,13 @@ if (Yii::app()->user->user->background == '' || Yii::app()->user->user->backgrou
         </a>
     </li>
     <li class="<?php echo $this->action->id == "myoffers" ? "active" : ""; ?>">
-        <a  href="<?php echo $this->createUrl("/web/userdata/myoffers"); ?>" >My Offers <span> <?php echo Yii::app()->user->user->numitems; ?> </span></a>
+        <a  href="<?php echo $this->createUrl("/web/userdata/myoffers"); ?>" ><?php echo Yii::t('link', "My Offers") ?> <span> <?php echo Yii::app()->user->user->numitems; ?> </span></a>
     </li>
     <li class="<?php echo $this->action->id == "myorders" ? "active" : ""; ?>">
-        <a href="<?php echo $this->createUrl("/web/userdata/myorders"); ?>" >My Orders <span><?php echo Yii::app()->user->user->numseller_orders + Yii::app()->user->user->numbuyer_orders; ?></span></a>
+        <a href="<?php echo $this->createUrl("/web/userdata/myorders"); ?>" ><?php echo Yii::t('link', "My Orders") ?><span><?php echo Yii::app()->user->user->numseller_orders + Yii::app()->user->user->numbuyer_orders; ?></span></a>
     </li>
     <li class="<?php echo $this->action->id == "settings" ? "active" : ""; ?>">
-        <a href="<?php echo $this->createUrl("/web/userdata/settings"); ?>" >Settings<span><?php echo $countper * 10; ?>%</a></span>
+        <a href="<?php echo $this->createUrl("/web/userdata/settings"); ?>" ><?php echo Yii::t('link', "Setting ") ?><span><?php echo $countper * 10; ?>%</a></span>
     </li>
     <li class="<?php echo $this->action->id == "payment" ? "active" : ""; ?>">
         <a href="<?php echo $this->createUrl("/web/userdata/payment"); ?>" >Payment<span><?php echo Yii::app()->user->user->sellerPayment . " &euro;"; ?></span></a>

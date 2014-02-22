@@ -1,0 +1,19 @@
+
+
+.find-review {
+    background-color: #FFFFFF;
+    border: 1px solid #DCDCDC;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #E2E0E0;
+    color: #414141;
+    min-height: 256px;
+	margin: 5px 0px;
+	padding: 10px 0px;
+	text-align:center;
+}
+
+.review-content-other { text-align:center; display:block; float:none !important; }
+
+.review-stats, .itemPrice { text-align:center !important; display:block; float:none !important; }
+
+.span-price { margin: 0 !important; }
