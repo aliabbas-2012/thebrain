@@ -2,6 +2,35 @@ body {
 
     padding-bottom: 30px;
 }
+
+@media (min-width: 768px) {
+    .login-bar-container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .login-bar-container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .login-bar-container {
+        width: 1340px;
+    }
+    .main-search-bar-2 {
+        margin-left: auto;
+        margin-right: auto;
+        margin-left: 88px;
+    }
+    #menu-secondary {
+        
+    }
+}
+
+
+
 .clear {
     clear: both;
 }
@@ -119,7 +148,7 @@ ul.dropdown-menu li a {
         padding-left: 20px;
     }
     .navbar ul li.keword_search input {
-        width: 280px;
+        width: 350px;
     }
     .navbar ul li.location_search {    
         padding-left:35px;
@@ -610,8 +639,8 @@ ul.grid.clearfix {
     margin-left: 0;
 }
 .feature1 .grid li {
-  
-  
+
+
     list-style: none;
 }
 #features a {
@@ -690,7 +719,7 @@ ul.grid.clearfix {
         float: none;
         border:none !important;
     }
-   
+
     .delete {
         margin-top: 0;
     }
@@ -2474,7 +2503,7 @@ ul.pager li.selected a{
 }
 .offer-login-box {
     border-radius: 50%;
-  
+
 }
 .avtar-img { float:left; width:30px; padding-top:5px; }
 

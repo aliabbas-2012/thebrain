@@ -49,7 +49,7 @@
         </div>
         <!-- Fixed navbar -->
         <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
+            <div class="container login-bar-container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-primary">
@@ -132,11 +132,6 @@
 
                         <li>
                             <?php
-                            echo CHtml::link(Yii::t('link', "Home"), $this->createUrl("/web/default/index"));
-                            ?>
-                        </li>
-                        <li>
-                            <?php
                             echo CHtml::link(Yii::t('link', "Blog"), $this->createUrl("/web/blog/index"));
                             ?>                        
                         </li>
@@ -147,7 +142,7 @@
                         </li>
                         <li >
                             <?php
-                            echo CHtml::link(Yii::t('link', "Post Offer"), $this->createUrl("/web/offers/post", array("action" => "create")), array("class" => "offer"));
+                            echo CHtml::link(Yii::t('link', "Post Your Offer"), $this->createUrl("/web/offers/post", array("action" => "create")), array("class" => "offer"));
                             ?>                        
                         </li>
 
