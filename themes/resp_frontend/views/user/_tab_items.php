@@ -29,12 +29,25 @@ foreach ($segments as $items) {
                 } else {
                     $percent = ($likes * 100) / $total_likes;
                 }
-                if (!empty($user->avatar)) {
-                    $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array("width" => "20", "title" => 'Avatar'));
-                } else {
-                    $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', '', array("width" => "20"));
-                }
+
                 $city = isset($user->city) ? $user->city : "";
+                $city.= isset($user->username) ? "," . $user->username : "";
+
+                if (!empty($user->avatar)) {
+                    $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array(
+                                "width" => "20",
+                                "title" => $city,
+                                "data-toggle" => "tooltip",
+                                "data-placement" => "top",
+                    ));
+                } else {
+                    $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', '', array(
+                                "width" => "20",
+                                "title" => $city,
+                                "data-toggle" => "tooltip",
+                                "data-placement" => "top",
+                    ));
+                }
                 ?>
                 <div class="col-lg-3">
                     <div class="saved-offers-img">
@@ -54,7 +67,7 @@ foreach ($segments as $items) {
                                     <a href="<?php echo $this->createUrl("/web/offers/detail", array("slug" => $item->slug)) ?>"><?php echo substr($item->name, 0, 51) . '...'; ?></a>
                                 </div>
                                 <div class="offer_address">
-                                    <?php echo $avatar . $city ?>
+                                    <?php echo $avatar; ?>
                                 </div>
                                 <div class="percentLike"><?php echo $percent; ?>%</div>
                                 <div class="clear"></div>
