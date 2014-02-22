@@ -192,6 +192,7 @@ class OffersController extends Controller {
      */
     public function actionChangeStatus($id) {
         $offer = BspItem::model()->findByPk($id);
+        
         if ($offer->iStatus == 0) {
             BspItem::model()->updateByPk($id, array("iStatus" => 1));
             Yii::app()->user->setFlash("offer-status", 'Offer Status has been Active Now');
@@ -235,7 +236,7 @@ class OffersController extends Controller {
     public function actionPost($slug = "", $action = "create") {
         $model = new BspItemFrontEnd();
         $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
-
+        
         if ($slug != "") {
             $slug_arr = explode("-", $slug);
             $id = $slug_arr[0];
@@ -250,7 +251,7 @@ class OffersController extends Controller {
             $model->attributes = $_POST['BspItemFrontEnd'];
             $user->attributes = $_POST['ChangeUser'];
             //set user avatar 
-
+            
             $this->checkCilds($model);
             $isvalid = 1;
             if (!$model->validate()) {
@@ -275,9 +276,11 @@ class OffersController extends Controller {
                     $user->save(false);
                     foreach ($model->image_items as $modelImg) {
                         $modelImg->item_id = $model->id;
+                        
                         $modelImg->save();
+                         
                     }
-
+                    
                     $item = BspItem::model()->findByPk($model->id);
                     $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
                 }
@@ -375,6 +378,7 @@ class OffersController extends Controller {
      */
     public function setOfferImage($model) {
         $is_valid = 0;
+       
         if (isset($_POST['BspItemImage'])) {
             $bspItem_imag = array();
             foreach ($_POST['BspItemImage'] as $key => $bspItemImg) {
@@ -392,6 +396,7 @@ class OffersController extends Controller {
             }
             $model->image_items = $bspItem_imag;
         }
+         
         return $is_valid;
     }
 

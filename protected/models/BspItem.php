@@ -444,4 +444,26 @@ class BspItem extends DTActiveRecord {
         return CJSON::encode(array("1" => "Fix", "2" => "Hour", "3" => "Day", "4" => "Week", "5" => "Month"));
     }
 
+    /**
+     * before save
+     */
+    public function beforeSave() {
+        $this->updateAllToUndefault();
+        parent::beforeSave();
+        return true;
+    }
+
+    /**
+     *  before saving all the records needs
+     *  to be undefault
+     */
+    public function updateAllToUndefault() {
+        if (!empty($this->item_id)) {
+            $connection = Yii::app()->db;
+            $sql = "UPDATE " . $this->tableName() . " t SET t.is_offer=0 WHERE t.item_id ='" . $this->item_id . "' ";
+            $command = $connection->createCommand($sql);
+            $command->execute();
+        }
+    }
+
 }

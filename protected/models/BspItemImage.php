@@ -35,7 +35,7 @@ class BspItemImage extends DTActiveRecord {
             array('item_id, is_offer', 'numerical', 'integerOnly' => true),
             array('image_url, video_url', 'length', 'max' => 255),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
-            array('id,item_id,is_image', 'safe'),
+            array('id,item_id,is_image,is_offer', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, item_id, image_url, video_url, is_offer, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
@@ -122,7 +122,7 @@ class BspItemImage extends DTActiveRecord {
      * before save
      */
     public function beforeSave() {
-        $this->updateAllToUndefault();
+        
         $this->is_image = 1;
         parent::beforeSave();
         return true;
@@ -161,17 +161,6 @@ class BspItemImage extends DTActiveRecord {
         }
     }
 
-    /**
-     *  before saving all the records needs
-     *  to be undefault
-     */
-    public function updateAllToUndefault() {
-        if (!empty($this->item_id)) {
-            $connection = Yii::app()->db;
-            $sql = "UPDATE " . $this->tableName() . " t SET t.is_offer=0 WHERE t.item_id ='" . $this->item_id . "' ";
-            $command = $connection->createCommand($sql);
-            $command->execute();
-        }
-    }
+    
 
 }
