@@ -26,9 +26,9 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                     <div class="col-lg-7">
                         <div class="contactLink">
                             <a id="contact-me"
-                            title ="Contact Me"   
-                            data-toggle ="tooltip" 
-                            data-placement ="top"><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
+                               title ="Contact Me"   
+                               data-toggle ="tooltip" 
+                               data-placement ="top"><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
                         </div>
                         <div class="clear"></div>
                         <div id="offerDetail">
@@ -45,7 +45,7 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                                     "class" => "chk-online", "width" => "15", "height" => "15",
                                     "data-toggle" => "tooltip",
                                     "data-placement" => "top",
-                                    "title"=>"Offline"
+                                    "title" => "Offline"
                                 ));
                             }
                             ?>
@@ -111,8 +111,19 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                     </label>
                 </div>
                 <div id='orderNowdiv'>
-                    <a id="orderNow" href="javascript:#"><?php echo Yii::t('link', 'Order Now') ?></a>
+                    <a id="orderNow" href="javascript:#"><?php echo Yii::t('link', 'Order Now'); ?></a>
                 </div>
+                <?php
+                if (!empty($user->store_url)):
+                    $store_url = str_replace(" ", "-", $user->store_url);
+                    $store_url = $this->createUrl("/web/userdata/store", array("id" => $user->id, "storeurl" => $store_url));
+                    ?>
+                    <div id='orderNowdiv'>
+                        <a id="visitMystore" href="<?php echo $store_url ?>"><?php echo Yii::t('link', 'Visit My Store'); ?></a>
+                    </div>
+                    <?php
+                endif;
+                ?>
             </div>
 
         </div>

@@ -2095,6 +2095,27 @@ div#orderNowdiv a#orderNow:hover {
 div#orderNowdiv a#orderNow2:hover {
     opacity: 0.9;
 }
+div#orderNowdiv a#visitMystore {
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #B0AEAE;
+    color: #000;
+    float: right;
+    font: bold 1.3em/25px Arial;
+    height: 25px;
+    margin-right: 3px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: capitalize;
+    visibility: visible;
+    width: 100%;
+}
+div#orderNowdiv a#visitMystore:hover {
+    background-color: #FBE83C;
+    color: #414141;
+}
+
 .detail-Likes {
     background-color: #FFFFFF;
     border: 1px solid #BFBFBF;
