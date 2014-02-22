@@ -453,6 +453,8 @@
                         $("form#search-form").submit();
                     }
                 });
+                
+                 $('[data-toggle="tooltip"]').tooltip();
             });
             $(document).scroll(function() {  // OR  $(window).scroll(function() {
                 $(window).scroll(scrollUpdateSeachBar()).trigger("scroll");

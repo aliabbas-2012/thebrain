@@ -22,7 +22,8 @@
                 <a href='<?php echo $this->createUrl("/web/offers/detail", array('slug' => $item->slug)); ?>'>
                     <?php
                     if (!empty($item->image_offer->image_url)):
-                        echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, $item->name,array("title"=>$item->name));
+                        echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, 
+                                $item->name,array("title"=>$item->name,"width"=>"150","height"=>"150"));
                     else :
                         echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png",$item->name,array("title"=>$item->name));
                     endif;

@@ -12,11 +12,11 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                     <div class="itemAvata col-lg-2">
                         <?php
                         $user = Users::model()->findByPk($model->user_id);
-                        $avatar = CHtml::image(Yii::app()->theme->baseUrl . "/images/noavatar.jpg", 'Avatar', array("width" => "110","title"=>"Avatar"));
+                        $avatar = CHtml::image(Yii::app()->theme->baseUrl . "/images/noavatar.jpg", 'Avatar', array("width" => "110", "title" => "Avatar"));
                         if (!empty($user->avatar)) {
-                            $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array("width" => "110","title"=>"Avatar"));
+                            $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array("width" => "110", "title" => "Avatar"));
                         } else {
-                            $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', 'Avatar', array("width" => "110","title"=>"Avatar"));
+                            $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', 'Avatar', array("width" => "110", "title" => "Avatar"));
                         }
                         echo $avatar;
                         ?>
@@ -25,15 +25,28 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                     </div>
                     <div class="col-lg-7">
                         <div class="contactLink">
-                            <a id="contact-me"><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
+                            <a id="contact-me"
+                            title ="Contact Me"   
+                            data-toggle ="tooltip" 
+                            data-placement ="top"><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
                         </div>
                         <div class="clear"></div>
                         <div id="offerDetail">
                             <?php
                             if (isset(Yii::app()->user)) {
-                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/online.png", '', array("class" => "chk-online", "width" => "15", "height" => "15"));
+                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/online.png", '', array(
+                                    "class" => "chk-online", "width" => "15", "height" => "15",
+                                    "data-toggle" => "tooltip",
+                                    "data-placement" => "top",
+                                    "title" => "Online"
+                                ));
                             } else {
-                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/offline.png", '', array("class" => "chk-online", "width" => "15", "height" => "15"));
+                                echo CHtml::image(Yii::app()->theme->baseUrl . "/images/offline.png", '', array(
+                                    "class" => "chk-online", "width" => "15", "height" => "15",
+                                    "data-toggle" => "tooltip",
+                                    "data-placement" => "top",
+                                    "title"=>"Offline"
+                                ));
                             }
                             ?>
                             <div>

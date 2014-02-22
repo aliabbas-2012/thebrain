@@ -44,11 +44,20 @@
         </div>
     </div>
     <div class="col-lg-1">
-        <img item_id ="<?php echo $model->id ?>" class="add-wishlist" src="<?php echo Yii::app()->theme->baseUrl ?>/images/addtowishlist.png" 
-             alt="add to wishlist" original-title="Save this offer">
+        <img 
+             item_id ="<?php echo $model->id ?>" class="add-wishlist" 
+             data-toggle="tooltip" 
+             data-placement="top" 
+             src="<?php echo Yii::app()->theme->baseUrl ?>/images/addtowishlist.png" 
+             alt="Save this offer" title="Save this offer">
     </div>
     <div class="col-lg-2">
-        <a id="addlike" item_id ='<?php echo $model->id; ?>' class="detail-addlike" href="javascript:void(0);" status="2">+1 like</a>
+        <a id="addlike" item_id ='<?php echo $model->id; ?>' 
+           class="detail-addlike" href="javascript:void(0);" 
+           data-toggle="tooltip"
+           data-placement="top" 
+           title ="Like"
+           status="2">+1 like</a>
     </div>
 
 </div>

@@ -596,7 +596,7 @@ div.item-img-content div.info-item.hover-content a.favorAdd {
     text-decoration: line-through;
 }
 .thumbnail > img, .thumbnail a > img {
-    width: 150px;
+    width: 100% !important;
     height: 150px;
 }
 

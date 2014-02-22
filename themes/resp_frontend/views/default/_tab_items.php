@@ -18,20 +18,43 @@ foreach ($segments as $items) {
                 $percent = ($likes * 100) / $total_likes;
             }
 
-            if (!empty($user->avatar)) {
-                $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array("width" => "20", "title" => 'Avatar'));
-            } else {
-                $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', 'Avatar', array("width" => "20", "title" => 'Avatar'));
-            }
             $city = isset($user->city) ? $user->city : "";
+            $city.= isset($user->username) ? "," . $user->username : "";
+
+            if (!empty($user->avatar)) {
+                $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array(
+                            "width" => "20",
+                            "title" => $city,
+                            "data-toggle" => "tooltip",
+                            "data-placement" => "top",
+                ));
+            } else {
+                $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', 'Avatar', array(
+                            "width" => "20",
+                            "title" => 'Avatar',
+                            "title" => $city,
+                            "data-toggle" => "tooltip",
+                            "data-placement" => "top",
+                ));
+            }
+
 
             $sItem = '<div class="item-img-content">';
             $sItem.= '<div class="info-item hover-content">';
             $sItem.='<div class="offer_name"><a href="javascript:void(0)">' . substr($item->name, 0, 51) . '...</a></div>';
-            $sItem.='<div class="offer_address">' . $avatar . $city . '</div>';
-            $sItem.= CHtml::image(Yii::app()->theme->baseUrl . '/images/handLike.png', 'Like', array("title" => "Like", "class" => "offer_like", "id" => $item->id));
+            $sItem.='<div class="offer_address"  title="' . $city . '">' . $avatar . '</div>';
+            $sItem.= CHtml::image(Yii::app()->theme->baseUrl . '/images/handLike.png', 'Like', array(
+                        "title" => "Like",
+                        "class" => "offer_like",
+                        "data-toggle" => "tooltip",
+                        "data-placement" => "top",
+                        "id" => $item->id));
             $sItem.='<div class="percentLike">' . $percent . '%</div>';
-            $sItem.='<a class="favorAdd" title="' . $item->id . '">' . CHtml::image(Yii::app()->theme->baseUrl . '/images/start.png', 'Save this offer', array("title" => "Save this offer", "class" => "star add-wishlist")) . '</a>';
+            $sItem.='<a class="favorAdd" title="' . $item->id . '">' . CHtml::image(Yii::app()->theme->baseUrl . '/images/start.png', 'Save this offer', array(
+                        "title" => "Save this offer", "class" => "star add-wishlist",
+                        "data-toggle" => "tooltip",
+                        "data-placement" => "top",
+                    )) . '</a>';
             $sItem.='<div class="offer_numlike show_far_num_' . $item->id . '">' . $likes . '</div>';
             $sItem.='<div class="clear"></div>';
             $sItem.='</div>'; // end of info-item
@@ -40,7 +63,9 @@ foreach ($segments as $items) {
             $sItem.='<div class="watch"><a href="' . $this->createUrl("/web/offers/detail", array("slug" => $item->slug)) . '">Watching</a></div>';
 
 
-            $sItem.='<div class="delete"><a title="rand' . $item->id . '" href="javascript:;"><img alt="star" title="star" class="star" src="' . Yii::app()->theme->baseUrl . '/images/x.png" /></a></div>';
+            $sItem.='<div class="delete"><a title="rand' . $item->id . '" href="javascript:;"><img alt="star" 
+                        data-toggle = "tooltip" 
+                        data-placement ="top" title="Delete" class="star" src="' . Yii::app()->theme->baseUrl . '/images/x.png" /></a></div>';
             $sItem.='<div class="clear"></div>';
             $sItem.='</div>';
             $sItem.='</div>';
@@ -76,27 +101,35 @@ foreach ($segments as $items) {
             <div class="col-xs-6 col-md-3">
                 <a href="<?php echo $this->createUrl("/web/offers/detail", array("slug" => $item->slug)); ?>" class="thumbnail">
 
-        <?php
-        if (!empty($item->image_offer->image_url)):
-            echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, $item->name, array("title" => $item->name));
-        else :
-            echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png", $item->name, array("title" => $item->name));
-        endif;
-        ?>
-                </a>
                     <?php
-                    echo $sItem;
-
-                    //die;
+                    if (!empty($item->image_offer->image_url)):
+                        echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, $item->name, array(
+                            "title" => $item->name,
+                            "data-toggle" => "tooltip",
+                            "data-placement" => "top",
+                        ));
+                    else :
+                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png", $item->name, array(
+                            "title" => $item->name,
+                            "data-toggle" => "tooltip",
+                            "data-placement" => "top",
+                        ));
+                    endif;
                     ?>
-            </div>
+                </a>
                 <?php
-            endforeach;
-            ?>
+                echo $sItem;
+
+                //die;
+                ?>
+            </div>
+            <?php
+        endforeach;
+        ?>
     </div>
-        <?php
-    }
-    ?>
+    <?php
+}
+?>
 <script>
     jQuery(".col-xs-6").hover(
             function() {
