@@ -2460,11 +2460,27 @@ ul.pager li.selected a{
 .avatar-main-top { float:left; width:100%; }
 .avatar-top a{ color:#000; }
 
-.avtar-img { float:left; width:30px; padding-top:20px; }
+.full-features  {
+    max-height: 60px;
+    max-width: 60px;
+    padding-top:8px; padding-left:11px; 
+}
+.avatar-border {
+    border-bottom:1px solid #bcbbbb; 
+    float:left; 
+    width:100%; 
+    padding: 5px 0;
+    border-radius: 50%;
+}
+.offer-login-box {
+    border-radius: 50%;
+  
+}
+.avtar-img { float:left; width:30px; padding-top:5px; }
 
 .avtar-text { float:left; padding: 0 10px; width:100px; }
 
-.avtar-percentage { color:#FFF; padding-top:16px; padding-left:11px; float:right; background: url("images/percentage-bg_03.jpg") no-repeat; width:50px; height:49px; } 
+.avtar-percentage { color:#FFF; float:right;  } 
 
 .avatar-main-edit { float:left; width:100%; }
 

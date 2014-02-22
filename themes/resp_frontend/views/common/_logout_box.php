@@ -22,7 +22,7 @@
                 if (!empty($avatar)):
                     ?>
                     <a href="<?php echo $this->createUrl('/web/user/profile') ?>">
-                        <img height="20" title="Mail" src="<?php echo $avatar; ?>" alt="Mail" style="border-radius:10px;" />
+                        <img height="20" width="20" title="Mail" src="<?php echo $avatar; ?>" alt="Mail" style="border-radius:10px;" />
                     </a>
                     <?php
                 endif;
@@ -32,9 +32,26 @@
                 <h6><strong>Hi <?php echo Yii::app()->user->name ?></strong></h6>
                 <p><?php $user->username ?></p>
             </div>
+            
             <div class="avtar-percentage">
-                <?php echo $countper * 10; ?>%
+                <canvas class="full-features" height="70" width="70" style="width: 70px; height: 70px;"> </canvas>
             </div>
+            
+            <script >
+                $(document.getElementsByClassName('full-features')).mambo({
+                    percentage:<?php echo $countper * 10; ?>,
+                    label: "",
+                    displayValue: true,
+                    labelColor: "#fff",
+                    circleColor: '#ff851f',
+                    circleBorder: '#f00',
+                    ringStyle: "full",
+                    ringBackground: "#fff",
+                    ringColor: "#16acea",
+                    drawShadow: true,
+                    animate: true
+                });
+            </script>
         </div>
         <div class="avatar-main-edit">
             <p><img title="Profie" src="<?php echo Yii::app()->theme->baseUrl . "/images/" ?>/edit.png" alt="Profie" />
@@ -43,7 +60,7 @@
                 ?>
             </p>
         </div>
-        <div class="avatar-border" style="border-bottom:1px solid #bcbbbb; float:left; width:100%; padding: 5px 0;">
+        <div class="avatar-border" >
         </div>
         <div class="avatar-main-text">
             <div class="avatar-main-text-left">
@@ -82,19 +99,18 @@
             $myOffers = BspItem::model()->findAll($criteria);
             foreach ($myOffers as $offer):
                 ?>
-                <p><img height="20" title="<?php echo $offer->name ?>" src="<?php echo $avatar; ?>" alt="<?php echo $offer->name ?>" style="border-radius:10px;" />
-                    <a href="<?php echo $this->createUrl("/web/offers/post", array("action"=>"update","slug"=>$offer->slug)) ?>">
+                <p><img class="offer-login-box" width="20" height="20" title="<?php echo $offer->name ?>" src="<?php echo $avatar; ?>" alt="<?php echo $offer->name ?>" />
+                    <a href="<?php echo $this->createUrl("/web/offers/post", array("action" => "update", "slug" => $offer->slug)) ?>">
                         <?php echo $offer->name ?>
                     </a>
-                    
+
                 </p>
                 <?php
             endforeach;
-            
             ?>
 
         </div>
-        <div class="avatar-border" style="border-bottom:1px solid #bcbbbb; float:left; width:100%; padding: 0px 0 0 0;">
+        <div class="avatar-border" >
         </div>
         <div class="avatar-bottom">
             <div class="avatar-setting">

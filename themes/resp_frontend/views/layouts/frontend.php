@@ -37,6 +37,8 @@
         <?php
         header('Content-Type: text/html; charset="utf-8"', true);
         ?>
+        
+        <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/jquery.mambo.js"></script>
 
     </head>
 
@@ -376,6 +378,7 @@
         <link rel="stylesheet" type="text/css" media="all" href="<?php echo Yii::app()->baseUrl ?>/css/Kendo/kendo.metro.min.css"/>
         <script type="text/javascript" language="javascript" src="<?php echo Yii::app()->baseUrl ?>/js/Kendo/kendo.web.min.js"></script>
 
+        <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/thepuzzleadmin.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/thepuzzleadmin.js"></script>
 
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
