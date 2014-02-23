@@ -35,7 +35,8 @@ class OffersController extends Controller {
                     'addpartial',
                     'changeStatus',
                     'deleteOffer',
-                    'getChildrenCategories'
+                    'getChildrenCategories',
+                    'sentMessage'
                 ),
                 'users' => array('@'),
             ),
@@ -192,7 +193,7 @@ class OffersController extends Controller {
      */
     public function actionChangeStatus($id) {
         $offer = BspItem::model()->findByPk($id);
-        
+
         if ($offer->iStatus == 0) {
             BspItem::model()->updateByPk($id, array("iStatus" => 1));
             Yii::app()->user->setFlash("offer-status", 'Offer Status has been Active Now');
@@ -236,7 +237,7 @@ class OffersController extends Controller {
     public function actionPost($slug = "", $action = "create") {
         $model = new BspItemFrontEnd();
         $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
-        
+
         if ($slug != "") {
             $slug_arr = explode("-", $slug);
             $id = $slug_arr[0];
@@ -251,7 +252,7 @@ class OffersController extends Controller {
             $model->attributes = $_POST['BspItemFrontEnd'];
             $user->attributes = $_POST['ChangeUser'];
             //set user avatar 
-            
+
             $this->checkCilds($model);
             $isvalid = 1;
             if (!$model->validate()) {
@@ -276,11 +277,10 @@ class OffersController extends Controller {
                     $user->save(false);
                     foreach ($model->image_items as $modelImg) {
                         $modelImg->item_id = $model->id;
-                        
+
                         $modelImg->save();
-                         
                     }
-                    
+
                     $item = BspItem::model()->findByPk($model->id);
                     $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
                 }
@@ -378,7 +378,7 @@ class OffersController extends Controller {
      */
     public function setOfferImage($model) {
         $is_valid = 0;
-       
+
         if (isset($_POST['BspItemImage'])) {
             $bspItem_imag = array();
             foreach ($_POST['BspItemImage'] as $key => $bspItemImg) {
@@ -396,7 +396,7 @@ class OffersController extends Controller {
             }
             $model->image_items = $bspItem_imag;
         }
-         
+
         return $is_valid;
     }
 
@@ -490,6 +490,35 @@ class OffersController extends Controller {
     public function actionGetChildrenCategories() {
         $data = BspCategory::model()->getChildrenCategories($_REQUEST['id']);
         echo CJSON::encode($data);
+    }
+
+    /**
+     * sent Message
+     */
+    public function actionSentMessage() {
+        $model = new BspMessage;
+        $recieve_user = "";
+        if (isset($_POST['BspMessage'])) {
+            $model->attributes = $_POST['BspMessage'];
+            $model->user_send = Yii::app()->user->id;
+            $recieve_user = Users::model()->findByPk($model->user_receive);
+            $attachment = $model->attachment;
+            if ($model->validate()) {
+                if ($model->save()) {
+                    if (!empty($attachment)) {
+                        $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("message", $model->Id));
+                        $source = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($model), get_class($model) . "_attachment"));
+                        if (is_file($source . $model->attachment)) {
+                            copy($source. $model->attachment, $upload_path.$model->attachment);
+                        }
+                    }
+                    //set flash
+                    Yii::app()->user->setFlash("success", "Your Message has been sent");
+                }
+            }
+        }
+
+        $this->renderPartial("//offers/_sent_message", array("model" => $model, "recieve_user" => $recieve_user));
     }
 
 }

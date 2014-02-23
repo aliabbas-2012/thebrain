@@ -45,11 +45,11 @@
     </div>
     <div class="col-lg-1">
         <img 
-             item_id ="<?php echo $model->id ?>" class="add-wishlist" 
-             data-toggle="tooltip" 
-             data-placement="top" 
-             src="<?php echo Yii::app()->theme->baseUrl ?>/images/addtowishlist.png" 
-             alt="Save this offer" title="Save this offer">
+            item_id ="<?php echo $model->id ?>" class="add-wishlist" 
+            data-toggle="tooltip" 
+            data-placement="top" 
+            src="<?php echo Yii::app()->theme->baseUrl ?>/images/addtowishlist.png" 
+            alt="Save this offer" title="Save this offer">
     </div>
     <div class="col-lg-2">
         <a id="addlike" item_id ='<?php echo $model->id; ?>' 
@@ -457,4 +457,15 @@ $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getDat
         })
     })
 </script>
-    
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <?php
+                $recieve_user = Users::model()->findByPk($model->user_id);
+                $message = new BspMessage;
+                $this->renderPartial("//offers/_sent_message", array("model" => $message,"recieve_user"=>$recieve_user));
+            ?>
+        </div>
+    </div>
+</div>

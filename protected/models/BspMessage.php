@@ -19,7 +19,7 @@
  */
 class BspMessage extends DTActiveRecord {
 
-    public $user_receive_name,$user_send_name;
+    public $user_receive_name,$user_send_name ,$attachment;
 
     /**
      * @return string the associated database table name
@@ -40,9 +40,10 @@ class BspMessage extends DTActiveRecord {
             array('sFile, subject', 'length', 'max' => 255),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('detail, date_time', 'safe'),
-            array('sFile', 'file', 'allowEmpty' => $this->isNewRecord ? false : true,
+            array('sFile', 'file', 'allowEmpty' => true,
                 'maxSize'=> 5120000, 
                 'types' => 'jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG,doc,pdf,odt,docx,xlsx,xls,txt'),
+            array('attachment','safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('Id, user_send, user_receive, is_view, detail, sFile, subject, date_time, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
@@ -67,12 +68,14 @@ class BspMessage extends DTActiveRecord {
     public function attributeLabels() {
         return array(
             'Id' => 'ID',
-            'user_send' => 'User Send',
-            'user_receive' => 'User Receive',
+            'user_send' => Yii::t('models', 'Sender'),
+            'user_receive' => Yii::t('models', 'Receiver'),
             'user_receive_name' => 'User Receive',
             'is_view' => 'Is View',
-            'detail' => 'Detail',
-            'sFile' => 'Attachment',
+            'subject' => Yii::t('models', 'Subject'),
+            'detail' => Yii::t('models', 'Message'),
+            'sFile' => Yii::t('models', 'Attach File'),
+            'attachment' => Yii::t('models', 'Attach File'),
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
             'update_time' => 'Update Time',

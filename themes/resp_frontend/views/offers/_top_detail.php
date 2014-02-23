@@ -25,13 +25,31 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                     </div>
                     <div class="col-lg-7">
                         <div class="contactLink">
-                            <a id="contact-me"
-                               title ="Contact Me"   
-                               data-toggle ="tooltip" 
-                               data-placement ="top"><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
+                            <?php
+                            if (!empty(Yii::app()->user->id)):
+                                ?>
+                                <a id="contact-me"
+                                   title ="Contact Me"   
+                                   data-toggle ="tooltip" 
+                                   data-placement ="top"
+                                   onclick='jQuery("#myModal").modal()'
+                                   href="javascript:void(0)"
+                                   ><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
+                                   <?php
+                               else:
+                                   ?>
+                                <a id="contact-me"
+                                   title ="Contact Me"   
+                                   data-toggle ="tooltip" 
+                                   data-placement ="top"
+                                
+                                   ><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
+                               <?php
+                               endif;
+                               ?>
                         </div>
-                        <div class="clear"></div>
-                        <div id="offerDetail">
+                        <div class = "clear"></div>
+                        <div id = "offerDetail">
                             <?php
                             if (isset(Yii::app()->user)) {
                                 echo CHtml::image(Yii::app()->theme->baseUrl . "/images/online.png", '', array(
