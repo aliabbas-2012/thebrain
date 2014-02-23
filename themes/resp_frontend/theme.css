@@ -2551,3 +2551,6 @@ ul.pager li.selected a{
 .avatar-signout { float:right; }
 
 .avatar-signout a { padding: 5px 10px; background:#ededed; border: 1px solid #cecece; border-radius:3px; color:#41414d }
+#my_mails .yiiPager {
+    display: block;
+}

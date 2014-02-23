@@ -89,6 +89,12 @@
                     jQuery("#loading").hide();
                     jQuery(".modal-content").html(resp);
                     
+                    setTimeout(function(){
+                         if(jQuery.trim(jQuery("#message-form .alert-success").html())!=""){
+                            window.location.reload();
+                         }
+                    },1300);
+
                 });
                 
                 return false;

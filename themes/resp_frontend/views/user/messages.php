@@ -32,8 +32,12 @@
             } else if ($type == "sent") {
                 $criteria->addCondition("user_send = " . Yii::app()->user->id);
             }
+
+            //CVarDumper::dump($criteria,10,true);
             $dataProvider = new CActiveDataProvider('BspMessage', array(
                 'criteria' => $criteria,
+                'sort' => array(
+                    'defaultOrder' => "Id DESC"),
             ));
             $this->widget('zii.widgets.grid.CGridView', array(
                 'id' => 'bsp-message-grid',
@@ -49,9 +53,9 @@
                     array('name' => 'sFile', 'value' => '$data->sFile'),
                     array('name' => 'is_view', 'value' => '$data->is_view == 1 ? "Viewed" : "Not Viewed"'),
                     array('name' => 'sFile', 'value' => '$data->date_time'),
-                    array(
-                        'class' => 'CButtonColumn',
-                    ),
+//                    array(
+//                        'class' => 'CButtonColumn',
+//                    ),
                 ),
             ));
             ?>
@@ -80,3 +84,4 @@
     </div>
 </div>
 
+<div class="clear-height"></div>

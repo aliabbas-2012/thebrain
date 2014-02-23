@@ -510,6 +510,8 @@ class OffersController extends Controller {
                         $source = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($model), get_class($model) . "_attachment"));
                         if (is_file($source . $model->attachment)) {
                             copy($source. $model->attachment, $upload_path.$model->attachment);
+                            
+                            BspMessage::model()->updateByPk($model->Id,array("sFile"=>$model->attachment));
                         }
                     }
                     //set flash
