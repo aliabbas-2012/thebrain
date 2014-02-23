@@ -36,7 +36,8 @@ class OffersController extends Controller {
                     'changeStatus',
                     'deleteOffer',
                     'getChildrenCategories',
-                    'sentMessage'
+                    'sentMessage',
+                    'deleteoffertype'
                 ),
                 'users' => array('@'),
             ),
@@ -524,7 +525,7 @@ class OffersController extends Controller {
                     $email['Body'] = $model->detail;
                     $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
 
-                    
+
                     $this->sendEmail2($email);
 
                     //set flash
@@ -576,6 +577,31 @@ class OffersController extends Controller {
                 }
                 $m = split(";", $m);
                 return trim($m[0]);
+        }
+    }
+
+    /**
+     * delete offer type
+     * like saved or recent
+     */
+    public function actionDeleteoffertype() {
+        if (isset($_POST['offer_id'])) {
+            if ($_POST['offer_type'] == "recent") {
+                $criteria = new CDbCriteria();
+                $criteria->addCondition("item_id =" . $_POST['offer_id']);
+                $items = BspItemLog::model()->findAll($criteria);
+                foreach ($items as $item) {
+                    BspItemLog::model()->deleteByPk($item->id);
+                }
+            } else if ($_POST['offer_type'] == "saved") {
+                $criteria = new CDbCriteria();
+                $criteria->addCondition("item_id =" . $_POST['offer_id']);
+                $criteria->addCondition("create_user_id = ".Yii::app()->user->id);
+                $items = BspFarvorite::model()->findAll($criteria);
+                foreach ($items as $item) {
+                    BspFarvorite::model()->deleteByPk($item->id);
+                }
+            }
         }
     }
 

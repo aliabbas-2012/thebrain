@@ -2,6 +2,8 @@
 
 <div class="clear"></div>
 <div class="tabs-container">
+    <span class='alert alert-success col-lg-12' id='tab-item-success' style="display:none"></span>
+    <div class="clear"></div>
     <ul class="nav nav-tabs">
         <li class="active"><a href="#random_offers" data-toggle="tab"><?php echo Yii::t("site", "Random Offers"); ?></a></li>
         <li><a href="#recent_offers" data-toggle="tab"><?php echo Yii::t("site", "Recently viewed"); ?></a></li>

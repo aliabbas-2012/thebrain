@@ -23,7 +23,7 @@
 
         <!-- Custom styles for this template -->
         <link href="<?php echo Yii::app()->theme->baseUrl ?>/theme.css" rel="stylesheet">
-<!--        convert inline to external style-->
+        <!--        convert inline to external style-->
         <link href="<?php echo Yii::app()->theme->baseUrl ?>/style.css" rel="stylesheet">
 
         <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -37,7 +37,7 @@
         <?php
         header('Content-Type: text/html; charset="utf-8"', true);
         ?>
-        
+
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/jquery.mambo.js"></script>
 
     </head>
@@ -281,8 +281,8 @@
         <div class="row notice-bar">
             <div class="row-holder">
                 <?php
-                    $notice_bar = ConfMisc::model()->find("param = '".Yii::app()->language."_notice_bar'");
-                    $notice_value = isset($notice_bar->value)?$notice_bar->value:"The Puzzle Alpha";
+                $notice_bar = ConfMisc::model()->find("param = '" . Yii::app()->language . "_notice_bar'");
+                $notice_value = isset($notice_bar->value) ? $notice_bar->value : "The Puzzle Alpha";
                 ?>
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
@@ -426,6 +426,39 @@
                                                 google.maps.event.addDomListener(window, 'load', initialize);
                                             }
 
+                                            function deleteOffer(id) {
+
+                                                if (jQuery("a[href=#recent_offers]").parent().hasClass("active")) {
+                                                    if (confirm("Are you sure you want to delete from recent offers")) {
+                                                        deleteOfferFunc(id, "recent");
+                                                    }
+                                                }
+                                                else if (jQuery("a[href=#saved_offers]").parent().hasClass("active")) {
+                                                    if (confirm("Are you sure you want to delete from saved offers")) {
+                                                        deleteOfferFunc(id, "saved");
+                                                    }
+                                                }
+                                            }
+
+                                            function deleteOfferFunc(id, type) {
+                                                jQuery("#loading").show();
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: '<?php echo $this->createUrl('/web/offers/deleteoffertype') ?>',
+                                                    data: {offer_id: id, offer_type: type}
+                                                }).done(function(resp) {
+
+                                                    jQuery("#loading").hide();
+                                                    jQuery("#tab-item-success").html(type + " Offer has been deleted");
+                                                    jQuery("#tab-item-success").show();
+                                                    setTimeout(function() {
+                                                        window.location.reload();
+                                                    }, 1300);
+
+                                                });
+
+                                                return false;
+                                            }
         </script>
         <div id="map-canvas"></div>
         <script type="text/javascript">
@@ -453,8 +486,8 @@
                         $("form#search-form").submit();
                     }
                 });
-                
-                 $('[data-toggle="tooltip"]').tooltip();
+
+                $('[data-toggle="tooltip"]').tooltip();
             });
             $(document).scroll(function() {  // OR  $(window).scroll(function() {
                 $(window).scroll(scrollUpdateSeachBar()).trigger("scroll");

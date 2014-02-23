@@ -1,4 +1,5 @@
 <?php
+
 $total_likes = BspItemLike::model()->count();
 $segments = array_chunk($items, 4);
 foreach ($segments as $items) {
@@ -62,10 +63,17 @@ foreach ($segments as $items) {
 
             $sItem.='<div class="watch"><a href="' . $this->createUrl("/web/offers/detail", array("slug" => $item->slug)) . '">Watching</a></div>';
 
-
-            $sItem.='<div class="delete"><a title="rand' . $item->id . '" href="javascript:;"><img alt="star" 
-                        data-toggle = "tooltip" 
+            if (!empty(Yii::app()->user->id)):
+                $sItem.='<div class="delete"><a title="rand' . $item->id . '" href="javascript:;"><img alt="star" 
+                        data-toggle = "tooltip"
+                        onclick = "deleteOffer(' . $item->id . ')"
                         data-placement ="top" title="Delete" class="star" src="' . Yii::app()->theme->baseUrl . '/images/x.png" /></a></div>';
+            else :
+                $sItem.='<div class="delete"><a title="rand' . $item->id . '" href="javascript:;"><img alt="star" 
+                        data-toggle = "tooltip"
+                        
+                        data-placement ="top" title="Delete" class="star" src="' . Yii::app()->theme->baseUrl . '/images/x.png" /></a></div>';
+            endif;
             $sItem.='<div class="clear"></div>';
             $sItem.='</div>';
             $sItem.='</div>';
