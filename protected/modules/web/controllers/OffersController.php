@@ -509,11 +509,24 @@ class OffersController extends Controller {
                         $upload_path = DTUploadedFile::creeatRecurSiveDirectories(array("message", $model->Id));
                         $source = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($model), get_class($model) . "_attachment"));
                         if (is_file($source . $model->attachment)) {
-                            copy($source. $model->attachment, $upload_path.$model->attachment);
-                            
-                            BspMessage::model()->updateByPk($model->Id,array("sFile"=>$model->attachment));
+                            copy($source . $model->attachment, $upload_path . $model->attachment);
+                            BspMessage::model()->updateByPk($model->Id, array("sFile" => $model->attachment));
+                            $email['attachment'] = $source . $model->attachment;
+                            $email['type'] = $this->get_mime($source . $model->attachment);
+                            $email['name'] = $model->attachment;
                         }
                     }
+
+                    $email['From'] = Yii::app()->user->user->user_email;
+                    $email['FromName'] = Yii::app()->user->user->username;
+                    $email['To'] = $recieve_user->user_email = "itsgeniusstar@gmail.com";
+                    $email['Subject'] = $model->subject;
+                    $email['Body'] = $model->detail;
+                    $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
+
+                    
+                    $this->sendEmail2($email);
+
                     //set flash
                     Yii::app()->user->setFlash("success", "Your Message has been sent");
                 }
@@ -521,6 +534,49 @@ class OffersController extends Controller {
         }
 
         $this->renderPartial("//offers/_sent_message", array("model" => $model, "recieve_user" => $recieve_user));
+    }
+
+    /**
+     * 
+     * @param type $file
+     * @return boolean
+     */
+
+    /**
+     * Tries to get mime data of the file. 
+     * @return {String} mime-type of the given file 
+     * @param $filename String 
+     */
+    function get_mime($filename) {
+        preg_match("/\.(.*?)$/", $filename, $m);    # Get File extension for a better match 
+        switch (strtolower($m[1])) {
+            case "js": return "application/javascript";
+            case "json": return "application/json";
+            case "jpg": case "jpeg": case "jpe": return "image/jpg";
+            case "png": case "gif": case "bmp": return "image/" . strtolower($m[1]);
+            case "css": return "text/css";
+            case "xml": return "application/xml";
+            case "html": case "htm": case "php": return "text/html";
+            default:
+                if (function_exists("mime_content_type")) { # if mime_content_type exists use it. 
+                    $m = mime_content_type($filename);
+                } else if (function_exists("")) {    # if Pecl installed use it 
+                    $finfo = finfo_open(FILEINFO_MIME);
+                    $m = finfo_file($finfo, $filename);
+                    finfo_close($finfo);
+                } else {    # if nothing left try shell 
+                    if (strstr($_SERVER[HTTP_USER_AGENT], "Windows")) { # Nothing to do on windows 
+                        return ""; # Blank mime display most files correctly especially images. 
+                    }
+                    if (strstr($_SERVER[HTTP_USER_AGENT], "Macintosh")) { # Correct output on macs 
+                        $m = trim(exec('file -b --mime ' . escapeshellarg($filename)));
+                    } else {    # Regular unix systems 
+                        $m = trim(exec('file -bi ' . escapeshellarg($filename)));
+                    }
+                }
+                $m = split(";", $m);
+                return trim($m[0]);
+        }
     }
 
 }
