@@ -330,7 +330,7 @@
                 <div class="navbar-inner navbar-content-center">
                     <ul class="footer-contain">
 
-                        <li class="link">
+                        <li class="link ">
                             <a href="<?php echo $this->createUrl("/web/article/article/", array('slug' => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-9")); ?>"><?php echo Yii::t('link', 'How it works') ?></a>
                         </li>
                         <li class="link">

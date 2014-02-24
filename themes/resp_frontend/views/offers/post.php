@@ -404,7 +404,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container post-bottom">
     <div class="row">
         <div class="col-lg-12">
             <div class="submit" align="center">
