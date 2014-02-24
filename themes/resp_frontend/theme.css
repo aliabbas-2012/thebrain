@@ -2576,3 +2576,6 @@ ul.pager li.selected a{
 #my_mails .yiiPager {
     display: block;
 }
+.model-container {
+    margin-left: 20px;
+}

@@ -1,4 +1,4 @@
-<div class="row-fluid profile-view">
+<div class="row-fluid profile-view model-container">
     <h2>
         <?php echo Yii::t('detailOffer', 'Contact Seller'); ?>
 
@@ -29,7 +29,7 @@
 
     <div class="form-group">
         <label class="control-label col-sm-2"></label>
-        <div class="col-lg-4">
+        <div class="col-lg-8">
 
             <?php
             if (!empty($recieve_user)) {
@@ -43,7 +43,7 @@
     </div>
     <div class="form-group">
         <?php echo $form->labelEx($model, 'subject', array('class' => 'control-label col-sm-2')); ?>
-        <div class="col-lg-4">
+        <div class="col-lg-8">
             <?php echo $form->textField($model, 'subject', array('class' => 'form-control')); ?> 
             <?php echo $form->error($model, 'subject', array("class" => 'alert alert-error')); ?>
         </div>
@@ -51,7 +51,7 @@
     </div>
     <div class="form-group">
         <?php echo $form->labelEx($model, 'detail', array('class' => 'control-label col-sm-2')); ?>
-        <div class="col-lg-4">
+        <div class="col-lg-8">
             <?php echo $form->textArea($model, 'detail', array('class' => 'form-control', 'cols' => '10', 'rows' => '10')); ?> 
             <?php echo $form->error($model, 'detail', array("class" => 'alert alert-error')); ?>
         </div>
