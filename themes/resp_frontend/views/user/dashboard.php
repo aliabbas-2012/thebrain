@@ -45,7 +45,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
 
     <div class="clear"></div>  
 
-    <div id="recentOrder" class="list-view">
+    <div id="recentOrder" class="list-view-dashboard">
         <?php
         $criteria = new CDbCriteria();
         $criteria->order = "id DESC";
