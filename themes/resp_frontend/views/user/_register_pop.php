@@ -1,12 +1,6 @@
 <div class="row-fluid profile-view model-container">
     <h3><?php echo Yii::t('user', "Register Yourself"); ?></h3>
-    <?php
-    if (Yii::app()->user->hasFlash('success')):
-        echo CHtml::openTag("div", array("class" => "alert-success"));
-        echo Yii::app()->user->getFlash('success');
-        echo CHtml::closeTag("div");
-    endif;
-    ?>
+
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'pop-up-users-form',
@@ -17,10 +11,16 @@
         "action" => $this->createUrl("/web/user/registerPopup")
     ));
     ?>
-
+    <?php
+    if (Yii::app()->user->hasFlash('success')):
+        echo CHtml::openTag("div", array("class" => "alert-success col-lg-10"));
+        echo Yii::app()->user->getFlash('success');
+        echo CHtml::closeTag("div");
+    endif;
+    ?>
     <div class="form-group">
         <?php echo $form->labelEx($model, 'first_name', array('class' => 'control-label col-sm-4')); ?>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <?php echo $form->textField($model, 'first_name', array('class' => 'form-control', 'maxlength' => 50)); ?>
             <?php echo $form->error($model, 'first_name'); ?>
 
@@ -31,7 +31,7 @@
 
     <div class="form-group">
         <?php echo $form->labelEx($model, 'second_name', array('class' => 'control-label col-sm-4')); ?>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <?php echo $form->textField($model, 'second_name', array('class' => 'form-control', 'maxlength' => 50)); ?>
             <?php echo $form->error($model, 'second_name'); ?>
 
@@ -42,7 +42,7 @@
 
     <div class="form-group">
         <?php echo $form->labelEx($model, 'username', array('class' => 'control-label col-sm-4')); ?>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'maxlength' => 255)); ?>
             <?php echo $form->error($model, 'username'); ?>
 
@@ -53,7 +53,7 @@
 
     <div class="form-group">
         <?php echo $form->labelEx($model, 'user_email', array('class' => 'control-label col-sm-4')); ?>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <?php echo $form->textField($model, 'user_email', array('class' => 'form-control', 'maxlength' => 255)); ?>
             <?php echo $form->error($model, 'user_email'); ?>
 
@@ -67,7 +67,7 @@
 
     <div class="form-group">
         <?php echo $form->labelEx($model, 'password', array('class' => 'control-label col-sm-4')); ?>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <?php echo $form->passwordField($model, 'password', array('class' => 'form-control', 'maxlength' => 50)); ?>
             <?php echo $form->error($model, 'password'); ?>
 
@@ -76,7 +76,7 @@
     </div><!-- group -->
     <div class="form-group">
         <?php echo $form->labelEx($model, 'password_repeat', array('class' => 'control-label col-sm-4')); ?>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <?php echo $form->passwordField($model, 'password_repeat', array('class' => 'form-control', 'maxlength' => 50)); ?>
             <?php echo $form->error($model, 'password_repeat'); ?>
 
@@ -87,7 +87,7 @@
 
     <div class="form-group">
         <?php echo $form->labelEx($model, 'password_hint', array('class' => 'control-label col-sm-4')); ?>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <?php echo $form->textField($model, 'password_hint', array('class' => 'form-control', 'maxlength' => 200)); ?>
             <?php echo $form->error($model, 'password_hint'); ?>
 
@@ -99,7 +99,7 @@
 
     <div class="form-group">
         <?php echo $form->labelEx($model, 'gender', array('class' => 'control-label col-sm-4')); ?>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <?php echo $form->dropDownList($model, 'gender', array("1" => "Male", "2" => "Female"), array('class' => 'form-control', 'maxlength' => 6)); ?>
             <?php echo $form->error($model, 'gender'); ?>
 
