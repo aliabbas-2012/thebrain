@@ -85,5 +85,6 @@ return array (
   'Zipcode' => '',
   'and atract more interest' => '',
   'for' => '',
+  'Register Yourself'=>'',  
   'link and shoild reflect the service or goods you sell' => '',
 );

@@ -360,7 +360,18 @@
             </nav>
         </div>
 
-
+        <!-- Modal -->
+        <div class="modal fade" id="singUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <?php
+                    
+                    $register = new RegisterUsers;
+                    $this->renderPartial("//user/_register_pop", array("model" => $register));
+                    ?>
+                </div>
+            </div>
+        </div>
 
         <!-- Bootstrap core JavaScript
         ================================================== -->

@@ -38,6 +38,7 @@ class UserController extends Controller {
                     'forgetPass',
                     'resetPass',
                     'register',
+                    'registerPopup',
                     'login'
                 ),
                 'users' => array('?'),
@@ -49,7 +50,7 @@ class UserController extends Controller {
     }
 
     /**
-     * 
+     * Register User
      */
     public function actionRegister() {
         $model = new RegisterUsers;
@@ -78,6 +79,38 @@ class UserController extends Controller {
         }
 
         $this->render("//user/register", array("model" => $model));
+    }
+
+    /**
+     * register User for pop up
+     */
+    public function actionRegisterPopup() {
+        $model = new RegisterUsers;
+        if (isset($_POST['RegisterUsers'])) {
+            $model->attributes = $_POST['RegisterUsers'];
+            $model->type = "non-admin";
+            if ($model->save()) {
+                $itst = new ItstFunctions;
+                $key = $itst->getRanddomeNo(25);
+                $model->updateByPk($model->id, array("email_authenticate" => $key));
+                $body = "Reset your link <br/>";
+                $url = $this->createAbsoluteUrl("/web/user/resetPass", array("id" => $model->id, "key" => $key));
+                $body.= CHtml::link($url, $url);
+                $email['From'] = Yii::app()->params->adminEmail;
+                $email['FromName'] = Yii::app()->name;
+                $email['To'] = $model->user_email;
+                $email['Subject'] = "Reset your link";
+                $email['Body'] = $body;
+                $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
+
+                $this->sendEmail2($email);
+
+                Yii::app()->user->setFlash("success", "Reset Link has been sent successfully");
+                
+            }
+        }
+
+         $this->renderPartial("//user/_register_pop", array("model" => $model));
     }
 
     /**
@@ -206,7 +239,7 @@ class UserController extends Controller {
      */
     public function actionResetPass($id, $key) {
         $user = Users::model()->findByPk($id);
-        
+
         if ($user->email_authenticate == $key) {
             $model = new ResetPassword;
             if (isset($_POST['ResetPassword'])) {
