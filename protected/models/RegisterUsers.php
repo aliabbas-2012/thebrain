@@ -25,6 +25,7 @@ class RegisterUsers extends Users {
             array('password password_repeat,password_hint', 'required'),
             array('username, user_email', 'unique'),
             array('user_email', 'email'),
+            array("store_url",'safe'),
             array('password', 'compare', 'compareAttribute' => 'password_repeat'),
         );
 

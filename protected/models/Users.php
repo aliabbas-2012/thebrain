@@ -57,7 +57,7 @@ class Users extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('username, user_email, store_url, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('username, user_email, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('lat, lng', 'numerical'),
             array('first_name, second_name, paypal_mail, password', 'length', 'max' => 50),
             array('username, user_email, store_url, fbmail, address, email_authenticate', 'length', 'max' => 255),
@@ -73,6 +73,7 @@ class Users extends DTActiveRecord {
             array('fbmail,paypal_mail', 'email'),
             array('user_email', $this->isNewRecord ? 'email' : "safe"),
             array('user_email,username', 'unique'),
+            array('store_url','safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, first_name, second_name, username, user_email, type, phone, avatar, birthday, gender, store_url, paypal_mail, fbmail, password, password_hint, description, address, country, city, zipcode, lat, lng, background, sRecentList, sWishList, lastActiveTime, email_authenticate, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
