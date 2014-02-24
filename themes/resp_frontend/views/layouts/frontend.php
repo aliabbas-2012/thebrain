@@ -331,7 +331,7 @@
                     <ul class="footer-contain">
 
                         <li class="link ">
-                            <a href="<?php echo $this->createUrl("/web/article/article/", array('slug' => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-9")); ?>"><?php echo Yii::t('link', 'How it works') ?></a>
+                            <a href="<?php echo $this->createUrl("/web/article/index/", array('slug' => !empty($articless[0]) ? $articless[0]->slug : "how-it-works-9")); ?>"><?php echo Yii::t('link', 'How it works') ?></a>
                         </li>
                         <li class="link">
                             <a href="<?php echo $this->createUrl("/web/blog/index"); ?>"><?php echo Yii::t('link', 'Blog'); ?></a>
