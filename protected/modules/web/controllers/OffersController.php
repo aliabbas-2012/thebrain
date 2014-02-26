@@ -104,7 +104,14 @@ class OffersController extends Controller {
             $model->attributes = $_POST['OfferSearch'];
             if (!empty($model->keyword)) {
                 $criteria->compare("name", $model->keyword, true, "OR");
+                $criteria->compare("name", $model->keyword, true, "OR");
                 $criteria->compare("t.id", $model->keyword, true, "OR");
+
+                $criteria->compare("name", $model->key_word_1, true, "OR");
+                $criteria->compare("name", $model->key_word_1, true, "OR");
+                $criteria->compare("t.id", $model->key_word_1, true, "OR");
+
+
                 $criteria->compare("offer_number", $model->keyword, true, "OR");
                 $criteria->compare("description", $model->keyword, true, "OR");
                 $criteria->compare("seo_keywords", $model->keyword, true, "OR");
@@ -596,7 +603,7 @@ class OffersController extends Controller {
             } else if ($_POST['offer_type'] == "saved") {
                 $criteria = new CDbCriteria();
                 $criteria->addCondition("item_id =" . $_POST['offer_id']);
-                $criteria->addCondition("create_user_id = ".Yii::app()->user->id);
+                $criteria->addCondition("create_user_id = " . Yii::app()->user->id);
                 $items = BspFarvorite::model()->findAll($criteria);
                 foreach ($items as $item) {
                     BspFarvorite::model()->deleteByPk($item->id);

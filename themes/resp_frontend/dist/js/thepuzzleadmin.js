@@ -295,6 +295,10 @@ var thepuzzleadmin = {
             jQuery(".alert-" + type).fadeOut();
         }, 1000);
 
-    }
+    },
+    submitSearch : function (){
+        
+        jQuery('#search-form').submit();
+    }        
 
 }

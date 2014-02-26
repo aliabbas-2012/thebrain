@@ -152,9 +152,31 @@
             </div><!-- /.container -->
         </nav>
         <!-- navbar search -->
+        <?php
+        $form = $this->beginWidget('CActiveForm', array(
+            'id' => 'search-form',
+            'enableAjaxValidation' => false,
+            'action' => $this->createUrl("/web/offers/search"),
+            'htmlOptions' => array(
+                'class' => 'form-horizontal',
+            )
+        ));
+        ?>
+        <?php
+        $model = new OfferSearch();
+
+        //offer search keywords
+        if (isset($_POST['OfferSearch'])) {
+            $model->attributes = $_POST['OfferSearch'];
+        }
+        ?>
         <nav id="navbar-search" class="navbar navbar-inverse" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
+                <?php
+                echo $form->textField($model, 'key_word_1', array("class" => "form-control location_search1",
+                    "placeholder" => "Search", "onclick" => "jQuery(this).next().click()"));
+                ?>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-secondary">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -168,21 +190,7 @@
                 <ul class="nav navbar-nav">
                     <div class="search-bar">
                         <div class="navbar-collapse form-nav main-search-bar-2">
-                            <?php
-                            $model = new OfferSearch();
-                            $form = $this->beginWidget('CActiveForm', array(
-                                'id' => 'search-form',
-                                'enableAjaxValidation' => false,
-                                'action' => $this->createUrl("/web/offers/search"),
-                                'htmlOptions' => array(
-                                    'class' => 'form-horizontal',
-                                )
-                            ));
-                            //offer search keywords
-                            if (isset($_POST['OfferSearch'])) {
-                                $model->attributes = $_POST['OfferSearch'];
-                            }
-                            ?>
+
                             <ul class="nav navbar-nav">
                                 <li class="dropdown">
                                     <a  class="dropdown-toggle head_category" data-toggle="dropdown">
@@ -221,16 +229,15 @@
 
                                     </ul>
                                 </li>
-
                                 <li class="keword_search">
                                     <?php
-                                    echo $form->textField($model, 'keyword', array(
-                                        "class" => "form-control", "placeholder" => "Search ..."));
+                                    echo $form->textField($model, 'keyword', array("class" => "form-control location_search", "placeholder" => "Search ..."));
                                     ?>
-                                </li>    
+                                </li>
                                 <li class="location_search">
                                     <?php
-                                    echo $form->textField($model, 'location', array("class" => "form-control", "placeholder" => "f.e 10245 Berlin..."));
+                                    echo $form->textField($model, 'location', array("class" => "form-control location_search", "placeholder" => "f.e 10245 Berlin..."));
+
                                     echo $form->hiddenField($model, 'lat');
                                     echo $form->hiddenField($model, 'lng');
 
@@ -262,7 +269,7 @@
                                 </li>
                                 <li class="btn-search">                            
                                     <div class="search-button">
-                                        <a class="searchbt-top" href="javascript:void(0)" onclick="jQuery('#search-form').submit();">
+                                        <a class="searchbt-top" href="javascript:void(0)" onclick="thepuzzleadmin.submitSearch()">
                                             <?php
                                             echo CHtml::image(Yii::app()->theme->baseUrl . "/images/search_button.png", 'Search', array("title" => "Search"));
                                             ?>
@@ -270,14 +277,15 @@
                                     </div>
                                 </li>
                             </ul>
-                            <?php
-                            $this->endWidget();
-                            ?>
+
                         </div><!--/.nav-collapse -->
                     </div>
                 </ul>           
             </div>
         </nav>
+        <?php
+        $this->endWidget();
+        ?>
         <div class="row notice-bar">
             <div class="row-holder">
                 <?php
@@ -365,7 +373,6 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <?php
-                    
                     $register = new RegisterUsers;
                     $this->renderPartial("//user/_register_pop", array("model" => $register));
                     ?>

@@ -13,7 +13,7 @@
 class OfferSearch extends CFormModel {
 
     //put your code here
-    public $keyword;
+    public $keyword,$key_word_1;
     public $location, $lat, $lng;
     public $special_deal, $withVideo, $withSound, $lowPrice, $highPrice, $popularity, $nearFirst;
 
@@ -29,7 +29,7 @@ class OfferSearch extends CFormModel {
 
 
         return array(
-            array('keyword, location,distance,lng,lat', 'safe'),
+            array('keyword,key_word_1, location,location_1,distance,lng,lat', 'safe'),
             array('special_deal, withVideo,withSound,lowPrice,highPrice,popularity,nearFirst', 'safe'),
         );
     }

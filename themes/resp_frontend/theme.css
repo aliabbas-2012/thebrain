@@ -25,7 +25,7 @@ body {
         margin-left: 88px;
     }
     #menu-secondary {
-        
+
     }
 }
 
@@ -106,12 +106,23 @@ ul.dropdown-menu li a {
         width: 1330px;
     }
 }
-
+@media (min-width: 768px) {
+    .location_search1 {
+        display:none
+    }
+}
+@media (max-width: 767px) {
+    .location_search {
+        display:none
+    }
+}
 @media (min-width: 768px) {
     .navbar li a.head_category {
         /*        font-family: Arial;*/
         font-size: 14px;
     }
+    
+
     .navbar ul.category_head_menu {
         width: 400px;
         height: auto;
@@ -1622,7 +1633,7 @@ div.w-header.w-shadow button.k-button-green:hover {
     .list-view {
         display:none !important;
     }
-    
+
     .thumb-view {
         display:block !important;
     }

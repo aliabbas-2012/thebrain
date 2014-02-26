@@ -222,6 +222,7 @@ input#txtprice.k-textbox {
     padding-bottom: 20px;
     padding-top: 20px;
     width: 100%;
+	float: left;
 }
 
 input#w-like.floatLeft {
@@ -604,6 +605,7 @@ div#tcs {
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 
@@ -731,4 +733,30 @@ button.k-button.row-add {
     color: #7f5050;
     font-size: 12px;
     font-weight: bold;
+}
+
+.only-search { display:none; }
+
+@media (max-width: 768px) {
+
+#offer1 { margin-bottom: 30px; }
+
+.select-bg-img { margin-top:20px; }
+
+.select-avatar-img { margin: 0 auto; }
+
+.offer_wrap { padding-bottom:20px; }
+
+#choose_radio { float:left; position:relative; }
+
+.titleOption { display:block; width:100%; float:left; }
+
+#wouldLike span { left: 0; float:left; }
+
+div.submit { width:100%; }
+
+.only-search { display:inline; width:50%; position:absolute; margin-top:10px; }
+
+.display-search { display:none; }
+
 }
