@@ -51,7 +51,7 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                         <div class = "clear"></div>
                         <div id = "offerDetail">
                             <?php
-                            if (isset(Yii::app()->user)) {
+                            if (isset(Yii::app()->user->id)) {
                                 echo CHtml::image(Yii::app()->theme->baseUrl . "/images/online.png", '', array(
                                     "class" => "chk-online", "width" => "15", "height" => "15",
                                     "data-toggle" => "tooltip",

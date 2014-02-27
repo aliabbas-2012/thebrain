@@ -29,9 +29,15 @@ foreach ($segments as $items) {
                 } else {
                     $percent = ($likes * 100) / $total_likes;
                 }
+                $city = array();
+                if (!empty($user->first_name)) {
+                    $city [] = $user->first_name;
+                } else {
+                    $city [] = $user->second_name;
+                }
 
-                $city = isset($user->city) ? $user->city : "";
-                $city.= isset($user->username) ? "," . $user->username : "";
+                $city [] = $user->city;
+                $city = implode(",", $city);
 
                 if (!empty($user->avatar)) {
                     $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, 'Avatar', array(

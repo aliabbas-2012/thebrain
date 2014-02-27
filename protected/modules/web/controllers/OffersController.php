@@ -149,10 +149,11 @@ class OffersController extends Controller {
             }
 
             if ($model->lowPrice == 1) {
-                $criteria->addCondition("(discount_price IS NOT NULL OR discount_price !='')");
+                $criteria->order = "price ASC";
             }
             if ($model->highPrice == 1) {
-                $criteria->addCondition("(price IS NOT NULL OR price !='')");
+                
+                $criteria->order = "price DESC";
             }
 
             if ($model->lat != "" && $model->lng != "" && $model->distance != "") {

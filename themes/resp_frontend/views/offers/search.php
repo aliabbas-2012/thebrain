@@ -70,7 +70,8 @@
                 </div>
             </div>  
             <div class="space-blog"></div>
-            <div
+            <div class="clear"></div>
+            <div>
                 <div class="view-style">
                     <div class="col-md-1">
                         <?php
@@ -84,7 +85,7 @@
                     </div>
                 </div>
 
-                <div id="grid_content">
+                <div id="grid_content" style="display: block">
                     <?php
                     $this->renderPartial("//offers/_search_result", array("dataProvider" => $dataProvider));
                     ?>
@@ -211,3 +212,4 @@
         })
 ', CClientScript::POS_END);
         ?>
+    </div>

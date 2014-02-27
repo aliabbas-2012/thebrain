@@ -333,6 +333,7 @@
         }
         ?>
         <div class="clear"></div>
+        
         <div id="footer" class="container">
             <nav class="navbar-default">
                 <div class="navbar-inner navbar-content-center">
@@ -483,13 +484,14 @@
             function scrollUpdateSeachBar() {
                 $(window).scroll(function() {
                     var scrolltop = $(window).scrollTop();
+                    
                     if (scrolltop >= 40)
                     {
-                        $('.search-bar').addClass('nav2-fix-bar');
+                        jQuery('.search-bar').addClass('nav2-fix-bar');
                     }
                     else
                     {
-                        $('.search-bar').removeClass('nav2-fix-bar');
+                        jQuery('.search-bar').removeClass('nav2-fix-bar');
                     }
                 });
             }
