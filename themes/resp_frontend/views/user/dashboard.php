@@ -1,6 +1,4 @@
-<?php
-Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/css/Screen.css', CClientScript::POS_END);
-?>
+
 
 <div class="tabs-container">
 
@@ -211,5 +209,9 @@ Yii::app()->clientScript->registerScript('dashobard', '
         </div>
     </div>
 </div>
+<?php
+Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/css/Screen.css', CClientScript::POS_END);
+
+?>
 
 

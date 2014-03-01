@@ -44,6 +44,10 @@
         header('Content-Type: text/html; charset="utf-8"', true);
         ?>
 
+         <!--rating-->
+        <link href="<?php echo Yii::app()->request->baseUrl; ?>/media/rating/jquery.rating.css" rel="stylesheet" />
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/media/rating/jquery.ratings.js"></script>
+        
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/jquery.mambo.js"></script>
 
     </head>

@@ -10,7 +10,7 @@
         'clientOptions' => array(
             'validateOnSubmit' => true,
         ),
-        "action" =>$this->createUrl("/web/user/sendReview",array("id"=>$id,"item_id"=>$item_id))
+        "action" => $this->createUrl("/web/user/sendReview", array("id" => $id, "item_id" => $item_id))
     ));
     ?>
 
@@ -19,6 +19,7 @@
         echo "<span class='alert alert-success col-lg-12'>" . Yii::app()->user->getFlash('success') . "</span>";
     }
     ?>
+    
     <div class="clear"></div>
     <?php
     $this->beginWidget('zii.widgets.CPortlet', array(
@@ -27,11 +28,12 @@
     ?>
 
 
-   
+  
     <div class="form-group">
         <?php echo $form->labelEx($model, 'rating', array('class' => 'control-label col-sm-2')); ?>
         <div class="col-lg-8">
-            <?php echo $form->dropDownList($model, 'rating',array("1"=>"1","2"=>"2","3"=>"3","4"=>"4","5"=>"5"), array('class' => 'form-control')); ?> 
+            <?php echo $form->hiddenField($model, 'rating', array('class' => 'form-control')); ?> 
+              <div id="rating-div"></div>
             <?php echo $form->error($model, 'rating', array("class" => 'alert alert-error')); ?>
         </div>
 
@@ -46,7 +48,7 @@
     </div>
 
 
-    
+
 
     <div class="form-group buttons">
         <div class="col-sm-offset-2 col-sm-2">
@@ -83,4 +85,10 @@
     <?php $this->endWidget(); ?>
     <?php $this->endWidget(); ?>
 </div>
-    
+
+<script>
+
+    $('#rating-div').ratings(5).bind('ratingchanged', function(event, data) {
+        jQuery("#BspComment_rating").val(data.rating);
+    })
+</script>
