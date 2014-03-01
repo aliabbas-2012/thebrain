@@ -30,10 +30,15 @@ class UserdataController extends Controller {
                     'settings',
                     'payment',
                     'ratings',
-                    'store',
                     'paymentdetail'
                 ),
                 'users' => array('@'),
+            ),
+            array('allow', // allow authenticated user to perform 'create' and 'update' actions
+                'actions' => array(
+                    'store'
+                ),
+                'users' => array('*'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),

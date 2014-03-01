@@ -135,9 +135,10 @@ class BspItemImage extends DTActiveRecord {
     public function afterSave() {
         parent::afterSave();
         $path = $upload_path = DTUploadedFile::getFolderPath(array("temp", Yii::app()->user->id, get_class($this)));
+       
         if (is_file($path . $this->image_url)) {
 
-            $id = Yii::app()->db->getLastInsertID();
+            $id = $this->id;
 
             copy($path . $this->image_url, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $id)) . $this->image_url);
             unlink($path . $this->image_url);
@@ -154,11 +155,13 @@ class BspItemImage extends DTActiveRecord {
        
         if (is_file($path . $this->image_url)) {
 
-            $id = Yii::app()->db->getLastInsertID();
+            $id = $this->id;
 
             copy($path . $this->image_url, DTUploadedFile::creeatRecurSiveDirectories(array(get_class($this), $id)) . $this->image_url);
             unlink($path . $this->image_url);
         }
+        
+       
     }
 
     

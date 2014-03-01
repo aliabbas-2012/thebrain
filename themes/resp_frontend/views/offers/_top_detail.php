@@ -42,7 +42,10 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                                    title ="Contact Me"   
                                    data-toggle ="tooltip" 
                                    data-placement ="top"
-                                
+                                   onclick=" $.alert.open({
+                                        type: 'error',
+                                        content: 'Please Login to continue'
+                                    });"
                                    ><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
                                <?php
                                endif;

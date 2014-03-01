@@ -195,17 +195,18 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
                                 </div>
                             </div>
                             <?php
-                            if (!isset($_POST['BspItemVideo']) && $model->isNewRecord) {
+                           
+                            if (!isset($_POST['BspItemVideoFrontEnd']) && $model->isNewRecord) {
                                 $m_video = array();
                                 for ($i = 0; $i <= 4; $i++) {
-                                    $sound = new BspItemVideo;
+                                    $video_m = new BspItemVideoFrontEnd;
                                     //$catM->category_id = $cat->id;
-                                    $m_video[] = $sound;
+                                    $m_video[] = $video_m;
                                 }
-                                $model->item_video = $m_video;
+                                $model->item_video_front = $m_video;
                             }
                             $index = 0;
-                            foreach ($model->item_video as $vid_model) {
+                            foreach ($model->item_video_front as $vid_model) {
                                 $this->renderPartial("//offers/_offer_videos", array("model" => $vid_model, "index" => $index));
                                 $index++;
                             }

@@ -22,12 +22,36 @@ $background = !empty($model->background) ? Yii::app()->baseUrl . "/uploads/Users
                 <div class="clear"></div>
                 <div class="col-lg-7">
                     <div class="contactLink">
-                        <a id="contact-me"><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
+                        <?php
+                        if (!empty(Yii::app()->user->id)):
+                            ?>
+                            <a id="contact-me"
+                               title ="Contact Me"   
+                               data-toggle ="tooltip" 
+                               data-placement ="top"
+                               onclick='jQuery("#myModal").modal()'
+                               href="javascript:void(0)"
+                               ><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
+                               <?php
+                           else:
+                               ?>
+                            <a id="contact-me"
+                               title ="Contact Me"   
+                               data-toggle ="tooltip" 
+                               data-placement ="top"
+                               onclick=" $.alert.open({
+                                                   type: 'error',
+                                                   content: 'Please Login to continue'
+                                               });"
+                               ><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
+                           <?php
+                           endif;
+                           ?>
                     </div>
                     <div class="clear"></div>
                     <div id="offerDetail">
                         <?php
-                        if (isset(Yii::app()->user)) {
+                        if (isset(Yii::app()->user->id) && Yii::app()->user->id == $user->id) {
                             echo CHtml::image(Yii::app()->theme->baseUrl . "/images/online.png", '', array("class" => "chk-online", "width" => "15", "height" => "15"));
                         } else {
                             echo CHtml::image(Yii::app()->theme->baseUrl . "/images/offline.png", '', array("class" => "chk-online", "width" => "15", "height" => "15"));

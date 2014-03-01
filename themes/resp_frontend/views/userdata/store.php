@@ -69,3 +69,15 @@ $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getDat
 <?php
 $this->renderPartial("//userdata/_user_store_bottom", array("model" => $model));
 ?>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <?php
+                $recieve_user = $model;
+                $message = new BspMessage;
+                $this->renderPartial("//offers/_sent_message", array("model" => $message,"recieve_user"=>$recieve_user));
+            ?>
+        </div>
+    </div>
+</div>

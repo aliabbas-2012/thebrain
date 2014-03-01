@@ -63,50 +63,23 @@
 </div>
 <div class="clear"></div>
 <div class="space-blog"></div>
-
-<div class="col-lg-3">
-    <div id="Portfolio" ><?php echo Yii::t('detailOffer', 'Images & Videos') ?></div>
+<div>
+    <?php
+        if(count($model->image_items)>0){
+             $this->renderPartial("//offers/_detail/_videos_images", array("model" => $model));
+        }
+    ?>
 </div>
+
 <div class="clear"></div>
 <div class="space-blog"></div>
 <div class="clear"></div>
+
 <div>
-    <div class="col-lg-12 detail-image-video">
-        <?php
-        foreach ($model->image_items as $item_img):
 
-            $path = Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item_img->id . "/" . $item_img->image_url;
-            ?>
-            <div>
-                <a href='<?php echo $path ?>'>
-                    <?php
-                    echo CHtml::image($path, '', array("height" => "200px"));
-                    ?>
-                </a>
-            </div>
-            <?php
-        endforeach;
-        if (count($model->image_items) == 0) {
-            echo "No Image Found";
-        }
-        ?>
-    </div>
     <div class='clear'></div>
-    <div class="space-blog"></div>
-    <div id='soundcloud'>
-        <?php
-        echo Yii::t('detailOffer', 'Sounds List');
-        if (empty($model->item_related_sounds)) {
-            echo "<div class='clear'></div>";
-            echo "No Sound Found";
-        }
-        ?>
-
-    </div>
     <?php
-    foreach ($model->item_related_sounds as $sound):
-        echo '<div class="col-lg-12" >' . $sound->url . '</div>';
-    endforeach;
+    $this->renderPartial("//offers/_detail/_sounds", array("model" => $model));
     ?>
     <div class='clear'></div>
     <div class="space-blog"></div>
@@ -176,92 +149,7 @@
                     <div class='col-lg-12'>
                         <!--                        <div class="space-blog"></div>
                                                 <div class="space-blog"></div>-->
-                        <div class="space-blog"></div>
-                        <div class='col-lg-12'>
-                            <div class='hour-day'>
-                                <span></span>
-                            </div>
-                            <div class='hour-day'>
-                                <span class='col-lg-6'>Tu.</span>
-                                <span class='col-lg-6'>
-                                    -
-                                    <?php if (isset($priceCal[0]) && $priceCal[0]->active != 1) { ?>
-                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
-                                        <?php
-                                    } else {
-                                        echo (isset($priceCal[0])) ? number_format($priceCal[0]->price) : '' . '&nbsp;' . $currency_symbol;
-                                    }
-                                    ?>
-                                </span>
-                            </div>
-                            <div class='hour-day'>
-                                <span class='col-lg-6'>We.</span>
-                                <span class='col-lg-6'>
-                                    -
-                                    <?php if (isset($priceCal[1]) && $priceCal[1]->active != 1) { ?>
-                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
-                                        <?php
-                                    } else {
-                                        echo (isset($priceCal[1])) ? number_format($priceCal[1]->price) : '' . '&nbsp;' . $currency_symbol;
-                                    }
-                                    ?>
-                                </span>
-                            </div>
-                            <div class='hour-day'>
-                                <span class='col-lg-6'>Th.</span>
-                                <span class='col-lg-6'>
-                                    -
-                                    <?php if (isset($priceCal[2]) && $priceCal[1]->active != 2) { ?>
-                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
-                                        <?php
-                                    } else {
-                                        echo (isset($priceCal[2])) ? number_format($priceCal[2]->price) : '' . '&nbsp;' . $currency_symbol;
-                                    }
-                                    ?>
-                                </span>
-                            </div>
-                            <div class='hour-day'>
-                                <span class='col-lg-6'>Fr.</span>
-                                <span class='col-lg-6'>
-                                    -
-                                    <?php if (isset($priceCal[3]) && $priceCal[3]->active != 1) { ?>
-                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
-                                        <?php
-                                    } else {
-                                        echo (isset($priceCal[4])) ? number_format($priceCal[4]->price) : '' . '&nbsp;' . $currency_symbol;
-                                    }
-                                    ?>
-                                </span>
-
-                            </div>
-                            <div class='hour-day'>
-                                <span class='col-lg-6'>Sa.</span>
-                                <span class='col-lg-6'>
-                                    -
-                                    <?php if (isset($priceCal[5]) && $priceCal[5]->active != 1) { ?>
-                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
-                                        <?php
-                                    } else {
-                                        echo (isset($priceCal[5])) ? number_format($priceCal[5]->price) : '' . '&nbsp;' . $currency_symbol;
-                                    }
-                                    ?>
-                                </span>
-                            </div>
-                            <div class='hour-day'>
-                                <span class='col-lg-6'>Su.</span>
-                                <span class='col-lg-6'>
-                                    -
-                                    <?php if (isset($priceCal[6]) && $priceCal[6]->active != 1) { ?>
-                                        <span class="offer-day"><?php echo Yii::t('detailOffer', 'Closed') ?></span>
-                                        <?php
-                                    } else {
-                                        echo (isset($priceCal[6])) ? number_format($priceCal[6]->price) : '' . '&nbsp;' . $currency_symbol;
-                                    }
-                                    ?>
-                                </span>
-                            </div>
-
-                        </div>
+                        
                         <div class='clear'></div>
                         <div class="space-blog"></div>
                         <span class="opening text-bold">
@@ -359,7 +247,7 @@
                     Time selection:-<span id="time-selection"></span>
                 </div>
             </div>
-            
+
         </div>
     </div>
 
@@ -407,7 +295,7 @@ $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getDat
             jQuery(".tab-data").hide();
             jQuery(".tab-" + jQuery(this).attr("tab-no") + "-data").show();
         })
-        
+
 
         jQuery("#addlike").click(function() {
             if ("<?php echo Yii::app()->user->id ?>" == "") {
@@ -459,9 +347,9 @@ $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getDat
     <div class="modal-dialog">
         <div class="modal-content">
             <?php
-                $recieve_user = Users::model()->findByPk($model->user_id);
-                $message = new BspMessage;
-                $this->renderPartial("//offers/_sent_message", array("model" => $message,"recieve_user"=>$recieve_user));
+            $recieve_user = Users::model()->findByPk($model->user_id);
+            $message = new BspMessage;
+            $this->renderPartial("//offers/_sent_message", array("model" => $message, "recieve_user" => $recieve_user));
             ?>
         </div>
     </div>

@@ -118,14 +118,14 @@ class OffersController extends Controller {
             $criteria->compare("lng", $model->lng);
             //new attribute
             //$criteria->compare("special_deal", $model->special_deal);
-            
-            if($model->special_deal ==1){
+
+            if ($model->special_deal == 1) {
                 $criteria->addCondition("t.discount_price IS NOT NULL AND t.discount_price !=''");
-                 $order_by[] = "t.discount_price DESC";
+                $order_by[] = "t.discount_price DESC";
             }
             $criteria->addCondition("iStatus = 1");
             $with = array();
-            
+
             if ($model->withVideo == 1) {
                 $with = array(
                     'item_video' => array(
@@ -141,11 +141,11 @@ class OffersController extends Controller {
             if ($model->popularity == 1) {
                 $with ['item_rating'] = array(
                     'joinType' => 'LEFT JOIN',
-                    //'order' => 'item_rating.rating DESC',
+                        //'order' => 'item_rating.rating DESC',
                 );
                 $order_by[] = "item_rating.rating DESC";
             }
-            
+
             if ($model->nearFirst == 1) {
                 $criteria->order = "t.id ASC";
             }
@@ -176,7 +176,7 @@ class OffersController extends Controller {
             }
         }
         if (!empty($order_by)) {
-            $order_by = implode(",",$order_by);
+            $order_by = implode(",", $order_by);
             $criteria->order = $order_by;
         }
         /**
@@ -187,7 +187,7 @@ class OffersController extends Controller {
         }
 //        CVarDumper::dump($model->attributes,10,true);
 //        CVarDumper::dump($_POST['OfferSearch'],10,true);
-        CVarDumper::dump($criteria, 10, true);
+        // CVarDumper::dump($criteria, 10, true);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 1000)
@@ -283,6 +283,9 @@ class OffersController extends Controller {
             if ($this->setOfferImage($model)) {
                 
             }
+            if ($this->setOfferVideos($model)) {
+                
+            }
             if ($isvalid == 1) {
                 if ($model->save()) {
                     //incase of !empty password then the login 
@@ -298,8 +301,16 @@ class OffersController extends Controller {
                         $modelImg->item_id = $model->id;
 
                         $modelImg->save();
+                        //CVarDumper::dump($modelImg->getErrors(), 10, true);
+                        //CVarDumper::dump($modelImg->attributes, 10, true);
                     }
+                    
+                    foreach($model->item_video_front as $modelVid){
+                        $modelVid->item_id = $model->id;
 
+                        $modelVid->save();
+                    }
+                    
                     $item = BspItem::model()->findByPk($model->id);
                     $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
                 }
@@ -400,20 +411,57 @@ class OffersController extends Controller {
 
         if (isset($_POST['BspItemImage'])) {
             $bspItem_imag = array();
+
             foreach ($_POST['BspItemImage'] as $key => $bspItemImg) {
 
                 if (!empty($bspItemImg['id'])) {
                     $modelItemImg = BspItemImage::model()->findByPk($bspItemImg['id']);
+                    if (empty($modelItemImg->id)) {
+                        $modelItemImg = new BspItemImage;
+                    }
                 } else {
                     $modelItemImg = new BspItemImage;
                 }
                 $modelItemImg->attributes = $bspItemImg;
+
                 if ($modelItemImg->validate()) {
                     $is_valid = 1;
                 }
                 $bspItem_imag [] = $modelItemImg;
             }
             $model->image_items = $bspItem_imag;
+        }
+
+        return $is_valid;
+    }
+
+    /**
+     * set offer videos
+     */
+    public function setOfferVideos($model) {
+        $is_valid = 0;
+        if (!empty($_POST['BspItemVideoFrontEnd'])) {
+            $bspItem_vid = array();
+            
+            foreach ($_POST['BspItemVideoFrontEnd'] as $bspItemVideo) {
+                if (!empty($bspItemVideo['id'])) {
+
+                    $modelItemVid = BspItemVideoFrontEnd::model()->findByPk($bspItemVideo['id']);
+                    if (empty($modelItemVid)) {
+                        $modelItemVid = new BspItemVideoFrontEnd;
+                    }
+                } else {
+                    $modelItemVid = new BspItemVideoFrontEnd;
+                }
+                $modelItemVid->attributes = $bspItemVideo;
+
+                if ($modelItemVid->validate()) {
+                    $is_valid = 1;
+                }
+                $bspItem_vid [] = $modelItemVid;
+            }
+           
+            $model->item_video_front = $bspItem_vid;
         }
 
         return $is_valid;
@@ -428,9 +476,9 @@ class OffersController extends Controller {
         /**
          * Bsp Item Image
          */
-        if (isset($_POST['BspItemVideo'])) {
-            $model->setRelationRecords('item_video', is_array($_POST['BspItemVideo']) ? $_POST['BspItemVideo'] : array());
-        }
+//        if (!empty($_POST['BspItemVideoFrontEnd'])) {
+//            $model->setRelationRecords('item_video_front', is_array($_POST['BspItemVideoFrontEnd']) ? $_POST['BspItemVideoFrontEnd'] : array());
+//        }
         if (isset($_POST['BspItemSoundUrl'])) {
             $model->setRelationRecords('item_related_sounds', is_array($_POST['BspItemSoundUrl']) ? $_POST['BspItemSoundUrl'] : array());
         }
