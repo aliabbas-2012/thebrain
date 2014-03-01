@@ -160,8 +160,9 @@
                 <div class='tab-3-data tab-data' style='display:none'>
                     <div class='col-lg-12'>
                         <div class="space-blog"></div>
-                        <div class="space-blog"></div>
-
+                        <?php
+                            $this->renderPartial("//offers/_detail/_reviews",array("model"=>$model));
+                        ?>
                     </div>
                 </div>
 
