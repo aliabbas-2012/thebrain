@@ -65,9 +65,9 @@
 <div class="space-blog"></div>
 <div>
     <?php
-        if(count($model->image_items)>0){
-             $this->renderPartial("//offers/_detail/_videos_images", array("model" => $model));
-        }
+    if (count($model->image_items) > 0) {
+        $this->renderPartial("//offers/_detail/_videos_images", array("model" => $model));
+    }
     ?>
 </div>
 
@@ -149,7 +149,7 @@
                     <div class='col-lg-12'>
                         <!--                        <div class="space-blog"></div>
                                                 <div class="space-blog"></div>-->
-                        
+
                         <div class='clear'></div>
                         <div class="space-blog"></div>
                         <span class="opening text-bold">
@@ -161,7 +161,7 @@
                     <div class='col-lg-12'>
                         <div class="space-blog"></div>
                         <?php
-                            $this->renderPartial("//offers/_detail/_reviews",array("model"=>$model));
+                        $this->renderPartial("//offers/_detail/_reviews", array("model" => $model));
                         ?>
                     </div>
                 </div>
@@ -271,22 +271,48 @@
         <div  id="Nr"><?php echo Yii::t('detailOffer', 'Offer Nr:'); ?> <?php echo $model->offer_number; ?></div>
     </div>
 </div>
-<div class="red-bg">
-    <label><?php echo Yii::t('detailOffer', 'Check out my other offers'); ?> </label>
-</div>
-<div class="clear"></div>
 <?php
 $criteria = new CDbCriteria();
 
 $criteria->order = "id DESC";
-$criteria->addCondition('id <> ' . $model->id . ' AND category_id =' . $model->category_id);
+$criteria->addCondition('id <> ' . $model->id . ' AND user_id =' . $model->user_id);
 $criteria->condition = "is_public>0 AND iStatus = 1";
 
 $dataProvider = new CActiveDataProvider('BspItem', array(
     'criteria' => $criteria,
-    'pagination' => array('pageSize' => 15)
+    'pagination' => array('pageSize' => 4)
         ));
-$this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
+if ($dataProvider->getTotalItemCount() > 0):
+    ?>
+    <div class="red-bg">
+        <label><?php echo Yii::t('detailOffer', 'Check out my other offers'); ?> </label>
+    </div>
+    <div class="clear"></div>
+    <?php
+    $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
+endif;
+?>
+    <div class="clear"></div>    
+<?php
+$criteria = new CDbCriteria();
+
+$criteria->order = "id DESC";
+$criteria->addCondition('id <> ' . $model->id . ' AND group_id =' . $model->group_id);
+$criteria->condition = "is_public>0 AND iStatus = 1";
+
+$dataProvider = new CActiveDataProvider('BspItem', array(
+    'criteria' => $criteria,
+    'pagination' => array('pageSize' => 4)
+        ));
+if ($dataProvider->getTotalItemCount() > 0):
+    ?>
+    <div class="red-bg">
+        <label><?php echo Yii::t('detailOffer', 'Relaed Offers'); ?> </label>
+    </div>
+    <div class="clear"></div>
+    <?php
+    $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
+endif;
 ?>
 <script>
     jQuery(function() {
