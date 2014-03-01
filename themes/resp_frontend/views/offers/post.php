@@ -363,7 +363,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
     <div class="row">
         <div class="col-lg-12">
             <div class="submit" align="center">
-                <a id="btn-submit" class="floatRight" href="javascript:void(0)" onclick="jQuery('#post-form').submit()">Publish for free</a>
+                <a id="btn-submit" class="floatRight" href="javascript:void(0)" onclick="thepuzzleadmin.postOffer()">Publish for free</a>
             </div>
         </div>
         <div class="col-lg-12">

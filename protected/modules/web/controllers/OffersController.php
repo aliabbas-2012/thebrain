@@ -107,18 +107,25 @@ class OffersController extends Controller {
                 $criteria->compare("name", $model->keyword, true, "OR");
                 $criteria->compare("t.id", $model->keyword, true, "OR");
 
-                
+
                 $criteria->compare("offer_number", $model->keyword, true, "OR");
                 $criteria->compare("description", $model->keyword, true, "OR");
                 $criteria->compare("seo_keywords", $model->keyword, true, "OR");
                 $criteria->compare("seo_title", $model->keyword, true, "OR");
             }
+            $order_by = array();
             $criteria->compare("lat", $model->lat);
             $criteria->compare("lng", $model->lng);
             //new attribute
-            $criteria->compare("special_deal", $model->special_deal);
+            //$criteria->compare("special_deal", $model->special_deal);
+            
+            if($model->special_deal ==1){
+                $criteria->addCondition("t.discount_price IS NOT NULL AND t.discount_price !=''");
+                 $order_by[] = "t.discount_price DESC";
+            }
             $criteria->addCondition("iStatus = 1");
             $with = array();
+            
             if ($model->withVideo == 1) {
                 $with = array(
                     'item_video' => array(
@@ -132,10 +139,13 @@ class OffersController extends Controller {
                 );
             }
             if ($model->popularity == 1) {
-                $with ['image_log'] = array(
-                    'joinType' => 'INNER JOIN',
+                $with ['item_rating'] = array(
+                    'joinType' => 'LEFT JOIN',
+                    //'order' => 'item_rating.rating DESC',
                 );
+                $order_by[] = "item_rating.rating DESC";
             }
+            
             if ($model->nearFirst == 1) {
                 $criteria->order = "t.id ASC";
             }
@@ -145,11 +155,11 @@ class OffersController extends Controller {
             }
 
             if ($model->lowPrice == 1) {
-                $criteria->order = "price ASC";
+                $order_by[] = "t.price ASC";
             }
             if ($model->highPrice == 1) {
-                
-                $criteria->order = "price DESC";
+
+                $order_by[] = "t.price DESC";
             }
 
             if ($model->lat != "" && $model->lng != "" && $model->distance != "") {
@@ -165,6 +175,10 @@ class OffersController extends Controller {
                 }
             }
         }
+        if (!empty($order_by)) {
+            $order_by = implode(",",$order_by);
+            $criteria->order = $order_by;
+        }
         /**
          * group id setting
          */
@@ -173,7 +187,7 @@ class OffersController extends Controller {
         }
 //        CVarDumper::dump($model->attributes,10,true);
 //        CVarDumper::dump($_POST['OfferSearch'],10,true);
-        //CVarDumper::dump($criteria,10,true);
+        CVarDumper::dump($criteria, 10, true);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 1000)

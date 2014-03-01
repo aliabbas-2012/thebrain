@@ -128,10 +128,10 @@ var thepuzzleadmin = {
             current.next().children().eq(0).trigger("click");
             current.removeClass("selected");
             current.next().addClass("selected");
-            
-             if (jQuery("#" + parent + " .yiiPager li.page.selected").next().hasClass("page") == false) {
-                 jQuery("#" + parent + " .load_more").remove();
-             }
+
+            if (jQuery("#" + parent + " .yiiPager li.page.selected").next().hasClass("page") == false) {
+                jQuery("#" + parent + " .load_more").remove();
+            }
         }
     },
     /**
@@ -153,7 +153,7 @@ var thepuzzleadmin = {
                     {
                         criteria: criteria,
                         "ajax": "1",
-                        "update_element_id":update_element_id
+                        "update_element_id": update_element_id
                     }
         }).done(function(response) {
             if (update_element_id != "") {
@@ -296,9 +296,21 @@ var thepuzzleadmin = {
         }, 1000);
 
     },
-    submitSearch : function (){
-        
+    submitSearch: function() {
         jQuery('#search-form').submit();
-    }        
+    },
+    postOffer: function() {
+        if (!$("#public_offer").is(':checked')) {
+
+            $.alert.open({
+                type: 'error',
+                content: 'Please accept T&Cs'
+            });
+        } else {
+            jQuery('#post-form').submit();
+        }
+
+    }
+
 
 }

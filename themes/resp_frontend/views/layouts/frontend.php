@@ -34,6 +34,12 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+        
+                <!--ALERT-->
+        <link href="<?php echo Yii::app()->request->baseUrl; ?>/media/alert/css/alert.css" rel="stylesheet" />
+        <link href="<?php echo Yii::app()->request->baseUrl; ?>/media/alert/themes/light/theme.css" rel="stylesheet" />
+        
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/media/alert/js/alert.js"></script>
         <?php
         header('Content-Type: text/html; charset="utf-8"', true);
         ?>

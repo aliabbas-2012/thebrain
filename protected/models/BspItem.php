@@ -130,11 +130,11 @@ class BspItem extends DTActiveRecord {
             'group' => array(self::BELONGS_TO, 'BspCategory', 'group_id'),
             'category' => array(self::BELONGS_TO, 'BspCategory', 'category_id'),
             'sub_category' => array(self::BELONGS_TO, 'BspCategory', 'sub_category_id'),
-            'item_video' => array(self::HAS_MANY, 'BspItemVideo', 'item_id', 'condition' => 'is_image = 0'),
+            'item_video' => array(self::HAS_MANY, 'BspItemVideo', 'item_id', 'condition' => 'is_image = 0','together'=>true),
             'image_items' => array(self::HAS_MANY, 'BspItemImage', 'item_id', 'condition' => 'is_image = 1'),
             'image_offer' => array(self::HAS_ONE, 'BspItemImage', 'item_id', 'condition' => 'is_offer = 1'),
             'image_log' => array(self::HAS_ONE, 'BspItemLog', 'item_id', 'condition' => 'log_type = "viewed"'),
-            'item_related_sounds' => array(self::HAS_MANY, 'BspItemSoundUrl', 'item_id'),
+            'item_related_sounds' => array(self::HAS_MANY, 'BspItemSoundUrl', 'item_id','together'=>true),
             'item_keywords' => array(self::HAS_MANY, 'BspItemSearchKeyword', 'item_id'),
             'item_orders' => array(self::HAS_MANY, 'BspOrder', 'item_id'),
             'item_logs' => array(self::HAS_MANY, 'BspItemLog', 'item_id'),
@@ -148,6 +148,7 @@ class BspItem extends DTActiveRecord {
             'numOrders' => array(self::STAT, 'BspOrder', 'item_id'),
             'numComments' => array(self::STAT, 'BspComment', 'item_id'),
             'avgRating' => array(self::STAT, 'BspComment', 'item_id', 'select' => 'AVG(rating)'),
+            'item_rating' => array(self::HAS_MANY, 'BspComment', 'item_id','together'=>true),
         );
     }
 
