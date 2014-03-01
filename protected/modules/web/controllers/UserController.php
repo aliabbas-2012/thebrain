@@ -29,7 +29,8 @@ class UserController extends Controller {
                     'profileview',
                     'saveItemLog',
                     'dashboard',
-                    'messages'
+                    'messages',
+                    'sendReview'
                 ),
                 'users' => array('@'),
             ),
@@ -106,11 +107,10 @@ class UserController extends Controller {
                 $this->sendEmail2($email);
 
                 Yii::app()->user->setFlash("success", "Reset Link has been sent successfully");
-                
             }
         }
 
-         $this->renderPartial("//user/_register_pop", array("model" => $model));
+        $this->renderPartial("//user/_register_pop", array("model" => $model));
     }
 
     /**
@@ -296,6 +296,32 @@ class UserController extends Controller {
      */
     public function actionMessages($type = "inbox") {
         $this->render("//user/messages", array('type' => $type));
+    }
+
+    /**
+     * send review to user
+     * comments and ratings
+     * @param type $id
+     * @param type $item_id
+     */
+    public function actionSendReview($id, $item_id = "") {
+        $model = new BspComment;
+
+        if (isset($_POST['BspComment'])) {
+            $model->attributes = $_POST['BspComment'];
+            $model->item_id = $item_id;
+            $model->order_id = $id;
+            $model->objType = 0;
+            if ($item_id != "") {
+                $model->user_id = BspItem::model()->findByPk($item_id)->user_id;
+            }
+
+            if ($model->save()) {
+                //set flash
+                Yii::app()->user->setFlash("success", "Your Review and rating has been sent");
+            }
+        }
+        $this->renderPartial("//user/_send_review", array("id" => $id, "item_id" => $item_id, "model" => $model));
     }
 
 }

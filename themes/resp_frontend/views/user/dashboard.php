@@ -72,6 +72,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/cs
                     <div class="review-content-amount"><?php echo $order->amount; ?> &euro;</div>
                 </div>
                 <div class="review-stats col-lg-2">
+                    <div class="seller send-review"><?php echo CHtml::link(Yii::t('user', 'Send A Review'),$this->createUrl("/web/user/sendReview",array("id"=>$order->id,"item_id"=>isset($order->item)?$order->item->id:""))); ?></div>
                     <div class="rating"> Order date:&nbsp;&nbsp;<?php echo date("d-m-Y", strtotime($order->date_order)); ?></div>
                     <div class="rating">Start date:&nbsp;&nbsp;<?php echo date("d-m-Y", strtotime($order->date_start)); ?></div>
                     <div class="rating"> Delivery date:&nbsp;&nbsp;<?php echo date("d-m-Y", strtotime($order->date_finish)); ?> </div>
@@ -190,8 +191,25 @@ Yii::app()->clientScript->registerScript('dashobard', '
                        jQuery(this).children().eq(2).hide();
                   }
                 );
+                
+           //send review 
+           
+          jQuery(".send-review a").click(function(){
+                
+                thepuzzleadmin.updateElementAjax(jQuery(this).attr("href"),"reveiwModel-content","");
+                jQuery("#reveiwModel").modal()
+                return false;
+          })
         })
 ', CClientScript::POS_END);
-
+?>
+<!-- Modal -->
+<div class="modal fade" id="reveiwModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="reveiwModel-content">
+            
+        </div>
+    </div>
+</div>
 
 

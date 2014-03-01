@@ -18,6 +18,7 @@ $rules_web = array(
     '<lang:[\w-\.]+>/home/blog' => '/web/blog/index',
     '<lang:[\w-\.]+>/home/faq' => '/web/faq/index',
     '<lang:[\w-\.]+>/user-dashboard' => '/web/user/dashboard',
+    '<lang:[\w-\.]+>/<id:[\w-\.]+>/<item_id:[\w-\.]+>/user-sendReview' => '/web/user/sendReview',
     '<lang:[\w-\.]+>/my-messages' => '/web/user/messages',
     '<lang:[\w-\.]+>/my-offers' => '/web/userdata/myoffers',
     '<lang:[\w-\.]+>/my-orders' => '/web/userdata/myorders',
