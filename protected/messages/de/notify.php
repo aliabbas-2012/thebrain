@@ -41,4 +41,5 @@ return array (
   'download file attach' => 'Dateianhang herunterladen',
   'minute ago' => 'Minuten zuvor',
   'orderd your service' => 'Deine Dienstleistung bestellt',
+  'Please accept T&Cs'=>'Bitte akzeptieren Sie AGB' 
 );

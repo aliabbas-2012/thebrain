@@ -32,11 +32,13 @@ foreach ($segments as $items) {
                 $city = array();
                 if (!empty($user->first_name)) {
                     $city [] = $user->first_name;
-                } else {
+                } else if (!empty($user->second_name)) {
                     $city [] = $user->second_name;
                 }
 
-                $city [] = $user->city;
+                if (isset($user->city)) {
+                    $city [] = $user->city;
+                }
                 $city = implode(",", $city);
 
                 if (!empty($user->avatar)) {

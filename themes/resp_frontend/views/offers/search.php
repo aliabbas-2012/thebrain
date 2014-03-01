@@ -61,13 +61,7 @@
                            />
                     <span id="span_refine_popularity" class="refine-search-span" ><?php echo Yii::t('form', 'Popularity') ?></span>
                 </div>
-                <div class="itemsearch">
-                    <input type="checkbox" name="near" id="near" 
-                           value="1" 
-                           elem_target="OfferSearch_nearFirst"
-                           class="refine-search-checkbox"/>
-                    <span id="span_refine_nearest" class="refine-search-span" ><?php echo Yii::t('form', 'Nearest First') ?></span>
-                </div>
+             
             </div>  
             <div class="space-blog"></div>
             <div class="clear"></div>
@@ -119,6 +113,23 @@
         jQuery(".itemsearch input[type=checkbox]").click(function(){
                 jQuery("#loading").show();
                 elem_target = jQuery(this).attr("elem_target");
+                
+                //handling low and high price checkbox a use case only one has to be checked
+                
+                if(jQuery(this).attr("id") == "low" && jQuery(this).is(":checked")){
+                    jQuery("#hight").attr("disabled","disabled");
+                }
+                else if(jQuery(this).attr("id") == "hight" && jQuery(this).is(":checked")){
+                    jQuery("#low").attr("disabled","disabled");
+                }
+                
+                if(jQuery(this).attr("id") == "low" && !jQuery(this).is(":checked")){
+                    jQuery("#hight").removeAttr("disabled");
+                }
+                else if(jQuery(this).attr("id") == "hight" && !jQuery(this).is(":checked")){
+                    jQuery("#low").removeAttr("disabled");
+                }
+                //normal routine
                 if(jQuery(this).is(":checked")){
                    jQuery("#"+elem_target).val(1)
                 }
@@ -127,7 +138,7 @@
                 }
                 
                  $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: jQuery("#search-form").attr("action")+"?ajax=1",
                     data: jQuery("#search-form").serialize(), 
                         success: function(data)
@@ -144,7 +155,7 @@
                  jQuery(".tab-header a").removeClass("active");
                  jQuery(this).addClass("active");
                  $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: jQuery("#search-form").attr("action")+"?ajax=1&grp_id="+grp_id,
                     data: jQuery("#search-form").serialize(), 
                         success: function(data)

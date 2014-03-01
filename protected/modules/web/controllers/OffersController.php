@@ -100,18 +100,14 @@ class OffersController extends Controller {
     public function actionSearch() {
         $model = new OfferSearch;
         $criteria = new CDbCriteria();
-        if (isset($_POST['OfferSearch'])) {
-            $model->attributes = $_POST['OfferSearch'];
+        if (isset($_GET['OfferSearch'])) {
+            $model->attributes = $_GET['OfferSearch'];
             if (!empty($model->keyword)) {
                 $criteria->compare("name", $model->keyword, true, "OR");
                 $criteria->compare("name", $model->keyword, true, "OR");
                 $criteria->compare("t.id", $model->keyword, true, "OR");
 
-                $criteria->compare("name", $model->key_word_1, true, "OR");
-                $criteria->compare("name", $model->key_word_1, true, "OR");
-                $criteria->compare("t.id", $model->key_word_1, true, "OR");
-
-
+                
                 $criteria->compare("offer_number", $model->keyword, true, "OR");
                 $criteria->compare("description", $model->keyword, true, "OR");
                 $criteria->compare("seo_keywords", $model->keyword, true, "OR");

@@ -336,52 +336,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <label class="titleOption">
-                Keywords/Tags
-                <img src="<?php echo Yii::app()->theme->baseUrl ?>/images/saydiv.png">
-            </label>
-        </div>
-        <div class="col-lg-12">
 
-            <?php
-            echo $form->textField(
-                    $model, 'seo_title', array(
-                'class' => 'font15 k-textbox post-offer-txtbox',
-                "id" => "key-word",
-                'placeholder' => 'Seo Title',
-                    )
-            );
-            ?>
-        </div>
-        <div class="col-lg-12">
-
-            <?php
-            echo $form->textField(
-                    $model, 'seo_keywords', array(
-                'class' => 'font15 k-textbox post-offer-txtbox',
-                "id" => "key-word",
-                'placeholder' => 'Seo Keywords',
-                    )
-            );
-            ?>
-        </div>
-        <div class="col-lg-12">
-
-            <?php
-            echo $form->textField(
-                    $model, 'seo_description', array(
-                'class' => 'font15 k-textbox post-offer-txtbox',
-                "id" => "key-word",
-                'placeholder' => 'Type here your keyword, separated by comma. Words which describe your offer the best...',
-                    )
-            );
-            ?>
-        </div>
-    </div>
-</div>
 <div class="clear"></div>
 <div class="container">
     <div class="row">
@@ -391,12 +346,12 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
 </div>
 <div class="container">
     <div class="row">
-        <div id="tcs>
+        <div id="tcs">
 
-            <?php
-            echo $form->checkBox($model, '_is_confirm', array("id" => "public_offer", "class" => "floatLeft", "margin" => "margin: 3px;"));
-            ?>
-            <span class="k-invalid-msg" data-for="public_offer"></span>
+             <?php
+             echo $form->checkBox($model, '_is_confirm', array("id" => "public_offer", "class" => "floatLeft", "margin" => "margin: 3px;"));
+             ?>
+             <span class="k-invalid-msg" data-for="public_offer"></span>
             <label class="fontsize_title floatLeft"  for="public_offer">
                 I confirm that I am able to deliver this service to Buyers within the delivery time specified.I will update or pause my Hourlie if I can no longer meet this delivery time. I understand that late delivery will adversely affect my rankings on ThePuzzzle and will entitle the Buyer to a refund. See
                 <a class="tncs" href="javascript:void(0)">T&Cs </a>

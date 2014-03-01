@@ -28,8 +28,13 @@ class BspItemFrontEnd extends BspItem {
     public function rules() {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
-        $rules = array(array("_is_confirm", "required"), array('upload_images', 'safe'));
+        $rules = array(
+            //array("_is_confirm", "required", 'requiredValue' => 1, 'message' => Yii::t('notify', 'Please accept T&C')),
+            array('_is_confirm','allowEmpty'=>false, 'compare', 'compareValue' => true,
+                'message' => 'You must agree to the terms and conditions'),
+            array('upload_images', 'safe'));
         $rules = array_merge(parent::rules(), $rules);
+        //print_r($rules);
         return parent::rules();
     }
 

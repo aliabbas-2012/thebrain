@@ -97,7 +97,7 @@ class BspItem extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name,seo_title,category_id,group_id, seo_description, seo_keywords, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('name,category_id,group_id,create_time, create_user_id, update_time, update_user_id', 'required'),
             array('category_id, sub_category_id, group_id, num_star, user_id, sound_id, video_id, showlocation, num_orders, my_condition, my_other_price, iStatus, iPayment, special_deal, currency_id, per_price', 'numerical', 'integerOnly' => true),
             array('price, lat, lng', 'numerical'),
             array('name', 'length', 'max' => 200),
@@ -109,7 +109,7 @@ class BspItem extends DTActiveRecord {
             array('start_price,end_price', 'safe'),
             array('offer_name,username', 'safe'),
             array('offer_number,most_visited,most_bought', 'safe'),
-            array('slug', 'safe'),
+            array('slug,seo_description, seo_keywords,seo_title', 'safe'),
             array('loc_name,_per_price,background_path,background_image_name,description, date_create', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.

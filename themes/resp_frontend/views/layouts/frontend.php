@@ -52,7 +52,7 @@
             <div class="container login-bar-container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-primary">
+                    <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#menu-primary">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -155,10 +155,12 @@
         <?php
         $form = $this->beginWidget('CActiveForm', array(
             'id' => 'search-form',
+            "method"=>"GET",
             'enableAjaxValidation' => false,
             'action' => $this->createUrl("/web/offers/search"),
             'htmlOptions' => array(
                 'class' => 'form-horizontal',
+                "method"=>"GET"
             )
         ));
         ?>
@@ -173,15 +175,10 @@
         <nav id="navbar-search" class="navbar navbar-inverse" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <?php
-                echo $form->textField($model, 'key_word_1', array("class" => "form-control location_search1",
-                    "placeholder" => "Search", "onclick" => "jQuery(this).next().click()"));
-                ?>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-secondary">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                
+                <button type="button" class="navbar-toggle search-toogle" data-toggle="collapse" data-target="#menu-secondary">
+                   <?php echo Yii::t('link', 'Search') ?>
+                    <span class="search-icon">&nbsp;</span>
                 </button>
             </div>
 
@@ -514,5 +511,7 @@
             });
 
         </script>
+        
+        
     </body>
 </html>

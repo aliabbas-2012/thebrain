@@ -359,10 +359,7 @@
                     Time selection:-<span id="time-selection"></span>
                 </div>
             </div>
-            <div class='clear'></div>
-            <div id="calendar">
-
-            </div>
+            
         </div>
     </div>
 
@@ -410,7 +407,7 @@ $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getDat
             jQuery(".tab-data").hide();
             jQuery(".tab-" + jQuery(this).attr("tab-no") + "-data").show();
         })
-        $("#calendar").kendoCalendar();
+        
 
         jQuery("#addlike").click(function() {
             if ("<?php echo Yii::app()->user->id ?>" == "") {
