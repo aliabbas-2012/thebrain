@@ -4,6 +4,7 @@ class BspItemFrontEnd extends BspItem {
 
     public $_is_confirm;
     public $upload_images;
+    public $_offer_images;
 
     /**
      * @return string the associated database table name
@@ -29,13 +30,16 @@ class BspItemFrontEnd extends BspItem {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         $rules = array(
-            //array("_is_confirm", "required", 'requiredValue' => 1, 'message' => Yii::t('notify', 'Please accept T&C')),
-            array('_is_confirm','allowEmpty'=>false, 'compare', 'compareValue' => true,
-                'message' => 'You must agree to the terms and conditions'),
-            array('upload_images', 'safe'));
-        $rules = array_merge(parent::rules(), $rules);
-        //print_r($rules);
-        return parent::rules();
+            array("_is_confirm", "required", 'requiredValue' => 1, 'message' => Yii::t('notify', 'Please accept T&C')),
+             array('_offer_images', 'required'),
+           // array('_is_confirm', 'allowEmpty' => false, 'compare', 'compareValue' => true,
+                //'message' => 'You must agree to the terms and conditions'),
+            array('upload_images', 'safe'),
+           
+        );
+        $rules = array_merge(parent::rules(),$rules);
+        //CVarDumper::dump($rules,10,true);
+        return $rules;
     }
 
     /**
@@ -50,6 +54,13 @@ class BspItemFrontEnd extends BspItem {
             unlink($path . $this->background_image);
         }
         return parent::afterSave();
+    }
+
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels() {
+        return parent::attributeLabels() + array("_offer_images" => Yii::t('models', "Offer Image"));
     }
 
 }

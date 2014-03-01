@@ -7,11 +7,11 @@
     <div id="PriceOffer-2" class="col-lg-12 div50percent floatLeft PriceOffer">
         <div>
             <span class="col-lg-3" >
-                <input class="optionType" type="radio" value="abs" name="hour" onclick="change_price_option(this)">                
+                <input class="optionType" type="radio" value="abs" name="week" onclick="change_price_option(this)">                
                 <?php echo Yii::t('postOffer', 'Absolute Rate:'); ?>
             </span>
             <span class="col-lg-3" >
-                <input class="optionType" type="radio" value="range" name="hour" onclick="change_price_option(this)">
+                <input class="optionType" type="radio" value="range" name="week" onclick="change_price_option(this)">
                <?php echo Yii::t('postOffer', 'Breakdown Rate:'); ?>
             </span>
             <span class="col-lg-6">

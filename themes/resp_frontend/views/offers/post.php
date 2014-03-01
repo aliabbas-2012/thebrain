@@ -217,6 +217,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
                 </div>
                 <div class="col-lg-6">
                     <?php
+                    echo $form->hiddenField($model,"_offer_images");
                     $this->renderPartial("//offers/_load_image_urls", array("model" => $model));
                     ?>
                 </div>

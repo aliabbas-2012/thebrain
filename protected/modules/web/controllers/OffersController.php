@@ -262,6 +262,10 @@ class OffersController extends Controller {
             $id = $slug_arr[0];
             $model = BspItemFrontEnd::model()->findByPk($id, "user_id =" . Yii::app()->user->id);
             $model->saveViewerForLog();
+            //setting one if the present its images;
+            if ($model->num_image_items > 0) {
+                $model->_offer_images = 1;
+            }
             if (empty($model)) {
                 throw new CHttpException(404, 'The specified post cannot be found.');
             }
@@ -274,18 +278,22 @@ class OffersController extends Controller {
 
             $this->checkCilds($model);
             $isvalid = 1;
+
+            if ($this->setOfferImage($model)) {
+                
+            }
+
+            if ($this->setOfferVideos($model)) {
+                
+            }
+
             if (!$model->validate()) {
                 $isvalid = 0;
             }
             if (!$user->validate()) {
                 $isvalid = 0;
             }
-            if ($this->setOfferImage($model)) {
-                
-            }
-            if ($this->setOfferVideos($model)) {
-                
-            }
+
             if ($isvalid == 1) {
                 if ($model->save()) {
                     //incase of !empty password then the login 
@@ -304,13 +312,13 @@ class OffersController extends Controller {
                         //CVarDumper::dump($modelImg->getErrors(), 10, true);
                         //CVarDumper::dump($modelImg->attributes, 10, true);
                     }
-                    
-                    foreach($model->item_video_front as $modelVid){
+
+                    foreach ($model->item_video_front as $modelVid) {
                         $modelVid->item_id = $model->id;
 
                         $modelVid->save();
                     }
-                    
+
                     $item = BspItem::model()->findByPk($model->id);
                     $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
                 }
@@ -430,6 +438,8 @@ class OffersController extends Controller {
                 $bspItem_imag [] = $modelItemImg;
             }
             $model->image_items = $bspItem_imag;
+            //in post also setttle this thing
+            $model->_offer_images = 1;
         }
 
         return $is_valid;
@@ -442,7 +452,7 @@ class OffersController extends Controller {
         $is_valid = 0;
         if (!empty($_POST['BspItemVideoFrontEnd'])) {
             $bspItem_vid = array();
-            
+
             foreach ($_POST['BspItemVideoFrontEnd'] as $bspItemVideo) {
                 if (!empty($bspItemVideo['id'])) {
 
@@ -460,7 +470,7 @@ class OffersController extends Controller {
                 }
                 $bspItem_vid [] = $modelItemVid;
             }
-           
+
             $model->item_video_front = $bspItem_vid;
         }
 

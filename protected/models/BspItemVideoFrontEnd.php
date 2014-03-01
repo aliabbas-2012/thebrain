@@ -17,6 +17,7 @@
  */
 class BspItemVideoFrontEnd extends BspItemVideo {
 
+   
     /**
      * @return string the associated database table name
      */
@@ -45,5 +46,6 @@ class BspItemVideoFrontEnd extends BspItemVideo {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
+  
 
 }
