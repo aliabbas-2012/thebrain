@@ -22,15 +22,23 @@ foreach ($segments as $items) {
         <div class="row">
             <?php
             foreach ($items as $item):
+                if (Yii::app()->language == "en") {
+                    $path = Yii::app()->baseUrl . "/uploads/adv_img/" . $item->id . "/" . $item->adv_img;
+                }
+                else if(Yii::app()->language == "de") {
+                    $path = Yii::app()->baseUrl . "/uploads/adv_img_de/" . $item->id . "/" . $item->adv_img_de;
+                }
+                
+                
                 ?>
                 <div class="col-lg-3">
                     <div class="saved-offers-img">
-                        <a href="<?php echo Yii::app()->language =="en"?$item->adv_url:$item->adv_url_de; ?>" class="thumbnail">
+                        <a href="<?php echo $path; ?>" class="thumbnail" data-gallery="">
                             <?php
                             if (Yii::app()->language == "en"):
-                                echo CHtml::image(Yii::app()->baseUrl . "/uploads/adv_img/" . $item->id . "/" . $item->adv_img, '');
+                                echo CHtml::image($path, '');
                             elseif (Yii::app()->language == "de"):
-                                echo CHtml::image(Yii::app()->baseUrl . "/uploads/adv_img_de/" . $item->id . "/" . $item->adv_img_de, '');
+                                echo CHtml::image($path, '');
                             else :
                                 echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png");
                             endif;

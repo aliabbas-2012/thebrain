@@ -9,7 +9,7 @@
         $path = Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item_img->id . "/" . $item_img->image_url;
         ?>
         <div>
-            <a href='<?php echo $path ?>'>
+            <a href='<?php echo $path ?>' data-gallery="">
                 <?php
                 echo CHtml::image($path, '', array("height" => "200px"));
                 ?>
