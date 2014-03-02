@@ -34,22 +34,24 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-        
-                <!--ALERT-->
+
+        <!--ALERT-->
         <link href="<?php echo Yii::app()->request->baseUrl; ?>/media/alert/css/alert.css" rel="stylesheet" />
         <link href="<?php echo Yii::app()->request->baseUrl; ?>/media/alert/themes/light/theme.css" rel="stylesheet" />
-        
+
         <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/media/alert/js/alert.js"></script>
         <?php
         header('Content-Type: text/html; charset="utf-8"', true);
         ?>
 
-         <!--rating-->
+        <!--rating-->
         <link href="<?php echo Yii::app()->request->baseUrl; ?>/media/rating/jquery.rating.css" rel="stylesheet" />
         <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/media/rating/jquery.ratings.js"></script>
-        
-        <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/jquery.mambo.js"></script>
 
+        <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/jquery.mambo.js"></script>
+        <!--gallery-->
+        <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/css/blueimp-gallery.min.css" />
+        <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/css/bootstrap-image-gallery.css">
     </head>
 
     <body>
@@ -165,12 +167,12 @@
         <?php
         $form = $this->beginWidget('CActiveForm', array(
             'id' => 'search-form',
-            "method"=>"GET",
+            "method" => "GET",
             'enableAjaxValidation' => false,
             'action' => $this->createUrl("/web/offers/search"),
             'htmlOptions' => array(
                 'class' => 'form-horizontal',
-                "method"=>"GET"
+                "method" => "GET"
             )
         ));
         ?>
@@ -185,9 +187,9 @@
         <nav id="navbar-search" class="navbar navbar-inverse" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                
+
                 <button type="button" class="navbar-toggle search-toogle" data-toggle="collapse" data-target="#menu-secondary">
-                   <?php echo Yii::t('link', 'Search') ?>
+                    <?php echo Yii::t('link', 'Search') ?>
                     <span class="search-icon">&nbsp;</span>
                 </button>
             </div>
@@ -340,7 +342,7 @@
         }
         ?>
         <div class="clear"></div>
-        
+
         <div id="footer" class="container">
             <nav class="navbar-default">
                 <div class="navbar-inner navbar-content-center">
@@ -384,6 +386,40 @@
                     $register = new RegisterUsers;
                     $this->renderPartial("//user/_register_pop", array("model" => $register));
                     ?>
+                </div>
+            </div>
+        </div>
+        <!-- gallery -->
+        <div id="blueimp-gallery" class="blueimp-gallery">
+            <!-- The container for the modal slides -->
+            <div class="slides"></div>
+            <!-- Controls for the borderless lightbox -->
+            <h3 class="title"></h3>
+            <a class="prev">â€¹</a>
+            <a class="next">â€º</a>
+            <a class="close">Ã—</a>
+            <a class="play-pause"></a>
+            <ol class="indicator"></ol>
+            <!-- The modal dialog, which will be used to wrap the lightbox content -->
+            <div class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="modal-body next"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left prev">
+                                <i class="glyphicon glyphicon-chevron-left"></i>
+                                Previous
+                            </button>
+                            <button type="button" class="btn btn-primary next">
+                                Next
+                                <i class="glyphicon glyphicon-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -491,7 +527,7 @@
             function scrollUpdateSeachBar() {
                 $(window).scroll(function() {
                     var scrolltop = $(window).scrollTop();
-                    
+
                     if (scrolltop >= 40)
                     {
                         jQuery('.search-bar').addClass('nav2-fix-bar');
@@ -521,7 +557,8 @@
             });
 
         </script>
-        
-        
+
+        <script src="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/js/jquery.blueimp-gallery.min.js"></script>
+        <script src="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/js/bootstrap-image-gallery.js"></script>
     </body>
 </html>

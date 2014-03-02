@@ -113,24 +113,42 @@ foreach ($segments as $items) {
             $sItem.='</div>';
             ?>
             <div class="col-xs-6 col-md-3">
-                <a href="<?php echo $this->createUrl("/web/offers/detail", array("slug" => $item->slug)); ?>" class="thumbnail">
 
-                    <?php
-                    if (!empty($item->image_offer->image_url)):
-                        echo CHtml::image(Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url, $item->name, array(
-                            "title" => $item->name,
-                            "data-toggle" => "tooltip",
-                            "data-placement" => "top",
-                        ));
-                    else :
-                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/post-avata.png", $item->name, array(
-                            "title" => $item->name,
-                            "data-toggle" => "tooltip",
-                            "data-placement" => "top",
-                        ));
-                    endif;
+
+                <?php
+                if (!empty($item->image_offer->image_url)):
+                    $url = $this->createUrl("/web/offers/detail", array("slug" => $item->slug));
+                    $path = Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url;
                     ?>
-                </a>
+                    <a href="<?php echo $path; ?>" class="thumbnail" data-gallery="" >
+                        <?php
+                        echo CHtml::image($path, $item->name, array(
+                            "title" => $item->name,
+                            "data-toggle" => "tooltip",
+                            "data-placement" => "top",
+                            
+                        ));
+                        ?>
+                    </a>
+                    <?php
+                else :
+                    $url = $this->createUrl("/web/offers/detail", array("slug" => $item->slug));
+                    $path = Yii::app()->theme->baseUrl . "/images/post-avata.png";
+                    ?>
+                    <a href="<?php echo $path; ?>" class="thumbnail" data-gallery="">
+                        <?php
+                        echo CHtml::image($path, $item->name, array(
+                            "title" => $item->name,
+                            "data-toggle" => "tooltip",
+                            "data-placement" => "top",
+                            
+                        ));
+                        ?>
+                    </a>   
+                <?php
+                endif;
+                ?>
+
                 <?php
                 echo $sItem;
 
