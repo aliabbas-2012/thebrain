@@ -91,4 +91,11 @@ class DefaultController extends Controller {
         $this->render('//user/resetPass', array('model' => $model));
     }
 
+    /**
+     * gmap
+     */
+    public function actionGmap() {
+        $this->renderPartial("//default/googlemap");
+    }
+
 }
