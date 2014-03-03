@@ -120,7 +120,7 @@ foreach ($segments as $items) {
                     $url = $this->createUrl("/web/offers/detail", array("slug" => $item->slug));
                     $path = Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url;
                     ?>
-                    <a href="<?php echo $path; ?>" class="thumbnail" data-gallery="" >
+                    <a href="<?php echo $url; ?>" class="thumbnail"  >
                         <?php
                         echo CHtml::image($path, $item->name, array(
                             "title" => $item->name,

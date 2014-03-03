@@ -66,10 +66,10 @@ foreach ($segments as $items) {
                             
                             if (!empty($item->image_offer->image_url)):
                                 $path = Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url;
-                                echo CHtml::link(CHtml::image($path, $item->name, array("title" => $item->name)),$path,array("class"=>"thumbnail","data-gallery"=>""));
+                                echo CHtml::link(CHtml::image($url, $item->name, array("title" => $item->name)),$path,array("class"=>"thumbnail"));
                             else :
                                 $path = Yii::app()->theme->baseUrl . "/images/post-avata.png";
-                                echo CHtml::link(CHtml::image($path, $item->name,array("title" => $item->name)),$path,array("class"=>"thumbnail","data-gallery"=>""));
+                                echo CHtml::link(CHtml::image($url, $item->name,array("title" => $item->name)),$path,array("class"=>"thumbnail"));
                             endif;
                             ?>
                         
