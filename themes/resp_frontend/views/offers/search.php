@@ -81,6 +81,7 @@
 
                 <div id="grid_content" style="display: block">
                     <?php
+                    $this->renderPartial("//offers/_search_map", array("dataProvider" => $dataProvider));
                     $this->renderPartial("//offers/_search_result", array("dataProvider" => $dataProvider));
                     ?>
                 </div>
