@@ -9,7 +9,6 @@ foreach ($items as $item):
     }
 endforeach;
 $locations = CJSON::encode($locations);
-echo $locations;
 ?>
 <script>
     var locations = <?php echo $locations; ?>
@@ -22,7 +21,7 @@ echo $locations;
             mapTypeControl: false});
         var bounds = new google.maps.LatLngBounds();
         var infowindow = new google.maps.InfoWindow();
-
+        center_marker;
         for (var i in locations)
         {
             var latlng = new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']);
@@ -33,25 +32,25 @@ echo $locations;
                 map: map,
                 title: locations[i]['title']
             });
+            center_marker = marker;
 
-            var circle = new google.maps.Circle({
-                //center: center,
-                map: map,
-                radius: 100000,
-                fillColor: 'transparent',
-                fillOpacity: .6,
-                strokeColor: '#313131',
-                strokeOpacity: .4,
-                strokeWeight: .8
-            });
-            circle.bindTo('center', marker, 'position');
-            bounds = circle.getBounds();
             google.maps.event.addListener(marker, 'click', function() {
                 infowindow.setContent(this.title);
                 infowindow.open(map, this);
             });
         }
-
+        var circle = new google.maps.Circle({
+            //center: center,
+            map: map,
+            radius: 100000,
+            fillColor: 'transparent',
+            fillOpacity: .6,
+            strokeColor: '#313131',
+            strokeOpacity: .4,
+            strokeWeight: .8
+        });
+        circle.bindTo('center', center_marker, 'position');
+        bounds = circle.getBounds();
         map.fitBounds(bounds);
     }
 

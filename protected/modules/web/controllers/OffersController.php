@@ -196,12 +196,14 @@ class OffersController extends Controller {
         if (isset($_GET['ajax'])) {
             $this->renderPartial("//offers/_search_result", array(
                 "cat_arr" => array("0" => "", 1 => ""),
-                "dataProvider" => $dataProvider
+                "dataProvider" => $dataProvider,
+                "radius"=>$model->distance,
             ));
         } else {
             $this->render("//offers/search", array(
                 "cat_arr" => array("0" => "", 1 => ""),
-                "dataProvider" => $dataProvider
+                "dataProvider" => $dataProvider,
+                "radius"=>$model->distance,
             ));
         }
     }
