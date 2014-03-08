@@ -32,7 +32,7 @@ $middle = CJSON::encode($middle);
 
 
         var map =
-                new google.maps.Map(document.getElementById('googleMap'), {zoom: 2, mapTypeId: google.maps.MapTypeId.ROADMAP,
+                new google.maps.Map(document.getElementById('googleMap'), {zoom: 5, mapTypeId: google.maps.MapTypeId.ROADMAP,
             mapTypeControl: false});
         var bounds = new google.maps.LatLngBounds();
         var infowindow = new google.maps.InfoWindow();
