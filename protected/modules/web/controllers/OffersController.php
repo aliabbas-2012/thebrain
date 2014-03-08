@@ -168,7 +168,7 @@ class OffersController extends Controller {
                 
                 //$model->lat = 43;
                 //$model->lng = 64;
-                $condition = ' distance  <=  ' . ($model->distance)/1000;
+                $condition = ' distance  <=  ' . ($model->distance)*1000;
                 if ($model->distance == "all") {
                     $condition = "";
                 }
@@ -196,6 +196,7 @@ class OffersController extends Controller {
                  $criteria->select='*,'.$select;
                  $criteria->having = $condition;
                  $order_by [] = ' distance ASC';
+                 $criteria->addCondition("lat IS NOT NULL AND lng IS NOT NULL ");
                 //$sql = "SELECT * FROM bsp_item WHERE ".$this->mysqlHaversine($model->lat,$model->lng,$model->distance);
                 //$dataItem = Yii::app()->db->createCommand($sql)->queryAll();
                 //$items = CHtml::listData($dataItem, 'id', 'id');
@@ -227,12 +228,12 @@ class OffersController extends Controller {
         }
 //        CVarDumper::dump($model->attributes,10,true);
 //        CVarDumper::dump($_POST['OfferSearch'],10,true);
-         CVarDumper::dump($criteria, 10, true);
+        //CVarDumper::dump($criteria, 10, true);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 1000)
         ));
-
+       
         if (isset($_GET['ajax'])) {
             $this->renderPartial("//offers/_search_result", array(
                 "cat_arr" => array("0" => "", 1 => ""),

@@ -5,26 +5,25 @@ $locations = array();
 $items = $dataProvider->getData();
 foreach ($items as $item):
     if (!empty($item->lat) && !empty($item->lng)) {
-        $locations[] = array("lat" => $item->lat, "lng" => $item->lat, "title" => $item->name);
+        $locations[] = array("lat" => $item->lat, "lng" => $item->lat, "name" => $item->name);
     }
 endforeach;
 
 $middle = array();
-if (count($dataItem) > 1) {
+if (count($locations) > 1) {
 
-    $middle = $dataItem[round(count($dataItem) / 2)];
-    unset($dataItem[round(count($dataItem) / 2)]);
-} else if (count($dataItem) == 1) {
-    $middle = $dataItem[0];
-    $location2 = array();
+    $middle = $locations[round(count($locations) / 2)];
+    unset($locations[round(count($locations) / 2)]);
+} else if (count($locations) == 1) {
+    $middle = $locations[0];
+    $locations = array();
 }
-$locations = CJSON::encode($locations);
-$location2 = CJSON::encode($dataItem);
+$jsonLoc = CJSON::encode($locations);
 $middle = CJSON::encode($middle);
 ?>
 <script>
-    var locations = <?php echo $locations; ?>;
-    var locations = <?php echo $location2; ?>;
+    var locations = <?php echo $jsonLoc; ?>;
+    
     var middle = <?php echo $middle; ?>;
     var radius = '<?php echo $radius ?>';
 

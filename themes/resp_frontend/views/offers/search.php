@@ -61,7 +61,7 @@
                            />
                     <span id="span_refine_popularity" class="refine-search-span" ><?php echo Yii::t('form', 'Popularity') ?></span>
                 </div>
-             
+
             </div>  
             <div class="space-blog"></div>
             <div class="clear"></div>
@@ -81,7 +81,9 @@
 
                 <div id="grid_content" style="display: block">
                     <?php
-                    $this->renderPartial("//offers/_search_map", array("dataProvider" => $dataProvider,"dataItem"=>$dataItem,"radius"=>$radius));
+                    if ($dataProvider->getTotalItemCount() > 0) {
+                        $this->renderPartial("//offers/_search_map", array("dataProvider" => $dataProvider, "radius" => $radius));
+                    }
                     $this->renderPartial("//offers/_search_result", array("dataProvider" => $dataProvider));
                     ?>
                 </div>
