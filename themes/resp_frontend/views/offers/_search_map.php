@@ -8,20 +8,36 @@ foreach ($items as $item):
         $locations[] = array("lat" => $item->lat, "lng" => $item->lat, "title" => $item->name);
     }
 endforeach;
+
+$middle = array();
+if (count($dataItem) > 1) {
+
+    $middle = $dataItem[round(count($dataItem) / 2)];
+    unset($dataItem[round(count($dataItem) / 2)]);
+} else if (count($dataItem) == 1) {
+    $middle = $dataItem[0];
+    $location2 = array();
+}
 $locations = CJSON::encode($locations);
+$location2 = CJSON::encode($dataItem);
+$middle = CJSON::encode($middle);
 ?>
 <script>
-    var locations = <?php echo $locations; ?>
+    var locations = <?php echo $locations; ?>;
+    var locations = <?php echo $location2; ?>;
+    var middle = <?php echo $middle; ?>;
+    var radius = '<?php echo $radius ?>';
 
     function initialize()
     {
+
 
         var map =
                 new google.maps.Map(document.getElementById('googleMap'), {zoom: 2, mapTypeId: google.maps.MapTypeId.ROADMAP,
             mapTypeControl: false});
         var bounds = new google.maps.LatLngBounds();
         var infowindow = new google.maps.InfoWindow();
-        center_marker;
+
         for (var i in locations)
         {
             var latlng = new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']);
@@ -30,27 +46,51 @@ $locations = CJSON::encode($locations);
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                title: locations[i]['title']
+                title: locations[i]['name']
             });
-            center_marker = marker;
+
 
             google.maps.event.addListener(marker, 'click', function() {
                 infowindow.setContent(this.title);
                 infowindow.open(map, this);
             });
         }
-        var circle = new google.maps.Circle({
-            //center: center,
+
+        //setting middle content now 
+
+        
+        var latlng = new google.maps.LatLng(middle['lat'], middle['lng']);
+        bounds.extend(latlng);
+
+        var middle_marker = new google.maps.Marker({
+            position: latlng,
             map: map,
-            radius: 100000,
-            fillColor: 'transparent',
-            fillOpacity: .6,
-            strokeColor: '#313131',
-            strokeOpacity: .4,
-            strokeWeight: .8
+            title: middle['name']
         });
-        circle.bindTo('center', center_marker, 'position');
-        bounds = circle.getBounds();
+
+
+        google.maps.event.addListener(middle_marker, 'click', function() {
+            infowindow.setContent(this.title);
+            infowindow.open(map, this);
+        });
+
+        if (radius != "" & radius != "all") {
+            radius = parseInt(radius);
+            var circle = new google.maps.Circle({
+                //center: center,
+                map: map,
+                radius: radius * 1000,
+                fillColor: 'transparent',
+                fillOpacity: .6,
+                strokeColor: '#313131',
+                strokeOpacity: .4,
+                strokeWeight: .8
+            });
+            circle.bindTo('center', middle_marker, 'position');
+            bounds = circle.getBounds();
+
+            
+        }
         map.fitBounds(bounds);
     }
 

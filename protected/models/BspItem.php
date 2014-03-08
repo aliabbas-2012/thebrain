@@ -59,6 +59,8 @@ class BspItem extends DTActiveRecord {
         4 => "Price per week",
         5 => "Price per month",
     );
+    
+    public $distance;
 
     /**
      *
@@ -109,7 +111,7 @@ class BspItem extends DTActiveRecord {
             array('start_price,end_price', 'safe'),
             array('offer_name,username', 'safe'),
             array('offer_number,most_visited,most_bought', 'safe'),
-            array('slug,seo_description, seo_keywords,seo_title', 'safe'),
+            array('distance,slug,seo_description, seo_keywords,seo_title', 'safe'),
             array('loc_name,_per_price,background_path,background_image_name,description, date_create', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.

@@ -180,8 +180,8 @@
         $model = new OfferSearch();
 
         //offer search keywords
-        if (isset($_POST['OfferSearch'])) {
-            $model->attributes = $_POST['OfferSearch'];
+        if (isset($_GET['OfferSearch'])) {
+            $model->attributes = $_GET['OfferSearch'];
         }
         ?>
         <nav id="navbar-search" class="navbar navbar-inverse" role="navigation">
@@ -270,7 +270,9 @@
                                         "50" => "50km",
                                         "100" => "100km",
                                         "250" => "250km",
-                                        "" => "All Over",
+                                        "500" => "500km",
+                                        "1000" => "1000km",
+                                        "all" => "All Over",
                                     );
                                     echo $form->dropDownList($model, 'distance', $distance_arr, array("class" => "form-control"));
                                     ?>
@@ -472,7 +474,7 @@
                                                         jQuery("#OfferSearch_lat").val(places[0].geometry.location.d);
                                                     }
                                                     if (typeof(places[0].geometry.location.e) != "undefined") {
-                                                        jQuery("#OfferSearch_lng").val(places[0].geometry.location.d);
+                                                        jQuery("#OfferSearch_lng").val(places[0].geometry.location.e);
                                                     }
 
 

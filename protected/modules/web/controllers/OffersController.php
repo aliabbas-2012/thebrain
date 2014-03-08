@@ -100,6 +100,7 @@ class OffersController extends Controller {
     public function actionSearch() {
         $model = new OfferSearch;
         $criteria = new CDbCriteria();
+        $dataItem = array();
         if (isset($_GET['OfferSearch'])) {
             $model->attributes = $_GET['OfferSearch'];
             if (!empty($model->keyword)) {
@@ -114,8 +115,8 @@ class OffersController extends Controller {
                 $criteria->compare("seo_title", $model->keyword, true, "OR");
             }
             $order_by = array();
-            $criteria->compare("lat", $model->lat);
-            $criteria->compare("lng", $model->lng);
+//            $criteria->compare("lat", $model->lat);
+//            $criteria->compare("lng", $model->lng);
             //new attribute
             //$criteria->compare("special_deal", $model->special_deal);
 
@@ -163,16 +164,55 @@ class OffersController extends Controller {
             }
 
             if ($model->lat != "" && $model->lng != "" && $model->distance != "") {
-                $users = $model->getLantLongUser();
-                $search_users = array();
-                foreach ($users as $user) {
-                    if ($model->getDistantByLocation($model->lat, $model->lng, $user->lat, $user->lng, $model->distance) > 0) {
-                        $search_users[$user->id] = $user->id;
-                    }
+                
+                
+                //$model->lat = 43;
+                //$model->lng = 64;
+                $condition = ' distance  <=  ' . ($model->distance)/1000;
+                if ($model->distance == "all") {
+                    $condition = "";
                 }
-                if (!empty($search_users)) {
-                    $criteria->addInCondition("user_id", $search_users);
-                }
+                 $select = '((6372.797 * (2 *
+        ATAN2(
+            SQRT(
+                SIN((' . ($model->lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) *
+                SIN((' . ($model->lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) +
+                COS(lat * (PI()/180)) *
+                COS(' . ($model->lat * 1) . ' * (PI()/180)) *
+                SIN((' . ($model->lng * 1) . ' * (PI()/180)-lng*(PI()/180))/2) *
+                SIN((' . ($model->lng * 1) . ' * (PI()/180)-lng*(PI()/180))/2)
+                ),
+            SQRT(1-(
+                SIN((' . ($model->lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) *
+                SIN((' . ($model->lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) +
+                COS(lat * (PI()/180)) *
+                COS(' . ($model->lat * 1) . ' * (PI()/180)) *
+                SIN((' . ($model->lng * 1) . ' * (PI()/180)-lng*(PI()/180))/2) *
+                SIN((' . ($model->lng * 1) . ' * (PI()/180)-lng*(PI()/180))/2)
+            ))
+        )
+        ))) as distance ';
+            
+                 $criteria->select='*,'.$select;
+                 $criteria->having = $condition;
+                 $order_by [] = ' distance ASC';
+                //$sql = "SELECT * FROM bsp_item WHERE ".$this->mysqlHaversine($model->lat,$model->lng,$model->distance);
+                //$dataItem = Yii::app()->db->createCommand($sql)->queryAll();
+                //$items = CHtml::listData($dataItem, 'id', 'id');
+                //
+                //  CVarDumper::dump($items, 10, true);
+                //echo $sql'
+//                $users = $model->getLantLongUser();
+//                $search_users = array();
+//                foreach ($users as $user) {
+//                    if ($model->getDistantByLocation($model->lat, $model->lng, $user->lat, $user->lng, $model->distance) > 0) {
+//                        $search_users[$user->id] = $user->id;
+//                    }
+//                }
+//                if (!empty($dataItem)) {
+//                    //$criteria->addInCondition("user_id", $search_users);
+//                    $criteria->addInCondition("t.id", $items);
+//                }
             }
         }
         if (!empty($order_by)) {
@@ -187,7 +227,7 @@ class OffersController extends Controller {
         }
 //        CVarDumper::dump($model->attributes,10,true);
 //        CVarDumper::dump($_POST['OfferSearch'],10,true);
-        // CVarDumper::dump($criteria, 10, true);
+         CVarDumper::dump($criteria, 10, true);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 1000)
@@ -197,13 +237,15 @@ class OffersController extends Controller {
             $this->renderPartial("//offers/_search_result", array(
                 "cat_arr" => array("0" => "", 1 => ""),
                 "dataProvider" => $dataProvider,
-                "radius"=>$model->distance,
+                "radius" => $model->distance,
+                "dataItem" => $dataItem,
             ));
         } else {
             $this->render("//offers/search", array(
                 "cat_arr" => array("0" => "", 1 => ""),
                 "dataProvider" => $dataProvider,
-                "radius"=>$model->distance,
+                "radius" => $model->distance,
+                "dataItem" => $dataItem,
             ));
         }
     }
@@ -681,6 +723,41 @@ class OffersController extends Controller {
                 }
             }
         }
+    }
+
+    /**
+     * 
+     * @param type $lat
+     * @param type $lon
+     * @param type $distance
+     * @return string
+     */
+    function mysqlHaversine($lat = 0, $lon = 0, $distance = 0) {
+        if ($distance > 0) {
+            return ('
+        ((6372.797 * (2 *
+        ATAN2(
+            SQRT(
+                SIN((' . ($lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) *
+                SIN((' . ($lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) +
+                COS(lat * (PI()/180)) *
+                COS(' . ($lat * 1) . ' * (PI()/180)) *
+                SIN((' . ($lon * 1) . ' * (PI()/180)-lng*(PI()/180))/2) *
+                SIN((' . ($lon * 1) . ' * (PI()/180)-lng*(PI()/180))/2)
+                ),
+            SQRT(1-(
+                SIN((' . ($lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) *
+                SIN((' . ($lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) +
+                COS(lat * (PI()/180)) *
+                COS(' . ($lat * 1) . ' * (PI()/180)) *
+                SIN((' . ($lon * 1) . ' * (PI()/180)-lng*(PI()/180))/2) *
+                SIN((' . ($lon * 1) . ' * (PI()/180)-lng*(PI()/180))/2)
+            ))
+        )
+        )) <= ' . ($distance / 1000) . ')');
+        }
+
+        return '';
     }
 
 }
