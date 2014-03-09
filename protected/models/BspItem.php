@@ -101,7 +101,7 @@ class BspItem extends DTActiveRecord {
         return array(
             array('name,category_id,group_id,create_time, create_user_id, update_time, update_user_id', 'required'),
             array('category_id, sub_category_id, group_id, num_star, user_id, sound_id, video_id, showlocation, num_orders, my_condition, my_other_price, iStatus, iPayment, special_deal, currency_id, per_price', 'numerical', 'integerOnly' => true),
-            array('price, lat, lng', 'numerical'),
+            array('discount_price,price, lat, lng', 'numerical'),
             array('name', 'length', 'max' => 200),
             array('avatar_image, item_image, background_image, seo_title, seo_keywords', 'length', 'max' => 255),
             array('num_like', 'length', 'max' => 10),
