@@ -228,7 +228,7 @@ class OffersController extends Controller {
         }
 //        CVarDumper::dump($model->attributes,10,true);
 //        CVarDumper::dump($_POST['OfferSearch'],10,true);
-        //CVarDumper::dump($criteria, 10, true);
+        
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 1000)

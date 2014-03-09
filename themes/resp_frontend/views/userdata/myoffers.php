@@ -8,7 +8,7 @@
     ?>
     <!-- Tab panes -->
     <div class="tab-content">
-        <div class="tab-pane active" id="my_offers">
+        <div class="tab-pane active myoffers" id="my_offers">
             <h1><?php echo Yii::t('user', 'My Offers') ?></h1>
             <?php
             echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("class" => "line-blog"));
@@ -32,6 +32,10 @@
                 $criteria->addCondition("user_id = " . Yii::app()->user->id);
                 $dataProvider = new CActiveDataProvider('BspItem', array(
                     'criteria' => $criteria,
+                    'pagination' => array('pageSize' => 25),
+                     'sort' => array(//optional and sortring
+                        'defaultOrder'=>'id DESC',
+                    ),
                 ));
                 $this->widget('zii.widgets.grid.CGridView', array(
                     'id' => 'bsp-my-offer-grid',

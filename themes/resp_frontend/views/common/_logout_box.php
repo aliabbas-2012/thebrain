@@ -32,11 +32,11 @@
                 <h6><strong>Hi <?php echo Yii::app()->user->name ?></strong></h6>
                 <p><?php $user->username ?></p>
             </div>
-            
+
             <div class="avtar-percentage">
                 <canvas class="full-features" height="70" width="70" style="width: 70px; height: 70px;"> </canvas>
             </div>
-            
+
             <script >
                 $(document.getElementsByClassName('full-features')).mambo({
                     percentage:<?php echo $countper * 10; ?>,
@@ -97,9 +97,15 @@
             $criteria->order = "id DESC";
             $criteria->addCondition("user_id = " . Yii::app()->user->id);
             $myOffers = BspItem::model()->findAll($criteria);
+
+
             foreach ($myOffers as $offer):
+                $path = $avatar;
+                if (!empty($offer->image_offer->image_url)):
+                    $path = Yii::app()->baseUrl . "/uploads/BspItemImage/" . $offer->image_offer->id . "/" . $offer->image_offer->image_url;
+                endif;
                 ?>
-                <p><img class="offer-login-box" width="20" height="20" title="<?php echo $offer->name ?>" src="<?php echo $avatar; ?>" alt="<?php echo $offer->name ?>" />
+                <p><img class="offer-login-box" width="20" height="20" title="<?php echo $offer->name ?>" src="<?php echo $path; ?>" alt="<?php echo $offer->name ?>" />
                     <a href="<?php echo $this->createUrl("/web/offers/post", array("action" => "update", "slug" => $offer->slug)) ?>">
                         <?php echo $offer->name ?>
                     </a>

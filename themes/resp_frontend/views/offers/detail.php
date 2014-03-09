@@ -79,7 +79,9 @@
 
     <div class='clear'></div>
     <?php
-    $this->renderPartial("//offers/_detail/_sounds", array("model" => $model));
+    if (count($model->item_related_sounds) > 1) {
+        $this->renderPartial("//offers/_detail/_sounds", array("model" => $model));
+    }
     ?>
     <div class='clear'></div>
     <div class="space-blog"></div>
@@ -292,7 +294,7 @@ if ($dataProvider->getTotalItemCount() > 0):
     $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
 endif;
 ?>
-    <div class="clear"></div>    
+<div class="clear"></div>    
 <?php
 $criteria = new CDbCriteria();
 

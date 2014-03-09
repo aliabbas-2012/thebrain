@@ -135,7 +135,7 @@ foreach ($segments as $items) {
                     $url = $this->createUrl("/web/offers/detail", array("slug" => $item->slug));
                     $path = Yii::app()->theme->baseUrl . "/images/post-avata.png";
                     ?>
-                    <a href="<?php echo $path; ?>" class="thumbnail" data-gallery="">
+                    <a href="<?php echo $url; ?>" class="thumbnail" data-gallery="">
                         <?php
                         echo CHtml::image($path, $item->name, array(
                             "title" => $item->name,

@@ -954,6 +954,9 @@ ul.grid.clearfix {
     top: -15px;
     left: 50px;
 }
+.myoffers ul.yiiPager {
+    display: block !important;
+}
 .tab-header a:not(.active):hover {
     color: #16ACEA !important;
 }
