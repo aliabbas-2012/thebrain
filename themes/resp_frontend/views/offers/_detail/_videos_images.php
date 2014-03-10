@@ -45,7 +45,7 @@ foreach ($videos as $video) {
         $url_parts = explode("/", $video->video_url);
 
         $videos_url[$count]['type'] = 'text/html';
-        $videos_url[$count]['vimeo'] = $url_parts[count($url_parts) - 1];
+        $videos_url[$count]['youtube'] = $url_parts[count($url_parts) - 1];
     }
     $count++;
 }
