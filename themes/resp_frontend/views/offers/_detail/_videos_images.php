@@ -18,4 +18,55 @@
         <?php
     endforeach;
     ?>
+
 </div>
+<div class="clear"></div>
+<?php
+$videos = $model->item_video_frnt;
+$videos_url = array();
+$count  = 0;
+foreach ($videos as $video) {
+    $videos_url[$count]['title'] = '';
+    $videos_url[$count]['href'] = $video->video_url;
+    $videos_url[$count]['poster'] = Yii::app()->theme->baseUrl . "/images/video_thumb.jpg";
+    
+    if (stristr($video->video_url, "mp4")) {
+        $videos_url[$count]['type'] = 'video/mp4';
+    } else if (stristr($video->video_url, "ogg")) {
+        $videos_url[$count]['type'] = 'video/ogg';
+    } else if (stristr($video->video_url, "webm")) {
+        $videos_url[$count]['type'] = 'video/webm';
+    } else if (stristr($video->video_url, "vimeo")) {
+        $url_parts = explode("/", $video->video_url);
+
+        $videos_url[$count]['type'] = 'text/html';
+        $videos_url[$count]['vimeo'] = $url_parts[count($url_parts) - 1];
+    } else if (stristr($video->video_url, "youtube")) {
+        $url_parts = explode("/", $video->video_url);
+
+        $videos_url[$count]['type'] = 'text/html';
+        $videos_url[$count]['vimeo'] = $url_parts[count($url_parts) - 1];
+    }
+    $count++;
+}
+if (!empty($videos_url)):
+    $videos_url_json = CJSON::encode($videos_url);
+    ?>
+    <button id="video-gallery-button" type="button" class="btn btn-success btn-lg">
+        <i class="glyphicon glyphicon-film"></i>
+
+        <?php echo Yii::t('detailOffer', 'Launch Video Gallery') ?>
+    </button>
+    <script>
+        var vidoes_url = <?php echo $videos_url_json ?>;
+        jQuery(function() {
+            jQuery('#video-gallery-button').on('click', function(event) {
+                event.preventDefault();
+                blueimp.Gallery(vidoes_url
+                , $('#blueimp-gallery').data());
+            });
+        })
+    </script>
+    <?php
+endif;
+?>

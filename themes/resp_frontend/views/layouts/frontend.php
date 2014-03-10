@@ -562,5 +562,10 @@
 
         <script src="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/js/jquery.blueimp-gallery.min.js"></script>
         <script src="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/js/bootstrap-image-gallery.js"></script>
+        <script type="text/javascript">
+            jQuery(function() {
+                jQuery('#blueimp-gallery').data('fullScreen', true);
+            })
+        </script>    
     </body>
 </html>

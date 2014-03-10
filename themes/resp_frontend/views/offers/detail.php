@@ -65,9 +65,10 @@
 <div class="space-blog"></div>
 <div>
     <?php
-    if (count($model->image_items) > 0) {
+    if (count($model->image_items) > 0 || count($model->item_video_frnt) > 0) {
         $this->renderPartial("//offers/_detail/_videos_images", array("model" => $model));
     }
+    
     ?>
 </div>
 
