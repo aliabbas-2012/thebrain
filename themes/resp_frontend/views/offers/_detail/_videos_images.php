@@ -24,12 +24,16 @@
 <?php
 $videos = $model->item_video_frnt;
 $videos_url = array();
-$count  = 0;
+$count = 0;
 foreach ($videos as $video) {
     $videos_url[$count]['title'] = '';
     $videos_url[$count]['href'] = $video->video_url;
-    $videos_url[$count]['poster'] = Yii::app()->theme->baseUrl . "/images/video_thumb.jpg";
-    
+    if ($video->image_url == "") {
+        $videos_url[$count]['poster'] = Yii::app()->theme->baseUrl . "/images/video_thumb.jpg";
+    }
+    else  {
+        $videos_url[$count]['poster'] = $video->image_url;
+    }
     if (stristr($video->video_url, "mp4")) {
         $videos_url[$count]['type'] = 'video/mp4';
     } else if (stristr($video->video_url, "ogg")) {
@@ -63,7 +67,7 @@ if (!empty($videos_url)):
             jQuery('#video-gallery-button').on('click', function(event) {
                 event.preventDefault();
                 blueimp.Gallery(vidoes_url
-                , $('#blueimp-gallery').data());
+                        , $('#blueimp-gallery').data());
             });
         })
     </script>

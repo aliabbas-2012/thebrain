@@ -117,7 +117,7 @@ class BspItemVideo extends DTActiveRecord {
         if ($this->isNewRecord) {
             $v_url1 = parse_url($this->video_url);
 
-            if (isset($v_url1['host']) && ($v_url1['host'] == 'www.vimeo.com' || $v_url1['host'] == 'vimeo.com')) {
+            if (isset($v_url1['host']) && stristr($v_url1['host'],"vimeo.com")) {
                 $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/" . substr($v_url1['path'], 1) . ".php"));
                 $idVm1 = $hash[0][id];
                 $this->image_url = $hash[0]["thumbnail_small"];
