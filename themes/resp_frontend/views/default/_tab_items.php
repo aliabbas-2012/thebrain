@@ -106,7 +106,7 @@ foreach ($segments as $items) {
                                 </div>
                                 ';
             } else {
-                $price = '<div class="price-offer">' . $item->price . '<font size="2"> ' . ($currency) . '</font></div>';
+                $price = '<div class="price-offer">' . $item->price . '<label class="font-label"> ' . ($currency) . '</label></div>';
             }
             $sItem.= $price;
             $sItem.='</div>';

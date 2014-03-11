@@ -112,14 +112,14 @@ foreach ($segments as $items) {
                                     $price = ' 
                                 <div class="price-offer">
                                     <label class="item-discount">' . $item->price . '</label>
-                                    <font size="2" class="item-discount"> ' . $currency_symbol . '</font>
+                                    <label  class="font-label item-discount"> ' . $currency_symbol . '</label>
                                     <label>' . $item->discount_price . '</label>
                                     <label class="font-label"> ' . $currency_symbol . '</label>
                                     
                                 </div>
                                 ';
                                 } else {
-                                    $price = '<div class="price-offer">' . $item->price . '<font size="2"> ' . $currency_symbol . '</font></div>';
+                                    $price = '<div class="price-offer">' . $item->price . '<label class="font-label"> ' . $currency_symbol . '</label></div>';
                                 }
                                 $sItem.= $price;
                                 $sItem.='</div>';

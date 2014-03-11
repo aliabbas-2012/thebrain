@@ -115,7 +115,7 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                         if ($model->special_deal == 1) {
                             $price = ' 
                                     <span class="item_offer_price_span">' . $model->price . '</span>
-                                    <font size="2" class="item-discount"> ' . $currency_symbol . '</font>
+                                    <label class="font-label item-discount"> ' . $currency_symbol . '</label>
                                     <span>' . $model->discount_price . '</span>
                                     
                                 ';
