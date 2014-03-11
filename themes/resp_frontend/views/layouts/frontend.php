@@ -13,7 +13,7 @@
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
 
-        <meta charset="iso-8859-15"> 
+        <meta charset="utf-8" /> 
 
 
         <!-- Bootstrap core CSS -->
@@ -43,7 +43,15 @@
         <?php
         header('Content-Type: text/html; charset="utf-8"', true);
         ?>
-
+        <?php
+        if ($this->id == "default" && $this->action->id == "index") {
+            ?>
+            <link media='all' href="<?php echo Yii::app()->theme->baseUrl ?>/dist/slider/css/bs-template-product.css" rel="stylesheet" type="text/css" />
+            <link media='all' href="<?php echo Yii::app()->theme->baseUrl ?>/dist/slider/css/animate.css" rel="stylesheet" type="text/css" />
+            <link media='all' href="<?php echo Yii::app()->theme->baseUrl ?>/dist/slider/css/bootslider.css" rel="stylesheet" type="text/css" />
+            <?php
+        }
+        ?>    
         <!--rating-->
         <link href="<?php echo Yii::app()->request->baseUrl; ?>/media/rating/jquery.rating.css" rel="stylesheet" />
         <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/media/rating/jquery.ratings.js"></script>
@@ -52,12 +60,14 @@
         <!--gallery-->
         <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/css/blueimp-gallery.min.css" />
         <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/css/bootstrap-image-gallery.css">
+        <!-- kendo -->
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo Yii::app()->baseUrl ?>/css/Kendo/kendo.common.min.css"/>
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo Yii::app()->baseUrl ?>/css/Kendo/kendo.metro.min.css"/>
     </head>
 
     <body>
-        <div id="loading" align="center">
+        <div id="loading">
             Please Wait
-
         </div>
         <!-- Fixed navbar -->
         <nav class="navbar navbar-default" role="navigation">
@@ -212,7 +222,7 @@
                                         $i = 1;
                                         foreach ($data as $da) {
 
-                                            $cssClass = "";
+                                            $cssClass = "noleft";
                                             if ($da->name != "Services" && $da->name != "Rentals") {
                                                 $cssClass = "clearleft";
                                             }
@@ -433,8 +443,7 @@
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/bootstrap.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/docs-assets/js/holder.js"></script>
 
-        <link rel="stylesheet" type="text/css" media="all" href="<?php echo Yii::app()->baseUrl ?>/css/Kendo/kendo.common.min.css"/>
-        <link rel="stylesheet" type="text/css" media="all" href="<?php echo Yii::app()->baseUrl ?>/css/Kendo/kendo.metro.min.css"/>
+
         <script type="text/javascript" language="javascript" src="<?php echo Yii::app()->baseUrl ?>/js/Kendo/kendo.web.min.js"></script>
 
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/thepuzzleadmin.js"></script>

@@ -55,7 +55,7 @@ foreach ($segments as $items) {
                         "class" => "offer_like",
                         "data-toggle" => "tooltip",
                         "data-placement" => "top",
-                        "id" => $item->id));
+                        "id" => $item->id.rand(0,5)));
             $sItem.='<div class="percentLike">' . $percent . '%</div>';
             $sItem.='<a class="favorAdd" title="' . $item->id . '">' . CHtml::image(Yii::app()->theme->baseUrl . '/images/start.png', 'Save this offer', array(
                         "title" => "Save this offer", "class" => "star add-wishlist",

@@ -1,6 +1,4 @@
-<link href="<?php echo Yii::app()->theme->baseUrl ?>/dist/slider/css/bs-template-product.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo Yii::app()->theme->baseUrl ?>/dist/slider/css/animate.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo Yii::app()->theme->baseUrl ?>/dist/slider/css/bootslider.css" rel="stylesheet" type="text/css" />
+
 <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/slider/js/touchSwipe.js" type="text/javascript"></script>
 <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/slider/js/mousewheel.js" type="text/javascript"></script>
 <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/slider/js/fitvids.js" type="text/javascript"></script>
