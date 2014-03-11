@@ -60,19 +60,19 @@ foreach ($segments as $items) {
                 <div class="col-lg-3">
                     <div class="saved-offers-img">
 
-                        
-                            <?php
-                            $url = $this->createUrl("/web/offers/detail", array("slug" => $item->slug));
-                            
-                            if (!empty($item->image_offer->image_url)):
-                                $path = Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url;
-                                echo CHtml::link(CHtml::image($url, $item->name, array("title" => $item->name)),$url,array("class"=>"thumbnail"));
-                            else :
-                                $path = Yii::app()->theme->baseUrl . "/images/post-avata.png";
-                                echo CHtml::link(CHtml::image($url, $item->name,array("title" => $item->name)),$url,array("class"=>"thumbnail"));
-                            endif;
-                            ?>
-                        
+
+                        <?php
+                        $url = $this->createUrl("/web/offers/detail", array("slug" => $item->slug));
+
+                        if (!empty($item->image_offer->image_url)):
+                            $path = Yii::app()->baseUrl . "/uploads/BspItemImage/" . $item->image_offer->id . "/" . $item->image_offer->image_url;
+                            echo CHtml::link(CHtml::image($url, $item->name, array("title" => $item->name)), $url, array("class" => "thumbnail"));
+                        else :
+                            $path = Yii::app()->theme->baseUrl . "/images/post-avata.png";
+                            echo CHtml::link(CHtml::image($path, $item->name, array("title" => $item->name)), $url, array("class" => "thumbnail"));
+                        endif;
+                        ?>
+
                         <div class="over-img1"></div>
                         <div style="display: none">
                             <div class="info-item hover-content">
@@ -95,37 +95,38 @@ foreach ($segments as $items) {
                                     </a>
                                 </div>
                                 <div class="clear"></div>
-                            </div>
-                            <?php
-                            $sItem = '<div class="cate-cotent">';
 
-                            if ($item->group_id == 9)
-                                $sItem.='<div class="catename">Service Offer</div>';
-                            else {
-                                $sItem.='<div class="catename">Rentals Offer</div>';
-                            }
-                            $currency_symbol = "&euro;";
-                            if (!empty($item->currency->symbol)) {
-                                $currency_symbol = $item->currency->symbol;
-                            }
-                            if ($item->special_deal == 1) {
-                                $price = ' 
+                                <?php
+                                $sItem = '<div class="cate-cotent">';
+
+                                if ($item->group_id == 9)
+                                    $sItem.='<div class="catename">Service Offer</div>';
+                                else {
+                                    $sItem.='<div class="catename">Rentals Offer</div>';
+                                }
+                                $currency_symbol = "&euro;";
+                                if (!empty($item->currency->symbol)) {
+                                    $currency_symbol = $item->currency->symbol;
+                                }
+                                if ($item->special_deal == 1) {
+                                    $price = ' 
                                 <div class="price-offer">
                                     <label class="item-discount">' . $item->price . '</label>
                                     <font size="2" class="item-discount"> ' . $currency_symbol . '</font>
                                     <label>' . $item->discount_price . '</label>
-                                    <font size="2"> ' . $currency_symbol . '</font>
+                                    <label class="font-label"> ' . $currency_symbol . '</label>
                                     
                                 </div>
                                 ';
-                            } else {
-                                $price = '<div class="price-offer">' . $item->price . '<font size="2"> ' . $currency_symbol . '</font></div>';
-                            }
-                            $sItem.= $price;
-                            $sItem.='</div>';
+                                } else {
+                                    $price = '<div class="price-offer">' . $item->price . '<font size="2"> ' . $currency_symbol . '</font></div>';
+                                }
+                                $sItem.= $price;
+                                $sItem.='</div>';
 
-                            echo $sItem;
-                            ?>
+                                echo $sItem;
+                                ?>
+                            </div>
                         </div>
 
                     </div>
@@ -140,10 +141,10 @@ foreach ($segments as $items) {
 }//end of segments
 ?>
 <script>
-    jQuery(".col-lg-3>div.saved-offers-img").hover(
-            function() {
-                jQuery(this).children().eq(2).show();
-            }, function() {
-        jQuery(this).children().eq(2).hide();
-    });
+//    jQuery(".col-lg-3>div.saved-offers-img").hover(
+//            function() {
+//                jQuery(this).children().eq(2).show();
+//            }, function() {
+//        jQuery(this).children().eq(2).show();
+//    });
 </script>    

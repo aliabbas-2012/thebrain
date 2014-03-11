@@ -82,7 +82,6 @@ foreach ($segments as $items) {
             endif;
             $sItem.='<div class="clear"></div>';
             $sItem.='</div>';
-            $sItem.='</div>';
             $sItem.='<div class="cate-cotent">';
 
             if ($item->group_id == 9)
@@ -100,9 +99,9 @@ foreach ($segments as $items) {
                 $price = ' 
                                 <div class="price-offer">
                                     <label class="item-discount">' . $item->price . '</label>
-                                    <font size="2" class="item-discount"> ' . $currency . '</font>
+                                    <label class="font-label item-discount"> ' . $currency . '</label>
                                     <label>' . $item->discount_price . '</label>
-                                    <font size="2"> ' . $currency . '</font>
+                                    <label class="font-label" >' . $currency . '</label>
                                     
                                 </div>
                                 ';
@@ -111,6 +110,8 @@ foreach ($segments as $items) {
             }
             $sItem.= $price;
             $sItem.='</div>';
+            $sItem.='</div>';
+            
             ?>
             <div class="col-xs-6 col-md-3">
 

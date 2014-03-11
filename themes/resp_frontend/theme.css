@@ -110,10 +110,10 @@ ul.dropdown-menu li a {
     }
 }
 @media (min-width: 768px) {
-    
+
 }
 @media (max-width: 767px) {
-    
+
     #navbar-search button.navbar-toggle  {
         border: 1px solid 		#f4c63f /*{e-bup-border}*/;
         background: 			#fadb4e /*{e-bup-background-color}*/;
@@ -130,17 +130,17 @@ ul.dropdown-menu li a {
         border-radius: 10px;
     }
     #navbar-search button.navbar-toggle:hover {
-        	border: 1px solid 		#f2c43d /*{e-bhover-border}*/;
-	background: 			#fbe26f /*{e-bhover-background-color}*/;
-	font-weight: bold;
-	color: 					#111 /*{e-bhover-color}*/;
-	text-shadow: 0 /*{e-bhover-shadow-x}*/ 1px /*{e-bhover-shadow-y}*/ 0 /*{e-bhover-shadow-radius}*/ 	#fff /*{e-bhover-shadow-color}*/;
-	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff5ba /*{e-bhover-background-start}*/), to( #fbdd52 /*{e-bhover-background-end}*/)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* IE10 */
-	background-image:      -o-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* Opera 11.10+ */
-	background-image:         linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/);
+        border: 1px solid 		#f2c43d /*{e-bhover-border}*/;
+        background: 			#fbe26f /*{e-bhover-background-color}*/;
+        font-weight: bold;
+        color: 					#111 /*{e-bhover-color}*/;
+        text-shadow: 0 /*{e-bhover-shadow-x}*/ 1px /*{e-bhover-shadow-y}*/ 0 /*{e-bhover-shadow-radius}*/ 	#fff /*{e-bhover-shadow-color}*/;
+        background-image: -webkit-gradient(linear, left top, left bottom, from( #fff5ba /*{e-bhover-background-start}*/), to( #fbdd52 /*{e-bhover-background-end}*/)); /* Saf4+, Chrome */
+        background-image: -webkit-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
+        background-image:    -moz-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* FF3.6 */
+        background-image:     -ms-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* IE10 */
+        background-image:      -o-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* Opera 11.10+ */
+        background-image:         linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/);
     }
     #navbar-search button.navbar-toggle .search-icon {
         background: url("images/icons-18-white.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0.4);
@@ -635,8 +635,11 @@ div.item-img-content div.info-item.hover-content a.favorAdd {
 
 .cate-cotent {
     height: 20px;
-    margin: 8px 5px 0;
-    padding: 2px 5px;
+    position: absolute;
+
+    width: 100%;
+    top: 194px;
+    width: 89%;
 }
 
 .catename {
@@ -2645,4 +2648,7 @@ ul.pager li.selected a{
 }
 .model-container {
     margin-left: 20px;
+}
+.font-label {
+    font-size: 11px;
 }
