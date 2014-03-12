@@ -87,6 +87,7 @@ $middle = CJSON::encode($middle);
             });
             circle.bindTo('center', middle_marker, 'position');
             bounds = circle.getBounds();
+            jQuery("#googleMap").hide();
 
             
         }
@@ -95,4 +96,10 @@ $middle = CJSON::encode($middle);
 
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
+<div class="col-lg-12">
+      <button  type="button" class="search-collaps btn btn-success btn-lg" onclick="jQuery('#googleMap').toggle('slow');">
+        <?php echo Yii::t('button', 'Map') ?>
+    </button>
+</div>
+<div class="clear space-blog"></div>
 <div id="googleMap" class="col-lg-12" style="height: 500px"></div>

@@ -1,3 +1,4 @@
+
 .login-box #LoginForm_username {
     margin-top:15px;
     size:30;
@@ -17,6 +18,7 @@ div#content_container >div.error {
 }
 .newfeed-close {
     width:30px; float: right;cursor: pointer;
+	line-height: 25px;
 }
 
 /*part of front end style tag */
@@ -104,6 +106,9 @@ div#Nr {
 }
 .add-wishlist {
     cursor: pointer;
+	position: relative;
+	left: 130px;
+	top: 2px;
 }
 .offer_image {
     width:100%;

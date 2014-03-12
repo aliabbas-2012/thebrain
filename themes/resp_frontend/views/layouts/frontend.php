@@ -289,13 +289,13 @@
 
                                 </li>
                                 <li class="btn-search">                            
-                                    <div class="search-button">
+                                    <span class="search-button">
                                         <a class="searchbt-top" href="javascript:void(0)" onclick="thepuzzleadmin.submitSearch()">
                                             <?php
                                             echo CHtml::image(Yii::app()->theme->baseUrl . "/images/search_button.png", 'Search', array("title" => "Search"));
                                             ?>
                                         </a>
-                                    </div>
+                                    </span>
                                 </li>
                             </ul>
 

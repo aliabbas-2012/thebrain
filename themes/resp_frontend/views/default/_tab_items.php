@@ -1,6 +1,6 @@
 <?php
 $total_likes = BspItemLike::model()->count();
-$segments = array_chunk($items, 4);
+$segments = array_chunk($items, 3);
 foreach ($segments as $items) {
     ?>
     <div class="row">
@@ -113,7 +113,7 @@ foreach ($segments as $items) {
             $sItem.='</div>';
             
             ?>
-            <div class="col-xs-6 col-md-3">
+            <div class="col-xs-6 col-md-4">
 
 
                 <?php
