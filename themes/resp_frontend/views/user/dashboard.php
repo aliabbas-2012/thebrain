@@ -202,7 +202,7 @@ Yii::app()->clientScript->registerScript('dashobard', '
 ', CClientScript::POS_END);
 ?>
 <!-- Modal -->
-<div class="modal fade" id="reveiwModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="reveiwModel" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" id="reveiwModel-content">
             

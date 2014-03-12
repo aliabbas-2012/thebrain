@@ -206,7 +206,8 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div id="menu-secondary" class="collapse navbar-collapse navbar-left">
-                <ul class="nav navbar-nav">
+                <div class="nav navbar-nav">
+                 
                     <div class="search-bar">
                         <div class="navbar-collapse form-nav main-search-bar-2">
 
@@ -301,7 +302,7 @@
 
                         </div><!--/.nav-collapse -->
                     </div>
-                </ul>           
+                </div>           
             </div>
         </nav>
         <?php
@@ -391,7 +392,7 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="singUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="singUpModal" tabindex="-1" role="dialog"  aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <?php
@@ -449,7 +450,7 @@
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/thepuzzleadmin.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/thepuzzleadmin.js"></script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&libraries=places"></script>
         <script>
                                             // This example adds a search box to a map, using the Google Place Autocomplete
                                             // feature. People can enter geographical searches. The search box will return a

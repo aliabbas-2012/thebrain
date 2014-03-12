@@ -70,7 +70,7 @@ $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getDat
 $this->renderPartial("//userdata/_user_store_bottom", array("model" => $model));
 ?>
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <?php
