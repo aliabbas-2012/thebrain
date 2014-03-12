@@ -450,7 +450,7 @@
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/thepuzzleadmin.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/thepuzzleadmin.js"></script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&libraries=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"></script>
         <script>
                                             // This example adds a search box to a map, using the Google Place Autocomplete
                                             // feature. People can enter geographical searches. The search box will return a

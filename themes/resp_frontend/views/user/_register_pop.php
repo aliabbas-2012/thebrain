@@ -100,7 +100,7 @@
     <div class="form-group">
         <?php echo $form->labelEx($model, 'gender', array('class' => 'control-label col-sm-4')); ?>
         <div class="col-lg-6">
-            <?php echo $form->dropDownList($model, 'gender', array("1" => "Male", "2" => "Female"), array('class' => 'form-control', 'maxlength' => 6)); ?>
+            <?php echo $form->dropDownList($model, 'gender', array("1" => "Male", "2" => "Female"), array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'gender'); ?>
 
         </div>
