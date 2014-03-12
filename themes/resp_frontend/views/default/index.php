@@ -293,7 +293,7 @@ Yii::app()->clientScript->registerScript('logoFix', '
                     thepuzzleadmin.showAlertBox("Please login First to like ","warning");
                 }
                 else {
-                    item_id = jQuery(this).attr("offer_id");
+                    item_id = jQuery(this).attr("data-id");
                     thepuzzleadmin.updateElementAjax("' . $this->createUrl("/web/user/saveItemLog", array("action" => "like")) . '?item_id="+item_id,"","");
                         thepuzzleadmin.showAlertBox("Added to like list ","success");
                 }
