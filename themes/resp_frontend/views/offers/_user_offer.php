@@ -105,7 +105,7 @@
         //                // Create the search box and link it to the UI element.
         var input = /** @type {HTMLInputElement} */(
                 document.getElementById('ChangeUser_city'));
-        console.log(input);
+       
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         var searchBox_city = new google.maps.places.SearchBox(
                 /** @type {HTMLInputElement} */(input),{types: ['(cities)'],});
@@ -158,7 +158,7 @@
         //                // Create the search box and link it to the UI element.
         var input = /** @type {HTMLInputElement} */(
                 document.getElementById('ChangeUser_zipcode'));
-        console.log(input);
+
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         var searchBox_city = new google.maps.places.SearchBox(
                 /** @type {HTMLInputElement} */(input),{types: ['(zipcodes)'],});

@@ -178,8 +178,10 @@
                             if (!empty($model->store_url)) {
                                 $store_url = str_replace(" ", "-", $model->store_url);
                                 $store_url = $this->createUrl("/web/userdata/store", array("id" => $model->id, "storeurl" => $store_url));
-                                echo CHtml::link(Yii::app()->request->hostInfo.$store_url, $store_url);
+                                echo CHtml::link(Yii::app()->request->hostInfo . $store_url, $store_url);
                             }
+                            echo $form->hiddenField($model, "lat");
+                            echo $form->hiddenField($model, "lng");
                             ?>
                         </div>
                     </div>
@@ -291,4 +293,113 @@
             },
         });
     })
+</script>
+<script>
+    function setCitySearch() {
+        //city button
+
+        var markers = [];
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        //                // Create the search box and link it to the UI element.
+        var input = /** @type {HTMLInputElement} */(
+                document.getElementById('Users_city'));
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        var searchBox_city = new google.maps.places.SearchBox(
+                /** @type {HTMLInputElement} */(input), {types: ['(cities)'], });
+
+
+
+
+        // [START region_getplaces]
+        // Listen for the event fired when the user selects an item from the
+        // pick list. Retrieve the matching places for that item.
+        google.maps.event.addListener(searchBox_city, 'places_changed', function() {
+            var places = searchBox_city.getPlaces();
+
+            if (typeof(places[0].geometry.location.nb) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.nb);
+
+            }
+            if (typeof(places[0].geometry.location.ob) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.ob);
+
+            }
+
+            //settting changed
+            if (typeof(places[0].geometry.location.A) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.A);
+
+            }
+            if (typeof(places[0].geometry.location.k) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.k);
+
+            }
+
+            if (typeof(places[0].geometry.location.d) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.d);
+
+            }
+            if (typeof(places[0].geometry.location.e) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.e);
+
+            }
+        });
+    }
+    function setZipSearch() {
+        //city button
+
+        var markers = [];
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        //                // Create the search box and link it to the UI element.
+        var input = /** @type {HTMLInputElement} */(
+                document.getElementById('Users_zipcode'));
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        var searchBox_city = new google.maps.places.SearchBox(
+                /** @type {HTMLInputElement} */(input), {types: ['(zipcodes)'], });
+
+
+
+
+        // [START region_getplaces]
+        // Listen for the event fired when the user selects an item from the
+        // pick list. Retrieve the matching places for that item.
+        google.maps.event.addListener(searchBox_city, 'places_changed', function() {
+            var places = searchBox_city.getPlaces();
+
+            if (typeof(places[0].geometry.location.nb) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.nb);
+
+            }
+            if (typeof(places[0].geometry.location.ob) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.ob);
+
+            }
+
+            //settting changed
+            if (typeof(places[0].geometry.location.A) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.A);
+
+            }
+            if (typeof(places[0].geometry.location.k) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.k);
+
+            }
+
+            if (typeof(places[0].geometry.location.d) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.d);
+
+            }
+            if (typeof(places[0].geometry.location.e) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.e);
+
+            }
+        });
+    }
+
 </script>

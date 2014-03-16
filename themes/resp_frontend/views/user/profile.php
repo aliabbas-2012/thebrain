@@ -2,8 +2,7 @@
     <h2>
         Profile
         <?php
-        echo CHtml::link(CHtml::button("View Profile", array("class" => "btn btn-default")), 
-                $this->createUrl("/web/user/profileview"));
+        echo CHtml::link(CHtml::button("View Profile", array("class" => "btn btn-default")), $this->createUrl("/web/user/profileview"));
         ?>
     </h2>
     <?php
@@ -95,7 +94,7 @@
             <?php
             echo zHtml::kendoUploader($model, 'avatar', 'avatar', $this->createUrl("/site/uploadTemp", array("model" => get_class($model), "attribute" => "Users_avatar"))
             );
-            echo zHtml::imageLinkRemove($model, 'avatar', get_class($model),"avatar");
+            echo zHtml::imageLinkRemove($model, 'avatar', get_class($model), "avatar");
             ?>
         </div>
 
@@ -124,7 +123,7 @@
             <?php
             echo zHtml::kendoMultiUploader(1, $model, 'background', 'background', $this->createUrl("/site/uploadTemp", array("index" => 1, "model" => get_class($model), "attribute" => "Users_background"))
             );
-            echo zHtml::imageLinkRemove($model, 'background', get_class($model),'background');
+            echo zHtml::imageLinkRemove($model, 'background', get_class($model), 'background');
             ?>
 
         </div>
@@ -213,3 +212,113 @@
     <?php $this->endWidget(); ?>
     <?php $this->endWidget(); ?>
 </div>
+
+<script>
+    function setCitySearch() {
+        //city button
+
+        var markers = [];
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        //                // Create the search box and link it to the UI element.
+        var input = /** @type {HTMLInputElement} */(
+                document.getElementById('Users_city'));
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        var searchBox_city = new google.maps.places.SearchBox(
+                /** @type {HTMLInputElement} */(input), {types: ['(cities)'], });
+
+
+
+
+        // [START region_getplaces]
+        // Listen for the event fired when the user selects an item from the
+        // pick list. Retrieve the matching places for that item.
+        google.maps.event.addListener(searchBox_city, 'places_changed', function() {
+            var places = searchBox_city.getPlaces();
+
+            if (typeof(places[0].geometry.location.nb) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.nb);
+
+            }
+            if (typeof(places[0].geometry.location.ob) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.ob);
+
+            }
+
+            //settting changed
+            if (typeof(places[0].geometry.location.A) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.A);
+
+            }
+            if (typeof(places[0].geometry.location.k) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.k);
+
+            }
+
+            if (typeof(places[0].geometry.location.d) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.d);
+
+            }
+            if (typeof(places[0].geometry.location.e) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.e);
+
+            }
+        });
+    }
+    function setZipSearch() {
+        //city button
+
+        var markers = [];
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        //                // Create the search box and link it to the UI element.
+        var input = /** @type {HTMLInputElement} */(
+                document.getElementById('Users_zipcode'));
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        var searchBox_city = new google.maps.places.SearchBox(
+                /** @type {HTMLInputElement} */(input), {types: ['(zipcodes)'], });
+
+
+
+
+        // [START region_getplaces]
+        // Listen for the event fired when the user selects an item from the
+        // pick list. Retrieve the matching places for that item.
+        google.maps.event.addListener(searchBox_city, 'places_changed', function() {
+            var places = searchBox_city.getPlaces();
+
+            if (typeof(places[0].geometry.location.nb) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.nb);
+
+            }
+            if (typeof(places[0].geometry.location.ob) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.ob);
+
+            }
+
+            //settting changed
+            if (typeof(places[0].geometry.location.A) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.A);
+
+            }
+            if (typeof(places[0].geometry.location.k) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.k);
+
+            }
+
+            if (typeof(places[0].geometry.location.d) != "undefined") {
+                jQuery("#Users_lat").val(places[0].geometry.location.d);
+
+            }
+            if (typeof(places[0].geometry.location.e) != "undefined") {
+                jQuery("#Users_lng").val(places[0].geometry.location.e);
+
+            }
+        });
+    }
+
+</script>
