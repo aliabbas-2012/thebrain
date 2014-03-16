@@ -114,7 +114,7 @@ foreach ($segments as $items) {
             $sItem.='</div>';
             
             ?>
-            <div class="col-xs-6 col-md-4">
+            <div class="col-xs-6 col-md-4 col-lg-4">
 
 
                 <?php

@@ -72,7 +72,7 @@ div#content_container >div.error {
 
 /*now other offers related*/
 .itemPrice .span-price {
-    color: #000;
+    color: #34475c;
 }
 .load_image_style {
     width:100%;
@@ -106,10 +106,19 @@ div#Nr {
 }
 .add-wishlist {
     cursor: pointer;
-	position: relative;
-	left: 130px;
-	top: 2px;
 }
+
+.search-button {
+    background-color: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    float: left;
+    height: 40px;
+    width: 100px;
+}
+
+
+
 .offer_image {
     width:100%;
 }
@@ -189,4 +198,8 @@ p#price_offer {
 }
 .url-custom-setting {
     font-size:13px; margin-left:10px; 
+}
+
+div.row.notice-bar {
+	margin: 0;
 }
