@@ -86,6 +86,6 @@
 <div  class="thumb-view" style="display: none">
     <div class="space-blog"></div>
     <?php
-    $this->renderPartial("//user/_tab_items", array("items" => $items));
+    $this->renderPartial("//default/_tab_items", array("items" => $items));
     ?>
 </div>

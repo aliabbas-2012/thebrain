@@ -207,7 +207,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div id="menu-secondary" class="collapse navbar-collapse navbar-left">
                 <div class="nav navbar-nav">
-                 
+
                     <div class="search-bar">
                         <div class="navbar-collapse form-nav main-search-bar-2">
 
@@ -468,16 +468,29 @@
                                                 map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
                                                 var searchBox = new google.maps.places.SearchBox(
                                                         /** @type {HTMLInputElement} */(input));
+
+
+
+
                                                 // [START region_getplaces]
                                                 // Listen for the event fired when the user selects an item from the
                                                 // pick list. Retrieve the matching places for that item.
                                                 google.maps.event.addListener(searchBox, 'places_changed', function() {
                                                     var places = searchBox.getPlaces();
+
                                                     if (typeof(places[0].geometry.location.nb) != "undefined") {
                                                         jQuery("#OfferSearch_lat").val(places[0].geometry.location.nb);
                                                     }
                                                     if (typeof(places[0].geometry.location.ob) != "undefined") {
                                                         jQuery("#OfferSearch_lng").val(places[0].geometry.location.ob);
+                                                    }
+
+                                                    //settting changed
+                                                    if (typeof(places[0].geometry.location.A) != "undefined") {
+                                                        jQuery("#OfferSearch_lat").val(places[0].geometry.location.A);
+                                                    }
+                                                    if (typeof(places[0].geometry.location.k) != "undefined") {
+                                                        jQuery("#OfferSearch_lng").val(places[0].geometry.location.k);
                                                     }
 
                                                     if (typeof(places[0].geometry.location.d) != "undefined") {
@@ -499,7 +512,12 @@
                                             if (typeof(google) != "undefined") {
                                                 google.maps.event.addDomListener(window, 'load', initialize);
                                             }
-
+                                            if (typeof(google) != "undefined" && typeof(setCitySearch) == "function") {
+                                                google.maps.event.addDomListener(window, 'load', setCitySearch);
+                                            }
+                                            if (typeof(google) != "undefined" && typeof(setZipSearch) == "function") {
+                                                google.maps.event.addDomListener(window, 'load', setZipSearch);
+                                            }
                                             function deleteOffer(id) {
 
                                                 if (jQuery("a[href=#recent_offers]").parent().hasClass("active")) {

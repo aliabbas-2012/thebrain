@@ -195,7 +195,6 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
                                 </div>
                             </div>
                             <?php
-                           
                             if (!isset($_POST['BspItemVideoFrontEnd']) && $model->isNewRecord) {
                                 $m_video = array();
                                 for ($i = 0; $i <= 4; $i++) {
@@ -217,7 +216,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
                 </div>
                 <div class="col-lg-6">
                     <?php
-                    echo $form->hiddenField($model,"_offer_images");
+                    echo $form->hiddenField($model, "_offer_images");
                     $this->renderPartial("//offers/_load_image_urls", array("model" => $model));
                     ?>
                 </div>
@@ -350,10 +349,12 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
     <div class="row">
         <div id="tcs">
 
-             <?php
-             echo $form->checkBox($model, '_is_confirm', array("id" => "public_offer", "class" => "floatLeft", "margin" => "margin: 3px;"));
-             ?>
-             <span class="k-invalid-msg" data-for="public_offer"></span>
+            <?php
+            echo $form->checkBox($model, '_is_confirm', array("id" => "public_offer", "class" => "floatLeft", "margin" => "margin: 3px;"));
+            echo $form->hiddenField($model, "lat");
+            echo $form->hiddenField($model, "lng");
+            ?>
+            <span class="k-invalid-msg" data-for="public_offer"></span>
             <label class="fontsize_title floatLeft"  for="public_offer">
                 I confirm that I am able to deliver this service to Buyers within the delivery time specified.I will update or pause my Hourlie if I can no longer meet this delivery time. I understand that late delivery will adversely affect my rankings on ThePuzzzle and will entitle the Buyer to a refund. See
                 <a class="tncs" href="javascript:void(0)">T&Cs </a>

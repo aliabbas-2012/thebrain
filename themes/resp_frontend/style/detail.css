@@ -314,10 +314,17 @@ input#txtdiscount.k-textbox {
     width: 100%;
 }
 
-input#first_name.k-textbox.floatLeft.profileBottom.profileText {
+input#first_name.k-textbox.floatLeft.profileBottom.profileText,input#ChangeUser_city.k-textbox.floatLeft.profileBottom.profileText {
     margin-top: 5px;
 }
-input#address.k-textbox, input#city.k-textbox, input#last_name.k-textbox, input#first_name.k-textbox, input#country.k-textbox {
+input#address.k-textbox, 
+input#city.k-textbox, 
+input#last_name.k-textbox, 
+input#first_name.k-textbox, 
+input#ChangeUser_city.k-textbox, 
+input#country.k-textbox,
+input#ChangeUser_zipcode.k-textbox
+{
     border: 1px solid #D2D2D2;
     height: 35px;
     width:100%; float:left;
@@ -341,6 +348,7 @@ input#address.k-textbox, input#city.k-textbox, input#last_name.k-textbox, input#
 #first_name { width:100% !important; float:left; }
 
 #country { width:100% !important; float:left; }
+input#ChangeUser_zipcode.k-textbox{ width:100% !important; float:left; }
 
 #pass { width:100% !important; float:left; }
 
@@ -376,8 +384,17 @@ input#country.k-textbox.floatLeft.profileBottom.profileText {
     margin-bottom: 30px;
     margin-top: 25px;
 }
+input#ChangeUser_zipcode.k-textbox.floatLeft.profileBottom.profileText {
+    float: left;
+    margin-bottom: 30px;
+    margin-top: 25px;
+}
 
-input#address.k-textbox, input#city.k-textbox, input#last_name.k-textbox, input#first_name.k-textbox, input#country.k-textbox {
+input#address.k-textbox, input#city.k-textbox, input#last_name.k-textbox, 
+input#first_name.k-textbox, 
+input#country.k-textbox,
+input#ChangeUser_zipcode.k-textbox
+{
     border: 1px solid #D2D2D2;
     height: 35px;
     width: 480px;
