@@ -103,7 +103,7 @@
                         echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("width" => "23"));
                         ?>
                     </div>
-                    <div class='col-lg-4' tab-no='3'>
+                    <div class='col-lg-2' tab-no='3'>
                         <strong>
                             (
                             <span id="comments_count">
@@ -113,6 +113,13 @@
                         </strong>
 
                         <?php echo Yii::t('detailOffer', 'Reviews'); ?> 
+                        <?php
+                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("width" => "23"));
+                        ?>
+                    </div>
+                    <div class='col-lg-2' tab-no='4'>
+
+                        <?php echo Yii::t('detailOffer', 'Map'); ?> 
                         <?php
                         echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("width" => "23"));
                         ?>
@@ -165,6 +172,18 @@
                         <?php
                         $this->renderPartial("//offers/_detail/_reviews", array("model" => $model));
                         ?>
+                    </div>
+                </div>
+                <div class='tab-4-data tab-data' style='display:none'>
+                    <div class='col-lg-12'>
+                        <div class="space-blog"></div>
+                        <div>
+                            <?php
+                            if ($model->lat != "" && $model->lng != "") {
+                                $this->renderPartial("//offers/_detail/_map", array("model" => $model));
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
 

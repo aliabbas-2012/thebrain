@@ -15,7 +15,10 @@
             ?>
         </div>
         <div class='col-lg-4' tab-no='3'>
-
+            <?php echo Yii::t('detailOffer', 'Map'); ?> 
+            <?php
+            echo CHtml::image(Yii::app()->theme->baseUrl . "/images/tab_bg.png", '', array("width" => "23"));
+            ?>
         </div>
 
     </div>
@@ -42,7 +45,7 @@
             <div class='col-lg-12'>
                 <?php
                 if ($model->numComments > 0) {
-                    
+
                     foreach ($model->comments as $comment) {
                         $total_rating = 5;
                         echo "<div class='col-lg-12'>";
@@ -63,21 +66,25 @@
                         echo "</div>";
                         echo "</div>";
                     }
-                    
                 } else {
                     echo Yii::t("user", "Not Found");
                 }
                 ?>
             </div>
         </div>
-        <div class='tab-3-data tab-data' style='display:none'>
-            <div class='col-lg-12'>
-                <div class="space-blog"></div>
-                <div class="space-blog"></div>
 
-            </div>
+
+    </div>
+    <div class='tab-3-data tab-data' style='display:none'>
+        <div class='col-lg-12'>
+            <div class="space-blog"></div>
+
+            <?php
+            if ($model->lat != "" && $model->lng != "") {
+                $this->renderPartial("//userdata/_user_map", array("model" => $model));
+            }
+            ?>
         </div>
-
     </div>
     <script>
         jQuery(function() {
