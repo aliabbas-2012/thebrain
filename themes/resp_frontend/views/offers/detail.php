@@ -68,7 +68,6 @@
     if (count($model->image_items) > 0 || count($model->item_video_frnt) > 0) {
         $this->renderPartial("//offers/_detail/_videos_images", array("model" => $model));
     }
-    
     ?>
 </div>
 
@@ -171,9 +170,7 @@
 
             </div>
 
-            <?php
-            $this->renderPartial("//offers/_advertising");
-            ?>
+
 
         </div>
         <div class='col-lg-4'>
@@ -251,7 +248,9 @@
                     Time selection:-<span id="time-selection"></span>
                 </div>
             </div>
-
+            <?php
+            $this->renderPartial("//offers/_advertising");
+            ?>
         </div>
     </div>
 

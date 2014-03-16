@@ -186,9 +186,9 @@ body {
         width: 500px;
         margin: 0 0 0 -394px;
     }
-    
-    
-    
+
+
+
 }
 
 
@@ -219,7 +219,7 @@ body {
 
     input#OfferSearch_keyword.form-control.location_search {
         min-width: 100%;
-	}
+    }
 
 
     #menu-primary {
@@ -266,15 +266,15 @@ body {
         border: 1px solid #D9D9D9;
         border-radius: 4px;
         height: 40px;
-		margin-right: 15px;
-	}
-	
-	 .navbar ul li.btn-search  {
-	 	float: right;
-	 	clear: both;
-	 	padding-top: 10px;
-	 }
-	
+        margin-right: 15px;
+    }
+
+    .navbar ul li.btn-search  {
+        float: right;
+        clear: both;
+        padding-top: 10px;
+    }
+
     .navbar li a.head_category {
         font-size: 12px;
         line-height: 5px;
@@ -291,10 +291,10 @@ body {
         border: 1px solid #ccd5d5;
         width: 150px;
         height: 40px;
-		float: right;
-	}
-	
-	
+        float: right;
+    }
+
+
 
     .navbar li a.head_category {
         font-size: 12px;
@@ -307,8 +307,8 @@ body {
     .navbar ul li.location_search input {
         min-width: 100%;
         height: 40px;
-		margin-left: 33px;
-	}
+        margin-left: 33px;
+    }
 
     #navbar-search button.navbar-toggle .search-icon {
         background: url("images/icons-18-white.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0.4);
@@ -337,9 +337,9 @@ body {
         background: #FFF !important;
         min-height:240px !important;
         padding-top:20px;
-	} 
+    } 
 
- } 
+} 
 
 
 /* Landscape phones and down */
@@ -348,46 +348,46 @@ body {
 @media (max-width: 768px) {
 
 }
-    /** search bar **/
-    .search-bar {
-        border-top: 1px dotted #b8c5c6;
-    }
-    .navbar-nav li a.offer{
-        -webkit-border-radius:3px;
-        -moz-border-radius:3px;
-        border-radius:3px;
-        border: 1px solid #b4b4b4;
-        background: #fbe83b;
-        padding: 7px 10px;
-        font-weight: bold;
-        font-size: 12px;
-        letter-spacing: 1px;
-        margin-top: 8px;
-        margin-right: auto;
-        margin-left: auto;
-    }
-    #navbar-search div.main-search-bar-2 {
-		margin-top: 25px;
-		margin-right: 0;
-		border-top: none;
-		margin-left: 15px;
-	}
+/** search bar **/
+.search-bar {
+    border-top: 1px dotted #b8c5c6;
+}
+.navbar-nav li a.offer{
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    border: 1px solid #b4b4b4;
+    background: #fbe83b;
+    padding: 7px 10px;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-top: 8px;
+    margin-right: auto;
+    margin-left: auto;
+}
+#navbar-search div.main-search-bar-2 {
+    margin-top: 25px;
+    margin-right: 0;
+    border-top: none;
+    margin-left: 15px;
+}
 
-    #menu-secondary {
-        border-top: none;
-	}
+#menu-secondary {
+    border-top: none;
+}
 
 
 
 .navbar ul li.keword_search input {
-        min-width: 120px;
+    min-width: 120px;
 }
 
-    .navbar ul li.location_search input {
-        width: 100px;
-		margin-right: 15px;
-		margin-left: 15px;
-	}
+.navbar ul li.location_search input {
+    width: 100px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
 .navbar ul li.distant_search select {
     /*        opacity:0;*/
     color:#34495e;
@@ -395,43 +395,43 @@ body {
     border: 1px solid #ccd5d5;
     width: 100px;
     height: 40px;
-	margin-right: 15px;
+    margin-right: 15px;
 }
 
-    .statistics ul li {
-        display: block !important;
-        margin-top: 10px;
-        border: 1px solid #dfe3e3;
-        height: 45px;
-        line-height: 45px;
-    }
+.statistics ul li {
+    display: block !important;
+    margin-top: 10px;
+    border: 1px solid #dfe3e3;
+    height: 45px;
+    line-height: 45px;
+}
 
-    .statistics {
-        text-align: center;
-        margin-bottom: 100px;
-    }
+.statistics {
+    text-align: center;
+    margin-bottom: 100px;
+}
 
-    .statistics ul li.first {
-        float: none;
-        background-color: #fff;
-        border: 1px solid #dfe3e3;
-        border-radius: 5px;
-        height: 45px;
-        line-height: 43px;
-        margin-top: 50px;
-    }
-    .nav-tabs li {
-        border-right:none;
-    }
-    .nav-tabs li:last-child {
-        border-right:none;
-        border-left:none;
+.statistics ul li.first {
+    float: none;
+    background-color: #fff;
+    border: 1px solid #dfe3e3;
+    border-radius: 5px;
+    height: 45px;
+    line-height: 43px;
+    margin-top: 50px;
+}
+.nav-tabs li {
+    border-right:none;
+}
+.nav-tabs li:last-child {
+    border-right:none;
+    border-left:none;
 
-    }
+}
 
-    div.container.login-bar-container {
-        width: 100%;
-    }
+div.container.login-bar-container {
+    width: 100%;
+}
 }
 
 
@@ -470,18 +470,18 @@ body {
     }
 
     .navbar-nav li a.offer{
--webkit-border-radius:3px;
--moz-border-radius:3px;
-border-radius:3px;
-border: 1px solid #b4b4b4;
-background: #fbe83b;
-padding: 7px 10px;
-font-weight: bold;
-font-size: 12px;
-letter-spacing: 1px;
-margin-top: 8px;
-margin-right: auto;
-margin-left: auto;
+        -webkit-border-radius:3px;
+        -moz-border-radius:3px;
+        border-radius:3px;
+        border: 1px solid #b4b4b4;
+        background: #fbe83b;
+        padding: 7px 10px;
+        font-weight: bold;
+        font-size: 12px;
+        letter-spacing: 1px;
+        margin-top: 8px;
+        margin-right: auto;
+        margin-left: auto;
     }
 }
 
@@ -532,15 +532,15 @@ margin-left: auto;
     .navbar ul li.location_search input {
         max-width: 150px;
         height: 40px;
-	}
-	
+    }
+
 
 
     input#OfferSearch_keyword.form-control.location_search {
         max-width: 100px;
         height: 40px;
     }
-  
+
 
     body { padding-bottom: 0 !important; }
 
@@ -563,7 +563,7 @@ margin-left: auto;
 input#OfferSearch_keyword.form-control.location_search {
     max-width: 150px;
     height: 40px;
-	margin-right: 15px;
+    margin-right: 15px;
 } 
 
 @media (max-width: 800px) { 
@@ -607,23 +607,23 @@ input#OfferSearch_keyword.form-control.location_search {
     .navbar ul li.location_search input {
         width: 200px;
         height: 40px;
-	}
+    }
 
 
     input#OfferSearch_keyword.form-control.location_search {
         width: 200px;
         height: 40px;
-		margin-right: 15px;
-	}
-.navbar ul li.location_search input {
-    width: 110px;
-	height: 40px;
-	margin-right: 15px;
-}
+        margin-right: 15px;
+    }
+    .navbar ul li.location_search input {
+        width: 110px;
+        height: 40px;
+        margin-right: 15px;
+    }
 
     .container-top {
         width: 1070px;
-	}
+    }
     .statistics ul li {
         display: block !important;
         margin-top: 10px;
@@ -652,18 +652,18 @@ input#OfferSearch_keyword.form-control.location_search {
         margin-left: auto;
     }
     .navbar-nav li a.offer{
--webkit-border-radius:3px;
--moz-border-radius:3px;
-border-radius:3px;
-border: 1px solid #b4b4b4;
-background: #fbe83b;
-padding: 7px 10px;
-font-weight: bold;
-font-size: 12px;
-letter-spacing: 1px;
-margin-top: 8px;
-margin-right: auto;
-margin-left: auto;    }
+        -webkit-border-radius:3px;
+        -moz-border-radius:3px;
+        border-radius:3px;
+        border: 1px solid #b4b4b4;
+        background: #fbe83b;
+        padding: 7px 10px;
+        font-weight: bold;
+        font-size: 12px;
+        letter-spacing: 1px;
+        margin-top: 8px;
+        margin-right: auto;
+        margin-left: auto;    }
 
 
     .statistics ul li.first {
@@ -690,28 +690,28 @@ margin-left: auto;    }
     .reviewcomment .ratingcomment {
         float: right;
     }
-  .search-bar {
-  border: none;
-  }
+    .search-bar {
+        border: none;
+    }
 
     .navbar ul li.keword_search input {
         width: 250px;
-	}
+    }
     .navbar ul li.location_search input {
         width: 200px;
-		margin-right: 15px;
-	}
-	
-	.navbar ul li.distant_search select {
-	    /*        opacity:0;*/
-	    color:#34495e;
-	    font-size: 13px;
-	    border: 1px solid #ccd5d5;
-	    width: 100px;
-	    height: 40px;
-		margin-right: 15px;
-	}
-	
+        margin-right: 15px;
+    }
+
+    .navbar ul li.distant_search select {
+        /*        opacity:0;*/
+        color:#34495e;
+        font-size: 13px;
+        border: 1px solid #ccd5d5;
+        width: 100px;
+        height: 40px;
+        margin-right: 15px;
+    }
+
     nav#navbar-search.navbar.navbar-inverse {
         margin-left: auto;
         margin-right: auto;
@@ -728,8 +728,8 @@ margin-left: auto;    }
         z-index: 150;
         top: -20px;
         background-color: rgba(255, 255, 255, 0);
-		margin-top: 0;
-	}
+        margin-top: 0;
+    }
     div#puzzle_slider {
         margin-top: 80px;
     }
@@ -775,28 +775,28 @@ margin-left: auto;    }
     }
 
     .navbar-nav li a.offer{
--webkit-border-radius:3px;
--moz-border-radius:3px;
-border-radius:3px;
-border: 1px solid #b4b4b4;
-background: #fbe83b;
-padding: 7px 10px;
-font-weight: bold;
-font-size: 12px;
-letter-spacing: 1px;
-margin-top: 8px;
-margin-right: auto;
-margin-left: auto;    }
+        -webkit-border-radius:3px;
+        -moz-border-radius:3px;
+        border-radius:3px;
+        border: 1px solid #b4b4b4;
+        background: #fbe83b;
+        padding: 7px 10px;
+        font-weight: bold;
+        font-size: 12px;
+        letter-spacing: 1px;
+        margin-top: 8px;
+        margin-right: auto;
+        margin-left: auto;    }
 
 
     .navbar ul li.keword_search input {
         width: 120px;
-	}
+    }
     .navbar ul li.location_search input {
         width: 110px;
-		height: 40px;
-	}
-	
+        height: 40px;
+    }
+
 
 
     #footer {
@@ -855,11 +855,11 @@ margin-left: auto;    }
         text-align: left;
     }
 
-.navbar li a.head_category {
-    font-size: 14px;
-    line-height: 5px;
-	color: #34495e;
-}
+    .navbar li a.head_category {
+        font-size: 14px;
+        line-height: 5px;
+        color: #34495e;
+    }
     #recentOrder  div.review div.review-content .review-content-item {
         color:#3498db;
         font-size: 20px;
@@ -869,18 +869,18 @@ margin-left: auto;    }
         text-align: left;
     }
     .navbar-nav li a.offer{
--webkit-border-radius:3px;
--moz-border-radius:3px;
-border-radius:3px;
-border: 1px solid #b4b4b4;
-background: #fbe83b;
-padding: 7px 10px;
-font-weight: bold;
-font-size: 12px;
-letter-spacing: 1px;
-margin-top: 8px;
-margin-right: auto;
-margin-left: auto;
+        -webkit-border-radius:3px;
+        -moz-border-radius:3px;
+        border-radius:3px;
+        border: 1px solid #b4b4b4;
+        background: #fbe83b;
+        padding: 7px 10px;
+        font-weight: bold;
+        font-size: 12px;
+        letter-spacing: 1px;
+        margin-top: 8px;
+        margin-right: auto;
+        margin-left: auto;
     }
 
     #grid_content .city {
@@ -954,9 +954,9 @@ margin-left: auto;
         position: absolute;
         margin-top: -5px;
         background-color: rgba(255, 255, 255, 0);
-	}
+    }
     #menu-secondary {
-	}
+    }
 
     nav#navbar-search.navbar.navbar-inverse {
         margin-left: auto;
@@ -1020,32 +1020,32 @@ margin-left: auto;
         float: left;
     }
     .search-bar {
-    border: none;
+        border: none;
     }
 
 
-.navbar-nav li  a.offer:hover{
-    background-color: #ecf0f1;
-    opacity: 1;
-}
+    .navbar-nav li  a.offer:hover{
+        background-color: #ecf0f1;
+        opacity: 1;
+    }
 
 
 
     .navbar ul li.location_search input {
         width: 200px;
         height: 40px;
-		margin-right: 15px;
-	}
+        margin-right: 15px;
+    }
 
-.navbar ul li.distant_search select {
-    /*        opacity:0;*/
-    color:#34495e;
-    font-size: 13px;
-    border: 1px solid #ccd5d5;
-    width: 100px;
-    height: 40px;
-	margin-right: 15px;
-}
+    .navbar ul li.distant_search select {
+        /*        opacity:0;*/
+        color:#34495e;
+        font-size: 13px;
+        border: 1px solid #ccd5d5;
+        width: 100px;
+        height: 40px;
+        margin-right: 15px;
+    }
 
     .tab-content .filterbar .refine-search .itemsearch {
         display: block;
@@ -1173,13 +1173,13 @@ margin-left: auto;
 
     #navbar-search div.main-search-bar-2 {
         width: 100%;
-		background-color: rgba(255, 255, 255, 0);
+        background-color: rgba(255, 255, 255, 0);
         height: 50px;
-		margin-right: 0;
-		margin-left: 0;
-		left: 0;
-		margin-top: 10px;
-	}
+        margin-right: 0;
+        margin-left: 0;
+        left: 0;
+        margin-top: 10px;
+    }
     .container-top {
         width: 850px;
     }
@@ -1189,13 +1189,13 @@ margin-left: auto;
     }
     div.container.login-bar-container {
         width: 100%;
-		background-color: rgba(255, 255, 255, 0.97);
-	}
+        background-color: rgba(255, 255, 255, 0.97);
+    }
     .navbar li a.head_category {
         font-size: 12px;
         line-height: 5px;
-		color: #34495e;
-	}
+        color: #34495e;
+    }
 
     #menu-secondary ul.nav.navbar-nav div.search-bar div.navbar-collapse.form-nav.main-search-bar-2 ul.nav.navbar-nav li.dropdown a.dropdown-toggle.head_category b.caret {
         margin-top: -5px;
@@ -1235,19 +1235,19 @@ margin-left: auto;
     .navbar ul li.keword_search {
         border-left: 1px solid #dfe3e3;
         padding-left: 20px;
-		float: left;
-		min-width: 280px;
-	}
+        float: left;
+        min-width: 280px;
+    }
 
     .navbar ul li.location_search {
-	}
+    }
 
     .navbar ul li.distant_search  {
-		width: 110px;
-	}
+        width: 110px;
+    }
 
     .navbar ul li.btn-search  {
-	}
+    }
 
     .navbar ul li.distant_search select {
         /*        opacity:0;*/
@@ -1256,12 +1256,12 @@ margin-left: auto;
         border: 1px solid #ccd5d5;
         width: 100px;
         height: 40px;
-		float: right;
-	}
+        float: right;
+    }
 
     input#OfferSearch_keyword.form-control.location_search {
         min-width: 250px;
-	}
+    }
 
     .styled {
         width: 100px;
@@ -1292,7 +1292,7 @@ margin-left: auto;
     }
     .dropdown .login-dropdown-menu {
         padding-top: 0px;
-	}
+    }
     .dropdown-menu .login-box {
         margin: 30px;
     }
@@ -1322,7 +1322,7 @@ margin-left: auto;
 
     .tabs-container {
         margin-top: 30px;
-	}
+    }
 
 
     .statistics ul li {
@@ -1383,21 +1383,21 @@ margin-left: auto;
 
 
 .navbar li > a {
-	display: block;
+    display: block;
     font: bold 12px Arial;
     text-transform: uppercase;
     text-shadow: none !important;
 }
 
 #menu-primary ul.nav.navbar-nav.navbar-right li.dropdown a.dropdown-toggle {
-	color: #16a085;
+    color: #16a085;
 }
 
 #menu-primary ul.nav.navbar-nav.navbar-right li a {
-	color: #34475c;
+    color: #34475c;
 }
 #menu-primary ul.nav.navbar-nav.navbar-right li a.offer {
-	color: #565c5c;
+    color: #565c5c;
 }
 .navbar li > a:hover {
     color: #14a8d0 !important;
@@ -1420,7 +1420,7 @@ ul.dropdown-menu li a {
     margin-right: auto;
     top: 0;
     width: 1090px;
-    
+
 }
 
 
@@ -1460,7 +1460,7 @@ div#googleMap.col-lg-12 {
 }
 
 div.col-xs-12.col-sm-6.col-md-4 {
-	margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 .footer-contain
@@ -1666,10 +1666,10 @@ div.error,div.errorMessage {
 }
 
 div.item-img-content div.info-item.hover-content a.favorAdd {
-	margin: 2px 10px 0 0;
-	position: relative;
-	cursor: pointer;
-	float: right;
+    margin: 2px 10px 0 0;
+    position: relative;
+    cursor: pointer;
+    float: right;
 }
 div.item-img-content div.info-item.hover-content div.offer_numlike {
     background: none no-repeat scroll center center rgba(0, 0, 0, 0);
@@ -1684,7 +1684,7 @@ div.item-img-content div.info-item.hover-content div.offer_numlike {
     padding-top: 1px;
     width: 40px;
     margin-top: 2px;
-	margin-right: 10px;
+    margin-right: 10px;
 }
 
 
@@ -1920,8 +1920,8 @@ ul.grid.clearfix {
 }
 .statistics ul li {
     list-style: none;
-	padding: 0;
-	margin-right: 20px;
+    padding: 0;
+    margin-right: 20px;
 }
 
 
@@ -3507,14 +3507,18 @@ ul.pager li.selected a{
 }
 
 button.search-collaps.btn.btn-success.btn-lg {
-	background: url(images/map.png) -2px -6px no-repeat;
-	color: #7f8b8d;
-	height: 35px;
-	font-size: 15px;
-	line-height: 12px;
-	border: 1px solid #d7d7d7;
-	text-align: right;
-	min-width: 100px;
-	font-weight: bold;
+    background: url(images/map.png) -2px -6px no-repeat;
+    color: #7f8b8d;
+    height: 35px;
+    font-size: 15px;
+    line-height: 12px;
+    border: 1px solid #d7d7d7;
+    text-align: right;
+    min-width: 100px;
+    font-weight: bold;
 }
 
+.no-margin {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
