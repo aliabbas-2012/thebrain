@@ -48,7 +48,7 @@ foreach ($segments as $items) {
 
             $sItem = '<div class="item-img-content">';
             $sItem.= '<div class="info-item hover-content">';
-            $sItem.='<div class="offer_name"><a href="javascript:void(0)">' . substr($item->name, 0, 51) . '...</a></div>';
+            $sItem.='<div class="offer_name"><a href="'.$link.'">' . substr($item->name, 0, 51) . '...</a></div>';
             $sItem.='<div class="offer_address"  title="' . $city . '">' . $avatar . '</div>';
             $sItem.= CHtml::image(Yii::app()->theme->baseUrl . '/images/handLike.png', 'Like', array(
                         "title" => "Like",
@@ -70,16 +70,16 @@ foreach ($segments as $items) {
 
             $sItem.='<div class="watch"><a href="' . $this->createUrl("/web/offers/detail", array("slug" => $item->slug)) . '">Watching</a></div>';
 
-            if (!empty(Yii::app()->user->id)):
+            if (!empty(Yii::app()->user->id) && isset($delete_btn) && $delete_btn == true):
                 $sItem.='<div class="delete"><a title="rand' . $item->id . '" href="javascript:;"><img alt="star" 
                         data-toggle = "tooltip"
                         onclick = "deleteOffer(' . $item->id . ')"
                         data-placement ="top" title="Delete" class="star" src="' . Yii::app()->theme->baseUrl . '/images/x.png" /></a></div>';
             else :
-                $sItem.='<div class="delete"><a title="rand' . $item->id . '" href="javascript:;"><img alt="star" 
-                        data-toggle = "tooltip"
-                        
-                        data-placement ="top" title="Delete" class="star" src="' . Yii::app()->theme->baseUrl . '/images/x.png" /></a></div>';
+//                $sItem.='<div class="delete"><a title="rand' . $item->id . '" href="javascript:;"><img alt="star" 
+//                        data-toggle = "tooltip"
+//                        
+//                        data-placement ="top" title="Delete" class="star" src="' . Yii::app()->theme->baseUrl . '/images/x.png" /></a></div>';
             endif;
             $sItem.='<div class="clear"></div>';
             $sItem.='</div>';

@@ -93,7 +93,7 @@
         <div class="avatar-scroll">
             <?php
             $criteria = new CDbCriteria();
-            $criteria->limit = 15;
+            $criteria->limit = 10;
             $criteria->order = "id DESC";
             $criteria->addCondition("user_id = " . Yii::app()->user->id);
             $myOffers = BspItem::model()->findAll($criteria);

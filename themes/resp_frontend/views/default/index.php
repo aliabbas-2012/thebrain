@@ -7,8 +7,14 @@
     <ul class="nav nav-tabs">
         <li class="active"><a href="#random_offers" data-toggle="tab"><?php echo Yii::t("site", "Random Offers"); ?></a></li>
         <li><a href="#recent_offers" data-toggle="tab"><?php echo Yii::t("site", "Recently viewed"); ?></a></li>
-        <li><a href="#saved_offers" data-toggle="tab"><?php echo Yii::t("site", "Saved Offers"); ?></a></li>
-
+        <?php
+        //only login user can see
+        if (!empty(Yii::app()->user->id)):
+            ?>
+            <li><a href="#saved_offers" data-toggle="tab"><?php echo Yii::t("site", "Saved Offers"); ?></a></li>
+            <?php
+        endif;
+        ?>
     </ul>
 
     <!-- Tab panes -->
@@ -58,7 +64,7 @@
                 $criteria_view->distinct = "item_id";
 
                 $viwed_items = CHtml::listData(BspItemLog::model()->findAll($criteria_view), 'item_id', 'item_id');
-                
+
                 $criteria = new CDbCriteria();
                 $criteria->limit = "16";
                 $criteria->order = "id DESC";
@@ -91,49 +97,56 @@
             ?>
 
         </div>
-        <div class="tab-pane" id="saved_offers">
-            <div id="saved_offers_content">
-                <?php
-                $criteria_fav = new CDbCriteria();
-                $criteria_fav->select = "item_id";
-                $criteria_fav->order = "id DESC";
-                $criteria_fav->limit = "16";
-                $criteria_fav->distinct = "item_id";
+        <?php
+        //only login user can see
+        if (!empty(Yii::app()->user->id)):
+            ?>
+            <div class="tab-pane" id="saved_offers">
+                <div id="saved_offers_content">
+                    <?php
+                    $criteria_fav = new CDbCriteria();
+                    $criteria_fav->select = "item_id";
+                    $criteria_fav->order = "id DESC";
+                    $criteria_fav->limit = "16";
+                    $criteria_fav->distinct = "item_id";
+                    $criteria_fav->addCondition("user_id =" . Yii::app()->user->id);
+                    $saved_items = CHtml::listData(BspFarvorite::model()->findAll($criteria_fav), 'item_id', 'item_id');
+                    $criteria = new CDbCriteria();
+                    $criteria->limit = "16";
+                    $criteria->order = "id DESC";
 
-                $saved_items = CHtml::listData(BspFarvorite::model()->findAll($criteria_fav), 'item_id', 'item_id');
-                $criteria = new CDbCriteria();
-                $criteria->limit = "16";
-                $criteria->order = "id DESC";
-               
-                $criteria->addInCondition('id', $saved_items);
-                $criteria->condition = "is_public>0 AND iStatus = 1";
-                $dataProvider = new CActiveDataProvider('BspItem', array(
-                    'criteria' => $criteria,
-                    'pagination' => array('pageSize' => 15)
-                ));
-                $this->renderPartial("//default/_tab_items", array("items" => $dataProvider->getData()));
+                    $criteria->addInCondition('id', $saved_items);
+                    $criteria->condition = "is_public>0 AND iStatus = 1";
+                    $dataProvider = new CActiveDataProvider('BspItem', array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => 15)
+                    ));
+                    $this->renderPartial("//default/_tab_items", array("items" => $dataProvider->getData(), "delete_btn" => true));
+                    ?>
+                </div>
+                <?php
+                if ($dataProvider->pagination->pageCount > 1) {
+                    $jsMethods = "thepuzzleadmin.appendElementAjax('" . $this->createUrl('/web/default/renderTabItems') . "','saved_offers_content'," . CJSON::encode($criteria) . ",this);return false;";
+
+                    echo "<div class='clear'></div>";
+
+                    $this->widget('DTScroller', array(
+                        'pages' => $dataProvider->pagination,
+                        'ajax' => true,
+                        'header' => '',
+                        'jsMethod' => $jsMethods,
+                            )
+                    );
+                    echo "<div class='col-lg-12 load_more_div'>";
+                    echo CHtml::link("Load More", 'javascript:void(0)', array("class" => "load_more", "onclick" => "thepuzzleadmin.loadNextPage('saved_offers')"));
+                    echo "</div>";
+                }
                 ?>
+
             </div>
             <?php
-            if ($dataProvider->pagination->pageCount > 1) {
-                $jsMethods = "thepuzzleadmin.appendElementAjax('" . $this->createUrl('/web/default/renderTabItems') . "','saved_offers_content'," . CJSON::encode($criteria) . ",this);return false;";
-
-                echo "<div class='clear'></div>";
-
-                $this->widget('DTScroller', array(
-                    'pages' => $dataProvider->pagination,
-                    'ajax' => true,
-                    'header' => '',
-                    'jsMethod' => $jsMethods,
-                        )
-                );
-                echo "<div class='col-lg-12 load_more_div'>";
-                echo CHtml::link("Load More", 'javascript:void(0)', array("class" => "load_more", "onclick" => "thepuzzleadmin.loadNextPage('saved_offers')"));
-                echo "</div>";
-            }
-            ?>
-
-        </div>
+        endif;
+        ?>
 
     </div>
 </div>
