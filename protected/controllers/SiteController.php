@@ -200,4 +200,19 @@ class SiteController extends Controller {
         $this->sendEmail2($email);
     }
 
+    /**
+     * simple form to handle 
+     */
+    public function actionPayPallSimple() {
+        $this->render("paypallsimple");
+    }
+
+    /**
+     * simple form to handle 
+     */
+    public function actionPayPallSimpleDo() {
+
+        $this->render("paypallsimpledo");
+    }
+
 }
