@@ -43,9 +43,9 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                                    data-toggle ="tooltip" 
                                    data-placement ="top"
                                    onclick=" $.alert.open({
-                                        type: 'error',
-                                        content: 'Please Login to continue'
-                                    });"
+                                                   type: 'error',
+                                                   content: '<?php echo Yii::t('link', 'Please Login to continue'); ?>'
+                                               });"
                                    ><?php echo Yii::t('detailOffer', 'Contact Me'); ?></a>
                                <?php
                                endif;
@@ -132,7 +132,31 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                     </label>
                 </div>
                 <div id='orderNowdiv'>
-                    <a id="orderNow" href="javascript:#"><?php echo Yii::t('link', 'Order Now'); ?></a>
+                    <?php
+                    if (!empty(Yii::app()->user->id)):
+                        if(Yii::app()->user->id == $model->user_id):
+                             echo CHtml::link(
+                                Yii::t('link', 'Order Now'), "javascript:#", array(
+                            "id" => "orderNow",
+                            "onclick" => "$.alert.open({
+                                        type: 'warning',
+                                        content: '".Yii::t('link', 'You are the owner of this offer')."'
+                                    });"
+                        ));
+                        else:
+                             echo CHtml::link(Yii::t('link', 'Order Now'), "javascript:#", array("id" => "orderNow"));
+                        endif;
+                    else :
+                        echo CHtml::link(
+                                Yii::t('link', 'Order Now'), "javascript:#", array(
+                            "id" => "orderNow",
+                            "onclick" => "$.alert.open({
+                                        type: 'warning',
+                                        content: '".Yii::t('link', 'Please Login to continue')."'
+                                    });"
+                        ));
+                    endif;
+                    ?>
                 </div>
                 <?php
                 if (!empty($user->store_url)):
