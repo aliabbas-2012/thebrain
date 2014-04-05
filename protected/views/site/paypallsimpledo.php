@@ -66,12 +66,20 @@ if (isset($_POST['receiverEmail'])) {
  */
 $payRequest = new PayRequest(new RequestEnvelope("en_US"), $_POST['actionType'], $_POST['cancelUrl'], $_POST['currencyCode'], $receiverList, $_POST['returnUrl']);
 
+
+
 /*
  * 	 ## Creating service wrapper object
   Creating service wrapper object to make API call and loading
   Configuration::getAcctAndConfig() returns array that contains credential and config parameters
  */
 $service = new AdaptivePaymentsService(Configuration::getAcctAndConfig());
+
+spl_autoload_register(array('YiiBase', 'autoload'));
+CVarDumper::dump(Configuration::getAcctAndConfig(),10,true);
+spl_autoload_unregister(array('YiiBase', 'autoload'));
+
+
 try {
     /* wrap API method calls on the service object with a try catch */
     $response = $service->Pay($payRequest);

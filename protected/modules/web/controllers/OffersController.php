@@ -37,7 +37,8 @@ class OffersController extends Controller {
                     'deleteOffer',
                     'getChildrenCategories',
                     'sentMessage',
-                    'deleteoffertype'
+                    'deleteoffertype',
+                    'orderOffer'
                 ),
                 'users' => array('@'),
             ),
@@ -164,15 +165,15 @@ class OffersController extends Controller {
             }
 
             if ($model->lat != "" && $model->lng != "" && $model->distance != "") {
-                
-                
+
+
                 //$model->lat = 43;
                 //$model->lng = 64;
-                $condition = ' distance  <=  ' . ($model->distance)*1000;
+                $condition = ' distance  <=  ' . ($model->distance) * 1000;
                 if ($model->distance == "all") {
                     $condition = "";
                 }
-                 $select = '((6372.797 * (2 *
+                $select = '((6372.797 * (2 *
         ATAN2(
             SQRT(
                 SIN((' . ($model->lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) *
@@ -192,11 +193,11 @@ class OffersController extends Controller {
             ))
         )
         ))) as distance ';
-            
-                 $criteria->select='*,'.$select;
-                 $criteria->having = $condition;
-                 $order_by [] = ' distance ASC';
-                 $criteria->addCondition("lat IS NOT NULL AND lng IS NOT NULL ");
+
+                $criteria->select = '*,' . $select;
+                $criteria->having = $condition;
+                $order_by [] = ' distance ASC';
+                $criteria->addCondition("lat IS NOT NULL AND lng IS NOT NULL ");
                 //$sql = "SELECT * FROM bsp_item WHERE ".$this->mysqlHaversine($model->lat,$model->lng,$model->distance);
                 //$dataItem = Yii::app()->db->createCommand($sql)->queryAll();
                 //$items = CHtml::listData($dataItem, 'id', 'id');
@@ -228,12 +229,12 @@ class OffersController extends Controller {
         }
 //        CVarDumper::dump($model->attributes,10,true);
 //        CVarDumper::dump($_POST['OfferSearch'],10,true);
-        
+
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 1000)
         ));
-       
+
         if (isset($_GET['ajax'])) {
             $this->renderPartial("//offers/_search_result", array(
                 "cat_arr" => array("0" => "", 1 => ""),
@@ -723,6 +724,25 @@ class OffersController extends Controller {
                     BspFarvorite::model()->deleteByPk($item->id);
                 }
             }
+        }
+    }
+
+    /**
+     * 
+     */
+    public function actionOrderOffer($id) {
+        $offer = BspItem::model()->findByPk($id);
+        $current_user = Yii::app()->user->user;
+
+        if ($current_user->paypal_mail == "" || $offer->user_rel->paypal_mail == "") {
+            if ($current_user->paypal_mail == "") {
+                echo CJSON::encode(array("ack" => "Warning", "warning" => "Kindly Update Your paypall Email"));
+            }
+            else if( $offer->user_rel->paypal_mail == ""){
+                echo CJSON::encode(array("ack" => "Warning", "warning" => "Offer Owner user has configured paypall Email <br/>but we have sent him your notification"));
+            }
+        } else {
+            
         }
     }
 

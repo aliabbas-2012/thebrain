@@ -51,7 +51,7 @@ $cancelUrl = $url . "/SimplePay.php";
                 <tr id="receiverTable_0">
 
                     <td>
-                        <input type="text" name="receiverEmail[]" id="receiveremail_0" value="platfo_1255612361_per@gmail.com">
+                        <input type="text" name="receiverEmail[]" id="receiveremail_0" value="itsgeniusstar_test@gmail.com">
                     </td>
                     <td>
                         <input type="text" name="receiverAmount[]" id="amount_0" value="1.0" class="smallfield">

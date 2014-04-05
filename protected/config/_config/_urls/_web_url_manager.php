@@ -36,5 +36,6 @@ $rules_web = array(
     '<lang:[\w-\.]+>/offers/post/<action:[\w-\.]+>' => '/web/offers/post',
     '<lang:[\w-\.]+>/offers/delete-offer/<id:[\w-\.]+>/' => '/web/offers/deleteOffer',
     '<lang:[\w-\.]+>/offers/change/status/<id:[\w-\.]+>/' => '/web/offers/changeStatus',
+    '<lang:[\w-\.]+>/offers/orderOffer/<id:[\w-\.]+>/' => '/web/offers/orderOffer',
 );
 ?>

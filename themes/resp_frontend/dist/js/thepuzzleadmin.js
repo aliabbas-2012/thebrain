@@ -310,6 +310,30 @@ var thepuzzleadmin = {
             jQuery('#post-form').submit();
         }
 
+    },
+    buyOffer: function(ajax_url) {
+
+        jQuery("#loading").show();
+
+        jQuery.ajax({
+            type: "POST",
+            url: ajax_url,
+            async: false,
+            dataType: 'json',
+            data:
+                    {
+                        "ajax": "1",
+                    }
+        }).done(function(response) {
+            console.log(response);
+            if (response['ack'] == "Warning") {
+                $.alert.open({
+                    type: 'warning',
+                    content: response['warning']
+                });
+            }
+            jQuery("#loading").hide();
+        });
     }
 
 
