@@ -737,13 +737,35 @@ class OffersController extends Controller {
         if ($current_user->paypal_mail == "" || $offer->user_rel->paypal_mail == "") {
             if ($current_user->paypal_mail == "") {
                 echo CJSON::encode(array("ack" => "Warning", "warning" => "Kindly Update Your paypall Email"));
-            }
-            else if( $offer->user_rel->paypal_mail == ""){
+            } else if ($offer->user_rel->paypal_mail == "") {
                 echo CJSON::encode(array("ack" => "Warning", "warning" => "Offer Owner user has configured paypall Email <br/>but we have sent him your notification"));
+                $this->sendNotificattion($offer->user_rel);
             }
         } else {
             
         }
+        PaymentPaypallAdaptive::model()->saveInitialPaymentOrder($offer->user_rel, $offer);
+    }
+
+    /**
+     * send notification to user 
+     */
+    public function sendNotificattion($owner) {
+
+        $email['From'] = Yii::app()->user->user->user_email;
+        $userFullName = Yii::app()->user->user->first_name . " " . Yii::app()->user->user->second_name . " ";
+        $email['FromName'] = $userFullName . Yii::app()->name;
+        $email['To'] = $owner->user_email;
+        $email['Subject'] = "Inivitation to purchase Offer";
+        $email['Body'] = $userFullName . " wants to buy your offer ! ";
+        if ($owner->paypal_mail == "") {
+            $email['Body'].= " you didn't configure your paypall email kindly configure <br/> to recieve this offer ";
+            $email['Body'].= " <br/> click on following link after Login <br/>";
+            $email['Body'].= CHtml::link($this->createAbsoluteUrl("/web/user/profile"), $this->createAbsoluteUrl("/web/user/profile"));
+        }
+        $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
+
+        $this->sendEmail2($email);
     }
 
     /**
