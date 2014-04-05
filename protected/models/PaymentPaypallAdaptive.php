@@ -132,6 +132,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
+
     /**
      * 
      * @return type
@@ -140,10 +141,11 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $this->saveHistory();
         return parent::afterSave();
     }
+
     /**
      * save history for log
      */
-    public function saveHistory(){
+    public function saveHistory() {
         $model = new PaymentPaypallAdaptiveHistory();
         $model->paypall_adaptive_id = $this->id;
         $model->buyer_status = $this->buyer_status;
@@ -154,32 +156,32 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $model->puzzzle_commission = $this->puzzzle_commission;
         $model->save();
     }
+
     /**
      * 
      * @param type $owner
      * @param type $offer
      */
-    public function saveInitialPaymentOrder($owner,$offer){
-      
+    public function saveInitialPaymentOrder($owner, $offer) {
+
         $model = new PaymentPaypallAdaptive;
         $model->buyer_id = Yii::app()->user->id;
         $model->sender_id = $owner->id;
-        
-        if($owner->paypal_mail ==""){
-            $model->item_id = $offer->id;
+        $model->item_id = $offer->id;
+        if ($owner->paypal_mail != "") {
             $model->buyer_status = "initiated";
-            $model->seller_status = "initiated";
         }
-        if($offer->discount_price!=""){
+        if ($offer->discount_price != "") {
             $model->amount = $offer->discount_price;
+        } else {
+            $model->amount = $offer->price;
         }
-        else {
-             $model->amount = $offer->price;
-        }
+
+        $model->seller_status = "initiated";
         $model->puzzzle_commission = 1;
         $model->ip_address = Yii::app()->request->userHostAddress;
-        CVarDumper::dump($model,10,true);
-        
+        CVarDumper::dump($model, 10, true);
+
         $model->save();
         die;
     }
