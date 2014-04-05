@@ -98,10 +98,10 @@
                         <?php
                         if (isset(Yii::app()->user->id)):
                             $criteria = new CDbCriteria();
-                            $criteria->condition = "isview = 0 AND user_id = ".Yii::app()->user->id;
+                            $criteria->condition = "isview = 0 AND user_id = " . Yii::app()->user->id;
                             $notify = BspNotify::model()->count($criteria);
                             $criteria->limit = 20;
-                            $criteria->condition = "user_id = ".Yii::app()->user->id;
+                            $criteria->condition = "user_id = " . Yii::app()->user->id;
                             $criteria->order = "id DESC";
                             $notifications = BspNotify::model()->findAll($criteria);
                             ?>
@@ -136,18 +136,25 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a  class="dropdown-toggle <?php echo $notify >0?"notifySelected":""; ?>" data-toggle="dropdown">
-                                     <?php
+                                <a  class="dropdown-toggle <?php echo $notify > 0 ? "notifySelected" : ""; ?>" data-toggle="dropdown">
+                                    <?php
                                     echo CHtml::image(Yii::app()->theme->baseUrl . "/images/notification_warning.png", 'Notifcation', array("height" => "24", "title" => 'Notifcation'));
                                     ?>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <?php
-                                        //echo CHtml::link(Yii::t('link', "View All Messages"), $this->createUrl('/web/user/messages'));
+                                    <?php
+                                    foreach ($notifications as $notify):
                                         ?>
-                                    </li>                                
+                                        <li>
+                                            <?php
+                                            echo CHtml::link(Yii::t('link', "View All Messages"), $this->createUrl('/web/user/messages'));
+                                            ?>
+                                        </li>
+                                        <?php
+                                    endforeach;
+                                    ;
+                                    ?>
                                 </ul>
                             </li>
                             <?php
@@ -221,7 +228,7 @@
             <div class="navbar-header">
 
                 <button type="button" class="navbar-toggle search-toogle" data-toggle="collapse" data-target="#menu-secondary">
-                    <?php echo Yii::t('link', 'Search') ?>
+<?php echo Yii::t('link', 'Search') ?>
                     <span class="search-icon">&nbsp;</span>
                 </button>
             </div>
@@ -236,7 +243,7 @@
                             <ul class="nav navbar-nav">
                                 <li class="dropdown">
                                     <a  class="dropdown-toggle head_category" data-toggle="dropdown">
-                                        <?php echo Yii::t('link', 'All Categories') ?>
+<?php echo Yii::t('link', 'All Categories') ?>
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu category_head_menu">
@@ -371,7 +378,7 @@
                 <div class="alert alert-warning" style="display: none"></div>
                 <div class="alert alert-success" style="display: none"></div>
 
-                <?php echo $content; ?>
+            <?php echo $content; ?>
             </div> <!-- /container -->
             <?php
         }
