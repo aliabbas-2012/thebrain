@@ -23,7 +23,7 @@
  * The followings are the available model relations:
  * @property PaymentPaypallAdaptiveHistory[] $paymentPaypallAdaptiveHistories
  */
-class PaymentPaypallAdaptive extends DTActiveRecord {
+class payment_adaptive_id extends DTActiveRecord {
 
     /**
      * @return string the associated database table name
@@ -183,7 +183,21 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         CVarDumper::dump($model, 10, true);
 
         $model->save();
-        die;
+        $this->generateNotification($model->sender_id, $model->id, "You have recieved invitation to sale your offer");
+    }
+
+    /**
+     * 
+     * @param type $user_id
+     * @param type $payment_adaptive_id
+     * @param type $message
+     */
+    public function generateNotification($user_id, $payment_adaptive_id, $message) {
+        $model = new BspNotify();
+        $model->user_id = $user_id;
+        $model->payment_adaptive_id = $payment_adaptive_id;
+        $model->message = $message;
+        $model->save();
     }
 
 }
