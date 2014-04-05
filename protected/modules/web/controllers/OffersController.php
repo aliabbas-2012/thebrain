@@ -733,7 +733,7 @@ class OffersController extends Controller {
     public function actionOrderOffer($id) {
         $offer = BspItem::model()->findByPk($id);
         $current_user = Yii::app()->user->user;
-
+        PaymentPaypallAdaptive::model()->saveInitialPaymentOrder($offer->user_rel, $offer);
         if ($current_user->paypal_mail == "" || $offer->user_rel->paypal_mail == "") {
             if ($current_user->paypal_mail == "") {
                 echo CJSON::encode(array("ack" => "Warning", "warning" => "Kindly Update Your paypall Email"));
@@ -744,7 +744,6 @@ class OffersController extends Controller {
         } else {
             
         }
-        PaymentPaypallAdaptive::model()->saveInitialPaymentOrder($offer->user_rel, $offer);
     }
 
     /**
