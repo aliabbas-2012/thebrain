@@ -18,7 +18,7 @@ div#content_container >div.error {
 }
 .newfeed-close {
     width:30px; float: right;cursor: pointer;
-	line-height: 25px;
+    line-height: 25px;
 }
 
 /*part of front end style tag */
@@ -201,5 +201,9 @@ p#price_offer {
 }
 
 div.row.notice-bar {
-	margin: 0;
+    margin: 0;
+}
+.notifySelected img{
+    background:#F1D9A1;
+    border-radius: 50px;
 }

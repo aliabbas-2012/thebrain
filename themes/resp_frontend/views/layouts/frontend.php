@@ -97,6 +97,12 @@
                     <ul class="nav navbar-nav navbar-right"> 
                         <?php
                         if (isset(Yii::app()->user->id)):
+                            $criteria = new CDbCriteria();
+                            $criteria->addCondition("is_view = 0 AND user_id = ".Yii::app()->user->id);
+                            $notify = BspNotify::model()->count($criteria);
+                            $criteria->limit = 20;
+                            $criteria->order = "id DESC";
+                            $notifications = BspNotify::model()->findAll($criteria);
                             ?>
                             <li class="dropdown">
                                 <a  class="dropdown-toggle" data-toggle="dropdown">
@@ -124,6 +130,21 @@
                                     <li>
                                         <?php
                                         echo CHtml::link(Yii::t('link', "View All Messages"), $this->createUrl('/web/user/messages'));
+                                        ?>
+                                    </li>                                
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a  class="dropdown-toggle notifySelected" data-toggle="dropdown">
+                                     <?php
+                                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/notification_warning.png", 'Notifcation', array("height" => "24", "title" => 'Notifcation'));
+                                    ?>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <?php
+                                        //echo CHtml::link(Yii::t('link', "View All Messages"), $this->createUrl('/web/user/messages'));
                                         ?>
                                     </li>                                
                                 </ul>

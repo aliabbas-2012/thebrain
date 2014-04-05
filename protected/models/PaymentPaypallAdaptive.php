@@ -23,7 +23,7 @@
  * The followings are the available model relations:
  * @property PaymentPaypallAdaptiveHistory[] $paymentPaypallAdaptiveHistories
  */
-class payment_adaptive_id extends DTActiveRecord {
+class PaymentPaypallAdaptive extends DTActiveRecord {
 
     /**
      * @return string the associated database table name
