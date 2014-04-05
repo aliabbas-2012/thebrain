@@ -98,9 +98,10 @@
                         <?php
                         if (isset(Yii::app()->user->id)):
                             $criteria = new CDbCriteria();
-                            $criteria->addCondition("is_view = 0 AND user_id = ".Yii::app()->user->id);
+                            $criteria->condition = "isview = 0 AND user_id = ".Yii::app()->user->id;
                             $notify = BspNotify::model()->count($criteria);
                             $criteria->limit = 20;
+                            $criteria->condition = "user_id = ".Yii::app()->user->id;
                             $criteria->order = "id DESC";
                             $notifications = BspNotify::model()->findAll($criteria);
                             ?>
@@ -135,7 +136,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a  class="dropdown-toggle notifySelected" data-toggle="dropdown">
+                                <a  class="dropdown-toggle <?php echo $notify >0?"notifySelected":""; ?>" data-toggle="dropdown">
                                      <?php
                                     echo CHtml::image(Yii::app()->theme->baseUrl . "/images/notification_warning.png", 'Notifcation', array("height" => "24", "title" => 'Notifcation'));
                                     ?>
