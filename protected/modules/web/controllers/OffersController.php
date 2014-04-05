@@ -734,12 +734,12 @@ class OffersController extends Controller {
         $offer = BspItem::model()->findByPk($id);
         $current_user = Yii::app()->user->user;
         PaymentPaypallAdaptive::model()->saveInitialPaymentOrder($offer->user_rel, $offer);
+        $this->sendNotificattion($offer->user_rel);
         if ($current_user->paypal_mail == "" || $offer->user_rel->paypal_mail == "") {
             if ($current_user->paypal_mail == "") {
                 echo CJSON::encode(array("ack" => "Warning", "warning" => "Kindly Update Your paypall Email"));
             } else if ($offer->user_rel->paypal_mail == "") {
                 echo CJSON::encode(array("ack" => "Warning", "warning" => "Offer Owner user has configured paypall Email <br/>but we have sent him your notification"));
-                $this->sendNotificattion($offer->user_rel);
             }
         } else {
             
