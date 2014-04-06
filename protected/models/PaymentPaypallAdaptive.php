@@ -59,6 +59,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'paymentPaypallAdaptiveHistories' => array(self::HAS_MANY, 'PaymentPaypallAdaptiveHistory', 'paypall_adaptive_id'),
+            'seller' => array(self::BELONGS_TO, 'Users', 'sender_id'),
+            'buyer' => array(self::BELONGS_TO, 'Users', 'buyer_id'),
         );
     }
 
@@ -183,7 +185,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         CVarDumper::dump($model, 10, true);
 
         $model->save();
-        $this->generateNotification($model->sender_id, $model->id, "You have recieved invitation to sale your offer");
+        $this->generateNotification($model->sender_id, $model->id,"seller", "You have recieved invitation to sale your offer");
     }
 
     /**
@@ -192,11 +194,12 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
      * @param type $payment_adaptive_id
      * @param type $message
      */
-    public function generateNotification($user_id, $payment_adaptive_id, $message) {
+    public function generateNotification($user_id, $payment_adaptive_id,$type, $message) {
         $model = new BspNotify();
         $model->user_id = $user_id;
         $model->payment_adaptive_id = $payment_adaptive_id;
         $model->message = $message;
+        $model->user_type = $type;
         $model->save();
     }
 

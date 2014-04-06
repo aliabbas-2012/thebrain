@@ -144,7 +144,7 @@ class UserController extends Controller {
     /**
      *  change profile
      */
-    public function actionProfile() {
+    public function actionProfile($source = "") {
 
         $model = Users::model()->findByPk(Yii::app()->user->id);
 
@@ -152,7 +152,14 @@ class UserController extends Controller {
             $model->attributes = $_POST['Users'];
 
             if ($model->save()) {
-                $this->redirect($this->createUrl("/web/user/profileview"));
+                if ($source == "notify") {
+
+                    $this->redirect($this->createUrl("/web/offers/notifcations"));
+                } else if ($source != "") {
+                    $this->redirect($this->createUrl("/web/offers/notificationdetail",array("id"=>$source)));
+                } else {
+                    $this->redirect($this->createUrl("/web/user/profileview"));
+                }
             }
         }
 

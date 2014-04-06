@@ -38,7 +38,10 @@ class OffersController extends Controller {
                     'getChildrenCategories',
                     'sentMessage',
                     'deleteoffertype',
-                    'orderOffer'
+                    'orderOffer',
+                    'notificationdetail',
+                    'notifications',
+                    'setPaymentStatus',
                 ),
                 'users' => array('@'),
             ),
@@ -765,6 +768,54 @@ class OffersController extends Controller {
         $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
 
         $this->sendEmail2($email);
+    }
+
+    /**
+     *  notification detail
+     */
+    public function actionNotificationdetail($id) {
+        $model = BspNotify::model()->findByPk($id);
+        $this->render("//offers/notification_detail", array("model" => $model));
+    }
+
+    /**
+     * all notifications
+     */
+    public function actionNotifications() {
+        
+    }
+
+    /**
+     * 
+     * @param type $id
+     * @param type $status
+     */
+    public function actionSetPaymentStatus($id, $status) {
+        $model = BspNotify::model()->findByPk($id);
+        PaymentPaypallAdaptive::model()->updateByPk($model->payment_adaptive->id, array("seller_status" => $status));
+        Yii::app()->user->setFlash("success", "Your Notification sent to your customer");
+
+        //send notifcation
+
+        $email['From'] = Yii::app()->user->user->user_email;
+        $userFullName = Yii::app()->user->user->first_name . " " . Yii::app()->user->user->second_name . " ";
+        $email['FromName'] = $userFullName . Yii::app()->name;
+        $email['To'] = $model->payment_adaptive->buyer->user_email;
+        $email['Subject'] = "your offer buy invitation has been ".ucfirst($status);
+        $email['Body'] = $userFullName . " has  ".ucfirst($status)." Your invitation";
+        
+        if($status == "rejected"){
+             $email['Body'] = "<br/> you can try again !";
+        }
+        else if($status == "confirmed"){
+            $email['Body'] = "<br/> at both of your completing this offer status offer you will be purchased this offer";
+        }
+       
+        $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
+
+        $this->sendEmail2($email);
+
+        $this->redirect($this->createUrl("/web/offers/notificationdetail", array("id" => $id)));
     }
 
     /**

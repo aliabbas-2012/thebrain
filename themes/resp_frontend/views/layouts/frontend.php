@@ -145,15 +145,9 @@
                                 <ul class="dropdown-menu">
                                     <?php
                                     foreach ($notifications as $notify):
-                                        ?>
-                                        <li>
-                                            <?php
-                                            echo CHtml::link(Yii::t('link', "View All Messages"), $this->createUrl('/web/user/messages'));
-                                            ?>
-                                        </li>
-                                        <?php
+                                        $this->renderPartial("//common/_notifcation_box",array("model"=>$notify));
                                     endforeach;
-                                    ;
+                                    
                                     ?>
                                 </ul>
                             </li>

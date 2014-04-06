@@ -9,6 +9,7 @@
  * @property integer $user_id
  * @property string $date_time
  * @property integer $isview
+ * @property integer $user_type
  * @property string $message
  * @property string $payment_adaptive_id
  * @property string $create_time
@@ -39,10 +40,10 @@ class BspNotify extends DTActiveRecord {
             array('order_id, user_id, isview', 'numerical', 'integerOnly' => true),
             array('message, payment_adaptive_id', 'length', 'max' => 255),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
-            array('date_time', 'safe'),
+            array('user_type,date_time', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('Id, order_id, user_id, date_time, isview, message, payment_adaptive_id, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
+            array('Id, order_id, user_id, date_time,user_type, isview, message, payment_adaptive_id, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -53,8 +54,8 @@ class BspNotify extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'user' => array(self::BELONGS_TO, 'BspUser', 'user_id'),
-            'payment_adaptive' => array(self::BELONGS_TO, 'payment_adaptive_id', 'payment_adaptive_id'),
+            'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
+            'payment_adaptive' => array(self::BELONGS_TO, 'PaymentPaypallAdaptive', 'payment_adaptive_id'),
         );
     }
 
@@ -68,6 +69,7 @@ class BspNotify extends DTActiveRecord {
             'user_id' => 'User',
             'date_time' => 'Date Time',
             'isview' => 'Isview',
+            'user_type' => 'User Type',
             'message' => 'Message',
             'payment_adaptive_id' => 'Payment Adaptive',
             'create_time' => 'Create Time',
@@ -99,6 +101,7 @@ class BspNotify extends DTActiveRecord {
         $criteria->compare('user_id', $this->user_id);
         $criteria->compare('date_time', $this->date_time, true);
         $criteria->compare('isview', $this->isview);
+        $criteria->compare('user_type', $this->user_type);
         $criteria->compare('message', $this->message, true);
         $criteria->compare('payment_adaptive_id', $this->payment_adaptive_id, true);
         $criteria->compare('create_time', $this->create_time, true);
