@@ -333,7 +333,9 @@ var thepuzzleadmin = {
                 });
             }
             jQuery("#loading").hide();
-        });
+        }).fail(function(jqXHR, textStatus) {
+            jQuery("#loading").hide();
+        })
     }
 
 

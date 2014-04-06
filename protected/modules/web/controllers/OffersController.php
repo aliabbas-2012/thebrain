@@ -805,10 +805,10 @@ class OffersController extends Controller {
         $email['Body'] = $userFullName . " has  ".ucfirst($status)." Your invitation";
         
         if($status == "rejected"){
-             $email['Body'] = "<br/> you can try again !";
+             $email['Body'].= "<br/> you can try again !";
         }
         else if($status == "confirmed"){
-            $email['Body'] = "<br/> at both of your completing this offer status offer you will be purchased this offer";
+            $email['Body'].= "<br/> at both of your completing this offer status offer you will be purchased this offer";
         }
        
         $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
