@@ -40,11 +40,33 @@ endif;
                     "class" => "btn btn btn-default",
                     "onclick" => "window.location.href='" . $update_url . "'",
                 ));
-                
-                
             }
             echo "&nbsp;&nbsp;";
-            echo "<div>".ucfirst($model->payment_adaptive->seller_status)."</div>";
+            echo "<div>" . ucfirst($model->payment_adaptive->seller_status) . "</div>";
+        } else if ($model->user_type == "buyer") {
+            //it is the case when no paypall account
+            if ($model->user->paypal_mail == "") {
+                $update_url = $this->createUrl("/web/user/profile", array("source" => $model->Id));
+                echo CHtml::button('Update PayPall Email', array(
+                    "class" => "btn btn btn-default",
+                    "onclick" => "window.location.href='" . $update_url . "'",
+                ));
+            } else if (
+                    $model->payment_adaptive->buyer_status != "completed" 
+            ) {
+                $update_url = $this->createUrl("/web/offers/payPallPayment", array("id" => $model->Id, "status" => "completed"));
+                echo CHtml::button('Complete', array(
+                    "class" => "btn btn btn-default",
+                    "onclick" => "window.location.href='" . $update_url . "'",
+                    "title"=>"Make Complete to transfer money",
+                    "alt"=>"Make Complete to transfer money",
+                ));
+                echo " (Make Complete to transfer money) ";
+                echo "&nbsp;&nbsp;";
+       
+            }
+            echo "&nbsp;&nbsp;";
+           
         }
         ?>
     </div>
