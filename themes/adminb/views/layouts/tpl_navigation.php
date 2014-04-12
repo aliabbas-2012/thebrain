@@ -129,6 +129,7 @@
                         'items' => array(
                             array('label' => 'Conf', 'url' => array('/configurations/load', 'm' => "Misc")),
                             array('label' => 'PayPall Settings', 'url' => array('/configurations/payPallSettings', 'id' => "2")),
+                            array('label' => 'PayPall Notifications', 'url' => array('/configurations/payPallSettings', 'id' => "2")),
                             array('label' => 'Rights', 'url' => array('/rights')),
                     ));
                 }

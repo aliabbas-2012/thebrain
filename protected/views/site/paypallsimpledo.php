@@ -1,4 +1,4 @@
-<?php
+.<?php
 /**
  * SimplePay.php
  * This file is called after the user clicks on a button during
@@ -73,11 +73,14 @@ $payRequest = new PayRequest(new RequestEnvelope("en_US"), $_POST['actionType'],
   Creating service wrapper object to make API call and loading
   Configuration::getAcctAndConfig() returns array that contains credential and config parameters
  */
-$service = new AdaptivePaymentsService(Configuration::getAcctAndConfig());
-
 spl_autoload_register(array('YiiBase', 'autoload'));
-CVarDumper::dump(Configuration::getAcctAndConfig(),10,true);
+
+$configurations = Paypalsettings::model()->getPayPallAdaptiveSetting();
 spl_autoload_unregister(array('YiiBase', 'autoload'));
+
+$service = new AdaptivePaymentsService($configurations);
+
+
 
 
 try {

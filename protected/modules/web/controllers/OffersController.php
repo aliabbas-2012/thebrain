@@ -736,16 +736,21 @@ class OffersController extends Controller {
     public function actionOrderOffer($id) {
         $offer = BspItem::model()->findByPk($id);
         $current_user = Yii::app()->user->user;
-        PaymentPaypallAdaptive::model()->saveInitialPaymentOrder($offer->user_rel, $offer);
-        $this->sendNotificattion($offer->user_rel);
-        if ($current_user->paypal_mail == "" || $offer->user_rel->paypal_mail == "") {
-            if ($current_user->paypal_mail == "") {
-                echo CJSON::encode(array("ack" => "Warning", "warning" => "Kindly Update Your paypall Email"));
-            } else if ($offer->user_rel->paypal_mail == "") {
-                echo CJSON::encode(array("ack" => "Warning", "warning" => "Offer Owner user has configured paypall Email <br/>but we have sent him your notification"));
+        $old = PaymentPaypallAdaptive::model()->saveInitialPaymentOrder($offer->user_rel, $offer);
+        if ($old) {
+            $this->sendNotificattion($offer->user_rel);
+            if ($current_user->paypal_mail == "" || $offer->user_rel->paypal_mail == "") {
+                if ($current_user->paypal_mail == "") {
+                    echo CJSON::encode(array("ack" => "Warning", "warning" => "Kindly Update Your paypall Email"));
+                } else if ($offer->user_rel->paypal_mail == "") {
+                    echo CJSON::encode(array("ack" => "Warning", "warning" => "Offer Owner user has configured paypall Email <br/>but we have sent him your notification"));
+                }
+            } else {
+                 echo CJSON::encode(array("ack" => "Success", "success" => "Your notification has been sent to seller"));
             }
-        } else {
-            
+        }
+        else {
+            echo CJSON::encode(array("ack" => "Warning", "warning" => "You have already placed this offer"));
         }
     }
 
@@ -801,16 +806,15 @@ class OffersController extends Controller {
         $userFullName = Yii::app()->user->user->first_name . " " . Yii::app()->user->user->second_name . " ";
         $email['FromName'] = $userFullName . Yii::app()->name;
         $email['To'] = $model->payment_adaptive->buyer->user_email;
-        $email['Subject'] = "your offer buy invitation has been ".ucfirst($status);
-        $email['Body'] = $userFullName . " has  ".ucfirst($status)." Your invitation";
-        
-        if($status == "rejected"){
-             $email['Body'].= "<br/> you can try again !";
-        }
-        else if($status == "confirmed"){
+        $email['Subject'] = "your offer buy invitation has been " . ucfirst($status);
+        $email['Body'] = $userFullName . " has  " . ucfirst($status) . " Your invitation";
+
+        if ($status == "rejected") {
+            $email['Body'].= "<br/> you can try again !";
+        } else if ($status == "confirmed") {
             $email['Body'].= "<br/> at both of your completing this offer status offer you will be purchased this offer";
         }
-       
+
         $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
 
         $this->sendEmail2($email);

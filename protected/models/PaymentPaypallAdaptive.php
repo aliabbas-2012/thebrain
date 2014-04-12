@@ -172,26 +172,37 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
      */
     public function saveInitialPaymentOrder($owner, $offer) {
 
-        $model = new PaymentPaypallAdaptive;
-        $model->buyer_id = Yii::app()->user->id;
-        $model->sender_id = $owner->id;
-        $model->item_id = $offer->id;
-        if ($owner->paypal_mail != "") {
-            $model->buyer_status = "initiated";
-        }
-        if ($offer->discount_price != "") {
-            $model->amount = $offer->discount_price;
-        } else {
-            $model->amount = $offer->price;
-        }
+        //check old offer with same user
 
-        $model->seller_status = "initiated";
-        $model->puzzzle_commission = 1;
-        $model->ip_address = Yii::app()->request->userHostAddress;
-        CVarDumper::dump($model, 10, true);
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("item_id = " . $offer->id . " AND seller_status <> 'rejected'");
+        $old = PaymentPaypallAdaptive::model()->count($criteria);
+        if ($old == 0) {
+            $model = new PaymentPaypallAdaptive;
+            $model->buyer_id = Yii::app()->user->id;
+            $model->sender_id = $owner->id;
+            $model->item_id = $offer->id;
+            if ($owner->paypal_mail != "") {
+                $model->buyer_status = "initiated";
+            }
+            if ($offer->discount_price != "") {
+                $model->amount = $offer->discount_price;
+            } else {
+                $model->amount = $offer->price;
+            }
 
-        $model->save();
-        $this->generateNotification($model->sender_id, $model->id, "seller", "You have recieved invitation to sale your offer");
+            $model->seller_status = "initiated";
+            $model->puzzzle_commission = 1;
+            $model->ip_address = Yii::app()->request->userHostAddress;
+
+
+            $model->save();
+            $this->generateNotification($model->sender_id, $model->id, "seller", "You have recieved invitation to sale your offer");
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**

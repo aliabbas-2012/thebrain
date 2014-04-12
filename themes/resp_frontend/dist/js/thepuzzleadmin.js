@@ -325,11 +325,17 @@ var thepuzzleadmin = {
                         "ajax": "1",
                     }
         }).done(function(response) {
-            console.log(response);
+            
             if (response['ack'] == "Warning") {
                 $.alert.open({
                     type: 'warning',
                     content: response['warning']
+                });
+            }
+            else if(response['ack'] == "Success"){
+                $.alert.open({
+                    type: 'success',
+                    content: response['success']
                 });
             }
             jQuery("#loading").hide();

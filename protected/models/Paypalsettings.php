@@ -132,4 +132,20 @@ class Paypalsettings extends DTActiveRecord {
         return parent::model($className);
     }
 
+    /**
+     * 
+     */
+    public function getPayPallAdaptiveSetting() {
+        $model = Paypalsettings::model()->findByPk(2);
+
+        return array(
+            "acct1.UserName" => $model->APIUsername,
+            "acct1.Password" => $model->APIPassword,
+            "acct1.Signature" => $model->APISignature,
+            "acct1.AppId" => $model->ApplicationID,
+            "acct1.CertPath" => "cert_key.pem",
+            "mode" => $model->Sandbox == 1 ? "sandbox" : "live",
+        );
+    }
+
 }
