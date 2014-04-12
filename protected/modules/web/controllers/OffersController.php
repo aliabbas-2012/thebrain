@@ -42,6 +42,7 @@ class OffersController extends Controller {
                     'notificationdetail',
                     'notifications',
                     'setPaymentStatus',
+                    'payPallPayment',
                 ),
                 'users' => array('@'),
             ),
@@ -746,10 +747,9 @@ class OffersController extends Controller {
                     echo CJSON::encode(array("ack" => "Warning", "warning" => "Offer Owner user has configured paypall Email <br/>but we have sent him your notification"));
                 }
             } else {
-                 echo CJSON::encode(array("ack" => "Success", "success" => "Your notification has been sent to seller"));
+                echo CJSON::encode(array("ack" => "Success", "success" => "Your notification has been sent to seller"));
             }
-        }
-        else {
+        } else {
             echo CJSON::encode(array("ack" => "Warning", "warning" => "You have already placed this offer"));
         }
     }
@@ -797,10 +797,14 @@ class OffersController extends Controller {
      */
     public function actionSetPaymentStatus($id, $status) {
         $model = BspNotify::model()->findByPk($id);
+
         PaymentPaypallAdaptive::model()->updateByPk($model->payment_adaptive->id, array("seller_status" => $status));
+        $paymentAdaptive = PaymentPaypallAdaptive::model()->findByPk($model->payment_adaptive->id);
+        $paymentAdaptive->saveHistory();
         Yii::app()->user->setFlash("success", "Your Notification sent to your customer");
 
-        //send notifcation
+
+        //send notifcationi
 
         $email['From'] = Yii::app()->user->user->user_email;
         $userFullName = Yii::app()->user->user->first_name . " " . Yii::app()->user->user->second_name . " ";
@@ -808,11 +812,47 @@ class OffersController extends Controller {
         $email['To'] = $model->payment_adaptive->buyer->user_email;
         $email['Subject'] = "your offer buy invitation has been " . ucfirst($status);
         $email['Body'] = $userFullName . " has  " . ucfirst($status) . " Your invitation";
-
+        //setting notification
+        $paymentAdaptive->generateNotification($model->payment_adaptive->buyer->id, $paymentAdaptive->id, "buyer", $email['Subject']);
         if ($status == "rejected") {
             $email['Body'].= "<br/> you can try again !";
         } else if ($status == "confirmed") {
             $email['Body'].= "<br/> at both of your completing this offer status offer you will be purchased this offer";
+        }
+
+        $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
+
+        $this->sendEmail2($email);
+
+        $this->redirect($this->createUrl("/web/offers/notificationdetail", array("id" => $id)));
+    }
+
+    /**
+     * 
+     * @param type $id
+     * @param type $status
+     */
+    public function actionPayPallPayment($id, $status) {
+        $model = BspNotify::model()->findByPk($id);
+
+        PaymentPaypallAdaptive::model()->updateByPk($model->payment_adaptive->id, array("buyer_status" => $status));
+        $paymentAdaptive = PaymentPaypallAdaptive::model()->findByPk($model->payment_adaptive->id);
+        $paymentAdaptive->saveHistory();
+        Yii::app()->user->setFlash("success", "Your Notification sent to your customer");
+
+
+        //send notifcationi
+
+        $email['From'] = Yii::app()->user->user->user_email;
+        $userFullName = Yii::app()->user->user->first_name . " " . Yii::app()->user->user->second_name . " ";
+        $email['FromName'] = $userFullName . Yii::app()->name;
+        $email['To'] = $model->payment_adaptive->seller->user_email;
+        $email['Subject'] = "buyer (".$userFullName.") has  " . ucfirst($status)." the offer and sent to you money ";
+        $email['Body'] = $userFullName . " has  " . ucfirst($status)." the offer and sent to you money ";
+        //setting notification
+        $paymentAdaptive->generateNotification($model->payment_adaptive->seller->id, $paymentAdaptive->id, "seller", $email['Subject']);
+        if ($status == "completed") {
+            $email['Body'].= "<br/> after 48 hours money will be transfered to you";
         }
 
         $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
