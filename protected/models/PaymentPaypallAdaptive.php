@@ -14,6 +14,7 @@
  * @property double $extra_amount
  * @property double $start_transfer_puzzzle
  * @property double $puzzzle_commission
+ * @property double $puzzzle_admin_status
  * @property string $ip_address
  * @property string $create_time
  * @property string $create_user_id
@@ -44,6 +45,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             array('amount, extra_amount, start_transfer_puzzzle, puzzzle_commission', 'numerical'),
             array('buyer_status, seller_status', 'length', 'max' => 9),
             array('ip_address', 'length', 'max' => 50),
+            array('puzzzle_admin_status', 'safe'),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -61,6 +63,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             'paymentPaypallAdaptiveHistories' => array(self::HAS_MANY, 'PaymentPaypallAdaptiveHistory', 'paypall_adaptive_id'),
             'seller' => array(self::BELONGS_TO, 'Users', 'sender_id'),
             'buyer' => array(self::BELONGS_TO, 'Users', 'buyer_id'),
+            'offer' => array(self::BELONGS_TO, 'BspItem', 'item_id'),
         );
     }
 
@@ -79,6 +82,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             'extra_amount' => 'Extra Amount',
             'start_transfer_puzzzle' => 'Start Transfer Puzzzle',
             'puzzzle_commission' => 'Puzzzle Commission',
+            'puzzzle_admin_status' => 'Puzzzle Admin Status',
             'ip_address' => 'Ip Address',
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
@@ -114,6 +118,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $criteria->compare('extra_amount', $this->extra_amount);
         $criteria->compare('start_transfer_puzzzle', $this->start_transfer_puzzzle);
         $criteria->compare('puzzzle_commission', $this->puzzzle_commission);
+        $criteria->compare('puzzzle_admin_status', $this->puzzzle_admin_status);
         $criteria->compare('ip_address', $this->ip_address, true);
         $criteria->compare('create_time', $this->create_time, true);
         $criteria->compare('create_user_id', $this->create_user_id, true);
@@ -156,6 +161,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $model->extra_amount = $this->extra_amount;
         $model->start_transfer_puzzzle = $this->start_transfer_puzzzle;
         $model->puzzzle_commission = $this->puzzzle_commission;
+        $model->puzzzle_admin_status = $this->puzzzle_admin_status;
         $model->save();
     }
 
@@ -185,7 +191,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         CVarDumper::dump($model, 10, true);
 
         $model->save();
-        $this->generateNotification($model->sender_id, $model->id,"seller", "You have recieved invitation to sale your offer");
+        $this->generateNotification($model->sender_id, $model->id, "seller", "You have recieved invitation to sale your offer");
     }
 
     /**
@@ -194,7 +200,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
      * @param type $payment_adaptive_id
      * @param type $message
      */
-    public function generateNotification($user_id, $payment_adaptive_id,$type, $message) {
+    public function generateNotification($user_id, $payment_adaptive_id, $type, $message) {
         $model = new BspNotify();
         $model->user_id = $user_id;
         $model->payment_adaptive_id = $payment_adaptive_id;

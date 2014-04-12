@@ -121,14 +121,15 @@
                                 )),
                 );
                 if (Yii::app()->user->isSuperuser) {
-                    $items [] = array('label' => 'Rights <span class="caret"></span>',
+                    $items [] = array('label' => 'Configurations <span class="caret"></span>',
                         'url' => '#',
                         'visible' => true,
                         'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
                         'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
                         'items' => array(
+                            array('label' => 'Conf', 'url' => array('/configurations/load', 'm' => "Misc")),
+                            array('label' => 'PayPall Settings', 'url' => array('/configurations/payPallSettings', 'id' => "2")),
                             array('label' => 'Rights', 'url' => array('/rights')),
-                            
                     ));
                 }
                 $this->widget('zii.widgets.CMenu', array(

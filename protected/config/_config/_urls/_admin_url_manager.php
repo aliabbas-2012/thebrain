@@ -10,6 +10,7 @@ $rules_admin = array(
      'admin' => '/site/login',
      'login' => '/site/login',
      'admin/config/<m:[\w-\.]+>' => '/configurations/load',
+     'admin/paypallsettins/<id:[\w-\.]+>' => '/configurations/payPallSettings',
      /**----------- advertinsg -----------**/
      'admin/advertising/create' => '/bspAdvertising/create',
      'admin/advertising/update' => '/bspAdvertising/update',

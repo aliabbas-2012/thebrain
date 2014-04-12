@@ -25,7 +25,7 @@ class ConfigurationsController extends Controller {
     public function beforeAction($action) {
         parent::beforeAction($action);
 
-        $operations = array('create', 'update', 'index', 'delete');
+        $operations = array('create', 'update', 'index', 'delete', 'payPallSettings');
         parent::setPermissions($this->id, $operations);
 
         return true;
@@ -96,6 +96,23 @@ class ConfigurationsController extends Controller {
         $model = new ConfMisc();
 
         $this->render("appSettings/index", array('model' => $model));
+    }
+
+    /**
+     * 
+     * paypall settings
+     */
+    public function actionPayPallSettings($id = 0) {
+        if ($id != 0) {
+            $model = Paypalsettings::model()->findByPk($id);
+            if(isset($_POST['Paypalsettings'])){
+                $model->attributes = $_POST['Paypalsettings'];
+                if($model->save()){
+                    $this->redirect($this->createUrl('/configurations/payPallSettings', array('id' => 2)));
+                }
+            }
+            $this->render("paypallsettings/index",array("model"=>$model));
+        }
     }
 
 }

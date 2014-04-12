@@ -24,12 +24,22 @@ class Configuration {
             "acct1.Password" => "WX4WTU3S8MY44S7F",
             "acct1.Signature" => "AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy",
             "acct1.AppId" => "APP-80W284485P519543T",
-            //new id 
+            //brian id 
             "acct1.UserName" => "info-facilitator_api1.thepuzzzle.com",
             "acct1.Password" => "1378983481",
             "acct1.Signature" => "An5ns1Kso7MWUdW4ErQKJJJ4qi4-ACD8NLSILqiVIZ6C-6ntynTTzDIY",
-            "acct1.AppId" => "APP-80W284485P519543T"
-
+//            "acct1.AppId" => "APP-80W284485P519543T",
+//            "acct1.AppId" => "Af0gmxAPZPPNrMbqc_UghqHoZPirQJUhW4YyRKZrsLn-IOScLCk6FgSamC2",
+//            "client_id" => "Af0gmxAPZPPNrMbqc_UghqHoZPirQJUhW4YyRKZrsLn-IOScLCk6FgSamC2",
+//            "secret" => "ENAe6xD7SaSSIKameILGIu7zLsEvvIP8ipULP867euBeZGuJ-R2B3VM3TSp3",
+//            
+            //ali id 
+            "acct1.UserName" => "itsgeniusstar-facilitator_api1.gmail.com",
+            "acct1.Password" => "1396287298",
+            "acct1.Signature" => "AFcWxV21C7fd0v3bYYYRCpSSRl31A.F1pMwuuKk-terTLTRLXghbYDGD",
+            "acct1.AppId" => "APP-80W284485P519543T",
+            "acct1.CertPath" => "cert_key.pem",
+//            
                 // Sample Certificate Credential
                 // "acct1.UserName" => "certuser_biz_api1.paypal.com",
                 // "acct1.Password" => "D6JNKKULHN3G5B8A",
