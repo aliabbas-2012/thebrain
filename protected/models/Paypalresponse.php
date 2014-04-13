@@ -134,5 +134,34 @@ class Paypalresponse extends DTActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
+    /**
+     * store paypall response against items
+     * and paypall apative
+     * @param type $response
+     * @param type $paypalladaptive
+     */
+    public function storeResponse($response,$paypalladaptive){
+      
+        $model = new Paypalresponse;
+        $model->item_id = $paypalladaptive->item_id;
+        $model->paypal_action_id = $paypalladaptive->id;
+        $model->Ack = isset($response['responseEnvelope']['ack'])?$response['responseEnvelope']['ack']:"Failure";
+        $model->Build = isset($response['responseEnvelope']['build'])?$response['responseEnvelope']['build']:"";
+        $model->CorrelationID = isset($response['responseEnvelope']['correlationId'])?$response['responseEnvelope']['correlationId']:"";
+        $model->Timestamp = isset($response['responseEnvelope']['timestamp'])?$response['responseEnvelope']['timestamp']:date("Y-m-d h:m:s");
+        $model->PayKey = isset($response['payKey'])?$response['payKey']:"";
+        $model->PaymentExecStatus = isset($response['paymentExecStatus'])?$response['paymentExecStatus']:"";;
+        $model->Status = "";
+        $model->RedirectURL = "https://www.paypal.com/webscr?cmd=_ap-payment&paykey=".isset($response['payKey'])?$response['payKey']:"";
+        $model->XMLRequest = "";
+        $model->XMLRequest = "";
+        $model->save();
+        
+        if(isset($response['responseEnvelope']['ack']) && $response['responseEnvelope']['ack'] =="Success"){
+            return $model->RedirectURL;
+        }
+        return "";
+        
+    }
 
 }

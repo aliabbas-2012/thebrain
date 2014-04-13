@@ -202,23 +202,6 @@ class OffersController extends Controller {
                 $criteria->having = $condition;
                 $order_by [] = ' distance ASC';
                 $criteria->addCondition("lat IS NOT NULL AND lng IS NOT NULL ");
-                //$sql = "SELECT * FROM bsp_item WHERE ".$this->mysqlHaversine($model->lat,$model->lng,$model->distance);
-                //$dataItem = Yii::app()->db->createCommand($sql)->queryAll();
-                //$items = CHtml::listData($dataItem, 'id', 'id');
-                //
-                //  CVarDumper::dump($items, 10, true);
-                //echo $sql'
-//                $users = $model->getLantLongUser();
-//                $search_users = array();
-//                foreach ($users as $user) {
-//                    if ($model->getDistantByLocation($model->lat, $model->lng, $user->lat, $user->lng, $model->distance) > 0) {
-//                        $search_users[$user->id] = $user->id;
-//                    }
-//                }
-//                if (!empty($dataItem)) {
-//                    //$criteria->addInCondition("user_id", $search_users);
-//                    $criteria->addInCondition("t.id", $items);
-//                }
             }
         }
         if (!empty($order_by)) {
@@ -231,8 +214,7 @@ class OffersController extends Controller {
         if (!empty($_GET['grp_id'])) {
             $criteria->addCondition("group_id = " . $_GET['grp_id']);
         }
-//        CVarDumper::dump($model->attributes,10,true);
-//        CVarDumper::dump($_POST['OfferSearch'],10,true);
+
 
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
@@ -536,9 +518,6 @@ class OffersController extends Controller {
         /**
          * Bsp Item Image
          */
-//        if (!empty($_POST['BspItemVideoFrontEnd'])) {
-//            $model->setRelationRecords('item_video_front', is_array($_POST['BspItemVideoFrontEnd']) ? $_POST['BspItemVideoFrontEnd'] : array());
-//        }
         if (isset($_POST['BspItemSoundUrl'])) {
             $model->setRelationRecords('item_related_sounds', is_array($_POST['BspItemSoundUrl']) ? $_POST['BspItemSoundUrl'] : array());
         }
@@ -732,7 +711,8 @@ class OffersController extends Controller {
     }
 
     /**
-     * 
+     * order offer
+     * @param type $id
      */
     public function actionOrderOffer($id) {
         $offer = BspItem::model()->findByPk($id);
@@ -793,7 +773,7 @@ class OffersController extends Controller {
     }
 
     /**
-     * 
+     * payment status
      * @param type $id
      * @param type $status
      */
