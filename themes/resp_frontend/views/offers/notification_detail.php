@@ -66,7 +66,7 @@ endif;
                 echo " (Make Payment) ";
                 echo "&nbsp;&nbsp;";
             } else if ($model->payment_adaptive->buyer_status == "paying") {
-
+                
                 echo CHtml::button('Confirm to PayPall', array(
                     "class" => "btn btn btn-default",
                     "onclick" => "window.location.href='" . $model->payment_adaptive->paypall_response->RedirectURL . "'",

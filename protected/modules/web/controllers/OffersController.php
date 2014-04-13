@@ -827,8 +827,8 @@ class OffersController extends Controller {
 
         //send notifcationi
 
-        $email['From'] = Yii::app()->user->user->user_email;
-        $userFullName = Yii::app()->user->user->first_name . " " . Yii::app()->user->user->second_name . " ";
+        $email['From'] = Yii::app()->user->User->user_email;
+        $userFullName = Yii::app()->user->User->first_name . " " . Yii::app()->user->user->second_name . " ";
         $email['FromName'] = $userFullName . Yii::app()->name;
         $email['To'] = $model->payment_adaptive->seller->user_email;
 

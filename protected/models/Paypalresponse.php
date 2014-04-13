@@ -141,6 +141,8 @@ class Paypalresponse extends DTActiveRecord {
      * @param type $paypalladaptive
      */
     public function storeResponse($response,$paypalladaptive){
+        
+        $response = json_decode(json_encode($response), true);
       
         $model = new Paypalresponse;
         $model->item_id = $paypalladaptive->item_id;
@@ -152,7 +154,7 @@ class Paypalresponse extends DTActiveRecord {
         $model->PayKey = isset($response['payKey'])?$response['payKey']:"";
         $model->PaymentExecStatus = isset($response['paymentExecStatus'])?$response['paymentExecStatus']:"";;
         $model->Status = "";
-        $model->RedirectURL = "https://www.paypal.com/webscr?cmd=_ap-payment&paykey=".isset($response['payKey'])?$response['payKey']:"";
+        $model->RedirectURL = "https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=".$model->PayKey;
         $model->XMLRequest = "";
         $model->XMLRequest = "";
         $model->save();
