@@ -7,7 +7,7 @@ class m140327_185137_addPaymentInformationInorderHistory extends DTDbMigration {
         $columns = array(
             'id' => 'int(10) unsigned NOT NULL auto_increment',
             'paypall_adaptive_id' => 'int(11) unsigned NOT NULL',
-            'buyer_status' => "enum('initiated', 'completed') DEFAULT NULL",
+            'buyer_status' => "enum('initiated','paying', 'completed','cancelled') DEFAULT NULL",
             'seller_status' => "enum('rejected', 'confirmed','completed') DEFAULT NULL",
             'amount' => 'double(12,3) DEFAULT 0',
             'extra_amount' => 'double(12,3) DEFAULT 0',

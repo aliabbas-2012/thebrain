@@ -144,8 +144,11 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <?php
+                                    $count = 0;
                                     foreach ($notifications as $notify):
-                                        $this->renderPartial("//common/_notifcation_box",array("model"=>$notify));
+                                        
+                                        $this->renderPartial("//common/_notifcation_box",array("model"=>$notify,"css_class"=>$count % 2 ==0?"even_box":"odd_box"));
+                                        $count++;
                                     endforeach;
                                     
                                     ?>

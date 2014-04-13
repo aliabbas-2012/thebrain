@@ -199,8 +199,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             $model->save();
             $this->generateNotification($model->sender_id, $model->id, "seller", "You have recieved invitation to sale your offer");
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -218,6 +217,63 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $model->message = $message;
         $model->user_type = $type;
         $model->save();
+    }
+
+    /**
+     *  money will be transfred to puzzle
+     * 
+     */
+    public function payToPuzzle($paymentAdaptive) {
+        $payPallSetting = Paypalsettings::model()->findByPk(2);
+        Yii::import('application.extensions.paypalladaptive.samples.PPBootStrap');
+        Yii::import('application.extensions.paypalladaptive.samples.Common.Constants');
+        Yii::import('application.extensions.paypalladaptive.samples.Common.Error');
+        Yii::import('application.extensions.paypalladaptive.samples.Common.Response');
+
+        require_once(Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.PPBootStrap')) . ".php";
+        require_once(Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Constants')) . ".php";
+
+        $error_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Error');
+        $response_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Response');
+
+        $cancel_url = Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $paymentAdaptive->id, "status" => "cancelled"));
+        $return_url = Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $paymentAdaptive->id, "status" => "completed"));
+        
+
+        define("DEFAULT_SELECT", "- Select -");
+        spl_autoload_unregister(array('YiiBase', 'autoload'));
+
+
+        $receiver = array();
+        /*
+         * A receiver's email address 
+         */
+
+        $receiver[0] = new Receiver();
+        $receiver[0]->email = $payPallSetting->app_account_email;
+        /*
+         *  	Amount to be credited to the receiver's account 
+         */
+        $receiver[0]->amount = $payPallSetting->comission_rate;
+        /*
+         * Set to true to indicate a chained payment; only one receiver can be a primary receiver. Omit this field, or set it to false for simple and parallel payments. 
+         */
+        $receiver[0]->primary = false;
+
+        $receiverList = new ReceiverList($receiver);
+
+
+        $payRequest = new PayRequest(new RequestEnvelope("en_US"), "PAY", $cancel_url, "USD", $receiverList, $return_url);
+
+        $payRequest->senderEmail = Yii::app()->user->User->paypal_mail;
+
+        $service = new AdaptivePaymentsService(Paypalsettings::model()->getPayPallAdaptiveSetting());
+        try {
+            /* wrap API method calls on the service object with a try catch */
+            $response = $service->Pay($payRequest);
+        } catch (Exception $ex) {
+           
+        }
     }
 
 }

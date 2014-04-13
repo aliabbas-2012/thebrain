@@ -780,6 +780,8 @@ class OffersController extends Controller {
      */
     public function actionNotificationdetail($id) {
         $model = BspNotify::model()->findByPk($id);
+        //updating view status
+        $model->updateByPk($id, array("isview" => 1));
         $this->render("//offers/notification_detail", array("model" => $model));
     }
 
@@ -831,6 +833,8 @@ class OffersController extends Controller {
      * 
      * @param type $id
      * @param type $status
+     * when buyer will set confirm
+     * 
      */
     public function actionPayPallPayment($id, $status) {
         $model = BspNotify::model()->findByPk($id);
@@ -847,17 +851,35 @@ class OffersController extends Controller {
         $userFullName = Yii::app()->user->user->first_name . " " . Yii::app()->user->user->second_name . " ";
         $email['FromName'] = $userFullName . Yii::app()->name;
         $email['To'] = $model->payment_adaptive->seller->user_email;
-        $email['Subject'] = "buyer (".$userFullName.") has  " . ucfirst($status)." the offer and sent to you money ";
-        $email['Body'] = $userFullName . " has  " . ucfirst($status)." the offer and sent to you money ";
+
         //setting notification
-        $paymentAdaptive->generateNotification($model->payment_adaptive->seller->id, $paymentAdaptive->id, "seller", $email['Subject']);
-        if ($status == "completed") {
+        
+        if ($status == "paying") {
+            $paymentAdaptive->payToPuzzle($paymentAdaptive);
+        } else if ($status == "cancelled") {
+            //setting notification
+                        $email['Subject'] = "buyer (" . $userFullName . ") has  " . ucfirst($status) . " the offer to buy ";
+            $paymentAdaptive->generateNotification($model->payment_adaptive->seller->id, $paymentAdaptive->id, "seller", $email['Subject']);
+
+            $email['Body'] = $userFullName . " has  " . ucfirst($status) . " the offer to buy ";
+            $email['Body'].= "<br/> May be some issue to whether he has'nt too much amount in his paypall account";
+            $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
+
+            $this->sendEmail2($email);
+        }
+         else if ($status == "completed") {
+            //setting notification
+              $email['Subject'] = "buyer (" . $userFullName . ") has  " . ucfirst($status) . " the offer and sent to you money ";
+            $paymentAdaptive->generateNotification($model->payment_adaptive->seller->id, $paymentAdaptive->id, "seller", $email['Subject']);
+           
+            $email['Body'] = $userFullName . " has  " . ucfirst($status) . " the offer and sent to you money ";
             $email['Body'].= "<br/> after 48 hours money will be transfered to you";
+            $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
+
+            $this->sendEmail2($email);
         }
 
-        $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
 
-        $this->sendEmail2($email);
 
         $this->redirect($this->createUrl("/web/offers/notificationdetail", array("id" => $id)));
     }

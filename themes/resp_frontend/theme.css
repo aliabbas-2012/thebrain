@@ -3,12 +3,6 @@ body {
     padding-bottom: 30px;
 }
 
-
-
-
-
-
-
 .clear {
     clear: both;
 }
@@ -3521,4 +3515,11 @@ button.search-collaps.btn.btn-success.btn-lg {
 .no-margin {
     padding-left: 0 !important;
     padding-right: 0 !important;
+}
+.notification_box {
+    height:30px;
+    padding-top:10px;
+}
+.notification_box.even_box {
+   background:#F9FAFA;
 }
