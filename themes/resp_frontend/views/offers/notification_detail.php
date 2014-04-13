@@ -54,21 +54,27 @@ endif;
             } else if (
                     $model->payment_adaptive->buyer_status != "paying" &&
                     $model->payment_adaptive->buyer_status != "completed" &&
-                    $model->payment_adaptive->buyer_status == "initiated"  
+                    $model->payment_adaptive->buyer_status == "initiated"
             ) {
                 $update_url = $this->createUrl("/web/offers/payPallPayment", array("id" => $model->Id, "status" => "paying"));
                 echo CHtml::button('Pay', array(
                     "class" => "btn btn btn-default",
                     "onclick" => "window.location.href='" . $update_url . "'",
-                    "title"=>"Make Payment to transfer money",
-                    "alt"=>"Make Payment to transfer money",
+                    "title" => "Make Payment to transfer money",
+                    "alt" => "Make Payment to transfer money",
                 ));
                 echo " (Make Payment) ";
                 echo "&nbsp;&nbsp;";
-       
+            } else if ($model->payment_adaptive->buyer_status == "paying") {
+
+                echo CHtml::button('Confirm to PayPall', array(
+                    "class" => "btn btn btn-default",
+                    "onclick" => "window.location.href='" . $model->payment_adaptive->paypall_response->RedirectURL . "'",
+                    "title" => "Confirm",
+                    "alt" => "Confirm to PayPall",
+                ));
             }
             echo "&nbsp;&nbsp;";
-           
         }
         ?>
     </div>

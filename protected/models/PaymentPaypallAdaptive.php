@@ -64,6 +64,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             'seller' => array(self::BELONGS_TO, 'Users', 'sender_id'),
             'buyer' => array(self::BELONGS_TO, 'Users', 'buyer_id'),
             'offer' => array(self::BELONGS_TO, 'BspItem', 'item_id'),
+            'paypall_response' => array(self::HAS_ONE, 'Paypalresponse', 'paypal_action_id'),
         );
     }
 
