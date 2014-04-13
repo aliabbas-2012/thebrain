@@ -52,16 +52,18 @@ endif;
                     "onclick" => "window.location.href='" . $update_url . "'",
                 ));
             } else if (
-                    $model->payment_adaptive->buyer_status != "completed" 
+                    $model->payment_adaptive->buyer_status != "paying" &&
+                    $model->payment_adaptive->buyer_status != "completed" &&
+                    $model->payment_adaptive->buyer_status == "initiated"  
             ) {
-                $update_url = $this->createUrl("/web/offers/payPallPayment", array("id" => $model->Id, "status" => "completed"));
-                echo CHtml::button('Complete', array(
+                $update_url = $this->createUrl("/web/offers/payPallPayment", array("id" => $model->Id, "status" => "paying"));
+                echo CHtml::button('Pay', array(
                     "class" => "btn btn btn-default",
                     "onclick" => "window.location.href='" . $update_url . "'",
-                    "title"=>"Make Complete to transfer money",
-                    "alt"=>"Make Complete to transfer money",
+                    "title"=>"Make Payment to transfer money",
+                    "alt"=>"Make Payment to transfer money",
                 ));
-                echo " (Make Complete to transfer money) ";
+                echo " (Make Payment) ";
                 echo "&nbsp;&nbsp;";
        
             }

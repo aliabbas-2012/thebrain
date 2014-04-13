@@ -236,9 +236,10 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $error_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Error');
         $response_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Response');
 
-        $cancel_url = Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $paymentAdaptive->id, "status" => "cancelled"));
-        $return_url = Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $paymentAdaptive->id, "status" => "completed"));
-        
+        $host_base = Yii::app()->request->hostInfo;
+        $cancel_url = $host_base.Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $paymentAdaptive->id, "status" => "cancelled"));
+        $return_url = $host_base.Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $paymentAdaptive->id, "status" => "completed"));
+
 
         define("DEFAULT_SELECT", "- Select -");
         spl_autoload_unregister(array('YiiBase', 'autoload'));
@@ -254,7 +255,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         /*
          *  	Amount to be credited to the receiver's account 
          */
-        $receiver[0]->amount = $payPallSetting->comission_rate;
+        $receiver[0]->amount = (double)$payPallSetting->comission_rate;
         /*
          * Set to true to indicate a chained payment; only one receiver can be a primary receiver. Omit this field, or set it to false for simple and parallel payments. 
          */
@@ -267,13 +268,21 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
 
         $payRequest->senderEmail = Yii::app()->user->User->paypal_mail;
 
+        $payRequest->feesPayer = "SENDER";
+        
         $service = new AdaptivePaymentsService(Paypalsettings::model()->getPayPallAdaptiveSetting());
         try {
             /* wrap API method calls on the service object with a try catch */
             $response = $service->Pay($payRequest);
+            spl_autoload_register(array('YiiBase', 'autoload'));
+            CVarDumper::dump($response, 10, true);
+            CVarDumper::dump($receiverList, 10, true);
+            CVarDumper::dump($payRequest, 10, true);
         } catch (Exception $ex) {
-           
+            
         }
+
+        die;
     }
 
 }

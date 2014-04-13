@@ -853,12 +853,12 @@ class OffersController extends Controller {
         $email['To'] = $model->payment_adaptive->seller->user_email;
 
         //setting notification
-        
+
         if ($status == "paying") {
             $paymentAdaptive->payToPuzzle($paymentAdaptive);
         } else if ($status == "cancelled") {
             //setting notification
-                        $email['Subject'] = "buyer (" . $userFullName . ") has  " . ucfirst($status) . " the offer to buy ";
+            $email['Subject'] = "buyer (" . $userFullName . ") has  " . ucfirst($status) . " the offer to buy ";
             $paymentAdaptive->generateNotification($model->payment_adaptive->seller->id, $paymentAdaptive->id, "seller", $email['Subject']);
 
             $email['Body'] = $userFullName . " has  " . ucfirst($status) . " the offer to buy ";
@@ -866,12 +866,11 @@ class OffersController extends Controller {
             $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
 
             $this->sendEmail2($email);
-        }
-         else if ($status == "completed") {
+        } else if ($status == "completed") {
             //setting notification
-              $email['Subject'] = "buyer (" . $userFullName . ") has  " . ucfirst($status) . " the offer and sent to you money ";
+            $email['Subject'] = "buyer (" . $userFullName . ") has  " . ucfirst($status) . " the offer and sent to you money ";
             $paymentAdaptive->generateNotification($model->payment_adaptive->seller->id, $paymentAdaptive->id, "seller", $email['Subject']);
-           
+
             $email['Body'] = $userFullName . " has  " . ucfirst($status) . " the offer and sent to you money ";
             $email['Body'].= "<br/> after 48 hours money will be transfered to you";
             $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
