@@ -243,8 +243,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $response_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Response');
 
         $host_base = Yii::app()->request->hostInfo;
-        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $notifyModel->id, "status" => "cancelled"));
-        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $notifyModel->id, "status" => "completed"));
+        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $notifyModel->Id, "status" => "cancelled"));
+        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $notifyModel->Id, "status" => "completed"));
 
 
         define("DEFAULT_SELECT", "- Select -");
