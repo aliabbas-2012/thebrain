@@ -173,6 +173,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
      */
     public function saveInitialPaymentOrder($owner, $offer) {
 
+        $payPallSetting = Paypalsettings::model()->findByPk(2);
         //check old offer with same user
 
         $criteria = new CDbCriteria();
@@ -193,7 +194,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             }
 
             $model->seller_status = "initiated";
-            $model->puzzzle_commission = 1;
+            $model->puzzzle_commission = $payPallSetting->comission_rate;
             $model->ip_address = Yii::app()->request->userHostAddress;
 
 
