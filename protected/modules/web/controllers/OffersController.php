@@ -759,17 +759,21 @@ class OffersController extends Controller {
      *  notification detail
      */
     public function actionNotificationdetail($id) {
-        $model = BspNotify::model()->findByPk($id);
-        //updating view status
-        $model->updateByPk($id, array("isview" => 1));
-        $this->render("//offers/notification_detail", array("model" => $model));
+        if ($model = BspNotify::model()->findByPk($id)) {
+            //updating view status
+            $model->updateByPk($id, array("isview" => 1));
+            $this->render("//offers/notifications/notification_detail", array("model" => $model));
+        }
+        else {
+            $this->render("//offers/notifications/no_notification");
+        }
     }
 
     /**
      * all notifications
      */
     public function actionNotifications() {
-        
+        $this->render("//offers/notifications/notifications");
     }
 
     /**
@@ -856,7 +860,6 @@ class OffersController extends Controller {
             $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
 
             $this->sendEmail2($email);
-        
         } else if ($status == "cancelled") {
             //setting notification
             $email['Subject'] = "buyer (" . Yii::app()->user->User->_name . ") has  " . ucfirst($status) . " the offer to buy ";
