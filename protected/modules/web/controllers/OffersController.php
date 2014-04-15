@@ -839,7 +839,7 @@ class OffersController extends Controller {
         //setting notification
 
         if ($status == "paying") {
-            $paymentAdaptive->payToPuzzle($paymentAdaptive);
+            $paymentAdaptive->payToPuzzle($paymentAdaptive,$model);
         } else if ($status == "cancelled") {
             //setting notification
             $email['Subject'] = "buyer (" . Yii::app()->user->User->_name . ") has  " . ucfirst($status) . " the offer to buy ";

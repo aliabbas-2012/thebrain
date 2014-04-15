@@ -64,7 +64,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             'seller' => array(self::BELONGS_TO, 'Users', 'sender_id'),
             'buyer' => array(self::BELONGS_TO, 'Users', 'buyer_id'),
             'offer' => array(self::BELONGS_TO, 'BspItem', 'item_id'),
-            'paypall_response' => array(self::HAS_ONE, 'Paypalresponse', 'paypal_action_id','condition'=>'item_id  IS NOT NULL AND Ack = "Success"',"order"=>" paypall_response.id DESC"),
+            'paypall_response' => array(self::HAS_ONE, 'Paypalresponse', 'paypal_action_id', 'condition' => 'item_id  IS NOT NULL AND Ack = "Success"', "order" => " paypall_response.id DESC"),
         );
     }
 
@@ -221,10 +221,15 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
     }
 
     /**
+
      *  money will be transfred to puzzle
      * 
+
+     * @param type $paymentAdaptive
+     * @param type $notifyModel
+     * @return type
      */
-    public function payToPuzzle($paymentAdaptive) {
+    public function payToPuzzle($paymentAdaptive, $notifyModel) {
         $payPallSetting = Paypalsettings::model()->findByPk(2);
         Yii::import('application.extensions.paypalladaptive.samples.PPBootStrap');
         Yii::import('application.extensions.paypalladaptive.samples.Common.Constants');
@@ -238,8 +243,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $response_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Response');
 
         $host_base = Yii::app()->request->hostInfo;
-        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $paymentAdaptive->id, "status" => "cancelled"));
-        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $paymentAdaptive->id, "status" => "completed"));
+        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $notifyModel->id, "status" => "cancelled"));
+        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $notifyModel->id, "status" => "completed"));
 
 
         define("DEFAULT_SELECT", "- Select -");
@@ -277,7 +282,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             $response = $service->Pay($payRequest);
             spl_autoload_register(array('YiiBase', 'autoload'));
 
-            return Paypalresponse::model()->storeResponse($response, $paymentAdaptive,$payPallSetting);
+            return Paypalresponse::model()->storeResponse($response, $paymentAdaptive, $payPallSetting);
         } catch (Exception $ex) {
             
         }
