@@ -66,6 +66,15 @@ if ($model->user_type == "seller") {
         ));
         echo " (Make Payment) ";
         echo "&nbsp;&nbsp;";
+        
+        $update_url = $this->createUrl("/web/offers/payPallPayment", array("id" => $model->Id, "status" => "cancelled"));
+        
+        echo CHtml::button('Cancel', array(
+            "class" => "btn btn btn-default",
+            "onclick" => "window.location.href='" . $update_url . "'",
+            "title" => "Make Payment to transfer money",
+            "alt" => "Make Payment to transfer money",
+        ));
     } else if ($model->payment_adaptive->buyer_status == "paying") {
 
         echo CHtml::button('Confirm to PayPall', array(

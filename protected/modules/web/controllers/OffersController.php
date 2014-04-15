@@ -856,6 +856,17 @@ class OffersController extends Controller {
             $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
 
             $this->sendEmail2($email);
+        
+        } else if ($status == "cancelled") {
+            //setting notification
+            $email['Subject'] = "buyer (" . Yii::app()->user->User->_name . ") has  " . ucfirst($status) . " the offer to buy ";
+            $paymentAdaptive->generateNotification($model->payment_adaptive->seller->id, $paymentAdaptive->id, "seller", $email['Subject']);
+
+            $email['Body'] = Yii::app()->user->User->_name . " has  " . ucfirst($status) . " the offer to buy ";
+            $email['Body'].= "<br/> May be some reason he cannot buy , problem of payment";
+            $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
+
+            $this->sendEmail2($email);
         }
 
 
