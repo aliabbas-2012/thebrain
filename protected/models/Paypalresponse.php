@@ -134,36 +134,43 @@ class Paypalresponse extends DTActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
+
     /**
      * store paypall response against items
      * and paypall apative
      * @param type $response
      * @param type $paypalladaptive
+     * @param type $payPallSetting
      */
-    public function storeResponse($response,$paypalladaptive){
-        
+    public function storeResponse($response, $paypalladaptive, $payPallSetting) {
+
         $response = json_decode(json_encode($response), true);
-      
+
         $model = new Paypalresponse;
         $model->item_id = $paypalladaptive->item_id;
         $model->paypal_action_id = $paypalladaptive->id;
-        $model->Ack = isset($response['responseEnvelope']['ack'])?$response['responseEnvelope']['ack']:"Failure";
-        $model->Build = isset($response['responseEnvelope']['build'])?$response['responseEnvelope']['build']:"";
-        $model->CorrelationID = isset($response['responseEnvelope']['correlationId'])?$response['responseEnvelope']['correlationId']:"";
-        $model->Timestamp = isset($response['responseEnvelope']['timestamp'])?$response['responseEnvelope']['timestamp']:date("Y-m-d h:m:s");
-        $model->PayKey = isset($response['payKey'])?$response['payKey']:"";
-        $model->PaymentExecStatus = isset($response['paymentExecStatus'])?$response['paymentExecStatus']:"";;
+        $model->Ack = isset($response['responseEnvelope']['ack']) ? $response['responseEnvelope']['ack'] : "Failure";
+        $model->Build = isset($response['responseEnvelope']['build']) ? $response['responseEnvelope']['build'] : "";
+        $model->CorrelationID = isset($response['responseEnvelope']['correlationId']) ? $response['responseEnvelope']['correlationId'] : "";
+        $model->Timestamp = isset($response['responseEnvelope']['timestamp']) ? $response['responseEnvelope']['timestamp'] : date("Y-m-d h:m:s");
+        $model->PayKey = isset($response['payKey']) ? $response['payKey'] : "";
+        $model->PaymentExecStatus = isset($response['paymentExecStatus']) ? $response['paymentExecStatus'] : "";
+        ;
         $model->Status = "";
-        $model->RedirectURL = "https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=".$model->PayKey;
+        if ($payPallSetting->Sandbox == 1) {
+            $model->RedirectURL = "https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=" . $model->PayKey;
+        }
+        else {
+            $model->RedirectURL = "https://www.paypal.com/webscr?cmd=_ap-payment&paykey=" . $model->PayKey;
+        }
         $model->XMLRequest = "";
         $model->XMLRequest = "";
         $model->save();
-        
-        if(isset($response['responseEnvelope']['ack']) && $response['responseEnvelope']['ack'] =="Success"){
+
+        if (isset($response['responseEnvelope']['ack']) && $response['responseEnvelope']['ack'] == "Success") {
             return $model->RedirectURL;
         }
         return "";
-        
     }
 
 }

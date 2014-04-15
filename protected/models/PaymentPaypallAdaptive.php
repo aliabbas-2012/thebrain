@@ -277,7 +277,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             $response = $service->Pay($payRequest);
             spl_autoload_register(array('YiiBase', 'autoload'));
 
-            return Paypalresponse::model()->storeResponse($response, $paymentAdaptive);
+            return Paypalresponse::model()->storeResponse($response, $paymentAdaptive,$payPallSetting);
         } catch (Exception $ex) {
             
         }

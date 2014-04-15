@@ -41,7 +41,7 @@
  */
 class Users extends DTActiveRecord {
 
-    public $pwd_repeat;
+    public $pwd_repeat, $_name;
 
     /**
      * @return string the associated database table name
@@ -73,7 +73,7 @@ class Users extends DTActiveRecord {
             array('fbmail,paypal_mail', 'email'),
             array('user_email', $this->isNewRecord ? 'email' : "safe"),
             array('user_email,username', 'unique'),
-            array('store_url','safe'),
+            array('_name,store_url', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, first_name, second_name, username, user_email, type, phone, avatar, birthday, gender, store_url, paypal_mail, fbmail, password, password_hint, description, address, country, city, zipcode, lat, lng, background, sRecentList, sWishList, lastActiveTime, email_authenticate, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
@@ -176,32 +176,32 @@ class Users extends DTActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'first_name' => Yii::t('models','First Name'),
-            'second_name' => Yii::t('models','Second Name'),
-            'username' => Yii::t('models','Username'),
-            'user_email' => Yii::t('models','User Email'),
-            'type' => Yii::t('models','Type'),
-            'phone' => Yii::t('models','Phone'),
-            'avatar' => Yii::t('models','Avatar'),
-            'birthday' => Yii::t('models','Birthday'),
-            'gender' => Yii::t('models','Gender'),
-            'store_url' => Yii::t('models','Store Url'),
-            'paypal_mail' => Yii::t('models','Paypal Mail'),
-            'fbmail' => Yii::t('models','Fbmail'),
-            'password' => Yii::t('models','Password'),
-            'password_hint' => Yii::t('models','Password Hint'),
-            'description' => Yii::t('models','About you'),
-            'address' => Yii::t('models','Address'),
-            'country' => Yii::t('models','Country'),
-            'city' => Yii::t('models','City'),
-            'zipcode' => Yii::t('models','Zipcode'),
-            'lat' => Yii::t('models','Lat'),
-            'lng' => Yii::t('models','Lng'),
-            'background' => Yii::t('models','Background'),
-            'sRecentList' => Yii::t('models','S Recent List'),
-            'sWishList' => Yii::t('models','S Wish List'),
-            'lastActiveTime' => Yii::t('models','Last Active Time'),
-            'email_authenticate' => Yii::t('models','Email Authenticate'),
+            'first_name' => Yii::t('models', 'First Name'),
+            'second_name' => Yii::t('models', 'Second Name'),
+            'username' => Yii::t('models', 'Username'),
+            'user_email' => Yii::t('models', 'User Email'),
+            'type' => Yii::t('models', 'Type'),
+            'phone' => Yii::t('models', 'Phone'),
+            'avatar' => Yii::t('models', 'Avatar'),
+            'birthday' => Yii::t('models', 'Birthday'),
+            'gender' => Yii::t('models', 'Gender'),
+            'store_url' => Yii::t('models', 'Store Url'),
+            'paypal_mail' => Yii::t('models', 'Paypal Mail'),
+            'fbmail' => Yii::t('models', 'Fbmail'),
+            'password' => Yii::t('models', 'Password'),
+            'password_hint' => Yii::t('models', 'Password Hint'),
+            'description' => Yii::t('models', 'About you'),
+            'address' => Yii::t('models', 'Address'),
+            'country' => Yii::t('models', 'Country'),
+            'city' => Yii::t('models', 'City'),
+            'zipcode' => Yii::t('models', 'Zipcode'),
+            'lat' => Yii::t('models', 'Lat'),
+            'lng' => Yii::t('models', 'Lng'),
+            'background' => Yii::t('models', 'Background'),
+            'sRecentList' => Yii::t('models', 'S Recent List'),
+            'sWishList' => Yii::t('models', 'S Wish List'),
+            'lastActiveTime' => Yii::t('models', 'Last Active Time'),
+            'email_authenticate' => Yii::t('models', 'Email Authenticate'),
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
             'update_time' => 'Update Time',
@@ -293,7 +293,12 @@ class Users extends DTActiveRecord {
      */
     public function afterFind() {
         $this->birthday = !empty($this->birthday) ? ItstFunctions::dateFormatForView($this->birthday) : "";
-
+        //setting a non db variable to check user name (first and last)
+        $name_arr = array($this->first_name, $this->second_name);
+        $this->_name = implode(" ", $name_arr);
+        if (trim($this->_name) == "") {
+            $this->_name = $this->username;
+        }
         return parent::afterFind();
     }
 

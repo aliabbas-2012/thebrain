@@ -740,11 +740,11 @@ class OffersController extends Controller {
     public function sendNotificattion($owner) {
 
         $email['From'] = Yii::app()->user->user->user_email;
-        $userFullName = Yii::app()->user->user->first_name . " " . Yii::app()->user->user->second_name . " ";
-        $email['FromName'] = $userFullName . Yii::app()->name;
+        Yii::app()->user->User->_name = Yii::app()->user->user->first_name . " " . Yii::app()->user->user->second_name . " ";
+        $email['FromName'] = Yii::app()->user->User->_name . Yii::app()->name;
         $email['To'] = $owner->user_email;
         $email['Subject'] = "Inivitation to purchase Offer";
-        $email['Body'] = $userFullName . " wants to buy your offer ! ";
+        $email['Body'] = Yii::app()->user->User->_name . " wants to buy your offer ! ";
         if ($owner->paypal_mail == "") {
             $email['Body'].= " you didn't configure your paypall email kindly configure <br/> to recieve this offer ";
             $email['Body'].= " <br/> click on following link after Login <br/>";
@@ -789,11 +789,11 @@ class OffersController extends Controller {
         //send notifcationi
 
         $email['From'] = Yii::app()->user->user->user_email;
-        $userFullName = Yii::app()->user->user->first_name . " " . Yii::app()->user->user->second_name . " ";
-        $email['FromName'] = $userFullName . Yii::app()->name;
+        Yii::app()->user->User->_name = Yii::app()->user->user->first_name . " " . Yii::app()->user->user->second_name . " ";
+        $email['FromName'] = Yii::app()->user->User->_name . Yii::app()->name;
         $email['To'] = $model->payment_adaptive->buyer->user_email;
         $email['Subject'] = "your offer buy invitation has been " . ucfirst($status);
-        $email['Body'] = $userFullName . " has  " . ucfirst($status) . " Your invitation";
+        $email['Body'] = Yii::app()->user->User->_name . " has  " . ucfirst($status) . " Your invitation";
         //setting notification
         $paymentAdaptive->generateNotification($model->payment_adaptive->buyer->id, $paymentAdaptive->id, "buyer", $email['Subject']);
         if ($status == "rejected") {
@@ -828,8 +828,8 @@ class OffersController extends Controller {
         //send notifcationi
 
         $email['From'] = Yii::app()->user->User->user_email;
-        $userFullName = Yii::app()->user->User->first_name . " " . Yii::app()->user->user->second_name . " ";
-        $email['FromName'] = $userFullName . Yii::app()->name;
+        Yii::app()->user->User->_name = Yii::app()->user->User->_name . " " . Yii::app()->user->user->second_name . " ";
+        $email['FromName'] = Yii::app()->user->User->_name . Yii::app()->name;
         $email['To'] = $model->payment_adaptive->seller->user_email;
 
         //setting notification
@@ -838,20 +838,20 @@ class OffersController extends Controller {
             $paymentAdaptive->payToPuzzle($paymentAdaptive);
         } else if ($status == "cancelled") {
             //setting notification
-            $email['Subject'] = "buyer (" . $userFullName . ") has  " . ucfirst($status) . " the offer to buy ";
+            $email['Subject'] = "buyer (" . Yii::app()->user->User->_name . ") has  " . ucfirst($status) . " the offer to buy ";
             $paymentAdaptive->generateNotification($model->payment_adaptive->seller->id, $paymentAdaptive->id, "seller", $email['Subject']);
 
-            $email['Body'] = $userFullName . " has  " . ucfirst($status) . " the offer to buy ";
+            $email['Body'] = Yii::app()->user->User->_name . " has  " . ucfirst($status) . " the offer to buy ";
             $email['Body'].= "<br/> May be some issue to whether he has'nt too much amount in his paypall account";
             $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
 
             $this->sendEmail2($email);
         } else if ($status == "completed") {
             //setting notification
-            $email['Subject'] = "buyer (" . $userFullName . ") has  " . ucfirst($status) . " the offer and sent to you money ";
+            $email['Subject'] = "buyer (" . Yii::app()->user->User->_name . ") has  " . ucfirst($status) . " the offer and sent to you money ";
             $paymentAdaptive->generateNotification($model->payment_adaptive->seller->id, $paymentAdaptive->id, "seller", $email['Subject']);
 
-            $email['Body'] = $userFullName . " has  " . ucfirst($status) . " the offer and sent to you money ";
+            $email['Body'] = Yii::app()->user->User->_name . " has  " . ucfirst($status) . " the offer and sent to you money ";
             $email['Body'].= "<br/> after 48 hours money will be transfered to you";
             $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
 
