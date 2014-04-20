@@ -44,7 +44,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array('name' => '_transfer_amount', 'value' => '$data->amount -  $data->puzzzle_commission',),
         'buyer_status',
         'seller_status',
-        //'start_transfer_puzzzle',
+        'puzzzle_admin_status',
         'ip_address',
     ),
 ));
