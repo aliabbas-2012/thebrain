@@ -27,6 +27,7 @@
 class PaymentPaypallAdaptive extends DTActiveRecord {
 
     public $_transfer_amount;
+    public $_transfer_status;
     /**
      * @return string the associated database table name
      */
@@ -46,7 +47,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             array('amount, extra_amount, start_transfer_puzzzle, puzzzle_commission', 'numerical'),
             array('buyer_status, seller_status', 'length', 'max' => 9),
             array('ip_address', 'length', 'max' => 50),
-            array('puzzzle_admin_status', 'safe'),
+            array('_transfer_status,puzzzle_admin_status', 'safe'),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -221,6 +222,19 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $model->user_type = $type;
         $model->save();
     }
+    /*
+     * 
+     */
+    public function afterFind() {
+        $this->_transfer_status = 0;
+        if(
+                $this->buyer_status == "completed" && 
+                $this->seller_status == "confirmed" && 
+                $this->puzzzle_admin_status == "initiated"){
+             $this->_transfer_status = 1;
+        }
+        return parent::afterFind();
+    }
 
     /**
 
@@ -289,7 +303,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             
         }
 
-        die;
+    
     }
 
 }

@@ -13,7 +13,7 @@ $this->PcmWidget['filter'] = array('name' => 'ItstLeftFilter',
         'keyUrl' => true,
         'action' => Yii::app()->createUrl($this->route),
         'grid_id' => 'payment-grid',
-        "view"=>"paymentNotifications"
+        "view" => "paymentNotifications"
         ));
 ?>
 
@@ -31,6 +31,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
         'cssFile' => '',
     ),
     'columns' => array(
+        'id:html' => array(
+            'header' => '<input type="checkbox" />',
+            //"type" => "raw",
+            "class"=>"CCheckBoxColumn",
+            'value' => '($data->_transfer_status ==1)?CHtml::checkBox("id",$data->id,array("id"=>"id_".$data->id)):""'
+            ),
         array(
             'name' => 'item_id',
             "type" => "raw",
