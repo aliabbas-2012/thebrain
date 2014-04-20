@@ -105,14 +105,30 @@ class ConfigurationsController extends Controller {
     public function actionPayPallSettings($id = 0) {
         if ($id != 0) {
             $model = Paypalsettings::model()->findByPk($id);
-            if(isset($_POST['Paypalsettings'])){
+            if (isset($_POST['Paypalsettings'])) {
                 $model->attributes = $_POST['Paypalsettings'];
-                if($model->save()){
+                if ($model->save()) {
                     $this->redirect($this->createUrl('/configurations/payPallSettings', array('id' => 2)));
                 }
             }
-            $this->render("paypallsettings/index",array("model"=>$model));
+            $this->render("paypallsettings/index", array("model" => $model));
         }
+    }
+
+    /**
+     * show all payments
+     */
+    public function actionPaymentNotifications() {
+        $this->layout = "column2";
+        $model = new PaymentPaypallAdaptive('search');
+        $criteria = new CDbCriteria();
+        $dataProvider = new CActiveDataProvider('PaymentPaypallAdaptive', array(
+            'criteria' => $criteria,
+        ));
+        $this->render("payment/notifications", array(
+            "dataProvider" => $dataProvider,
+            "model" => $model,
+        ));
     }
 
 }

@@ -26,6 +26,7 @@
  */
 class PaymentPaypallAdaptive extends DTActiveRecord {
 
+    public $_transfer_amount;
     /**
      * @return string the associated database table name
      */

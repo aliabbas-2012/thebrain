@@ -11,6 +11,7 @@ $rules_admin = array(
      'login' => '/site/login',
      'admin/config/<m:[\w-\.]+>' => '/configurations/load',
      'admin/paypallsettins/<id:[\w-\.]+>' => '/configurations/payPallSettings',
+     'admin/payment-notifications' => '/configurations/PaymentNotifications',
      /**----------- advertinsg -----------**/
      'admin/advertising/create' => '/bspAdvertising/create',
      'admin/advertising/update' => '/bspAdvertising/update',
