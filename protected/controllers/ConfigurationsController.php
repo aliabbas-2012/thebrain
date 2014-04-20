@@ -7,6 +7,7 @@ class ConfigurationsController extends Controller {
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
     public $layout = '//layouts/column2';
+    public $filters;
 
     /**
      * @return array action filters
@@ -119,9 +120,30 @@ class ConfigurationsController extends Controller {
      * show all payments
      */
     public function actionPaymentNotifications() {
+
+        $this->filters = array(
+            'buyer_status' => array(
+                "initiated" => "Initiated",
+                "completed" => "Completed",
+                "paying" => "Paying",
+                "cancelled" => "Cancelled",
+            ),
+            'seller_status' => array(
+                "Rejected" => "rejected", "confirmed" => "Confirmed",
+                "completed" => "Completed"),
+            'puzzzle_admin_status' => array("initiated" => "Initiated", "tranfered" => "Tranfered"),
+        );
+
         $this->layout = "column2";
         $model = new PaymentPaypallAdaptive('search');
         $criteria = new CDbCriteria();
+        if(isset($_GET['PaymentPaypallAdaptive'])){
+            $model->attributes = $_GET['PaymentPaypallAdaptive'];
+            $criteria->compare('buyer_status', $model->buyer_status);
+            $criteria->compare('seller_status', $model->seller_status);
+            $criteria->compare('puzzzle_admin_status', $model->puzzzle_admin_status);
+        }
+        
         $dataProvider = new CActiveDataProvider('PaymentPaypallAdaptive', array(
             'criteria' => $criteria,
         ));

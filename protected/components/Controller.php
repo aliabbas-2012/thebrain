@@ -11,6 +11,8 @@ class Controller extends RController {
      * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
      */
     public $layout = '//layouts/column2';
+    
+    
 
     /**
      * Register script/css files
