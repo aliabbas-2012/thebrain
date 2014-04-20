@@ -54,6 +54,9 @@ var thepuzzleadmin = {
         return true;
 
     },
+    checkUncheckBoxAll: function (obj){
+        $(".child_checkbox input:checkbox").prop('checked', $(obj).prop("checked"));
+    },
     /**
      * to update element on ajax all
      * @param {type} ajax_url

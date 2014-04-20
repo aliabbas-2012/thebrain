@@ -32,11 +32,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
     ),
     'columns' => array(
         'id:html' => array(
-            'header' => '<input type="checkbox" />',
-            //"type" => "raw",
-            "class"=>"CCheckBoxColumn",
-            'value' => '($data->_transfer_status ==1)?CHtml::checkBox("id",$data->id,array("id"=>"id_".$data->id)):""'
-            ),
+            'header' => '<input type="checkbox" id="header" onclick="
+                thepuzzleadmin.checkUncheckBoxAll(this);
+            "/>',
+            "type" => "raw",
+            // "class"=>'($data->_transfer_status ==1)?CCheckBoxColumn:""',
+            'value' => '($data->_transfer_status ==1)?CHtml::checkBox("id",$data->id,array("id"=>"id_".$data->id)):""',
+            "htmlOptions" => array("class" => "child_checkbox")
+        ),
         array(
             'name' => 'item_id',
             "type" => "raw",
