@@ -179,7 +179,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         //check old offer with same user
 
         $criteria = new CDbCriteria();
-        $criteria->addCondition("item_id = " . $offer->id . " AND seller_status <> 'rejected'");
+        $criteria->addCondition("item_id = " . $offer->id . " AND seller_status <> 'rejected' AND buyer_id = ".Yii::app()->user->id);
         $old = PaymentPaypallAdaptive::model()->count($criteria);
         if ($old == 0) {
             $model = new PaymentPaypallAdaptive;
@@ -297,12 +297,12 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             /* wrap API method calls on the service object with a try catch */
             $response = $service->Pay($payRequest);
             spl_autoload_register(array('YiiBase', 'autoload'));
-
+            
             return Paypalresponse::model()->storeResponse($response, $paymentAdaptive, $payPallSetting);
         } catch (Exception $ex) {
             
         }
-
+       
     
     }
 
