@@ -803,6 +803,7 @@ class OffersController extends Controller {
         if ($status == "rejected") {
             $email['Body'].= "<br/> you can try again !";
         } else if ($status == "confirmed") {
+            BspOrder::model()->generateOrder($paymentAdaptive);
             $email['Body'].= "<br/> at both of your completing this offer status offer you will be purchased this offer";
         }
 
@@ -840,6 +841,7 @@ class OffersController extends Controller {
 
         if ($status == "paying") {
             $paymentAdaptive->payToPuzzle($paymentAdaptive,$model);
+            BspOrder::model()->setStatusOrder($paymentAdaptive, BspOrder::STATUS_ORDER_WORKING);
         } else if ($status == "cancelled") {
             //setting notification
             $email['Subject'] = "buyer (" . Yii::app()->user->User->_name . ") has  " . ucfirst($status) . " the offer to buy ";
@@ -848,7 +850,7 @@ class OffersController extends Controller {
             $email['Body'] = Yii::app()->user->User->_name . " has  " . ucfirst($status) . " the offer to buy ";
             $email['Body'].= "<br/> May be some issue to whether he has'nt too much amount in his paypall account";
             $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
-
+            BspOrder::model()->setStatusOrder($paymentAdaptive, BspOrder::STATUS_ORDER_CANCELLED);
             $this->sendEmail2($email);
         } else if ($status == "completed") {
             //setting notification
@@ -858,7 +860,7 @@ class OffersController extends Controller {
             $email['Body'] = Yii::app()->user->User->_name . " has  " . ucfirst($status) . " the offer and sent to you money ";
             $email['Body'].= "<br/> after 48 hours money will be transfered to you";
             $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
-
+            BspOrder::model()->setStatusOrder($paymentAdaptive, BspOrder::STATUS_ORDER_COMPLETE);
             $this->sendEmail2($email);
         } else if ($status == "cancelled") {
             //setting notification

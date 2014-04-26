@@ -108,6 +108,7 @@ class AdminPaymentTransfer extends CFormModel {
             $url = "";
             foreach ($transer_arr as $id) {
                 $paymentAdaptive = PaymentPaypallAdaptive::model()->findByPk($id);
+                BspOrder::model()->setStatusOrder($paymentAdaptive, BspOrder::STATUS_ESCROW_PAID);
                 $url = Paypalresponse::model()->storeResponse($response, $paymentAdaptive, $payPallSetting);
             }
             return $url;

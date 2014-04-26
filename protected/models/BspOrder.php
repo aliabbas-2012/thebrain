@@ -17,6 +17,7 @@
  * @property double $amount
  * @property integer $payment
  * @property integer $status
+ * @property integer $payment_adaptive_id
  * @property string $create_time
  * @property string $create_user_id
  * @property string $update_time
@@ -64,7 +65,7 @@ class BspOrder extends DTActiveRecord {
             array('pph, comission, amount', 'numerical'),
             array('description', 'length', 'max' => 300),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
-            array('date_order, date_start, date_finish', 'safe'),
+            array('payment_adaptive_id,date_order, date_start, date_finish', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, item_id, buyer_id, seller_id, date_order, date_start, date_finish, description, pph, comission, amount, payment, status, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
@@ -81,6 +82,7 @@ class BspOrder extends DTActiveRecord {
             'item' => array(self::BELONGS_TO, 'BspItem', 'item_id'),
             'buyer' => array(self::BELONGS_TO, 'Users', 'buyer_id'),
             'seller' => array(self::BELONGS_TO, 'Users', 'seller_id'),
+            'adaptive' => array(self::BELONGS_TO, 'PaymentPaypallAdaptive', 'payment_adaptive_id'),
         );
     }
 
@@ -100,6 +102,7 @@ class BspOrder extends DTActiveRecord {
             'pph' => 'Pph',
             'comission' => 'Comission',
             'amount' => 'Amount',
+            'payment_adaptive_id' => 'Adaptive',
             'payment' => 'Payment Status',
             'status' => 'Status',
             'create_time' => 'Create Time',
@@ -136,6 +139,7 @@ class BspOrder extends DTActiveRecord {
         $criteria->compare('description', $this->description, true);
         $criteria->compare('pph', $this->pph);
         $criteria->compare('comission', $this->comission);
+        $criteria->compare('payment_adaptive_id', $this->payment_adaptive_id);
         $criteria->compare('amount', $this->amount);
         $criteria->compare('payment', $this->payment);
         $criteria->compare('status', $this->status);
@@ -427,6 +431,40 @@ class BspOrder extends DTActiveRecord {
         $this->_payment_status = isset($payment_status[$this->payment]) ? $payment_status[$this->payment] : "";
         $this->_status = $all_status[$this->status];
         return parent::afterFind();
+    }
+
+    /**
+     * generate order from paypall adaptive
+     * @param type $payPallAdaptive
+     */
+    public function generateOrder($payPallAdaptive) {
+        $order = new BspOrder;
+        $order->payment_adaptive_id = $payPallAdaptive->id;
+        $order->buyer_id = $payPallAdaptive->buyer_id;
+        $order->seller_id = $payPallAdaptive->sender_id;
+        $order->item_id = $payPallAdaptive->item_id;
+        $order->amount = $payPallAdaptive->amount;
+        $order->comission = $payPallAdaptive->puzzzle_commission;
+        $order->pph = 0;
+        $order->date_start = $payPallAdaptive->create_time;
+        $order->date_order = date("Y-m-d H:i:s");
+        $order->date_finish = '';
+        $order->status = self::STATUS_ORDER_RECIEVED;
+        $order->payment = 0;
+        $order->save();
+    }
+
+    /**
+     * generate order from paypall adaptive
+     * @param type $payPallAdaptive
+     */
+    public function setStatusOrder($payPallAdaptive, $status) {
+        $order = BspOrder::model()->find("payment_adaptive_id = " . $payPallAdaptive->id);
+        $update_arr = array("status" => $status);
+        if ($status == 5) {
+            $update_arr['payment'] = 1;
+        }
+        $order->updateByPk($order->id, $update_arr);
     }
 
 }
