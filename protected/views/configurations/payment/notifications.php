@@ -22,6 +22,18 @@ $this->PcmWidget['filter'] = array('name' => 'ItstLeftFilter',
 
 
 <?php
+$form = $this->beginWidget('CActiveForm', array(
+    'id' => 'admin-payment-form',
+        ));
+?>
+<p class="note">
+    <?php
+    echo $form->hiddenField($transfer_Model, "flag", array("value" => "1"));
+    echo $form->error($transfer_Model, 'selection');
+    ?>
+</p>
+
+<?php
 $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'payment-grid',
     'dataProvider' => $dataProvider,
@@ -32,13 +44,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
     ),
     'columns' => array(
         'id:html' => array(
-            'header' => '<input type="checkbox" id="header" onclick="
+            'header' => '<input type="checkbox"  id="header" onclick="
                 thepuzzleadmin.checkUncheckBoxAll(this);
             "/>',
             "type" => "raw",
             // "class"=>'($data->_transfer_status ==1)?CCheckBoxColumn:""',
-            'value' => '($data->_transfer_status ==1)?CHtml::checkBox("id",$data->id,array("id"=>"id_".$data->id)):""',
-            "htmlOptions" => array("class" => "child_checkbox")
+            'value' => '($data->_transfer_status ==1)?CHtml::checkBox("id[]",$data->id,array("value"=>$data->id,"id"=>"id_".$data->id)):""',
+            "htmlOptions" => array("class" => "child_checkbox"),
+            //"class"=>"CCheckBoxColumn"
         ),
         array(
             'name' => 'item_id',
@@ -57,4 +70,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         'ip_address',
     ),
 ));
+
+echo CHtml::submitButton('Transfer Money', array('class' => 'btn btn btn-primary'));
+$this->endWidget();
 ?>

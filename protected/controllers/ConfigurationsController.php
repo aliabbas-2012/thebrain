@@ -121,6 +121,7 @@ class ConfigurationsController extends Controller {
      */
     public function actionPaymentNotifications() {
 
+        $transfer_Model = new AdminPaymentTransfer();
         $this->filters = array(
             'buyer_status' => array(
                 "initiated" => "Initiated",
@@ -137,20 +138,43 @@ class ConfigurationsController extends Controller {
         $this->layout = "column2";
         $model = new PaymentPaypallAdaptive('search');
         $criteria = new CDbCriteria();
-        if(isset($_GET['PaymentPaypallAdaptive'])){
+        if (isset($_GET['PaymentPaypallAdaptive'])) {
             $model->attributes = $_GET['PaymentPaypallAdaptive'];
             $criteria->compare('buyer_status', $model->buyer_status);
             $criteria->compare('seller_status', $model->seller_status);
             $criteria->compare('puzzzle_admin_status', $model->puzzzle_admin_status);
         }
-        
+
         $dataProvider = new CActiveDataProvider('PaymentPaypallAdaptive', array(
             'criteria' => $criteria,
         ));
+       
+        //transfer money
+        if(isset($_POST['AdminPaymentTransfer'])){
+            $transfer_Model->attributes = $_POST['AdminPaymentTransfer'];
+            $transfer_Model->selection = isset($_POST['id'])?$_POST['id']:"";
+            if($transfer_Model->validate()){
+                $transfer_Model->transferMoney($transfer_Model->selection);
+            }
+        }
+
         $this->render("payment/notifications", array(
             "dataProvider" => $dataProvider,
             "model" => $model,
+            "transfer_Model" => $transfer_Model
         ));
+    }
+    /**
+     * 
+     */
+    public function actionNotificationConfirm(){
+        
+    }
+    /**
+     * 
+     */
+    public function actionNotificationCancel(){
+        
     }
 
 }
