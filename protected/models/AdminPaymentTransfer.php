@@ -65,7 +65,7 @@ class AdminPaymentTransfer extends CFormModel {
 
         $host_base = Yii::app()->request->hostInfo;
         $cancel_url = $host_base . Yii::app()->controller->createUrl("/configurations/notificationConfirm", array("ids" => $ids));
-        $return_url = $host_base . Yii::app()->controller->createUrl("/configurations/notificationCancel", array("ids" => $ids));
+        $return_url = $host_base . Yii::app()->controller->createUrl("/configurations/notificationConfirm", array("ids" => $ids));
 
 
         define("DEFAULT_SELECT", "- Select -");
@@ -104,19 +104,22 @@ class AdminPaymentTransfer extends CFormModel {
             /* wrap API method calls on the service object with a try catch */
             $response = $service->Pay($payRequest);
             spl_autoload_register(array('YiiBase', 'autoload'));
-            CVarDumper::dump($response, 10, true);
+            
             $url = "";
             foreach ($transer_arr as $id) {
                 $paymentAdaptive = PaymentPaypallAdaptive::model()->findByPk($id);
                 $url = Paypalresponse::model()->storeResponse($response, $paymentAdaptive, $payPallSetting);
             }
             return $url;
-            die;
+            
             //return Paypalresponse::model()->storeResponse($response, $paymentAdaptive, $payPallSetting);
         } catch (Exception $ex) {
             
         }
+        return "";
     }
+    
+    
 
 }
 

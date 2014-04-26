@@ -148,13 +148,19 @@ class ConfigurationsController extends Controller {
         $dataProvider = new CActiveDataProvider('PaymentPaypallAdaptive', array(
             'criteria' => $criteria,
         ));
-       
+
         //transfer money
-        if(isset($_POST['AdminPaymentTransfer'])){
+        if (isset($_POST['AdminPaymentTransfer'])) {
             $transfer_Model->attributes = $_POST['AdminPaymentTransfer'];
-            $transfer_Model->selection = isset($_POST['id'])?$_POST['id']:"";
-            if($transfer_Model->validate()){
-                $transfer_Model->transferMoney($transfer_Model->selection);
+            $transfer_Model->selection = isset($_POST['id']) ? $_POST['id'] : "";
+            if ($transfer_Model->validate()) {
+                $url = $transfer_Model->transferMoney($transfer_Model->selection);
+                if ($url != "") {
+                    $this->redirect($url);
+                } else {
+                    Yii::app()->user->setFlash("error", "Some things not completed pleas try again");
+                    $this->redirect($this->createUrl("/configurations/paymentNotifications"));
+                }
             }
         }
 
@@ -164,17 +170,36 @@ class ConfigurationsController extends Controller {
             "transfer_Model" => $transfer_Model
         ));
     }
+
     /**
      * 
+     * @param type $ids
      */
-    public function actionNotificationConfirm(){
-        
+    public function actionNotificationConfirm($ids = "") {
+        $ids = explode(",", $ids);
+
+        foreach ($ids as $id) {
+            $model = PaymentPaypallAdaptive::model()->findByPk($id);
+            Yii::app()->user->setFlash("success", "Payment has been Transfered");
+            $model->updateByPk($id, array("puzzzle_admin_status" => "tranfered"));
+            $model = PaymentPaypallAdaptive::model()->findByPk($id);
+            $model->saveHistory();
+            $this->redirect($this->createUrl("/configurations/paymentNotifications"));
+        }
     }
+
     /**
      * 
+     * @param type $ids
      */
-    public function actionNotificationCancel(){
-        
+    public function actionNotificationCancel($ids = "") {
+        $ids = explode(",", $ids);
+
+        foreach ($ids as $id) {
+            $model = PaymentPaypallAdaptive::model()->findByPk($id);
+            Yii::app()->user->setFlash("error", "Some things not completed pleas try again");
+            $this->redirect($this->createUrl("/configurations/paymentNotifications"));
+        }
     }
 
 }

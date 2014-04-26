@@ -19,7 +19,16 @@ $this->PcmWidget['filter'] = array('name' => 'ItstLeftFilter',
 
 <h1>Manage Payments</h1>
 
-
+<?php
+if (Yii::app()->user->hasFlash('error')) {
+    echo "<span class='alert alert-error'>" . Yii::app()->user->getFlash('error') . "</span>";
+    echo CHtml::tag("div", array('class' => "clear"),false);
+}
+if (Yii::app()->user->hasFlash('success')) {
+    echo "<span class='alert alert-success'>" . Yii::app()->user->getFlash('success') . "</span>";
+    echo CHtml::tag("div", array('class' => "clear"),false);
+}
+?>
 
 <?php
 $form = $this->beginWidget('CActiveForm', array(
