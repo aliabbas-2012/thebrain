@@ -285,9 +285,10 @@ class OffersController extends Controller {
      * @param type $id
      * @param type $action
      */
-    public function actionPost($slug = "", $action = "create") {
+    public function actionPost($action = "create", $slug = "") {
         $model = new BspItemFrontEnd();
         $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
+       
 
         if ($slug != "") {
             $slug_arr = explode("-", $slug);
@@ -763,8 +764,7 @@ class OffersController extends Controller {
             //updating view status
             $model->updateByPk($id, array("isview" => 1));
             $this->render("//offers/notifications/notification_detail", array("model" => $model));
-        }
-        else {
+        } else {
             $this->render("//offers/notifications/no_notification");
         }
     }
@@ -840,7 +840,7 @@ class OffersController extends Controller {
         //setting notification
 
         if ($status == "paying") {
-            $paymentAdaptive->payToPuzzle($paymentAdaptive,$model);
+            $paymentAdaptive->payToPuzzle($paymentAdaptive, $model);
             BspOrder::model()->setStatusOrder($paymentAdaptive, BspOrder::STATUS_ORDER_WORKING);
         } else if ($status == "cancelled") {
             //setting notification

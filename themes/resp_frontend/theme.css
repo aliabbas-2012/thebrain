@@ -332,6 +332,11 @@ body {
         min-height:240px !important;
         padding-top:20px;
     } 
+    
+/*    hiding advertisng box on mobile*/
+    div.advertising {
+        display:none;
+    }
 
 } 
 

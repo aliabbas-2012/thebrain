@@ -94,7 +94,6 @@
                     $criteria->select = "ID,article_name,article_name_de,custom_url_de,custom_url";
                     $criteria->condition = "iStatus = 1";
                     $articless = BspArticla::model()->findAll($criteria);
-                    
                     ?>
                     <ul class="nav navbar-nav navbar-right"> 
                         <?php
@@ -148,11 +147,10 @@
                                     <?php
                                     $count = 0;
                                     foreach ($notifications as $notify):
-                                        
-                                        $this->renderPartial("//common/_notifcation_box",array("model"=>$notify,"css_class"=>$count % 2 ==0?"even_box":"odd_box"));
+
+                                        $this->renderPartial("//common/_notifcation_box", array("model" => $notify, "css_class" => $count % 2 == 0 ? "even_box" : "odd_box"));
                                         $count++;
                                     endforeach;
-                                    
                                     ?>
                                 </ul>
                             </li>
@@ -192,7 +190,21 @@
                         </li>
                         <li >
                             <?php
-                            echo CHtml::link(Yii::t('link', "Post Your Offer"), $this->createUrl("/web/offers/post", array("action" => "create")), array("class" => "offer"));
+                            if (!empty(Yii::app()->user->id)) {
+                                echo CHtml::link(Yii::t('link', "Post Your Offer"), $this->createUrl("/web/offers/post", array("action" => "create")), array("class" => "offer"));
+                            } else {
+
+                                echo CHtml::link(Yii::t('link', "Post Your Offer"), "javascript:void(0)", array(
+                                    "class" => "offer",
+                                    "onclick" => "
+                                                        $.alert.open({
+                                                   type: 'error',
+                                                   content: '" . Yii::t('link', 'Please Login to continue') . "'
+                                               });
+                                                        "
+                                        )
+                                );
+                            }
                             ?>                        
                         </li>
 
@@ -227,7 +239,7 @@
             <div class="navbar-header">
 
                 <button type="button" class="navbar-toggle search-toogle" data-toggle="collapse" data-target="#menu-secondary">
-<?php echo Yii::t('link', 'Search') ?>
+                    <?php echo Yii::t('link', 'Search') ?>
                     <span class="search-icon">&nbsp;</span>
                 </button>
             </div>
@@ -242,7 +254,7 @@
                             <ul class="nav navbar-nav">
                                 <li class="dropdown">
                                     <a  class="dropdown-toggle head_category" data-toggle="dropdown">
-<?php echo Yii::t('link', 'All Categories') ?>
+                                        <?php echo Yii::t('link', 'All Categories') ?>
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu category_head_menu">
@@ -289,7 +301,7 @@
                                     echo $form->hiddenField($model, 'lat');
                                     echo $form->hiddenField($model, 'lng');
 
-                                    //other fields as search
+//other fields as search
                                     echo $form->hiddenField($model, 'special_deal');
                                     echo $form->hiddenField($model, 'withVideo');
                                     echo $form->hiddenField($model, 'withSound');
@@ -368,7 +380,7 @@
         </div>
 
         <?php
-        //post offer offer
+//post offer offer
         if ($this->id == "offers" && $this->action->id == "post") {
             echo $content;
         } else {
@@ -377,7 +389,7 @@
                 <div class="alert alert-warning" style="display: none"></div>
                 <div class="alert alert-success" style="display: none"></div>
 
-            <?php echo $content; ?>
+                <?php echo $content; ?>
             </div> <!-- /container -->
             <?php
         }

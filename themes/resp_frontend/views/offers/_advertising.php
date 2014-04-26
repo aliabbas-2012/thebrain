@@ -14,7 +14,7 @@ foreach ($segments as $items) {
             $path = Yii::app()->baseUrl . "/uploads/adv_img_de/" . $item->id . "/" . $item->adv_img_de;
         }
         ?>
-        <div class="col-lg-12 no-margin">
+        <div class="col-lg-12 no-margin advertising">
             <div class="saved-offers-img">
                 <a href="<?php echo $path; ?>" class="thumbnail" data-gallery="">
                     <?php

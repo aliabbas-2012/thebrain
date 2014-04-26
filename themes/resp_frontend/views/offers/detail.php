@@ -310,7 +310,7 @@ if ($dataProvider->getTotalItemCount() > 0):
     </div>
     <div class="clear"></div>
     <?php
-    $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
+    $this->renderPartial("//default/_tab_items", array("items" => $dataProvider->getData()));
 endif;
 ?>
 <div class="clear"></div>    
@@ -332,7 +332,7 @@ if ($dataProvider->getTotalItemCount() > 0):
     </div>
     <div class="clear"></div>
     <?php
-    $this->renderPartial("//user/_tab_items", array("items" => $dataProvider->getData()));
+    $this->renderPartial("//default/_tab_items", array("items" => $dataProvider->getData()));
 endif;
 ?>
 <script>
