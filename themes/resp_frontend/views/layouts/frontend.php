@@ -92,7 +92,9 @@
                     <?php
                     $criteria = new CDbCriteria();
                     $criteria->select = "ID,article_name,article_name_de,custom_url_de,custom_url";
+                    $criteria->condition = "iStatus = 1";
                     $articless = BspArticla::model()->findAll($criteria);
+                    
                     ?>
                     <ul class="nav navbar-nav navbar-right"> 
                         <?php
