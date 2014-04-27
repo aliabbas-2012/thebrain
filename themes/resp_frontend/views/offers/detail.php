@@ -233,18 +233,30 @@
                 ?>
                 <div class='col-lg-12'>
                     <div class='col-lg-6'>
+                    
                         <?php echo $form->textField($priceCalF, "start_date", array('style' => "width:120px;")); ?>
+                        <div class='pricetextleft'><?php echo Yii::t('detailOffer', 'start date'); ?>  </div>
+                        
                     </div>
+                    
                     <div class='col-lg-6'>
                         <?php echo $form->dropDownList($priceCalF, "start_time", $time_arr, array('style' => "width:120px;")); ?>
+                        <div class='pricetextright'><?php echo Yii::t('detailOffer', 'start time'); ?> </div>
+                        
                     </div>
                 </div>
                 <div class='col-lg-12'>
+                
                     <div class='col-lg-6'>
                         <?php echo $form->textField($priceCalF, "end_date", array('style' => "width:120px;")); ?>
+                        <div class='pricetextleft'><?php echo Yii::t('detailOffer', 'end date'); ?> </div>
+                        
                     </div>
+                    
                     <div class='col-lg-6'>
                         <?php echo $form->dropDownList($priceCalF, "end_time", $time_arr, array('style' => "width:120px;")); ?>
+                        <div class='pricetextright'><?php echo Yii::t('detailOffer', 'end time'); ?> </div>
+                        
                     </div>
                 </div>
 

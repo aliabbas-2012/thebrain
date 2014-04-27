@@ -1,8 +1,12 @@
+
 .redactor_box {
 	position: relative;
 	overflow: visible;
 	border: 1px solid #ddd;
 	background-color: #fff;
+	resize:both;
+	overflow: scroll;
+	width: 75%;
 }
 
 body .redactor_air {
@@ -87,6 +91,7 @@ body .redactor_box_fullscreen {
 .redactor_editor h5,
 .redactor_editor h6 {
 	font-family: Arial, Helvetica, Verdana, Tahoma, sans-serif !important;
+	resize:none;
 }
 
 .redactor_editor code,
@@ -158,6 +163,11 @@ body .redactor_box_fullscreen {
 	background: none !important;
 	box-shadow: none !important;
 }
+
+div.redactor_form-control.redactor_editor {
+	min-height: 90%;
+}
+
 .redactor_editor iframe,
 .redactor_editor object,
 .redactor_editor hr {
@@ -827,3 +837,7 @@ body .redactor_toolbar li a.redactor_btn_pre		 		{ background-position: -875px; 
 }
 
 
+#bsp-faq-form div.row {
+		max-width: 95%;
+	
+}

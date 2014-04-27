@@ -46,9 +46,9 @@
         <div class="bs-slide" data-animate-in="fadeInLeft" data-animate-out="fadeOutRight">
             <div class="bs-foreground">
                 <div class="text-center text-white" data-animate-in="fadeInDown" data-delay="400">
-                    <h1>Bootslider</h1>
+                    <h1></h1>
                     <p class="hidden-xs">
-                        Simply loves Bootstrap
+                        
                     </p>
                 </div>
                 <div class="text-center">
@@ -72,9 +72,9 @@
         <div class="bs-slide" data-animate-in="fadeInLeft" data-animate-out="fadeOutRight">
             <div class="bs-foreground">
                 <div class="text-center text-white" data-animate-in="fadeInDown" data-delay="400">
-                    <h1>Bootslider</h1>
+                    <h1></h1>
                     <p class="hidden-xs">
-                        Simply loves Bootstrap
+                        
                     </p>
                 </div>
                 <div class="text-center">

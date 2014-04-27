@@ -5,6 +5,9 @@
 }
 .login-box #LoginForm_password {
     margin-bottom:15px
+ border-radius: 5px;
+	margin-top: 15px;
+	padding: 5px;
 }
 .login-box #LoginForm_rememberMe {
     float: left; margin-right: 10px;

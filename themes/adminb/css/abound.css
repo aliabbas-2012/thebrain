@@ -1,10 +1,10 @@
 body {
 
     font-size:12px;
-    padding-bottom: 40px;
-
+	padding: 0 0 40px 15px;
 }
-.container-fluid{padding-top: 20px;}
+.container-fluid{padding-top: 20px;
+}
 
 /*Nav bar*/
 .navbar .brand {
@@ -24,31 +24,39 @@ body {
 
 .navbar-search .search-query {
     border-radius:5px;
+	position: relative;
+	float: right;
 }
 
 /* Desktops and laptops ----------- */
 @media only screen 
 and (min-width : 1224px) {
     .container-fluid{padding-top: 100px;}
-    .navbar .brand {margin-left:-90px;}
-    .style-switcher{margin-left:-70px;}
+    .navbar .brand {margin-left:0px;}
+    .style-switcher{margin-left:-70px;
+		visibility: hidden;
+	}
 }
 
 /* Large screens ----------- */
 @media only screen 
 and (min-width : 1824px) {
     .container-fluid{padding-top: 100px;}
-    .navbar .brand {margin-left:-90px;}
-    .style-switcher{margin-left:-70px;}
+    .navbar .brand {margin-left:0px;}
+    .style-switcher{margin-left:-70px;
+    visibility: hidden;}
 }
 
 table.detail-view td {font-size:12px;}
 h1,h2,h3,h4, .portlet > .portlet-decoration, .sidebar-nav > ul > li > a, .navbar a, th{
     font-family: 'Carrois Gothic', sans-serif;
+	color: #39c7f2;
 }
 
 .portlet > .portlet-decoration, .sidebar-nav > ul > li > a, .navbar li > a, th{
-    font-size:14px!important;
+    font-size: 13px !important;
+	text-transform: capitalize;
+	margin-bottom: 10px;
 }
 /* Start Portlets*/
 .portlet{
@@ -215,32 +223,30 @@ h1,h2,h3,h4, .portlet > .portlet-decoration, .sidebar-nav > ul > li > a, .navbar
 .dropdown-menu li > a:hover,
 .dropdown-menu li > a:focus,
 .dropdown-submenu:hover > a {
-    color: #ffffff;
+    color: #979797;
     text-decoration: none;
-    background-color: #848282;
-    background-color: #848282;
-    background-image: -moz-linear-gradient(top, #848282, #9e9090);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#848282), to(#9e9090));
-    background-image: -webkit-linear-gradient(top, #848282, #9e9090);
-    background-image: -o-linear-gradient(top, #848282, #9e9090);
-    background-image: linear-gradient(to bottom, #848282, #9e9090);
-    background-repeat: repeat-x;
-    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#848282', endColorstr='#9e9090', GradientType=0);
+    background-color: #ffffff;
+	background-repeat: repeat-x;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.006, #f9f9f9), color-stop(0.994, #e3e3e3));
+	background-image: -webkit-linear-gradient(top, #f9f9f9 0.6%, #e3e3e3 99.4%);
+	background-image: -moz-linear-gradient(top, #f9f9f9 0.6%, #e3e3e3 99.4%);
+	background-image: -o-linear-gradient(top, #f9f9f9 0.6%, #e3e3e3 99.4%);
+	background-image: linear-gradient(to bottom, #f9f9f9 0.6%, #e3e3e3 99.4%);
+	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#848282', endColorstr='#9e9090', GradientType=0);
 }
 
 .dropdown-menu .active > a,
 .dropdown-menu .active > a:hover {
-    color: #ffffff;
+    color: #af8686;
     text-decoration: none;
     background-color: #848282;
-    background-color: #848282;
-    background-image: linear-gradient(to bottom, #848282, #9e9090);
-    background-image: -moz-linear-gradient(top, #848282, #9e9090);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#848282), to(#9e9090));
-    background-image: -webkit-linear-gradient(top, #848282, #9e9090);
-    background-image: -o-linear-gradient(top, #848282, #9e9090);
-    background-repeat: repeat-x;
-    outline: 0;
+	background-repeat: repeat-x;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e8e8e8));
+	background-image: -webkit-linear-gradient(top, #ffffff 0%, #e8e8e8 100%);
+	background-image: -moz-linear-gradient(top, #ffffff 0%, #e8e8e8 100%);
+	background-image: -o-linear-gradient(top, #ffffff 0%, #e8e8e8 100%);
+	background-image: linear-gradient(to bottom, #ffffff 0%, #e8e8e8 100%);
+	outline: 0;
     filter: progid:dximagetransform.microsoft.gradient(startColorstr='#848282', endColorstr='#9e9090', GradientType=0);
 }
 /*Side Nav*/
@@ -499,6 +505,7 @@ footer {
 .style-switcher
 {
     padding-top:13px;
+    visibility: hidden;
 }
 .style-switcher span.style
 {

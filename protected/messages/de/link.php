@@ -40,6 +40,7 @@ return array (
   'Services' => 'Dienstleistungen',
   'Settings' => 'Einstellungen',
   'Sign out' => 'Abmelden',
-  'Term & Conditions' => 'Allgemeine Gesch&auml;ftsbedingungen',
+  'Term &amp; Conditions' => 'Allgemeine Gesch&auml;ftsbedingungen',
   'more...' => 'mehr...',
+  'Post Your Offer for free' => 'Angebot kostenlos einstellen',
 );

@@ -1,3 +1,4 @@
+
 /*
     Plugin: Bootslider
     Plugin Website: http://themes.grozav.com/bootslider
@@ -9,9 +10,10 @@
     zoom: 1;
     z-index: 1;
     display: block;
-    position: relative;
-    overflow: hidden;
-    width: 100%; }
+	overflow: hidden;
+    width: 100%;
+	float: left;
+}
 .bootslider:before, .bootslider:after {
     content: "\0020";
     display: block;
@@ -26,7 +28,7 @@
     top: 0;
     left: 0;
     z-index: 999;
-    background: #000;
+    background: #f7f8f8;
     display: block; }
 .bootslider .bs-loader #loader {
     position: absolute;
@@ -44,7 +46,8 @@
     left: 0;
     margin: 0;
     display: none;
-    position: relative; }
+	position: relative;
+}
 .bootslider .bs-container .bs-slide .bs-foreground {
     top: 0;
     left: 0;
@@ -120,8 +123,8 @@
     margin: 20px 0 20px 0; }
 .bootslider .bs-pagination .active a {
     z-index: 0;
-    background: #e74c3c;
-    border-color: #e74c3c; }
+    background: #fae83b;
+    border-color: #fae83b; }
 .bootslider .bs-pagination .active a:hover {
     color: #fff; }
 .bootslider .bs-pagination a:hover {
@@ -240,14 +243,14 @@ a:hover.wisteria {
     color: #8e44ad; }
 
 .wet-ashpalt {
-    background-color: #34495e;
+    background-color: rgba(255, 255, 255, 0);
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease; }
 
 a:hover.wet-ashpalt {
-    background-color: #2b3c4e; }
+    background-color: rgba(255, 255, 255, 0); }
 
 .text-wet-ashpalt, .text-wet-ashpalt * {
     color: #34495e; }
@@ -406,7 +409,15 @@ a:hover.white {
     background-color: #f2f2f2; }
 
 .text-white, .text-white * {
-    color: white; }
+    color: #484848;
+	font-size: 10px;
+	font-weight: bold;
+	width: 200px;
+	bottom: 0;
+	right: 0;
+	float: right;
+	line-height: 10px;
+}
 
 .black {
     background-color: black;
