@@ -144,6 +144,7 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                                     });"
                         ));
                         else:
+                             echo CHtml::hiddenField("_order_price","");
                              echo CHtml::link(Yii::t('link', 'Order Now'), "javascript:void(0)", array(
                                     "id" => "orderNow",
                                     "onclick"=>"thepuzzleadmin.buyOffer('".$this->createUrl("/web/offers/orderOffer",array("id"=>$model->id))."')"

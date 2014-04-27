@@ -314,7 +314,8 @@ var thepuzzleadmin = {
     buyOffer: function(ajax_url) {
 
         jQuery("#loading").show();
-
+        price = jQuery("#_order_price").val();
+        console.log(price);
         jQuery.ajax({
             type: "POST",
             url: ajax_url,
@@ -323,6 +324,7 @@ var thepuzzleadmin = {
             data:
                     {
                         "ajax": "1",
+                        "order_price":price,
                     }
         }).done(function(response) {
             

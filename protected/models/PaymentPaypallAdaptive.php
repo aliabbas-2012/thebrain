@@ -190,12 +190,15 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             if ($owner->paypal_mail != "") {
                 $model->buyer_status = "initiated";
             }
+            if($offer->_order_price !=""){
+                $model->amount = $offer->_order_price;
+            }
             if ($offer->discount_price != "") {
                 $model->amount = $offer->discount_price;
             } else {
                 $model->amount = $offer->price;
             }
-
+           
             $model->seller_status = "initiated";
             $model->puzzzle_commission = $payPallSetting->comission_rate;
             $model->ip_address = Yii::app()->request->userHostAddress;

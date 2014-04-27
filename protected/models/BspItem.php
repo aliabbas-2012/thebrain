@@ -61,6 +61,8 @@ class BspItem extends DTActiveRecord {
     );
     
     public $distance;
+    
+    public $_order_price;
 
     /**
      *
@@ -109,7 +111,7 @@ class BspItem extends DTActiveRecord {
             array('is_public', 'length', 'max' => 5),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('start_price,end_price', 'safe'),
-            array('offer_name,username', 'safe'),
+            array('_order_price,offer_name,username', 'safe'),
             array('offer_number,most_visited,most_bought', 'safe'),
             array('distance,slug,seo_description, seo_keywords,seo_title', 'safe'),
             array('loc_name,_per_price,background_path,background_image_name,description, date_create', 'safe'),

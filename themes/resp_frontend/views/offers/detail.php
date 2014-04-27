@@ -394,6 +394,7 @@ endif;
                 {
 
                     jQuery("#kqtinh").html(data.price);
+                    jQuery("#_order_price").val(data.price);
                     jQuery("#time-selection").html(data.period);
                     jQuery("#loading").hide();
 

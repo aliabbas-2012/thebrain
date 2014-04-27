@@ -715,8 +715,13 @@ class OffersController extends Controller {
      * order offer
      * @param type $id
      */
-    public function actionOrderOffer($id) {
+    public function actionOrderOffer($id ,$price  = "") {
         $offer = BspItem::model()->findByPk($id);
+        
+        if(isset($_POST['order_price']) && $_POST['order_price']!="" && $_POST['order_price'] !=0){
+            $offer->_order_price = $_POST['order_price'];
+        }
+        
         $current_user = Yii::app()->user->user;
         $old = PaymentPaypallAdaptive::model()->saveInitialPaymentOrder($offer->user_rel, $offer);
         if ($old) {
