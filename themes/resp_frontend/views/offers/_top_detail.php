@@ -1,6 +1,7 @@
 
 <?php
 $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads/BspItem/" . $model->id . "/" . $model->background_image : "";
+
 ?>
 <div class="offer_item-top" style="background: url('<?php echo $background ?>')">
     <div class="container ">

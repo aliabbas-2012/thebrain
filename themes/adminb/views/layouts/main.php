@@ -9,7 +9,7 @@
         // $cs->registerScriptFile($baseUrl . '/js/jquery1.8.js', CClientScript::POS_HEAD);
         ?>
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/js/jquery1.8.js"></script>
-        <meta charset="utf-8">
+       
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Free yii themes, free web application theme">

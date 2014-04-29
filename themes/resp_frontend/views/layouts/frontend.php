@@ -1,20 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>        
-
+        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo Yii::app()->charset ?>" />
+        <meta content="utf-8" http-equiv="encoding">
+        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="The Puzzzle loves sharing your skills and equipment" />
+        <meta name="description" content="The Puzzzle loves sharing your skills and equipment" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+
         <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl ?>/docs-assets/ico/favicon.png" />
 
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/jquery-1.10.2.min.js"></script>
 
-        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
 
-        <meta charset="utf-8" /> 
+
+
 
 
         <!-- Bootstrap core CSS -->
@@ -489,7 +492,7 @@
         <script type="text/javascript" src="<?php echo Yii::app()->baseUrl ?>/js/Kendo/kendo.web.min.js"></script>
 
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/thepuzzleadmin.js"></script>
-       
+
 
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"></script>
         <script>

@@ -338,6 +338,9 @@ class BspItem extends DTActiveRecord {
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
+            'sort'=>array(
+                    'defaultOrder'=>'id DESC',
+                ),
         ));
     }
 
@@ -412,7 +415,10 @@ class BspItem extends DTActiveRecord {
      */
     public function afterFind() {
         $this->setSlug();
-
+        if (get_class(Yii::app()->controller->getModule()) == "WebModule"){
+             $this->name = CHtml::decode($this->name);
+            
+        }
         return parent::afterFind();
     }
 

@@ -3,7 +3,12 @@ var thepuzzleadmin = {
     filldropDownField: function(obj, url, elem_id) {
         if ($(obj).val() != "") {
             $("#loading").show();
-            url += "?id=" + $(obj).val();
+            if(url.indexOf("?")==-1){
+                url += "?id=" + $(obj).val();
+            }
+            else {
+                  url += "&id=" + $(obj).val();
+            }
             $.getJSON(url, function(data) {
 
                 var items = [];

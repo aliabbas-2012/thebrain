@@ -67,7 +67,7 @@ class DTActiveRecord extends CActiveRecord {
             $this->update_user_id = 1;
         }
         parent::beforeValidate();
-        //$this->attributes = $this->decodeArray($this->attributes);
+        $this->attributes = $this->decodeArray($this->attributes);
         return true;
     }
 
@@ -151,13 +151,13 @@ class DTActiveRecord extends CActiveRecord {
              */
 
             if (mb_detect_encoding($value) == "UTF-8") {
-
-                $d[$key] = $this->_current_module == "WebModule" ? utf8_decode($value) : $value;
+                
+                $d[$key] = $this->_current_module == "WebModule" ? $value : $value;
             } else {
                 $d[$key] = $value;
             }
         }
-
+       
         return $d;
     }
 

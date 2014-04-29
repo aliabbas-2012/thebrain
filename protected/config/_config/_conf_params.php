@@ -66,6 +66,6 @@ $params = array(
         'uk', // ukrainian.
         'zh' // chinese.
     ),
-    'notallowdCharactorsUrl' => array('[', ']', '@', '!', '$', '&', '(', ')', '*', '+', ';', "'", ",", "?", ":"),
+    'notallowdCharactorsUrl' => array('[', ']', '@', '!', '$', '&', '(', ')', '*', '+', ';', "'", ",", "?", ":","ü"),
 );
 ?>
