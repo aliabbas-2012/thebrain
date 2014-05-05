@@ -2,8 +2,24 @@
 
 class DefaultController extends Controller {
 
+    //class variable to handle some renderParital inside layouts
+    public $_user;
+
     public function actionIndex() {
-        $this->render('//default/index');
+        $store_url = Yii::app()->request->getQuery("storeurl");
+        if (!empty($store_url)) {
+            $criteria = new CDbCriteria();
+            $criteria->condition = "store_url =:store_url";
+            $criteria->params = array(":store_url" => $store_url);
+
+            $this->_user = $model = Users::model()->find($criteria);
+            if ($model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+
+            $this->render("//userdata/store", array("model" => $model));
+        } else {
+            $this->render('//default/index');
+        }
     }
 
     /**

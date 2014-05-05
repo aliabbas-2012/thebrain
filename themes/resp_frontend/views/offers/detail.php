@@ -199,7 +199,7 @@
             //calculation price offers
             //if the price is not fix price then it should load
             if ($model->per_price != 1) {
-                $this->renderPartial("//_detail/_price_calculation", array("model" => $model));
+                $this->renderPartial("//offers/_detail/_price_calculation", array("model" => $model));
             }
             ?>
 

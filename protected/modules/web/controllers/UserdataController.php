@@ -5,7 +5,9 @@
  */
 class UserdataController extends Controller {
 
+//class variable to handle some renderParital inside layouts
     public $_user;
+
     /**
      * @return array action filters
      */
@@ -176,7 +178,7 @@ class UserdataController extends Controller {
      */
     public function actionStore($storeurl, $id) {
         $this->_user = $model = Users::model()->findByPk($id);
-        $this->render("//userdata/store",array("model"=>$model));
+        $this->render("//userdata/store", array("model" => $model));
     }
 
 }

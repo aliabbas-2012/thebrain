@@ -11,6 +11,7 @@ $rules_web = array(
     '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
     '' => '/web/default/index',
+    '<storeurl:[\w-\.]+>' => '/web/default/index',
     '<lang:[\w-\.]+>/home' => '/web/default/index',
     '<lang:[\w-\.]+>/<slug:[\w-\.]+>/article' => '/web/article/index',
     '<lang:[\w-\.]+>/<slug:[\w-\.]+>/blog-detail' => '/web/blog/detail',
@@ -25,6 +26,7 @@ $rules_web = array(
     '<lang:[\w-\.]+>/my-settings' => '/web/userdata/settings',
     '<lang:[\w-\.]+>/<type:[\w-\.]+>/my-payments' => '/web/userdata/payment',
     '<lang:[\w-\.]+>/<storeurl:[\w-\.]+>/store/<id:[\w-\.]+>' => '/web/userdata/store',
+   
     '<lang:[\w-\.]+>/my-payments' => '/web/userdata/payment',
     '<lang:[\w-\.]+>/my-ratings' => '/web/userdata/ratings',
     '<lang:[\w-\.]+>/view/profile/user' => '/web/user/profileview',
