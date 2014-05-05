@@ -62,6 +62,7 @@ class Users extends DTActiveRecord {
             array('first_name, second_name, paypal_mail, password', 'length', 'max' => 50),
             array('username, user_email, store_url, fbmail, address, email_authenticate', 'length', 'max' => 255),
             array('type', 'length', 'max' => 9),
+            array('store_url','unique'),
             array('phone', 'length', 'max' => 30),
             array('avatar, background', 'length', 'max' => 300),
             array('gender', 'length', 'max' => 6),

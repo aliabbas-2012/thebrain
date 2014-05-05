@@ -142,6 +142,7 @@ class BspItem extends DTActiveRecord {
             'image_offer' => array(self::HAS_ONE, 'BspItemImage', 'item_id', 'condition' => 'is_offer = 1'),
             'image_log' => array(self::HAS_ONE, 'BspItemLog', 'item_id', 'condition' => 'log_type = "viewed"'),
             'item_related_sounds' => array(self::HAS_MANY, 'BspItemSoundUrl', 'item_id','together'=>true),
+            'item_related_sounds_view' => array(self::HAS_MANY, 'BspItemSoundUrl', 'item_id','together'=>true,'condition'=>'url <> ""'),
             'item_keywords' => array(self::HAS_MANY, 'BspItemSearchKeyword', 'item_id'),
             'item_orders' => array(self::HAS_MANY, 'BspOrder', 'item_id'),
             'item_logs' => array(self::HAS_MANY, 'BspItemLog', 'item_id'),

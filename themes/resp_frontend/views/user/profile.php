@@ -170,22 +170,9 @@
         </div>
 
     </div>
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'lat', array('class' => 'control-label col-sm-2')); ?>
-        <div class="col-lg-4">
-            <?php echo $form->textField($model, 'lat', array('class' => 'form-control')); ?> 
-            <?php echo $form->error($model, 'lat', array("class" => 'alert alert-error')); ?>
-        </div>
-
-    </div>
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'lng', array('class' => 'control-label col-sm-2')); ?>
-        <div class="col-lg-4">
-            <?php echo $form->textField($model, 'lng', array('class' => 'form-control')); ?> 
-            <?php echo $form->error($model, 'lng', array("class" => 'alert alert-error')); ?>     
-        </div> 
-
-    </div>
+    <?php echo $form->hiddenField($model, 'lat', array('class' => 'form-control')); ?> 
+    <?php echo $form->hiddenField($model, 'lng', array('class' => 'form-control')); ?> 
+   
 
     <div class="form-group">
         <?php echo $form->labelEx($model, 'store_url', array('class' => 'control-label col-sm-2')); ?>

@@ -81,7 +81,7 @@
 
     <div class='clear'></div>
     <?php
-    if (count($model->item_related_sounds) > 1) {
+    if (count($model->item_related_sounds_view) > 1) {
         $this->renderPartial("//offers/_detail/_sounds", array("model" => $model));
     }
     ?>
@@ -195,92 +195,14 @@
 
         </div>
         <div class='col-lg-4'>
-            <div class="yelow-bg">
-                <label><?php echo Yii::t('detailOffer', 'Check out my price offers') ?></label>
-            </div>
-            <div id='price_detail'>
-                <p>Price Offers</p>
-                <p class="price-detail-label">
-                    <?php echo Yii::t('detailOffer', 'Calculate Price'); ?> 
-                </p>
+            <?php
+            //calculation price offers
+            //if the price is not fix price then it should load
+            if ($model->per_price != 1) {
+                $this->renderPartial("//_detail/_price_calculation", array("model" => $model));
+            }
+            ?>
 
-                <div class='price-type'>
-                    <div class='col-lg-10'>1 Hour </div>
-                    <div class='col-lg-2'>€ 6</div>
-                </div>
-                <div class='price-type'>
-                    <div class='col-lg-10'> 2 Hours (per Hour)</div>
-                    <div class='col-lg-2'>€ 6</div>
-                </div>
-                <div class='price-type'>
-                    <div class='col-lg-10'>4 Hours (per Hour) </div>
-                    <div class='col-lg-2'>€ 6</div>
-                </div>
-                <div class='clear'></div>
-                <?php
-                $priceCalF = new PriceCalculation();
-                $form = $this->beginWidget('CActiveForm', array(
-                    'id' => 'price-form',
-                    'enableAjaxValidation' => false,
-                    'action' => $this->createUrl("/web/offers/calculatePrice"),
-                    'htmlOptions' => array(
-                        'class' => 'form-horizontal',
-                    )
-                ));
-                $time_arr = array();
-                for ($i = 0; $i <= 23; $i++) {
-                    $time_arr["0" . $i . ":00:00"] = "0" . $i . ":00";
-                }
-                echo $form->hiddenField($priceCalF, "item_id", array("value" => $model->id));
-                ?>
-                <div class='col-lg-12'>
-                    <div class='col-lg-6'>
-
-                        <?php echo $form->textField($priceCalF, "start_date", array('style' => "width:120px;")); ?>
-                        <div class='pricetextleft'><?php echo Yii::t('detailOffer', 'start date'); ?>  </div>
-
-                    </div>
-
-                    <div class='col-lg-6'>
-                        <?php echo $form->dropDownList($priceCalF, "start_time", $time_arr, array('style' => "width:120px;")); ?>
-                        <div class='pricetextright'><?php echo Yii::t('detailOffer', 'start time'); ?> </div>
-
-                    </div>
-                </div>
-                <div class='col-lg-12'>
-
-                    <div class='col-lg-6'>
-                        <?php echo $form->textField($priceCalF, "end_date", array('style' => "width:120px;")); ?>
-                        <div class='pricetextleft'><?php echo Yii::t('detailOffer', 'end date'); ?> </div>
-
-                    </div>
-
-                    <div class='col-lg-6'>
-                        <?php echo $form->dropDownList($priceCalF, "end_time", $time_arr, array('style' => "width:120px;")); ?>
-                        <div class='pricetextright'><?php echo Yii::t('detailOffer', 'end time'); ?> </div>
-
-                    </div>
-                </div>
-
-                <div id="buttonCalculate"><?php echo Yii::t('detailOffer', 'Calculate Price'); ?></div>
-                <?php
-                $this->endWidget();
-                ?>
-                <div class='clear'></div>
-                <div id="priceTotal" class="col-lg-12">
-                    <div class="col-lg-3 price-label" style=''>
-                        Price
-                    </div>
-                    <div class="col-lg-9 price-calculation">
-
-                        <div id="kqtinh" class='col-lg-9'>000,00</div>
-                        <sup class='col-lg-2'> €</sup>
-                    </div>
-                </div>
-                <div class='col-lg-12' class="time-selection-container" >
-                    Time selection:-<span id="time-selection"></span>
-                </div>
-            </div>
             <?php
             $this->renderPartial("//offers/_advertising");
             ?>
@@ -315,7 +237,7 @@ $criteria->condition = "is_public>0 AND iStatus = 1";
 
 $dataProvider = new CActiveDataProvider('BspItem', array(
     'criteria' => $criteria,
-    'pagination' => array('pageSize' => 4)
+    'pagination' => array('pageSize' => 6)
         ));
 if ($dataProvider->getTotalItemCount() > 0):
     ?>
@@ -337,7 +259,7 @@ $criteria->condition = "is_public>0 AND iStatus = 1";
 
 $dataProvider = new CActiveDataProvider('BspItem', array(
     'criteria' => $criteria,
-    'pagination' => array('pageSize' => 4)
+    'pagination' => array('pageSize' => 6)
         ));
 if ($dataProvider->getTotalItemCount() > 0):
     ?>
@@ -351,33 +273,33 @@ endif;
 ?>
 <script>
     jQuery(function() {
-        jQuery(".detail-tab-part>div").click(function() {
+            jQuery(".detail-tab-part>div").click(function() {
             jQuery(".detail-tab-part>div").removeClass("actived");
             jQuery(this).addClass("actived");
             jQuery(".tab-data").hide();
-            jQuery(".tab-" + jQuery(this).attr("tab-no") + "-data").show();
-        })
+        jQuery(".tab-" + jQuery(this).attr("tab-no") + "-data").show();
+            })
 
 
         jQuery("#addlike").click(function() {
-            if ("<?php echo Yii::app()->user->id ?>" == "") {
+                if ("<?php echo Yii::app()->user->id ?>" == "") {
                 thepuzzleadmin.showAlertBox("Please login First to like ", "warning");
             }
             else {
                 item_id = jQuery(this).attr("item_id");
                 thepuzzleadmin.updateElementAjax("<?php echo $this->createUrl("/web/user/saveItemLog", array("action" => "like")) ?>?item_id=" + item_id, "", "");
-                thepuzzleadmin.showAlertBox("Added to like list ", "success");
+        thepuzzleadmin.showAlertBox("Added to like list ", "success");
             }
-        })
+            })
 
         jQuery(".add-wishlist").click(function() {
-            if ("<?php echo Yii::app()->user->id ?>" == "") {
+                if ("<?php echo Yii::app()->user->id ?>" == "") {
                 thepuzzleadmin.showAlertBox("Please login First to like ", "warning");
             }
             else {
                 item_id = jQuery(this).attr("item_id");
                 thepuzzleadmin.updateElementAjax("<?php echo $this->createUrl("/web/user/saveItemLog", array("action" => "favrout")) ?>?item_id=" + item_id, "", "");
-                thepuzzleadmin.showAlertBox("Added to favourate list ", "success");
+        thepuzzleadmin.showAlertBox("Added to favourate list ", "success");
             }
         })
         jQuery("#PriceCalculation_start_date").kendoDatePicker({format: "yyyy/MM/dd", });
@@ -385,20 +307,20 @@ endif;
         $("#PriceCalculation_start_time").kendoDropDownList();
         $("#PriceCalculation_end_time").kendoDropDownList();
 
-        jQuery("#buttonCalculate").click(function() {
-            jQuery("#loading").show();
-            jQuery.ajax({
+            jQuery("#buttonCalculate").click(function() {
+                jQuery("#loading").show();
+                jQuery.ajax({
                 type: "POST",
                 url: jQuery("#price-form").attr("action") + "?ajax=1",
                 data: jQuery("#price-form").serialize(),
                 dataType: "JSON",
-                success: function(data)
+                    success: function(data)
                 {
 
                     jQuery("#kqtinh").html(data.price);
                     jQuery("#_order_price").val(data.price);
-                    jQuery("#time-selection").html(data.period);
-                    jQuery("#loading").hide();
+                jQuery("#time-selection").html(data.period);
+    jQuery("#loading").hide();
 
                 }
             });
