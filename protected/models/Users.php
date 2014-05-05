@@ -305,7 +305,7 @@ class Users extends DTActiveRecord {
 
     public function beforeSave() {
         $this->birthday = !empty($this->birthday) ? ItstFunctions::dateFormatForSave($this->birthday) : "";
-
+        $this->store_url = MyHelper::convert_no_sign($this->store_url);
         return parent::beforeSave();
     }
 
