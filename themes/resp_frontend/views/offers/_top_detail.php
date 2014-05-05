@@ -166,7 +166,7 @@ $background = !empty($model->background_image) ? Yii::app()->baseUrl . "/uploads
                 <?php
                 if (!empty($user->store_url)):
                     $store_url = str_replace(" ", "-", $user->store_url);
-                    $store_url = $this->createUrl("/web/userdata/store", array("id" => $user->id, "storeurl" => $store_url));
+                    $store_url = $this->createSimpleUrl("/web/default/index/").$store_url;
                     ?>
                     <div id='orderNowdiv'>
                         <a id="visitMystore" href="<?php echo $store_url ?>"><?php echo Yii::t('link', 'Visit My Store'); ?></a>

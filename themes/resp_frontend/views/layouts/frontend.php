@@ -373,7 +373,11 @@
         <div id="puzzle_slider">
             <?php
             if ($this->id == "default" && $this->action->id == "index") {
-                $this->renderPartial("//default/_slider");
+                if (!empty($this->_user)) {
+                    $this->renderPartial("//userdata/_user_store_top", array("model" => $this->_user));
+                } else {
+                    $this->renderPartial("//default/_slider");
+                }
             } else if ($this->id == "offers" && $this->action->id == "detail" && !empty($this->item)) {
                 $this->renderPartial("//offers/_top_detail", array("model" => $this->item));
             }

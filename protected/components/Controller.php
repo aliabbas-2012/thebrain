@@ -352,6 +352,15 @@ class Controller extends RController {
         }
         return parent::createUrl($route, $params, $ampersand);
     }
+    /**
+     *  only for simple url
+     * @param type $route
+     * @param type $params
+     * @param type $ampersand
+     */
+    public function createSimpleUrl($route, $params = array(), $ampersand = '&') {
+        return parent::createUrl($route, $params, $ampersand);
+    }
 
     /*
      * DT dumper for development only just pass the variable...
