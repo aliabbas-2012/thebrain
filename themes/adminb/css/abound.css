@@ -587,3 +587,6 @@ input.error {
 .k-numeric-wrap input.error {
     background-color: red !important;
 }
+.btn-primary {
+    float: none !important;
+}
