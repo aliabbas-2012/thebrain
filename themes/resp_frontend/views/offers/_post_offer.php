@@ -25,7 +25,20 @@ if ($model->background_image != "") {
                 <div class="col-lg-4">
                     <div id="offer2">
                         <?php
-                        echo $form->dropDownList($model, 'per_price', $model->_per_price_options, array("class" => "select1"));
+                        echo $form->dropDownList($model, 'per_price', $model->_per_price_options, 
+                                array(
+                                        "class" => "select1",
+                                        "onchange"=>"
+                                            
+                                            if(jQuery(this).val()!=1){
+                                                
+                                                jQuery('#discount-price').show();
+                                            }
+                                            else {
+                                                jQuery('#discount-price').hide();
+                                            }
+                                         "
+                                    ));
                         ?>
 
                         <?php echo zHtml::activeDropDownList($model, 'currency_id', (BspCurrency::model()->getCurrencies()), array('class' => 'select2', 'encode' => true)); ?>

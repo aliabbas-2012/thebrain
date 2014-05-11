@@ -129,7 +129,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
                 </div>
             </div>
             <div class="col-lg-5">
-                <div id="discount-price">
+                <div id="discount-price" style="<?php echo $model->per_price ==1 || empty($model->per_price)?"display:none":""; ?>">
 
                     <?php
                     echo $form->textField($model, 'discount_price', array(
