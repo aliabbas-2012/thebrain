@@ -318,7 +318,7 @@
         // pick list. Retrieve the matching places for that item.
         google.maps.event.addListener(searchBox_city, 'places_changed', function() {
             var places = searchBox_city.getPlaces();
-
+            
             if (typeof(places[0].geometry.location.nb) != "undefined") {
                 jQuery("#Users_lat").val(places[0].geometry.location.nb);
 

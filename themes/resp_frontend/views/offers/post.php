@@ -156,7 +156,12 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
 </div>
 <div class="container">
     <?php
-    $this->renderPartial("//offers/_user_offer", array("model" => $user, "form" => $form));
+    if ($is_user_update == true) {
+        $this->renderPartial("//offers/_user_offer", array("model" => $user, "form" => $form));
+    }
+    else {
+        echo $form->hiddenField($user,"_dummy");
+    }
     ?>
 </div>
 <div class="clear"></div>
