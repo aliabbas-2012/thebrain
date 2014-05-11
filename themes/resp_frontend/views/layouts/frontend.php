@@ -147,7 +147,7 @@
                                     ?>
                                     <b class="caret"></b>
                                 </a>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu notication-box-2">
                                     <?php
                                     $count = 0;
                                     foreach ($notifications as $notify):
