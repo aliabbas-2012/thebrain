@@ -288,7 +288,7 @@ class OffersController extends Controller {
     public function actionPost($action = "create", $slug = "") {
         $model = new BspItemFrontEnd();
         $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
-       
+        $is_user_update = $user->checkUserNeedToUpdateOnOffer();
 
         if ($slug != "") {
             $slug_arr = explode("-", $slug);
@@ -323,7 +323,7 @@ class OffersController extends Controller {
             if (!$model->validate()) {
                 $isvalid = 0;
             }
-            if (!$user->validate()) {
+            if ($is_user_update == true && !$user->validate()) {
                 $isvalid = 0;
             }
 
@@ -336,8 +336,9 @@ class OffersController extends Controller {
                     } else {
                         unset($user->password);
                     }
-
-                    $user->save(false);
+                    if ($is_user_update == true) {
+                        $user->save(false);
+                    }
                     foreach ($model->image_items as $modelImg) {
                         $modelImg->item_id = $model->id;
 
@@ -357,7 +358,7 @@ class OffersController extends Controller {
                 }
             }
         }
-        $this->render("//offers/post", array("model" => $model, "user" => $user));
+        $this->render("//offers/post", array("model" => $model, "user" => $user, "is_user_update" => $is_user_update));
     }
 
     /**
@@ -715,13 +716,13 @@ class OffersController extends Controller {
      * order offer
      * @param type $id
      */
-    public function actionOrderOffer($id ,$price  = "") {
+    public function actionOrderOffer($id, $price = "") {
         $offer = BspItem::model()->findByPk($id);
-        
-        if(isset($_POST['order_price']) && $_POST['order_price']!="" && $_POST['order_price'] !=0){
+
+        if (isset($_POST['order_price']) && $_POST['order_price'] != "" && $_POST['order_price'] != 0) {
             $offer->_order_price = $_POST['order_price'];
         }
-        
+
         $current_user = Yii::app()->user->user;
         $old = PaymentPaypallAdaptive::model()->saveInitialPaymentOrder($offer->user_rel, $offer);
         if ($old) {

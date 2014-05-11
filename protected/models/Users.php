@@ -41,7 +41,7 @@
  */
 class Users extends DTActiveRecord {
 
-    public $pwd_repeat, $_name;
+    public $pwd_repeat, $_name,$_dummy;
 
     /**
      * @return string the associated database table name
@@ -62,8 +62,9 @@ class Users extends DTActiveRecord {
             array('first_name, second_name, paypal_mail, password', 'length', 'max' => 50),
             array('username, user_email, store_url, fbmail, address, email_authenticate', 'length', 'max' => 255),
             array('type', 'length', 'max' => 9),
-            array('store_url','unique'),
+            array('store_url', 'unique'),
             array('phone', 'length', 'max' => 30),
+            array('phone', 'numerical', 'allowEmpty' => true),
             array('avatar, background', 'length', 'max' => 300),
             array('gender', 'length', 'max' => 6),
             array('password_hint, city', 'length', 'max' => 200),
@@ -74,7 +75,7 @@ class Users extends DTActiveRecord {
             array('fbmail,paypal_mail', 'email'),
             array('user_email', $this->isNewRecord ? 'email' : "safe"),
             array('user_email,username', 'unique'),
-            array('_name,store_url', 'safe'),
+            array('_dummy,_name,store_url', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, first_name, second_name, username, user_email, type, phone, avatar, birthday, gender, store_url, paypal_mail, fbmail, password, password_hint, description, address, country, city, zipcode, lat, lng, background, sRecentList, sWishList, lastActiveTime, email_authenticate, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
@@ -357,6 +358,28 @@ class Users extends DTActiveRecord {
 
         $command = $connection->createCommand($sql);
         return $command->queryScalar();
+    }
+
+    /**
+     * check if any field in setting page is empty then
+     * user will be able to update on post offer page
+     */
+    public function checkUserNeedToUpdateOnOffer() {
+        $fields_array = array("first_name",
+            "second_name","phone",
+            "address",'birthday',
+            'city','gender',
+            'country',
+            'zipcode'
+        );
+        $is_update = false;
+        foreach($fields_array as $field){
+            if(trim($this->$field)==""){
+                $is_update = true;
+                break;
+            }
+        }
+        return $is_update;
     }
 
 }
