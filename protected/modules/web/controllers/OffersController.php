@@ -860,10 +860,12 @@ class OffersController extends Controller {
             $this->sendEmail2($email);
         } else if ($status == "completed") {
             //setting notification
-            $email['Subject'] = "buyer (" . Yii::app()->user->User->_name . ") has  " . ucfirst($status) . " the offer and sent to you money ";
+            $money = $paymentAdaptive->amount - $paymentAdaptive->puzzzle_commission." ".$paymentAdaptive->offer->currency->name
+                    ;
+            $email['Subject'] = "buyer (" . Yii::app()->user->User->_name . ") has  " . ucfirst($status) . " the offer and sent to you  ".$money;
             $paymentAdaptive->generateNotification($model->payment_adaptive->seller->id, $paymentAdaptive->id, "seller", $email['Subject']);
 
-            $email['Body'] = Yii::app()->user->User->_name . " has  " . ucfirst($status) . " the offer and sent to you money ";
+            $email['Body'] = Yii::app()->user->User->_name . " has  " . ucfirst($status) . " the offer and sent to you  ".$money;
             $email['Body'].= "<br/> after 48 hours money will be transfered to you";
             $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
             BspOrder::model()->setStatusOrder($paymentAdaptive, BspOrder::STATUS_ORDER_COMPLETE);
