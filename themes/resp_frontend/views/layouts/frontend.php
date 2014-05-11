@@ -105,7 +105,7 @@
                             $criteria = new CDbCriteria();
                             $criteria->condition = "isview = 0 AND user_id = " . Yii::app()->user->id;
                             $notify = BspNotify::model()->count($criteria);
-                            $criteria->limit = 20;
+                            $criteria->limit = 10;
                             $criteria->condition = "user_id = " . Yii::app()->user->id;
                             $criteria->order = "id DESC";
                             $notifications = BspNotify::model()->findAll($criteria);
