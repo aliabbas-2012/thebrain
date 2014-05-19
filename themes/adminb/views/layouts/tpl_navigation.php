@@ -34,6 +34,7 @@
                                 'items' => array(
                                     array('label' => 'Create', 'url' => array('/users/create'), 'visible' => !Yii::app()->user->isGuest),
                                     array('label' => 'List', 'url' => array('/users/index'), 'visible' => !Yii::app()->user->isGuest),
+                                    array('label' => 'Facebook Users ', 'url' => array('/users/index',"Users[_is_fb]"=>1), 'visible' => !Yii::app()->user->isGuest),
                                 )),
                             array('label' => 'Item <span class="caret"></span>',
                                 'url' => '#', 'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),

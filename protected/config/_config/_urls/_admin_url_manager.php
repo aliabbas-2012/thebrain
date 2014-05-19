@@ -75,5 +75,7 @@ $rules_admin = array(
      'admin/users/changepass' => '/users/changepass',
      'admin/users/profile' => '/users/profile',
      'admin/users/profileview' => '/users/profileview',
+      //rights 
+     'admin/rights' => '/rights',
 );
 ?>

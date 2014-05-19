@@ -41,7 +41,7 @@
  */
 class Users extends DTActiveRecord {
 
-    public $pwd_repeat, $_name,$_dummy;
+    public $pwd_repeat, $_name,$_dummy ,$_is_fb;
 
     /**
      * @return string the associated database table name
@@ -75,7 +75,7 @@ class Users extends DTActiveRecord {
             array('fbmail,paypal_mail', 'email'),
             array('user_email', $this->isNewRecord ? 'email' : "safe"),
             array('user_email,username', 'unique'),
-            array('_dummy,_name,store_url', 'safe'),
+            array('_is_fb,_dummy,_name,store_url', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, first_name, second_name, username, user_email, type, phone, avatar, birthday, gender, store_url, paypal_mail, fbmail, password, password_hint, description, address, country, city, zipcode, lat, lng, background, sRecentList, sWishList, lastActiveTime, email_authenticate, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
@@ -259,6 +259,10 @@ class Users extends DTActiveRecord {
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
         $criteria->compare('update_user_id', $this->update_user_id, true);
+        
+        if($this->_is_fb == true){
+            $criteria->addCondition("fbmail <> ''");
+        }
 
 
         $criteria->addCondition("id <> " . Yii::app()->user->id . " AND type ='non-admin'");

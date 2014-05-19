@@ -58,6 +58,11 @@
         <?php echo $form->textField($model, 'comission_rate'); ?>
         <?php echo $form->error($model, 'comission_rate'); ?>
     </div>
+    <div class="row">
+        <?php echo $form->labelEx($model, 'discount_offer_rate'); ?>
+        <?php echo $form->textField($model, 'discount_offer_rate'); ?>
+        <?php echo $form->error($model, 'discount_offer_rate'); ?>
+    </div>
 
 
     <div class="row buttons">
