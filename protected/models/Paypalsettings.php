@@ -147,6 +147,8 @@ class Paypalsettings extends DTActiveRecord {
             "acct1.Signature" => $model->APISignature,
             "acct1.AppId" => $model->ApplicationID,
             "acct1.CertPath" => "cert_key.pem",
+            "discount_offer_rate" => $model->discount_offer_rate,
+            "comission_rate" => $model->comission_rate,
             "mode" => $model->Sandbox == 1 ? "sandbox" : "live",
         );
     }

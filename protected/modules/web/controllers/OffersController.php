@@ -286,6 +286,7 @@ class OffersController extends Controller {
      * @param type $action
      */
     public function actionPost($action = "create", $slug = "") {
+        $payPAllSetting = Paypalsettings::model()->getPayPallAdaptiveSetting();
         $model = new BspItemFrontEnd();
         $user = ChangeUser::model()->findByPk(Yii::app()->user->id);
         $is_user_update = $user->checkUserNeedToUpdateOnOffer();
@@ -358,7 +359,10 @@ class OffersController extends Controller {
                 }
             }
         }
-        $this->render("//offers/post", array("model" => $model, "user" => $user, "is_user_update" => $is_user_update));
+        $this->render("//offers/post", array(
+            "model" => $model,
+            "payPAllSetting" => $payPAllSetting,
+            "user" => $user, "is_user_update" => $is_user_update));
     }
 
     /**
@@ -860,12 +864,12 @@ class OffersController extends Controller {
             $this->sendEmail2($email);
         } else if ($status == "completed") {
             //setting notification
-            $money = $paymentAdaptive->amount - $paymentAdaptive->puzzzle_commission." ".$paymentAdaptive->offer->currency->name
-                    ;
-            $email['Subject'] = "buyer (" . Yii::app()->user->User->_name . ") has  " . ucfirst($status) . " the offer and sent to you  ".$money;
+            $money = $paymentAdaptive->amount - $paymentAdaptive->puzzzle_commission . " " . $paymentAdaptive->offer->currency->name
+            ;
+            $email['Subject'] = "buyer (" . Yii::app()->user->User->_name . ") has  " . ucfirst($status) . " the offer and sent to you  " . $money;
             $paymentAdaptive->generateNotification($model->payment_adaptive->seller->id, $paymentAdaptive->id, "seller", $email['Subject']);
 
-            $email['Body'] = Yii::app()->user->User->_name . " has  " . ucfirst($status) . " the offer and sent to you  ".$money;
+            $email['Body'] = Yii::app()->user->User->_name . " has  " . ucfirst($status) . " the offer and sent to you  " . $money;
             $email['Body'].= "<br/> after 48 hours money will be transfered to you";
             $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
             BspOrder::model()->setStatusOrder($paymentAdaptive, BspOrder::STATUS_ORDER_COMPLETE);

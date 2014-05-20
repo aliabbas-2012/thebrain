@@ -3,6 +3,9 @@
 <div class="alert alert-success" style="display: none"></div>
 
 <?php
+$disount_ofer_price = Yii::t('postOffer', "Publish for ").$payPAllSetting['discount_offer_rate'];
+$publish_free = Yii::t('postOffer', "Publish for free");
+
 //header('Content-Type: text/html; charset=utf-8');
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'post-form',
@@ -137,7 +140,17 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
                         'placeholder' => "My New Price is?...",
                         "font-size" => "font-size: 20px",
                         "pattern" => "\d{1,11}",
-                        "id" => "txtdiscount")
+                        "id" => "txtdiscount",
+                        "onkeyup"=>"
+                            its_val = jQuery.trim(jQuery(this).val());
+                            if(its_val !='' && its_val>0){
+                                jQuery('#btn-submit').html('".$disount_ofer_price."')
+                            }
+                            else {
+                                 jQuery('#btn-submit').html('".$publish_free."');
+                            }
+                        "
+                        )
                     );
                     ?>
                     <sup>€</sup>
@@ -371,7 +384,10 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
     <div class="row">
         <div class="col-lg-12">
             <div class="submit" align="center">
-                <a id="btn-submit" class="floatRight" href="javascript:void(0)" onclick="thepuzzleadmin.postOffer()">Publish for free</a>
+                <a id="btn-submit" class="floatRight" href="javascript:void(0)" 
+                   onclick="thepuzzleadmin.postOffer()"><?php echo $publish_free; ?>
+                    
+                </a>
             </div>
         </div>
         <div class="col-lg-12">
