@@ -235,6 +235,9 @@ $criteria->order = "id DESC";
 $criteria->addCondition('id <> ' . $model->id . ' AND user_id =' . $model->user_id);
 $criteria->condition = "is_public>0 AND iStatus = 1";
 
+$criteria->addCondition("deleted = :deleted");
+$criteria->params = array("deleted" => 0);
+
 $dataProvider = new CActiveDataProvider('BspItem', array(
     'criteria' => $criteria,
     'pagination' => array('pageSize' => 6)
@@ -256,6 +259,8 @@ $criteria = new CDbCriteria();
 $criteria->order = "id DESC";
 $criteria->addCondition('id <> ' . $model->id . ' AND group_id =' . $model->group_id);
 $criteria->condition = "is_public>0 AND iStatus = 1";
+$criteria->addCondition("deleted = :deleted");
+$criteria->params = array("deleted" => 0);
 
 $dataProvider = new CActiveDataProvider('BspItem', array(
     'criteria' => $criteria,
@@ -273,33 +278,33 @@ endif;
 ?>
 <script>
     jQuery(function() {
-            jQuery(".detail-tab-part>div").click(function() {
+        jQuery(".detail-tab-part>div").click(function() {
             jQuery(".detail-tab-part>div").removeClass("actived");
             jQuery(this).addClass("actived");
             jQuery(".tab-data").hide();
-        jQuery(".tab-" + jQuery(this).attr("tab-no") + "-data").show();
-            })
+            jQuery(".tab-" + jQuery(this).attr("tab-no") + "-data").show();
+        })
 
 
         jQuery("#addlike").click(function() {
-                if ("<?php echo Yii::app()->user->id ?>" == "") {
+            if ("<?php echo Yii::app()->user->id ?>" == "") {
                 thepuzzleadmin.showAlertBox("Please login First to like ", "warning");
             }
             else {
                 item_id = jQuery(this).attr("item_id");
                 thepuzzleadmin.updateElementAjax("<?php echo $this->createUrl("/web/user/saveItemLog", array("action" => "like")) ?>?item_id=" + item_id, "", "");
-        thepuzzleadmin.showAlertBox("Added to like list ", "success");
+                thepuzzleadmin.showAlertBox("Added to like list ", "success");
             }
-            })
+        })
 
         jQuery(".add-wishlist").click(function() {
-                if ("<?php echo Yii::app()->user->id ?>" == "") {
+            if ("<?php echo Yii::app()->user->id ?>" == "") {
                 thepuzzleadmin.showAlertBox("Please login First to like ", "warning");
             }
             else {
                 item_id = jQuery(this).attr("item_id");
                 thepuzzleadmin.updateElementAjax("<?php echo $this->createUrl("/web/user/saveItemLog", array("action" => "favrout")) ?>?item_id=" + item_id, "", "");
-        thepuzzleadmin.showAlertBox("Added to favourate list ", "success");
+                thepuzzleadmin.showAlertBox("Added to favourate list ", "success");
             }
         })
         jQuery("#PriceCalculation_start_date").kendoDatePicker({format: "yyyy/MM/dd", });
@@ -307,20 +312,20 @@ endif;
         $("#PriceCalculation_start_time").kendoDropDownList();
         $("#PriceCalculation_end_time").kendoDropDownList();
 
-            jQuery("#buttonCalculate").click(function() {
-                jQuery("#loading").show();
-                jQuery.ajax({
+        jQuery("#buttonCalculate").click(function() {
+            jQuery("#loading").show();
+            jQuery.ajax({
                 type: "POST",
                 url: jQuery("#price-form").attr("action") + "?ajax=1",
                 data: jQuery("#price-form").serialize(),
                 dataType: "JSON",
-                    success: function(data)
+                success: function(data)
                 {
 
                     jQuery("#kqtinh").html(data.price);
                     jQuery("#_order_price").val(data.price);
-                jQuery("#time-selection").html(data.period);
-    jQuery("#loading").hide();
+                    jQuery("#time-selection").html(data.period);
+                    jQuery("#loading").hide();
 
                 }
             });

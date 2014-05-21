@@ -70,7 +70,7 @@
                     <div class="review-content-amount"><?php echo $order->amount; ?> &euro;</div>
                 </div>
                 <div class="review-stats col-lg-2">
-                    <div class="seller send-review"><?php echo CHtml::link(Yii::t('user', 'Send A Review'),$this->createUrl("/web/user/sendReview",array("id"=>$order->id,"item_id"=>isset($order->item)?$order->item->id:""))); ?></div>
+                    <div class="seller send-review"><?php echo CHtml::link(Yii::t('user', 'Send A Review'), $this->createUrl("/web/user/sendReview", array("id" => $order->id, "item_id" => isset($order->item) ? $order->item->id : ""))); ?></div>
                     <div class="rating"> Order date:&nbsp;&nbsp;<?php echo date("d-m-Y", strtotime($order->date_order)); ?></div>
                     <div class="rating">Start date:&nbsp;&nbsp;<?php echo date("d-m-Y", strtotime($order->date_start)); ?></div>
                     <div class="rating"> Delivery date:&nbsp;&nbsp;<?php echo date("d-m-Y", strtotime($order->date_finish)); ?> </div>
@@ -105,6 +105,8 @@
     $criteria->order = "id DESC";
     $criteria->addInCondition('id', $saved_items);
     $criteria->condition = "is_public>0 AND iStatus = 1";
+    $criteria->addCondition("deleted = :deleted");
+    $criteria->params = array("deleted" => 0);
 
     $dataProvider = new CActiveDataProvider('BspItem', array(
         'criteria' => $criteria,
@@ -143,6 +145,8 @@
     $criteria->limit = "16";
     $criteria->order = "id DESC";
     $criteria->condition = "is_public>0 AND iStatus = 1";
+    $criteria->addCondition("deleted = :deleted");
+    $criteria->params = array("deleted" => 0);
     $dataProvider = new CActiveDataProvider('BspItem', array(
         'criteria' => $criteria,
         'pagination' => array('pageSize' => 15)
@@ -205,13 +209,12 @@ Yii::app()->clientScript->registerScript('dashobard', '
 <div class="modal fade" id="reveiwModel" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" id="reveiwModel-content">
-            
+
         </div>
     </div>
 </div>
 <?php
 Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/dist/css/Screen.css', CClientScript::POS_END);
-
 ?>
 
 

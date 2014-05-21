@@ -58,6 +58,8 @@ $criteria = new CDbCriteria();
 
 $criteria->order = "id DESC";
 $criteria->addCondition("user_id =" . $model->id);
+$criteria->addCondition("deleted = :deleted");
+$criteria->params = array("deleted" => 0);
 $dataProvider = new CActiveDataProvider('BspItem', array(
     'criteria' => $criteria,
     'pagination' => array('pageSize' => 15)
@@ -74,9 +76,9 @@ $this->renderPartial("//userdata/_user_store_bottom", array("model" => $model));
     <div class="modal-dialog">
         <div class="modal-content">
             <?php
-                $recieve_user = $model;
-                $message = new BspMessage;
-                $this->renderPartial("//offers/_sent_message", array("model" => $message,"recieve_user"=>$recieve_user));
+            $recieve_user = $model;
+            $message = new BspMessage;
+            $this->renderPartial("//offers/_sent_message", array("model" => $message, "recieve_user" => $recieve_user));
             ?>
         </div>
     </div>

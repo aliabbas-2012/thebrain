@@ -69,6 +69,9 @@ class OffersController extends Controller {
         $criteria = new CDbCriteria();
         $criteria->addCondition("group_id = " . $cat_arr[count($cat_arr) - 1]);
         $criteria->addCondition("iStatus = 1");
+
+        $criteria->addCondition("deleted = :deleted");
+        $criteria->params = array("deleted" => 0);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 15)
@@ -216,6 +219,10 @@ class OffersController extends Controller {
         }
 
 
+        $criteria->addCondition("deleted = :deleted");
+        $criteria->params = array("deleted" => 0);
+
+
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 1000)
@@ -273,6 +280,9 @@ class OffersController extends Controller {
      */
     public function actionDetail($slug = "") {
         $slug_arr = explode("-", $slug);
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("deleted = :deleted");
+        $criteria->params = array("deleted" => 0);
         $model = BspItem::model()->findByPk($slug_arr[0]);
         $priceCal = BspItemConditionHour::model()->findAll("item_id = " . $slug_arr[0]);
         $this->item = $model;
@@ -294,7 +304,12 @@ class OffersController extends Controller {
         if ($slug != "") {
             $slug_arr = explode("-", $slug);
             $id = $slug_arr[0];
-            $model = BspItemFrontEnd::model()->findByPk($id, "user_id =" . Yii::app()->user->id);
+
+            $criteria = new CDbCriteria();
+            $criteria->addCondition("deleted = :deleted AND user_id =:user_id");
+            $criteria->params = array("deleted" => 0,"user_id"=>Yii::app()->user->id);
+
+            $model = BspItemFrontEnd::model()->findByPk($id,$criteria);
             $model->saveViewerForLog();
             //setting one if the present its images;
             if ($model->num_image_items > 0) {
@@ -329,7 +344,7 @@ class OffersController extends Controller {
             }
 
             if ($isvalid == 1) {
-                if($model->discount_price >0){
+                if ($model->discount_price > 0) {
                     $model->is_public = 0;
                     $model->iStatus = 0;
                 }

@@ -26,6 +26,9 @@
                 $criteria->order = "rand()";
                 $criteria->condition = "is_public>0 AND iStatus = 1";
 
+                $criteria->addCondition("deleted = :deleted");
+                $criteria->params = array("deleted" => 0);
+
                 $dataProvider = new CActiveDataProvider('BspItem', array(
                     'criteria' => $criteria,
                     'pagination' => array('pageSize' => 15)
@@ -70,6 +73,8 @@
                 $criteria->order = "id DESC";
                 $criteria->condition = "is_public>0 AND iStatus = 1";
                 $criteria->addInCondition('id', $viwed_items);
+                $criteria->addCondition("t.deleted = 0");
+      
                 $dataProvider = new CActiveDataProvider('BspItem', array(
                     'criteria' => $criteria,
                     'pagination' => array('pageSize' => 15)
@@ -117,6 +122,8 @@
 
                     $criteria->addInCondition('id', $saved_items);
                     $criteria->condition = "is_public>0 AND iStatus = 1";
+                    $criteria->addCondition("deleted = :deleted");
+                    $criteria->params = array("deleted" => 0);
                     $dataProvider = new CActiveDataProvider('BspItem', array(
                         'criteria' => $criteria,
                         'pagination' => array('pageSize' => 15)

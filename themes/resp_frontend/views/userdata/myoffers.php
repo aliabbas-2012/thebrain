@@ -20,7 +20,7 @@
                 ?>
                 <div class="alert alert-success">
                     <?php
-                        echo Yii::app()->user->getFlash('offer-status');
+                    echo Yii::app()->user->getFlash('offer-status');
                     ?>  
                 </div>
                 <?php
@@ -30,11 +30,13 @@
                 <?php
                 $criteria = new CDbCriteria();
                 $criteria->addCondition("user_id = " . Yii::app()->user->id);
+                $criteria->addCondition("deleted = :deleted");
+                $criteria->params = array("deleted" => 0);
                 $dataProvider = new CActiveDataProvider('BspItem', array(
                     'criteria' => $criteria,
                     'pagination' => array('pageSize' => 25),
-                     'sort' => array(//optional and sortring
-                        'defaultOrder'=>'id DESC',
+                    'sort' => array(//optional and sortring
+                        'defaultOrder' => 'id DESC',
                     ),
                 ));
                 $this->widget('zii.widgets.grid.CGridView', array(
