@@ -3,7 +3,7 @@
 <div class="alert alert-success" style="display: none"></div>
 
 <?php
-$disount_ofer_price = Yii::t('postOffer', "Publish for ").$payPAllSetting['discount_offer_rate'];
+$disount_ofer_price = Yii::t('postOffer', "Publish for ") . $payPAllSetting['discount_offer_rate'];
 $publish_free = Yii::t('postOffer', "Publish for free");
 
 //header('Content-Type: text/html; charset=utf-8');
@@ -132,25 +132,28 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
                 </div>
             </div>
             <div class="col-lg-5">
-                <div id="discount-price" style="<?php echo $model->per_price ==1 || empty($model->per_price)?"display:none":""; ?>">
+                <div id="discount-price" style="<?php echo $model->per_price == 1 || empty($model->per_price) ? "display:none" : ""; ?>">
 
                     <?php
+                    $key_up = array("onkeyup" => "
+                            its_val = jQuery.trim(jQuery(this).val());
+                            if(its_val !='' && its_val>0){
+                                jQuery('#btn-submit').html('" . $disount_ofer_price . "')
+                            }
+                            else {
+                                 jQuery('#btn-submit').html('" . $publish_free . "');
+                            }
+                        ");
+                    if (!$model->isNewRecord) {
+                        $key_up = array();
+                    }
                     echo $form->textField($model, 'discount_price', array(
                         'class' => 'k-textbox k-textbox',
                         'placeholder' => "My New Price is?...",
                         "font-size" => "font-size: 20px",
                         "pattern" => "\d{1,11}",
                         "id" => "txtdiscount",
-                        "onkeyup"=>"
-                            its_val = jQuery.trim(jQuery(this).val());
-                            if(its_val !='' && its_val>0){
-                                jQuery('#btn-submit').html('".$disount_ofer_price."')
-                            }
-                            else {
-                                 jQuery('#btn-submit').html('".$publish_free."');
-                            }
-                        "
-                        )
+                            )+$key_up
                     );
                     ?>
                     <sup>€</sup>
@@ -171,9 +174,8 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
     <?php
     if ($is_user_update == true) {
         $this->renderPartial("//offers/_user_offer", array("model" => $user, "form" => $form));
-    }
-    else {
-        echo $form->hiddenField($user,"_dummy");
+    } else {
+        echo $form->hiddenField($user, "_dummy");
     }
     ?>
 </div>
@@ -386,7 +388,7 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
             <div class="submit" align="center">
                 <a id="btn-submit" class="floatRight" href="javascript:void(0)" 
                    onclick="thepuzzleadmin.postOffer()"><?php echo $publish_free; ?>
-                    
+
                 </a>
             </div>
         </div>
@@ -403,201 +405,201 @@ $this->renderPartial("//offers/offer_errors/_offer_errors", array("model" => $mo
 <?php $this->endWidget(); ?>
 
 <script>
-                    var background_url = "<?php
+                       var background_url = "<?php
 echo $this->createUrl("/site/uploadTemp", array(
     "index" => 1,
     "model" => get_class($model), "attribute" => "BspItemFrontEnd_background_image")
 );
 ?>";
-                    var avatar_url = "<?php
+                       var avatar_url = "<?php
 echo $this->createUrl("/site/uploadTemp", array(
     "index" => 2,
     "model" => get_class($user), "attribute" => "Users_avatar")
 );
 ?>";
-                    var upload_images_url = "<?php
+                       var upload_images_url = "<?php
 echo $this->createUrl("/site/uploadTemp", array(
     "index" => 3,
     "model" => get_class($model), "attribute" => "BspItemFrontEnd_upload_images")
 );
 ?>";
-                    var addPartial = "<?php
+                       var addPartial = "<?php
 echo $this->createUrl("/web/offers/addpartial");
 ?>";
-                    /**
-                     *  change price option
-                     * @param {type} obj 
-                     * @returns {undefined}
-                     */
-                    function change_price_option(obj) {
-                        jQuery(obj).parent().parent().parent().find(".change_price_option").val(jQuery(obj).val());
+                       /**
+                        *  change price option
+                        * @param {type} obj 
+                        * @returns {undefined}
+                        */
+                       function change_price_option(obj) {
+                           jQuery(obj).parent().parent().parent().find(".change_price_option").val(jQuery(obj).val());
 
-                        if (jQuery(obj).val() == "range") {
-                            jQuery(obj).parent().parent().parent().find(".start_time_label").show();
-                            jQuery(obj).parent().parent().parent().find(".end_time_label").show();
-                            jQuery(obj).parent().parent().parent().find(".end_field").show();
-                        }
-                        else {
-                            jQuery(obj).parent().parent().parent().find(".start_time_label").hide();
-                            jQuery(obj).parent().parent().parent().find(".end_time_label").hide();
-                            jQuery(obj).parent().parent().parent().find(".end_field").hide();
+                           if (jQuery(obj).val() == "range") {
+                               jQuery(obj).parent().parent().parent().find(".start_time_label").show();
+                               jQuery(obj).parent().parent().parent().find(".end_time_label").show();
+                               jQuery(obj).parent().parent().parent().find(".end_field").show();
+                           }
+                           else {
+                               jQuery(obj).parent().parent().parent().find(".start_time_label").hide();
+                               jQuery(obj).parent().parent().parent().find(".end_time_label").hide();
+                               jQuery(obj).parent().parent().parent().find(".end_field").hide();
 
-                        }
-                        //.find(".change_price_option")
-                    }
-                    jQuery(function() {
-                        //CASE IS DIFFERNT NOW
-                        //WITH HOUR ONLY HOUR
-                        //WITH DAY IS HOUR AND DAY
-                        //WITH WEEK IS HOUR , DAY , WEEK
-                        // WITH MONTH IS HOUR , DAY, WEEK AND MONTH
+                           }
+                           //.find(".change_price_option")
+                       }
+                       jQuery(function() {
+                           //CASE IS DIFFERNT NOW
+                           //WITH HOUR ONLY HOUR
+                           //WITH DAY IS HOUR AND DAY
+                           //WITH WEEK IS HOUR , DAY , WEEK
+                           // WITH MONTH IS HOUR , DAY, WEEK AND MONTH
 
-                        jQuery("#BspItemFrontEnd_per_price").change(function() {
-                            elem_id = jQuery(this).val();
-                            jQuery(".type_offer").hide();
-                            if (elem_id == 2) {
-                                jQuery("#type_offer_" + elem_id).show();
-                            }
-                            else if (elem_id == 3) {
-                                jQuery("#type_offer_2").show();
-                                jQuery("#type_offer_3").show();
-                            }
-                            else if (elem_id == 4) {
-                                jQuery("#type_offer_2").show();
-                                jQuery("#type_offer_3").show();
-                                jQuery("#type_offer_4").show();
-                            }
-                            else if (elem_id == 5) {
-                                jQuery("#type_offer_2").show();
-                                jQuery("#type_offer_3").show();
-                                jQuery("#type_offer_4").show();
-                                jQuery("#type_offer_5").show();
-                            }
+                           jQuery("#BspItemFrontEnd_per_price").change(function() {
+                               elem_id = jQuery(this).val();
+                               jQuery(".type_offer").hide();
+                               if (elem_id == 2) {
+                                   jQuery("#type_offer_" + elem_id).show();
+                               }
+                               else if (elem_id == 3) {
+                                   jQuery("#type_offer_2").show();
+                                   jQuery("#type_offer_3").show();
+                               }
+                               else if (elem_id == 4) {
+                                   jQuery("#type_offer_2").show();
+                                   jQuery("#type_offer_3").show();
+                                   jQuery("#type_offer_4").show();
+                               }
+                               else if (elem_id == 5) {
+                                   jQuery("#type_offer_2").show();
+                                   jQuery("#type_offer_3").show();
+                                   jQuery("#type_offer_4").show();
+                                   jQuery("#type_offer_5").show();
+                               }
 
-                        })
-                        jQuery("#BspItemFrontEnd_per_price").trigger("change");
-                        jQuery("#BspItemFrontEnd_per_price").kendoDropDownList();
-                        jQuery("#BspItemFrontEnd_currency_id").kendoDropDownList();
-                        jQuery("#BspItemFrontEnd_category_id").kendoDropDownList();
-                        jQuery("#BspItemFrontEnd_sub_category_id").kendoDropDownList();
-                        jQuery("#immediately").kendoDropDownList();
-
-
-                        jQuery(".row-add").click(function() {
-                            data_params = {};
-                            data_params ['partial'] = jQuery(this).attr("partial");
-                            data_params ['ajax'] = 1;
-
-                            parent = jQuery(this).parent().parent().parent();
-                            data_params ['index'] = parseInt(parent.find(".current_index:last").val()) + 1;
-                            if (typeof(parent.find(".current_index:last").val()) == "undefined") {
-                                data_params ['index'] = 0;
-                            }
-
-                            thepuzzleadmin.updateElementAjaxParameter(addPartial, parent, data_params);
-                        })
-
-                        //getting which price offer is open
-                        if (typeof(jQuery("#type_offer_" + jQuery("#BspItemFrontEnd_per_price").val())) != "undefined") {
-                            jQuery("#type_offer_" + jQuery("#BspItemFrontEnd_per_price").val()).show();
-                        }
-                        // select upload background
-
-                        jQuery(".select-bg-img span a").click(function() {
-                            jQuery("#UploadTemp_1_upload_temp_image").trigger("click");
-                        })
-                        jQuery("#UploadTemp_1_upload_temp_image").kendoUpload({
-                            async: {
-                                saveUrl: background_url,
-                                autoUpload: true
-                            },
-                            localization: {
-                                "select": "Select your background image"
-                            },
-                            cancel: function(e) {
-
-                            },
-                            complete: function(e) {
-
-                            },
-                            error: function(e) {
-
-                            },
-                            progress: function(e) {
-
-                            },
-                            remove: function(e) {
-
-                            },
-                            select: function(e) {
-                                jQuery("#loading").show();
-
-                            },
-                            success: function(e) {
-
-                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_background_image/" ?>" + e.response.file;
-                                jQuery("#loading").hide();
-                                jQuery("#BspItemFrontEnd_background_image").val(e.response.file);
-
-                                jQuery(".i_offer").attr("style", "background: url(" + path + ")");
-
-                            },
-                            upload: function(e) {
-
-                            },
-                        });
+                           })
+                           jQuery("#BspItemFrontEnd_per_price").trigger("change");
+                           jQuery("#BspItemFrontEnd_per_price").kendoDropDownList();
+                           jQuery("#BspItemFrontEnd_currency_id").kendoDropDownList();
+                           jQuery("#BspItemFrontEnd_category_id").kendoDropDownList();
+                           jQuery("#BspItemFrontEnd_sub_category_id").kendoDropDownList();
+                           jQuery("#immediately").kendoDropDownList();
 
 
-                        //select avtar image
+                           jQuery(".row-add").click(function() {
+                               data_params = {};
+                               data_params ['partial'] = jQuery(this).attr("partial");
+                               data_params ['ajax'] = 1;
+
+                               parent = jQuery(this).parent().parent().parent();
+                               data_params ['index'] = parseInt(parent.find(".current_index:last").val()) + 1;
+                               if (typeof(parent.find(".current_index:last").val()) == "undefined") {
+                                   data_params ['index'] = 0;
+                               }
+
+                               thepuzzleadmin.updateElementAjaxParameter(addPartial, parent, data_params);
+                           })
+
+                           //getting which price offer is open
+                           if (typeof(jQuery("#type_offer_" + jQuery("#BspItemFrontEnd_per_price").val())) != "undefined") {
+                               jQuery("#type_offer_" + jQuery("#BspItemFrontEnd_per_price").val()).show();
+                           }
+                           // select upload background
+
+                           jQuery(".select-bg-img span a").click(function() {
+                               jQuery("#UploadTemp_1_upload_temp_image").trigger("click");
+                           })
+                           jQuery("#UploadTemp_1_upload_temp_image").kendoUpload({
+                               async: {
+                                   saveUrl: background_url,
+                                   autoUpload: true
+                               },
+                               localization: {
+                                   "select": "Select your background image"
+                               },
+                               cancel: function(e) {
+
+                               },
+                               complete: function(e) {
+
+                               },
+                               error: function(e) {
+
+                               },
+                               progress: function(e) {
+
+                               },
+                               remove: function(e) {
+
+                               },
+                               select: function(e) {
+                                   jQuery("#loading").show();
+
+                               },
+                               success: function(e) {
+
+                                   path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/BspItemFrontEnd/BspItemFrontEnd_background_image/" ?>" + e.response.file;
+                                   jQuery("#loading").hide();
+                                   jQuery("#BspItemFrontEnd_background_image").val(e.response.file);
+
+                                   jQuery(".i_offer").attr("style", "background: url(" + path + ")");
+
+                               },
+                               upload: function(e) {
+
+                               },
+                           });
 
 
-                        jQuery(".select-avatar-img span a").click(function() {
-                            jQuery("#UploadTemp_2_upload_temp_image").trigger("click");
-                        })
-                        jQuery("#UploadTemp_2_upload_temp_image").kendoUpload({
-                            async: {
-                                saveUrl: avatar_url,
-                                autoUpload: true
-                            },
-                            localization: {
-                                "select": "Select Your avatar"
-                            },
-                            cancel: function(e) {
-
-                            },
-                            complete: function(e) {
-
-                            },
-                            error: function(e) {
-
-                            },
-                            progress: function(e) {
-
-                            },
-                            remove: function(e) {
-
-                            },
-                            select: function(e) {
-                                jQuery("#loading").show();
-
-                            },
-                            success: function(e) {
-
-                                path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/ChangeUser/Users_avatar/" ?>" + e.response.file;
-                                jQuery("#loading").hide();
-                                jQuery("#ChangeUser_avatar").val(e.response.file);
+                           //select avtar image
 
 
-                                jQuery(".over-post-avata").attr("src", path);
+                           jQuery(".select-avatar-img span a").click(function() {
+                               jQuery("#UploadTemp_2_upload_temp_image").trigger("click");
+                           })
+                           jQuery("#UploadTemp_2_upload_temp_image").kendoUpload({
+                               async: {
+                                   saveUrl: avatar_url,
+                                   autoUpload: true
+                               },
+                               localization: {
+                                   "select": "Select Your avatar"
+                               },
+                               cancel: function(e) {
 
-                            },
-                            upload: function(e) {
+                               },
+                               complete: function(e) {
 
-                            },
-                        });
+                               },
+                               error: function(e) {
+
+                               },
+                               progress: function(e) {
+
+                               },
+                               remove: function(e) {
+
+                               },
+                               select: function(e) {
+                                   jQuery("#loading").show();
+
+                               },
+                               success: function(e) {
+
+                                   path = "<?php echo Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/ChangeUser/Users_avatar/" ?>" + e.response.file;
+                                   jQuery("#loading").hide();
+                                   jQuery("#ChangeUser_avatar").val(e.response.file);
 
 
-                    })
+                                   jQuery(".over-post-avata").attr("src", path);
+
+                               },
+                               upload: function(e) {
+
+                               },
+                           });
+
+
+                       })
 
 
 

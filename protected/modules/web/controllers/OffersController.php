@@ -329,6 +329,10 @@ class OffersController extends Controller {
             }
 
             if ($isvalid == 1) {
+                if($model->discount_price >0){
+                    $model->is_public = 0;
+                    $model->iStatus = 0;
+                }
                 if ($model->save()) {
                     //incase of !empty password then the login 
                     if (!empty($user->password_new)) {

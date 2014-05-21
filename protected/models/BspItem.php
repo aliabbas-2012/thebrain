@@ -37,6 +37,7 @@
  * @property string $seo_keywords
  * @property double $lat
  * @property double $lng
+ * @property double $deleted
  * @property double $offer_number
  * @property string $create_time
  * @property string $create_user_id
@@ -113,7 +114,7 @@ class BspItem extends DTActiveRecord {
             array('start_price,end_price', 'safe'),
             array('_order_price,offer_name,username', 'safe'),
             array('offer_number,most_visited,most_bought', 'safe'),
-            array('distance,slug,seo_description, seo_keywords,seo_title', 'safe'),
+            array('deleted,distance,slug,seo_description, seo_keywords,seo_title', 'safe'),
             array('loc_name,_per_price,background_path,background_image_name,description, date_create', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -227,6 +228,7 @@ class BspItem extends DTActiveRecord {
             'seo_keywords' => 'Seo Keywords',
             'lat' => 'Lat',
             'lng' => 'Lng',
+            'deleted' => 'Deleted',
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
             'update_time' => 'Update Time',
@@ -285,6 +287,7 @@ class BspItem extends DTActiveRecord {
         $criteria->compare('offer_number', $this->offer_number, true);
         $criteria->compare('lat', $this->lat);
         $criteria->compare('lng', $this->lng);
+        $criteria->compare('deleted', $this->deleted);
         $criteria->compare('create_time', $this->create_time, true);
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
