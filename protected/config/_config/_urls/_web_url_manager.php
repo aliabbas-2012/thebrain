@@ -39,6 +39,7 @@ $rules_web = array(
     '<lang:[\w-\.]+>/offers/delete-offer/<id:[\w-\.]+>/' => '/web/offers/deleteOffer',
     '<lang:[\w-\.]+>/offers/change/status/<id:[\w-\.]+>/' => '/web/offers/changeStatus',
     '<lang:[\w-\.]+>/offers/payPallPayment/<status:[\w-\.]+>/<id:[\w-\.]+>/' => '/web/offers/payPallPayment',
+    '<lang:[\w-\.]+>/offers/set-confirm-offer/<status:[\w-\.]+>/<id:[\w-\.]+>/<item:[\w-\.]+>' => '/web/offers/confirmOffer',
     '<lang:[\w-\.]+>/offers/orderOffer/<id:[\w-\.]+>/' => '/web/offers/orderOffer',
     '<lang:[\w-\.]+>/offers/notification-detail/<id:[\w-\.]+>/' => '/web/offers/notificationdetail',
     '<lang:[\w-\.]+>/offers/notifications/' => '/web/offers/notifications',

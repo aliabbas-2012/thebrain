@@ -43,6 +43,7 @@ class OffersController extends Controller {
                     'notifications',
                     'setPaymentStatus',
                     'payPallPayment',
+                    'confirmOffer',
                 ),
                 'users' => array('@'),
             ),
@@ -307,9 +308,9 @@ class OffersController extends Controller {
 
             $criteria = new CDbCriteria();
             $criteria->addCondition("deleted = :deleted AND user_id =:user_id");
-            $criteria->params = array("deleted" => 0,"user_id"=>Yii::app()->user->id);
+            $criteria->params = array("deleted" => 0, "user_id" => Yii::app()->user->id);
 
-            $model = BspItemFrontEnd::model()->findByPk($id,$criteria);
+            $model = BspItemFrontEnd::model()->findByPk($id, $criteria);
             $model->saveViewerForLog();
             //setting one if the present its images;
             if ($model->num_image_items > 0) {
@@ -348,6 +349,10 @@ class OffersController extends Controller {
                     $model->is_public = 0;
                     $model->iStatus = 0;
                 }
+                //because its on discount admin dont wants this offer should be free 
+                if ($model->discount_price > 0) {
+                    $model->deleted = 1;
+                }
                 if ($model->save()) {
                     //incase of !empty password then the login 
                     if (!empty($user->password_new)) {
@@ -374,7 +379,11 @@ class OffersController extends Controller {
                     }
 
                     $item = BspItem::model()->findByPk($model->id);
-                    $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
+                    if ($model->discount_price > 0) {
+                        PaymentPaypallAdaptive::model()->payDirectToPuzzle($item->id);
+                    } else {
+                        $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
+                    }
                 }
             }
         }
@@ -908,6 +917,25 @@ class OffersController extends Controller {
 
 
         $this->redirect($this->createUrl("/web/offers/notificationdetail", array("id" => $id)));
+    }
+
+    /**
+     * set offer status when user is comming back from paying 
+     * @param type $id
+     * @param type $item
+     * @param type $status
+     */
+    public function actionConfirmOffer($id, $item, $status) {
+        $notifyModel = BspNotify::model()->findByPk($id);
+        if ($status == "completed") {
+            $model = BspItem::model()->findByPk($id);
+            $model->updateByPk($item,array("deleted"=>0));
+            $notifyModel = $this->generateNotification($notifyModel->payment_adaptive->sender_id, $notifyModel->payment_adaptive_id, "seller", "User has been paid for this");
+        }
+        else {
+            BspItem::model()->deleteByPk($item);
+            $notifyModel = $this->generateNotification($notifyModel->payment_adaptive->sender_id, $notifyModel->payment_adaptive_id, "seller", "User has been cancelled or discarded");
+        }
     }
 
     /**

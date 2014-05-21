@@ -338,6 +338,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
 
 
         $paymentAdaptive->save();
+        $paymentAdaptive->saveHistory();
         $notifyModel = $this->generateNotification($paymentAdaptive->sender_id, $paymentAdaptive->id, "seller", "You have recieved invitation to sale offer on discount price");
 
 
@@ -353,8 +354,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $response_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Response');
 
         $host_base = Yii::app()->request->hostInfo;
-        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $notifyModel->Id, "status" => "cancelled"));
-        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $notifyModel->Id, "status" => "completed"));
+        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item"=>$item_id,"id" => $notifyModel->Id, "status" => "cancelled"));
+        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item"=>$item_id,"id" => $notifyModel->Id, "status" => "completed"));
 
 
         define("DEFAULT_SELECT", "- Select -");
