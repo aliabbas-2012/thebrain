@@ -335,9 +335,11 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $paymentAdaptive->payment_type = "creation_purchase";
 
         $paymentAdaptive->ip_address = Yii::app()->request->userHostAddress;
-
+        
+       
 
         $paymentAdaptive->save();
+        
         $paymentAdaptive->saveHistory();
         $notifyModel = $this->generateNotification($paymentAdaptive->sender_id, $paymentAdaptive->id, "seller", "You have recieved invitation to sale offer on discount price");
 
@@ -356,7 +358,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $host_base = Yii::app()->request->hostInfo;
         $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item"=>$item_id,"id" => $notifyModel->Id, "status" => "cancelled"));
         $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item"=>$item_id,"id" => $notifyModel->Id, "status" => "completed"));
-
+        
+        
 
         define("DEFAULT_SELECT", "- Select -");
         spl_autoload_unregister(array('YiiBase', 'autoload'));
@@ -372,16 +375,19 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         /*
          *  	Amount to be credited to the receiver's account 
          */
-        $receiver[0]->amount = (double) $payPallSetting->discount_offer_rate;
+        $receiver[0]->amount = ceil((double) $payPallSetting->discount_offer_rate);
         /*
          * Set to true to indicate a chained payment; only one receiver can be a primary receiver. Omit this field, or set it to false for simple and parallel payments. 
          */
         $receiver[0]->primary = false;
 
         $receiverList = new ReceiverList($receiver);
+        
+        
+        
 
 
-        $payRequest = new PayRequest(new RequestEnvelope("en_US"), "PAY", $cancel_url, "EURO", $receiverList, $return_url);
+        $payRequest = new PayRequest(new RequestEnvelope("en_US"), "PAY", $cancel_url, "EUR", $receiverList, $return_url);
 
         $payRequest->senderEmail = Yii::app()->user->User->paypal_mail;
 

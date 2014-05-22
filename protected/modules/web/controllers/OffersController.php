@@ -380,7 +380,10 @@ class OffersController extends Controller {
 
                     $item = BspItem::model()->findByPk($model->id);
                     if ($model->discount_price > 0) {
-                        PaymentPaypallAdaptive::model()->payDirectToPuzzle($item->id);
+
+                        $url = PaymentPaypallAdaptive::model()->payDirectToPuzzle($item->id);
+
+                        $this->redirect($url);
                     } else {
                         $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
                     }
@@ -928,13 +931,16 @@ class OffersController extends Controller {
     public function actionConfirmOffer($id, $item, $status) {
         $notifyModel = BspNotify::model()->findByPk($id);
         if ($status == "completed") {
-            $model = BspItem::model()->findByPk($id);
-            $model->updateByPk($item,array("deleted"=>0));
-            $notifyModel = $this->generateNotification($notifyModel->payment_adaptive->sender_id, $notifyModel->payment_adaptive_id, "seller", "User has been paid for this");
-        }
-        else {
+            $model = BspItem::model()->findByPk($item);
+            BspItem::model()->updateByPk($item, array("deleted" => 0));
+            $notifyModel = $notifyModel->payment_adaptive->generateNotification($notifyModel->payment_adaptive->sender_id, $notifyModel->payment_adaptive_id, "seller", "User has been paid for this");
+            Yii::app()->user->setFlash("success","Your Offer has been created successfully");
+            $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $model->slug)));
+        } else {
             BspItem::model()->deleteByPk($item);
-            $notifyModel = $this->generateNotification($notifyModel->payment_adaptive->sender_id, $notifyModel->payment_adaptive_id, "seller", "User has been cancelled or discarded");
+            $notifyModel = $notifyModel->payment_adaptive->generateNotification($notifyModel->payment_adaptive->sender_id, $notifyModel->payment_adaptive_id, "seller", "User has been cancelled or discarded");
+            Yii::app()->user->setFlash("error","Your transaction has been failed , you need to do again");
+            $this->redirect($this->createUrl("/web/offers/post", array("action" => "create")));
         }
     }
 
