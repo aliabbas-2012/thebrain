@@ -170,7 +170,9 @@
                         </p>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2">thePuzzle.com/</label>
+                        <label class="control-label col-sm-2">
+                            <?php echo Yii::app()->request->hostInfo; ?>/<?php echo Yii::app()->request->baseUrl; ?>
+                        </label>
                         <div class="col-lg-5">
                             <?php echo $form->textField($model, 'store_url', array('class' => 'form-control')); ?> 
                             <?php echo $form->error($model, 'store_url', array("class" => 'alert alert-error')); ?>
@@ -178,6 +180,9 @@
                             if (!empty($model->store_url)) {
                                 $store_url = str_replace(" ", "-", $model->store_url);
                                 $store_url = $this->createUrl("/web/userdata/store", array("id" => $model->id, "storeurl" => $store_url));
+                                $url = Yii::app()->request->hostInfo . "/" . Yii::app()->request->baseUrl . "/" . str_replace(" ", "-", $model->store_url);
+                                echo CHtml::link($url, $url)." OR ";
+                                echo "<div class='clear'></div>";
                                 echo CHtml::link(Yii::app()->request->hostInfo . $store_url, $store_url);
                             }
                             echo $form->hiddenField($model, "lat");
@@ -310,7 +315,7 @@
         var searchBox_city = new google.maps.places.SearchBox(
                 /** @type {HTMLInputElement} */(input), {types: ['(cities)'], });
 
-
+          
 
 
         // [START region_getplaces]
@@ -318,7 +323,15 @@
         // pick list. Retrieve the matching places for that item.
         google.maps.event.addListener(searchBox_city, 'places_changed', function() {
             var places = searchBox_city.getPlaces();
-            
+            //auto filling country 
+            city = input.value;
+            city = city.split(",");
+            if (city.length == 2) {
+                jQuery("#Users_country").val(jQuery.trim(city[1]));
+            }
+            else if (city.length == 3) {
+                jQuery("#Users_country").val(jQuery.trim(city[2]));
+            }
             if (typeof(places[0].geometry.location.nb) != "undefined") {
                 jQuery("#Users_lat").val(places[0].geometry.location.nb);
 
