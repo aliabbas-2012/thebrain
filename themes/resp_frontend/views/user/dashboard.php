@@ -104,7 +104,7 @@
 
     $criteria->order = "id DESC";
     $criteria->addInCondition('id', $saved_items);
-    $criteria->condition = "is_public>0 AND iStatus = 1";
+    $criteria->condition = "is_public>0 AND iStatus = 1 AND admin_status = 1";
     $criteria->addCondition("deleted = :deleted");
     $criteria->params = array("deleted" => 0);
 
@@ -144,7 +144,7 @@
     $criteria = new CDbCriteria();
     $criteria->limit = "16";
     $criteria->order = "id DESC";
-    $criteria->condition = "is_public>0 AND iStatus = 1";
+    $criteria->condition = "is_public>0 AND iStatus = 1 AND admin_status = 1";
     $criteria->addCondition("deleted = :deleted");
     $criteria->params = array("deleted" => 0);
     $dataProvider = new CActiveDataProvider('BspItem', array(

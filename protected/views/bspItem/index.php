@@ -165,6 +165,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array('name' => 'special_deal', 'value' => '$data->special_deal',),
         array('name' => 'num_star', 'value' => '$data->num_star',),
         array('name' => 'iStatus', 'value' => '$data->iStatus == 1 ? "Enabled" : "Disabled"',),
+        array('name' => 'admin_status', 'value' => '$data->admin_status == 1 ? "Enabled" : "Disabled"',),
         array(
             'class' => 'CButtonColumn',
         ),

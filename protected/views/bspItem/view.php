@@ -20,6 +20,7 @@ $this->widget('zii.widgets.CDetailView', array(
         array('name' => 'lng', 'value' => $model->lng,),
         array('name' => 'my_other_price', 'value' => $model->my_other_price == 1 ? "Yes" : "No",),
         array('name' => 'iStatus', 'value' => $model->iStatus == 1 ? "Enabled" : "Disabled",),
+        array('name' => 'admin_status', 'value' => $model->admin_status == 1 ? "Enabled" : "Disabled",),
         array('name' => 'background_image', 'value' => zHtml::imageLink($model, 'background_image', get_class($model)), "type" => "raw"),
         array('name' => 'seo_title', 'value' => $model->seo_title,),
         array('name' => 'seo_description', 'value' => $model->seo_description,),

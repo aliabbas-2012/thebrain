@@ -69,10 +69,11 @@ class OffersController extends Controller {
         $cat_arr = explode("-", $category);
         $criteria = new CDbCriteria();
         $criteria->addCondition("group_id = " . $cat_arr[count($cat_arr) - 1]);
-        $criteria->addCondition("iStatus = 1");
+        $criteria->addCondition("iStatus = :iStatus");
+        $criteria->addCondition("admin_status = :admin_status");
 
         $criteria->addCondition("deleted = :deleted");
-        $criteria->params = array("deleted" => 0);
+        $criteria->params = array("deleted" => 0,"iStatus"=>1,"admin_status"=>1);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 15)

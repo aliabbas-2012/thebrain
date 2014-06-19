@@ -60,6 +60,12 @@
                             'htmlOptions' => array("class" => "not_responsive")
                         ),
                         array('name' => 'price', 'value' => 'isset($data->currency)?$data->price." ".html_entity_decode($data->currency->symbol):""'),
+                        array(
+                            'name' => 'admin_status',
+                            'value' => '$data->admin_status == 1 ? "Enabled" : "Disabled"',
+                            'headerHtmlOptions' => array("class" => "not_responsive"),
+                            'htmlOptions' => array("class" => "not_responsive")
+                        ),
                         array('name' => 'create_time',
                             'value' => '$data->create_time',
                             'headerHtmlOptions' => array("class" => "not_responsive"),

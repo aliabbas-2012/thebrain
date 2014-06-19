@@ -205,6 +205,15 @@
         </div>
 
     </div><!-- group -->
+    <div class="row">
+        <?php echo $form->labelEx($model, 'admin_status', array('class' => 'control-label col-lg-2')); ?>
+        <div class="">
+            <?php echo $form->dropDownList($model, 'admin_status', array("" => "All") + array("0" => "Disabled", "1" => "Enabled"), array('class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'admin_status'); ?>
+
+        </div>
+
+    </div><!-- group -->
 
 
     <div class="row">

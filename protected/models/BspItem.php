@@ -28,7 +28,7 @@
  * @property integer $my_condition
  * @property integer $my_other_price
  * @property integer $iStatus
- * @property integer $iPayment
+ * @property integer $admin_status
  * @property integer $special_deal
  * @property integer $currency_id
  * @property integer $per_price
@@ -103,7 +103,7 @@ class BspItem extends DTActiveRecord {
         // will receive user inputs.
         return array(
             array('name,category_id,group_id,create_time, create_user_id, update_time, update_user_id', 'required'),
-            array('category_id, sub_category_id, group_id, num_star, user_id, sound_id, video_id, showlocation, num_orders, my_condition, my_other_price, iStatus, iPayment, special_deal, currency_id, per_price', 'numerical', 'integerOnly' => true),
+            array('category_id, sub_category_id, group_id, num_star, user_id, sound_id, video_id, showlocation, num_orders, my_condition, my_other_price, iStatus, admin_status, special_deal, currency_id, per_price', 'numerical', 'integerOnly' => true),
             array('discount_price,price, lat, lng', 'numerical'),
             array('name', 'length', 'max' => 200),
             array('avatar_image, item_image, background_image, seo_title, seo_keywords', 'length', 'max' => 255),
@@ -118,8 +118,8 @@ class BspItem extends DTActiveRecord {
             array('loc_name,_per_price,background_path,background_image_name,description, date_create', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, category_id, sub_category_id, group_id, name, avatar_image, description, num_star, num_like, user_id, date_create, price, num_review, sound_id, video_id, item_image, background_image, discount_price, is_public, showlocation, num_orders, my_condition, my_other_price, iStatus, iPayment, special_deal, currency_id, per_price, seo_title, seo_description, seo_keywords, lat, lng, create_time, create_user_id, update_time, update_user_id', 'safe'),
-            array('id, category_id, sub_category_id, group_id, name, avatar_image, description, num_star, num_like, user_id, date_create, price, num_review, sound_id, video_id, item_image, background_image, discount_price, is_public, showlocation, num_orders, my_condition, my_other_price, iStatus, iPayment, special_deal, currency_id, per_price, seo_title, seo_description, seo_keywords, lat, lng, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
+            array('id, category_id, sub_category_id, group_id, name, avatar_image, description, num_star, num_like, user_id, date_create, price, num_review, sound_id, video_id, item_image, background_image, discount_price, is_public, showlocation, num_orders, my_condition, my_other_price, iStatus, admin_status, special_deal, currency_id, per_price, seo_title, seo_description, seo_keywords, lat, lng, create_time, create_user_id, update_time, update_user_id', 'safe'),
+            array('id, category_id, sub_category_id, group_id, name, avatar_image, description, num_star, num_like, user_id, date_create, price, num_review, sound_id, video_id, item_image, background_image, discount_price, is_public, showlocation, num_orders, my_condition, my_other_price, iStatus, admin_status, special_deal, currency_id, per_price, seo_title, seo_description, seo_keywords, lat, lng, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -218,8 +218,8 @@ class BspItem extends DTActiveRecord {
             'num_orders' => 'This field auto increase +1 when user has their customer order',
             'my_condition' => 'My Condition',
             'my_other_price' => 'Offer additional prices',
-            'iStatus' => 'Status',
-            'iPayment' => 'I Payment',
+            'iStatus' => 'User Status',
+            'admin_status' => 'Admin Status',
             'special_deal' => 'Special Deal',
             'currency_id' => 'Currency',
             'per_price' => 'Per Price',
@@ -277,7 +277,7 @@ class BspItem extends DTActiveRecord {
         $criteria->compare('my_condition', $this->my_condition);
         $criteria->compare('my_other_price', $this->my_other_price);
         $criteria->compare('iStatus', $this->iStatus);
-        $criteria->compare('iPayment', $this->iPayment);
+        $criteria->compare('admin_status', $this->admin_status);
         $criteria->compare('special_deal', $this->special_deal);
         $criteria->compare('currency_id', $this->currency_id);
         $criteria->compare('per_price', $this->per_price);

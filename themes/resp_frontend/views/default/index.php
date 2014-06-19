@@ -24,10 +24,10 @@
                 <?php
                 $criteria = new CDbCriteria();
                 $criteria->order = "rand()";
-                $criteria->condition = "is_public>0 AND iStatus = 1";
+                $criteria->condition = "is_public>0 AND iStatus = :iStatus AND admin_status =:admin_status";
 
                 $criteria->addCondition("deleted = :deleted");
-                $criteria->params = array("deleted" => 0);
+                $criteria->params = array("deleted" => 0,"iStatus"=>1,"admin_status"=>1);
 
                 $dataProvider = new CActiveDataProvider('BspItem', array(
                     'criteria' => $criteria,
@@ -71,9 +71,12 @@
                 $criteria = new CDbCriteria();
                 $criteria->limit = "16";
                 $criteria->order = "id DESC";
-                $criteria->condition = "is_public>0 AND iStatus = 1";
+                $criteria->condition = "is_public>0 AND iStatus = :iStatus AND admin_status =:admin_status";
+
+                $criteria->addCondition("deleted = :deleted");
                 $criteria->addInCondition('id', $viwed_items);
-                $criteria->addCondition("t.deleted = 0");
+             
+                $criteria->params = array("deleted" => 0,"iStatus"=>1,"admin_status"=>1);
       
                 $dataProvider = new CActiveDataProvider('BspItem', array(
                     'criteria' => $criteria,
@@ -121,9 +124,9 @@
                     $criteria->order = "id DESC";
 
                     $criteria->addInCondition('id', $saved_items);
-                    $criteria->condition = "is_public>0 AND iStatus = 1";
+                    $criteria->condition = "is_public>0 AND iStatus = :iStatus AND admin_status =:admin_status";
                     $criteria->addCondition("deleted = :deleted");
-                    $criteria->params = array("deleted" => 0);
+                    $criteria->params = array("deleted" => 0,"admin_status"=>1,"iStatus"=>1);
                     $dataProvider = new CActiveDataProvider('BspItem', array(
                         'criteria' => $criteria,
                         'pagination' => array('pageSize' => 15)
