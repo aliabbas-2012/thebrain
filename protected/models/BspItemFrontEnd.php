@@ -34,6 +34,7 @@ class BspItemFrontEnd extends BspItem {
             array("_is_confirm", "required", 'requiredValue' => 1, 'message' => Yii::t('notify', 'Please accept T&C')),
             array('_offer_images', 'required'),
             array('price',"validationFixBasedPrice"),
+            array("description","required"),
            // array('_is_confirm', 'allowEmpty' => false, 'compare', 'compareValue' => true,
                 //'message' => 'You must agree to the terms and conditions'),
             array('upload_images', 'safe'),
