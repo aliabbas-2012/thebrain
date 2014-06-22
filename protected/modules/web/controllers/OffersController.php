@@ -71,9 +71,10 @@ class OffersController extends Controller {
         $criteria->addCondition("group_id = " . $cat_arr[count($cat_arr) - 1]);
         $criteria->addCondition("iStatus = :iStatus");
         $criteria->addCondition("admin_status = :admin_status");
+        $criteria->addCondition("language_id = :language_id");
 
         $criteria->addCondition("deleted = :deleted");
-        $criteria->params = array("deleted" => 0, "iStatus" => 1, "admin_status" => 1);
+        $criteria->params = array("deleted" => 0, "iStatus" => 1, "admin_status" => 1, "language_id" => Yii::app()->language);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 15)
@@ -115,8 +116,8 @@ class OffersController extends Controller {
             $model->attributes = $_GET['OfferSearch'];
             if (!empty($model->keyword)) {
                 $criteria->compare("name", $model->keyword, true, "OR");
-                $criteria->compare("name", $model->keyword, true, "OR");
-                $criteria->compare("t.id", $model->keyword, true, "OR");
+                
+                $criteria->compare("t.id", $model->keyword, true);
 
 
                 $criteria->compare("offer_number", $model->keyword, true, "OR");
@@ -134,7 +135,7 @@ class OffersController extends Controller {
                 $criteria->addCondition("t.discount_price IS NOT NULL AND t.discount_price !=''");
                 $order_by[] = "t.discount_price DESC";
             }
-            $criteria->addCondition("iStatus = 1");
+            $criteria->compare("iStatus",1);
             $with = array();
 
             if ($model->withVideo == 1) {
@@ -221,8 +222,11 @@ class OffersController extends Controller {
         }
 
 
-        $criteria->addCondition("deleted = :deleted");
-        $criteria->params = array("deleted" => 0);
+        $criteria->compare("deleted",0,false);
+        $criteria->compare("admin_status",1,false);
+        $criteria->compare("language_id",Yii::app()->language,false);
+       // CVarDumper::dump($criteria,10,true);
+       // $criteria->params = array("deleted" => 0);
 
 
         $dataProvider = new CActiveDataProvider('BspItem', array(
@@ -330,6 +334,7 @@ class OffersController extends Controller {
         if (isset($_POST['BspItemFrontEnd']) && isset($_POST['ChangeUser'])) {
             $model->attributes = $_POST['BspItemFrontEnd'];
             $user->attributes = $_POST['ChangeUser'];
+            $model->language_id = Yii::app()->language;
 
 
             //set user avatar 
