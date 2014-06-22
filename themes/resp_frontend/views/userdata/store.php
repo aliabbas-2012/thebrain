@@ -57,9 +57,9 @@
 $criteria = new CDbCriteria();
 
 $criteria->order = "id DESC";
-$criteria->addCondition("user_id =" . $model->id." AND admin_status = 1");
-$criteria->addCondition("deleted = :deleted");
-$criteria->params = array("deleted" => 0);
+$criteria->addCondition("user_id =" . $model->id . " AND admin_status = 1");
+$criteria->addCondition("deleted = :deleted AND language_id = :language_id");
+$criteria->params = array("deleted" => 0, "language_id" => Yii::app()->language);
 $dataProvider = new CActiveDataProvider('BspItem', array(
     'criteria' => $criteria,
     'pagination' => array('pageSize' => 15)

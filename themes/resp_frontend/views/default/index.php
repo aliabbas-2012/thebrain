@@ -25,9 +25,9 @@
                 $criteria = new CDbCriteria();
                 $criteria->order = "rand()";
                 $criteria->condition = "is_public>0 AND iStatus = :iStatus AND admin_status =:admin_status";
-
+                $criteria->condition.=" AND language_id = :language_id";
                 $criteria->addCondition("deleted = :deleted");
-                $criteria->params = array("deleted" => 0,"iStatus"=>1,"admin_status"=>1);
+                $criteria->params = array("deleted" => 0,"iStatus"=>1,"admin_status"=>1,"language_id"=>Yii::app()->language);
 
                 $dataProvider = new CActiveDataProvider('BspItem', array(
                     'criteria' => $criteria,
@@ -72,7 +72,7 @@
                 $criteria->limit = "16";
                 $criteria->order = "id DESC";
                 $criteria->condition = "t.is_public>0 AND t.iStatus = 1 AND t.admin_status =1 AND t.deleted = 0";
-
+                $criteria->condition.=" AND language_id = '".Yii::app()->language."'";
                
                 $criteria->addInCondition('t.id', $viwed_items);
              
@@ -125,8 +125,9 @@
 
                     $criteria->addInCondition('id', $saved_items);
                     $criteria->condition = "is_public>0 AND iStatus = :iStatus AND admin_status =:admin_status";
+                    $criteria->condition.=" AND language_id = :language_id";
                     $criteria->addCondition("deleted = :deleted");
-                    $criteria->params = array("deleted" => 0,"admin_status"=>1,"iStatus"=>1);
+                    $criteria->params = array("deleted" => 0,"admin_status"=>1,"iStatus"=>1,"language_id"=>Yii::app()->language);
                     $dataProvider = new CActiveDataProvider('BspItem', array(
                         'criteria' => $criteria,
                         'pagination' => array('pageSize' => 15)

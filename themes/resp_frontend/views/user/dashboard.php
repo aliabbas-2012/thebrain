@@ -105,8 +105,8 @@
     $criteria->order = "id DESC";
     $criteria->addInCondition('id', $saved_items);
     $criteria->condition = "is_public>0 AND iStatus = 1 AND admin_status = 1";
-    $criteria->addCondition("deleted = :deleted");
-    $criteria->params = array("deleted" => 0);
+    $criteria->addCondition("deleted = :deleted AND language_id = :language_id");
+    $criteria->params = array("deleted" => 0, "language_id" => Yii::app()->language);
 
     $dataProvider = new CActiveDataProvider('BspItem', array(
         'criteria' => $criteria,
@@ -145,8 +145,8 @@
     $criteria->limit = "16";
     $criteria->order = "id DESC";
     $criteria->condition = "is_public>0 AND iStatus = 1 AND admin_status = 1";
-    $criteria->addCondition("deleted = :deleted");
-    $criteria->params = array("deleted" => 0);
+    $criteria->addCondition("deleted = :deleted AND language_id = :language_id");
+    $criteria->params = array("deleted" => 0, "language_id" => Yii::app()->language);
     $dataProvider = new CActiveDataProvider('BspItem', array(
         'criteria' => $criteria,
         'pagination' => array('pageSize' => 15)
