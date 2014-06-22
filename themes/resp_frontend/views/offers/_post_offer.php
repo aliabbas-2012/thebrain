@@ -45,7 +45,7 @@ if (Yii::app()->user->hasFlash('error')) {
                                             else {
                                                 jQuery('#discount-price').hide();
                                                 jQuery('#discount-price').val('');
-                                                
+                                                jQuery('#txtprice').hide();
                                             }
                                          "
                         ));
@@ -59,6 +59,7 @@ if (Yii::app()->user->hasFlash('error')) {
                             "id" => "txtprice",
                             'placeholder' => Yii::t('postOffer', "Your Price?..."),
                             "pattern" => "\d{1,11}",
+                            "style"=>$model->per_price!=1?"display:none":""
                         ));
                         ?>
                     </div>
