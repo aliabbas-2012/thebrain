@@ -36,7 +36,7 @@ if (Yii::app()->user->hasFlash('error')) {
                             "class" => "select1",
                             "onchange" => "
                                             jQuery('#discount-price').trigger('keyup');
-                                            if(jQuery(this).val()!=1){
+                                            if(jQuery(this).val()==1){
                                                 
                                                 jQuery('#discount-price').show();
                                                 
