@@ -263,6 +263,8 @@
                                     </a>
                                     <ul class="dropdown-menu category_head_menu">
                                         <?php
+                                        //for language translation
+                                        $cat_var = Yii::app()->language == "en"?"name":"name_de";
                                         $data = BspCategory::model()->findAll(array('condition' => 'parent_id=0'));
                                         $i = 1;
                                         foreach ($data as $da) {
@@ -273,7 +275,7 @@
                                             }
                                             echo '<li id="menu-item-' . $i . '" class=' . $cssClass . '>';
 
-                                            echo CHtml::link($da->name, $this->createUrl("/web/offers/category", array("category" => $da->slug)));
+                                            echo CHtml::link($da->$cat_var, $this->createUrl("/web/offers/category", array("category" => $da->slug)));
 
 
                                             echo CHtml::openTag("ul", array("class" => ""));
@@ -281,7 +283,7 @@
                                             foreach ($subcate as $sub) {
 
                                                 echo '<li>';
-                                                echo CHtml::link($sub->name, $this->createUrl("/web/offers/category", array("category" => $sub->slug)));
+                                                echo CHtml::link($sub->$cat_var, $this->createUrl("/web/offers/category", array("category" => $sub->slug)));
                                                 echo '</li>';
                                             }
                                             echo CHtml::closeTag("ul");

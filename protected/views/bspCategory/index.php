@@ -40,6 +40,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
     ),
     'columns' => array(
         'name',
+        'name_de',
         'parent_name',
         array(
             'class' => 'CButtonColumn',

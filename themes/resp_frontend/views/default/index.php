@@ -71,12 +71,12 @@
                 $criteria = new CDbCriteria();
                 $criteria->limit = "16";
                 $criteria->order = "id DESC";
-                $criteria->condition = "is_public>0 AND iStatus = :iStatus AND admin_status =:admin_status";
+                $criteria->condition = "t.is_public>0 AND t.iStatus = 1 AND t.admin_status =1 AND t.deleted = 0";
 
-                $criteria->addCondition("deleted = :deleted");
-                $criteria->addInCondition('id', $viwed_items);
+               
+                $criteria->addInCondition('t.id', $viwed_items);
              
-                $criteria->params = array("deleted" => 0,"iStatus"=>1,"admin_status"=>1);
+                //$criteria->params = array("deleted" => 0);
       
                 $dataProvider = new CActiveDataProvider('BspItem', array(
                     'criteria' => $criteria,

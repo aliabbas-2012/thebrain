@@ -28,6 +28,15 @@
         </div>
 
     </div><!-- group -->
+    <div class="row">
+        <?php echo $form->labelEx($model, 'name_de', array('class' => 'control-label col-lg-2')); ?>
+        <div class="col-lg-4">
+            <?php echo $form->textField($model, 'name_de', array('class' => 'form-control', 'maxlength' => 45)); ?>
+            <?php echo $form->error($model, 'name_de'); ?>
+
+        </div>
+
+    </div><!-- group -->
 
 
 

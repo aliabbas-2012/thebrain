@@ -28,6 +28,7 @@
             ?>
             <div>
                 <?php
+                $cat_var = Yii::app()->language == "en" ? "name" : "name_de";
                 $criteria = new CDbCriteria();
                 $criteria->addCondition("user_id = " . Yii::app()->user->id);
                 $criteria->addCondition("deleted = :deleted");
@@ -48,7 +49,7 @@
                         'cssFile' => '',
                     ),
                     'columns' => array(
-                        array('name' => 'category_id', 'value' => 'isset($data->category)?$data->category->name:""'),
+                        array('name' => 'category_id', 'value' => 'isset($data->category)?$data->category->_trans_name:""'),
                         array(
                             'name' => 'name',
                             'value' => '$data->slug_link',
