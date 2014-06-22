@@ -73,7 +73,7 @@ class OffersController extends Controller {
         $criteria->addCondition("admin_status = :admin_status");
 
         $criteria->addCondition("deleted = :deleted");
-        $criteria->params = array("deleted" => 0,"iStatus"=>1,"admin_status"=>1);
+        $criteria->params = array("deleted" => 0, "iStatus" => 1, "admin_status" => 1);
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 15)
@@ -270,8 +270,12 @@ class OffersController extends Controller {
      * @param type $id
      */
     public function actionDeleteOffer($id) {
+        
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("user_id =:user_id AND language_id = :language_id");
+        $criteria->params = array("user_id" => Yii::app()->user->id, "language_id" => Yii::app()->language);
 
-        BspItem::model()->deleteByPk($id);
+        BspItem::model()->deleteByPk($id,$criteria);
         Yii::app()->user->setFlash("offer-status", 'You have deleted offer');
         $this->redirect($this->createUrl("/web/userdata/myoffers"));
     }
@@ -283,8 +287,9 @@ class OffersController extends Controller {
     public function actionDetail($slug = "") {
         $slug_arr = explode("-", $slug);
         $criteria = new CDbCriteria();
-        $criteria->addCondition("deleted = :deleted");
-        $criteria->params = array("deleted" => 0);
+
+        $criteria->addCondition("deleted = :deleted AND language_id = :language_id");
+        $criteria->params = array("deleted" => 0, "language_id" => Yii::app()->language);
         $model = BspItem::model()->findByPk($slug_arr[0]);
         $priceCal = BspItemConditionHour::model()->findAll("item_id = " . $slug_arr[0]);
         $this->item = $model;
@@ -308,8 +313,8 @@ class OffersController extends Controller {
             $id = $slug_arr[0];
 
             $criteria = new CDbCriteria();
-            $criteria->addCondition("deleted = :deleted AND user_id =:user_id");
-            $criteria->params = array("deleted" => 0, "user_id" => Yii::app()->user->id);
+            $criteria->addCondition("deleted = :deleted AND user_id =:user_id AND language_id = :language_id");
+            $criteria->params = array("deleted" => 0, "user_id" => Yii::app()->user->id, "language_id" => Yii::app()->language);
 
             $model = BspItemFrontEnd::model()->findByPk($id, $criteria);
             $model->saveViewerForLog();
@@ -325,8 +330,8 @@ class OffersController extends Controller {
         if (isset($_POST['BspItemFrontEnd']) && isset($_POST['ChangeUser'])) {
             $model->attributes = $_POST['BspItemFrontEnd'];
             $user->attributes = $_POST['ChangeUser'];
-            
-            
+
+
             //set user avatar 
 
             $this->checkCilds($model);
@@ -393,7 +398,7 @@ class OffersController extends Controller {
                 }
             }
         }
-       
+
         $this->render("//offers/post", array(
             "model" => $model,
             "payPAllSetting" => $payPAllSetting,
@@ -938,12 +943,12 @@ class OffersController extends Controller {
             $model = BspItem::model()->findByPk($item);
             BspItem::model()->updateByPk($item, array("deleted" => 0));
             $notifyModel = $notifyModel->payment_adaptive->generateNotification($notifyModel->payment_adaptive->sender_id, $notifyModel->payment_adaptive_id, "seller", "User has been paid for this");
-            Yii::app()->user->setFlash("success","Your Offer has been created successfully");
+            Yii::app()->user->setFlash("success", "Your Offer has been created successfully");
             $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $model->slug)));
         } else {
             BspItem::model()->deleteByPk($item);
             $notifyModel = $notifyModel->payment_adaptive->generateNotification($notifyModel->payment_adaptive->sender_id, $notifyModel->payment_adaptive_id, "seller", "User has been cancelled or discarded");
-            Yii::app()->user->setFlash("error","Your transaction has been failed , you need to do again");
+            Yii::app()->user->setFlash("error", "Your transaction has been failed , you need to do again");
             $this->redirect($this->createUrl("/web/offers/post", array("action" => "create")));
         }
     }
