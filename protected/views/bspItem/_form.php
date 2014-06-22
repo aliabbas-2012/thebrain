@@ -84,6 +84,15 @@
 
 
     </div><!-- group -->
+    <div class="row">
+
+        <?php echo $form->labelEx($model, 'language_id', array('class' => 'control-label col-lg-2')); ?>
+
+        <?php echo $form->dropDownList($model, 'language_id', $model->language_arr,array('class' => 'form-control', 'maxlength' => 200)); ?>
+        <?php echo $form->error($model, 'language_id'); ?>
+
+
+    </div><!-- group -->
 
 
     <div class="row">

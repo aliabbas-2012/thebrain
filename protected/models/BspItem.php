@@ -29,6 +29,7 @@
  * @property integer $my_other_price
  * @property integer $iStatus
  * @property integer $admin_status
+ * @property integer $language_id
  * @property integer $special_deal
  * @property integer $currency_id
  * @property integer $per_price
@@ -50,7 +51,7 @@ class BspItem extends DTActiveRecord {
      *
      * @var type 
      */
-    public $is_extra, $loc_name;
+    public $is_extra, $loc_name,$_language_name;
     public $slug, $slug_link;
     public $background_image_name, $background_path, $_per_price;
     public $_per_price_options = array(
@@ -60,7 +61,7 @@ class BspItem extends DTActiveRecord {
         4 => "Price per week",
         5 => "Price per month",
     );
-    
+    public $language_arr = array("de"=>"German","en"=>"English");
     public $distance;
     
     public $_order_price;
@@ -113,7 +114,7 @@ class BspItem extends DTActiveRecord {
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('start_price,end_price', 'safe'),
             array('_order_price,offer_name,username', 'safe'),
-            array('offer_number,most_visited,most_bought', 'safe'),
+            array('_language_name,language_id,offer_number,most_visited,most_bought', 'safe'),
             array('deleted,distance,slug,seo_description, seo_keywords,seo_title', 'safe'),
             array('loc_name,_per_price,background_path,background_image_name,description, date_create', 'safe'),
             // The following rule is used by search().
@@ -220,6 +221,7 @@ class BspItem extends DTActiveRecord {
             'my_other_price' => 'Offer additional prices',
             'iStatus' => 'User Status',
             'admin_status' => 'Admin Status',
+            'language_id' => 'Language',
             'special_deal' => 'Special Deal',
             'currency_id' => 'Currency',
             'per_price' => 'Per Price',
@@ -423,6 +425,7 @@ class BspItem extends DTActiveRecord {
              $this->name = CHtml::decode($this->name);
             
         }
+        $this->_language_name = isset($this->language_arr[$this->language_id])?$this->language_arr[$this->language_id]:"";
         return parent::afterFind();
     }
 

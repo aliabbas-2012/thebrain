@@ -9,6 +9,7 @@ $this->widget('zii.widgets.CDetailView', array(
         array('name' => 'category_id', 'value' => !empty($model->category) ? $model->category->name : ""),
         array('name' => 'sub_category_id', 'value' => !empty($model->sub_category) ? $model->sub_category->name : ""),
         array('name' => 'name', 'value' => $model->name,),
+        array('name' => 'language_id', 'value' => $model->_language_name,),
         array('name' => 'currency_id', 'value' => !empty($model->currency) ? $model->currency->symbol : ""),
         array('name' => 'per_price', 'value' => !empty($model->_per_price_options[$model->per_price]) ? $model->_per_price_options[$model->per_price] : ""),
         array('name' => 'special_deal', 'value' => $model->special_deal,),
