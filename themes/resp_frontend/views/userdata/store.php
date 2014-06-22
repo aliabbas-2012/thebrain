@@ -57,7 +57,7 @@
 $criteria = new CDbCriteria();
 
 $criteria->order = "id DESC";
-$criteria->addCondition("user_id =" . $model->id);
+$criteria->addCondition("user_id =" . $model->id." AND admin_status = 1");
 $criteria->addCondition("deleted = :deleted");
 $criteria->params = array("deleted" => 0);
 $dataProvider = new CActiveDataProvider('BspItem', array(
