@@ -1,7 +1,6 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+return array(
+    'price_validation'=>'Der Preis muss dann greather 0 und nicht leer sein'
+);
 ?>

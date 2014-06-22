@@ -325,6 +325,8 @@ class OffersController extends Controller {
         if (isset($_POST['BspItemFrontEnd']) && isset($_POST['ChangeUser'])) {
             $model->attributes = $_POST['BspItemFrontEnd'];
             $user->attributes = $_POST['ChangeUser'];
+            
+            
             //set user avatar 
 
             $this->checkCilds($model);
@@ -391,6 +393,7 @@ class OffersController extends Controller {
                 }
             }
         }
+       
         $this->render("//offers/post", array(
             "model" => $model,
             "payPAllSetting" => $payPAllSetting,

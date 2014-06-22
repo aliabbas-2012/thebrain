@@ -29,9 +29,11 @@ class BspItemFrontEnd extends BspItem {
     public function rules() {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
+       
         $rules = array(
             array("_is_confirm", "required", 'requiredValue' => 1, 'message' => Yii::t('notify', 'Please accept T&C')),
-             array('_offer_images', 'required'),
+            array('_offer_images', 'required'),
+            array('price',"validationFixBasedPrice"),
            // array('_is_confirm', 'allowEmpty' => false, 'compare', 'compareValue' => true,
                 //'message' => 'You must agree to the terms and conditions'),
             array('upload_images', 'safe'),
@@ -40,6 +42,15 @@ class BspItemFrontEnd extends BspItem {
         $rules = array_merge(parent::rules(),$rules);
         //CVarDumper::dump($rules,10,true);
         return $rules;
+    }
+    /**
+     * if per price is 1 or fixed then price main should be 
+     * greater then 0 and not empty
+     */
+    public function validationFixBasedPrice(){
+        if($this->per_price ==1 && ($this->price == 0 || empty($this->price))){
+            $this->addError("price", Yii::t("price_validation",'Price must be greather then 0 and not blank'));
+        }
     }
 
     /**

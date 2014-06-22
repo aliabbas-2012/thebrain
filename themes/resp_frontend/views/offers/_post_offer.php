@@ -1,4 +1,5 @@
 <?php
+
 $background = "";
 if ($model->background_image != "") {
     if (!$model->isNewRecord) {

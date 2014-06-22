@@ -1,7 +1,6 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+return array(
+    'price_validation'=>'Price must be greather then 0 and not blank'
+);
 ?>
