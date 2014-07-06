@@ -1,24 +1,91 @@
 <div class="yelow-bg">
     <label><?php echo Yii::t('detailOffer', 'Check out my price offers') ?></label>
 </div>
+<?php
+$criteria = new CDbCriteria();
+$criteria->select = "price,start,end";
+$criteria->addCondition("item_id = :item_id AND (t.start IS NOT NULL OR t.end IS NOT NULL)");
+$criteria->params = array("item_id" => $model->id);
+
+$hours_price = BspItemPriceOfferHour::model()->findAll($criteria);
+$day_price = BspItemPriceOfferDay::model()->findAll($criteria);
+$week_price = BspItemPriceOfferWeek::model()->findAll($criteria);
+$month_price = BspItemPriceOfferMonth::model()->findAll($criteria);
+?>
 <div id='price_detail'>
     <p><?php echo Yii::t('detailOffer', 'Price Offers'); ?> </p>
     <p class="price-detail-label">
         <?php echo Yii::t('detailOffer', 'Calculate Price'); ?> 
     </p>
+    <?php
+    foreach ($hours_price as $hour):
+        $interval = 0;
+        if ($hour->end >= $hour->start) {
+            $interval = ($hour->end - $hour->start);
+            $interval = ceil($interval);
+        } else if ($hour->end == "") {
+            $interval = ceil($hour->start);
+        }
+        ?>
+        <div class='price-type'>
+            <div class='col-lg-10'><?php echo $interval; ?> Hour</div>
+            <div class='col-lg-2'>€ <?php echo $hour->price; ?></div>
+        </div>
+        <?php
+    endforeach;
+    ?>
+    <?php
+    foreach ($day_price as $day):
+        $interval = 0;
+        if ($day->end >= $day->start) {
+            $interval = ($day->end - $day->start);
+            $interval = ceil($interval);
+        } else if ($day->end == "") {
+            $interval = ceil($day->start);
+        }
+        ?>
+        <div class='price-type'>
+            <div class='col-lg-10'><?php echo $interval; ?> Day </div>
+            <div class='col-lg-2'>€ <?php echo $day->price; ?></div>
+        </div>
+        <?php
+    endforeach;
+    ?>
+    <?php
+    foreach ($week_price as $week):
+        $interval = 0;
+        if ($week->end >= $week->start) {
+            $interval = ($week->end - $week->start);
+            $interval = ceil($interval);
+        } else if ($week->end == "") {
+            $interval = ceil($week->start);
+        }
+        ?>
+        <div class='price-type'>
+            <div class='col-lg-10'><?php echo $interval; ?> Week </div>
+            <div class='col-lg-2'>€ <?php echo $week->price; ?></div>
+        </div>
+        <?php
+    endforeach;
+    ?>
+    <?php
+    foreach ($month_price as $month):
+        $interval = 0;
+        if ($month->end >= $month->start) {
+            $interval = ($month->end - $month->start);
+            $interval = ceil($interval);
+        } else if ($month->end == "") {
+            $interval = ceil($month->start);
+        }
+        ?>
+        <div class='price-type'>
+            <div class='col-lg-10'><?php echo $interval; ?> Month </div>
+            <div class='col-lg-2'>€ <?php echo $month->price; ?></div>
+        </div>
+        <?php
+    endforeach;
+    ?>
 
-    <div class='price-type'>
-        <div class='col-lg-10'>1 Hour </div>
-        <div class='col-lg-2'>€ 6</div>
-    </div>
-    <div class='price-type'>
-        <div class='col-lg-10'> 2 Hours (per Hour)</div>
-        <div class='col-lg-2'>€ 6</div>
-    </div>
-    <div class='price-type'>
-        <div class='col-lg-10'>4 Hours (per Hour) </div>
-        <div class='col-lg-2'>€ 6</div>
-    </div>
     <div class='clear'></div>
     <?php
     $priceCalF = new PriceCalculation();
