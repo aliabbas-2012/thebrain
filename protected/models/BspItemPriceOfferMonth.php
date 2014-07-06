@@ -29,6 +29,13 @@ class BspItemPriceOfferMonth extends BspItemPriceOffer {
     }
 
     /**
+     * @return string the associated database table name
+     */
+    public function tableName() {
+        return 'bsp_item_price_offer_month';
+    }
+
+    /**
      * 
      * @set period type
      */

@@ -24,7 +24,7 @@ class BspItemPriceOfferDay extends DTActiveRecord {
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'bsp_item_price_offer';
+        return 'bsp_item_price_offer_day';
     }
 
     /**

@@ -494,8 +494,23 @@ $baseUrl = Yii::app()->theme->baseUrl;
                 "FROM bsp_comment " .
                 "UNION ALL " .
                 "SELECT " .
-                "IFNULL(SUM(bsp_item_price_offer.price),0) as  total_items,'Total Price' as label " .
-                "FROM bsp_item_price_offer " .
+                "IFNULL(SUM(bsp_item_price_offer_hours.price),0) as  total_items,'Total Price' as label " .
+                "FROM bsp_item_price_offer_hours " .
+                ") " .
+                "UNION ALL " .
+                "SELECT " .
+                "IFNULL(SUM(bsp_item_price_offer_day.price),0) as  total_items,'Total Price' as label " .
+                "FROM bsp_item_price_offer_day " .
+                ") " .
+                "UNION ALL " .
+                "SELECT " .
+                "IFNULL(SUM(bsp_item_price_offer_week.price),0) as  total_items,'Total Price' as label " .
+                "FROM bsp_item_price_offer_week " .
+                ") " .
+                "UNION ALL " .
+                "SELECT " .
+                "IFNULL(SUM(bsp_item_price_offer_month.price),0) as  total_items,'Total Price' as label " .
+                "FROM bsp_item_price_offer_month " .
                 ") " .
                 "item_data";
         $command = Yii::app()->db->createCommand($sql);
