@@ -165,6 +165,10 @@
                         <div class="space-blog"></div>
                         <span class="opening text-bold">
                             <?php echo Yii::t('detailOffer', 'To get started I will need from the buyer:'); ?> 
+                            <div class="clear"></div>
+                             <?php
+                                echo $model->seo_description;
+                            ?>
                         </span>
                     </div>
                 </div>
