@@ -435,8 +435,6 @@ class OffersController extends Controller {
         foreach ($periods as $label => $value) {
             $time .= $value . " " . $label . " ";
         }
-
-
         $prices = $item->getPerPriceOptions($item->per_price);
         $sum = 0;
 
