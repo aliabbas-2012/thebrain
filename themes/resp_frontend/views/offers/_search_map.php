@@ -87,7 +87,7 @@ $middle = CJSON::encode($middle);
             });
             circle.bindTo('center', middle_marker, 'position');
             bounds = circle.getBounds();
-            jQuery("#googleMap").hide();
+           // jQuery("#googleMap").hide();
 
             
         }
