@@ -1,5 +1,4 @@
 <?php
-
 $background = "";
 if ($model->background_image != "") {
     if (!$model->isNewRecord) {
@@ -59,7 +58,7 @@ if (Yii::app()->user->hasFlash('error')) {
                             "id" => "txtprice",
                             'placeholder' => Yii::t('postOffer', "Your Price?..."),
                             "pattern" => "\d{1,11}",
-                            "style"=>$model->per_price!=1?"display:none":""
+                            "style" => $model->per_price != 1 ? "display:none" : ""
                         ));
                         ?>
                     </div>
@@ -68,10 +67,10 @@ if (Yii::app()->user->hasFlash('error')) {
 
                     <div class="select-bg-img">
                         <span><a href="javascript:void(0)"><?php echo Yii::t('postOffer', 'Select your background image'); ?></a></span>
-<?php
-$uploadTemp = new UploadTemp();
-echo zHtml::activeFileField($uploadTemp, '[' . 1 . ']upload_temp_image');
-?>
+                        <?php
+                        $uploadTemp = new UploadTemp();
+                        echo zHtml::activeFileField($uploadTemp, '[' . 1 . ']upload_temp_image');
+                        ?>
                         <?php echo $form->hiddenField($model, 'background_image'); ?>
                     </div>
                 </div>
@@ -79,17 +78,17 @@ echo zHtml::activeFileField($uploadTemp, '[' . 1 . ']upload_temp_image');
                     <div class="col-lg-2">
                         <div>
                             <p>
-<?php
-$avatar = "";
-if ($user->avatar != "" && $model->hasErrors()) {
-    echo CHtml::image(Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/ChangeUser/Users_avatar/" . $user->avatar, '', array("class" => "over-post-avata"));
-} else if (!empty($user->avatar)) {
-    $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, '', array("class" => "over-post-avata"));
-} else {
-    $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', '', array("class" => "over-post-avata"));
-}
-echo $avatar;
-?>
+                                <?php
+                                $avatar = "";
+                                if ($user->avatar != "" && $model->hasErrors()) {
+                                    echo CHtml::image(Yii::app()->baseUrl . "/uploads/temp/" . Yii::app()->user->id . "/ChangeUser/Users_avatar/" . $user->avatar, '', array("class" => "over-post-avata"));
+                                } else if (!empty($user->avatar)) {
+                                    $avatar = CHtml::image(Yii::app()->baseUrl . '/uploads/Users/' . $user->id . '/avatar/' . $user->avatar, '', array("class" => "over-post-avata"));
+                                } else {
+                                    $avatar = CHtml::image(Yii::app()->theme->baseUrl . '/images/noavatar.jpg', '', array("class" => "over-post-avata"));
+                                }
+                                echo $avatar;
+                                ?>
 
                             </p> 
                         </div>
@@ -97,10 +96,10 @@ echo $avatar;
                     <div class="col-lg-10">
                         <div class="select-avatar-img">
                             <span><a href="javascript:void(0)"><?php echo Yii::t('postOffer', 'Select your avatar'); ?></a></span>
-<?php
-$uploadTemp = new UploadTemp();
-echo zHtml::activeFileField($uploadTemp, '[' . 2 . ']upload_temp_image');
-?>
+                            <?php
+                            $uploadTemp = new UploadTemp();
+                            echo zHtml::activeFileField($uploadTemp, '[' . 2 . ']upload_temp_image');
+                            ?>
                             <?php echo $form->hiddenField($user, 'avatar'); ?>
                         </div>
                     </div>

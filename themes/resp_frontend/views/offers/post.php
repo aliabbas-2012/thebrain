@@ -453,6 +453,8 @@ echo $this->createUrl("/web/offers/addpartial");
                            //WITH DAY IS HOUR AND DAY
                            //WITH WEEK IS HOUR , DAY , WEEK
                            // WITH MONTH IS HOUR , DAY, WEEK AND MONTH
+                           
+                           jQuery("#BspItemFrontEnd_discount_price").trigger("keyup")
 
                            jQuery("#BspItemFrontEnd_per_price").change(function() {
                                elem_id = jQuery(this).val();
