@@ -116,7 +116,7 @@ class OffersController extends Controller {
             $model->attributes = $_GET['OfferSearch'];
             if (!empty($model->keyword)) {
                 $criteria->compare("name", $model->keyword, true, "OR");
-                
+
                 $criteria->compare("t.id", $model->keyword, true);
 
 
@@ -135,7 +135,7 @@ class OffersController extends Controller {
                 $criteria->addCondition("t.discount_price IS NOT NULL AND t.discount_price !=''");
                 $order_by[] = "t.discount_price DESC";
             }
-            $criteria->compare("iStatus",1);
+            $criteria->compare("iStatus", 1);
             $with = array();
 
             if ($model->withVideo == 1) {
@@ -222,11 +222,11 @@ class OffersController extends Controller {
         }
 
 
-        $criteria->compare("deleted",0,false);
-        $criteria->compare("admin_status",1,false);
-        $criteria->compare("language_id",Yii::app()->language,false);
-       // CVarDumper::dump($criteria,10,true);
-       // $criteria->params = array("deleted" => 0);
+        $criteria->compare("deleted", 0, false);
+        $criteria->compare("admin_status", 1, false);
+        $criteria->compare("language_id", Yii::app()->language, false);
+        // CVarDumper::dump($criteria,10,true);
+        // $criteria->params = array("deleted" => 0);
 
 
         $dataProvider = new CActiveDataProvider('BspItem', array(
@@ -274,12 +274,12 @@ class OffersController extends Controller {
      * @param type $id
      */
     public function actionDeleteOffer($id) {
-        
+
         $criteria = new CDbCriteria();
         $criteria->addCondition("user_id =:user_id AND language_id = :language_id");
         $criteria->params = array("user_id" => Yii::app()->user->id, "language_id" => Yii::app()->language);
 
-        BspItem::model()->deleteByPk($id,$criteria);
+        BspItem::model()->deleteByPk($id, $criteria);
         Yii::app()->user->setFlash("offer-status", 'You have deleted offer');
         $this->redirect($this->createUrl("/web/userdata/myoffers"));
     }
@@ -320,94 +320,101 @@ class OffersController extends Controller {
             $criteria->addCondition("deleted = :deleted AND user_id =:user_id AND language_id = :language_id");
             $criteria->params = array("deleted" => 0, "user_id" => Yii::app()->user->id, "language_id" => Yii::app()->language);
 
-            $model = BspItemFrontEnd::model()->findByPk($id, $criteria);
-            $model->saveViewerForLog();
-            //setting one if the present its images;
-            if ($model->num_image_items > 0) {
-                $model->_offer_images = 1;
+            if ($model = BspItemFrontEnd::model()->findByPk($id, $criteria)) {
+
+                $model->saveViewerForLog();
+                //setting one if the present its images;
+                if ($model->num_image_items > 0) {
+                    $model->_offer_images = 1;
+                }
+                
             }
-            if (empty($model)) {
+            else {
                 throw new CHttpException(404, 'The specified post cannot be found.');
-            }
-        }
-
-        if (isset($_POST['BspItemFrontEnd']) && isset($_POST['ChangeUser'])) {
-            $model->attributes = $_POST['BspItemFrontEnd'];
-            $user->attributes = $_POST['ChangeUser'];
-            $model->language_id = Yii::app()->language;
-
-
-            //set user avatar 
-
-            $this->checkCilds($model);
-            $isvalid = 1;
-
-            if ($this->setOfferImage($model)) {
-                
+                return true;
             }
 
-            if ($this->setOfferVideos($model)) {
-                
-            }
+            if (isset($_POST['BspItemFrontEnd']) && isset($_POST['ChangeUser'])) {
+                $model->attributes = $_POST['BspItemFrontEnd'];
+                $user->attributes = $_POST['ChangeUser'];
+                $model->language_id = Yii::app()->language;
 
-            if (!$model->validate()) {
-                $isvalid = 0;
-            }
-            if ($is_user_update == true && !$user->validate()) {
-                $isvalid = 0;
-            }
 
-            if ($isvalid == 1) {
-                if ($model->discount_price > 0) {
-                    $model->is_public = 0;
-                    $model->iStatus = 0;
+                //set user avatar 
+
+                $this->checkCilds($model);
+                $isvalid = 1;
+
+                if ($this->setOfferImage($model)) {
+                    
                 }
-                //because its on discount admin dont wants this offer should be free 
-                if ($model->discount_price > 0) {
-                    $model->deleted = 1;
+
+                if ($this->setOfferVideos($model)) {
+                    
                 }
-                if ($model->save()) {
-                    //incase of !empty password then the login 
-                    if (!empty($user->password_new)) {
 
-                        $user->password = md5($user->password_new);
-                    } else {
-                        unset($user->password);
-                    }
-                    if ($is_user_update == true) {
-                        $user->save(false);
-                    }
-                    foreach ($model->image_items as $modelImg) {
-                        $modelImg->item_id = $model->id;
+                if (!$model->validate()) {
+                    $isvalid = 0;
+                }
+                if ($is_user_update == true && !$user->validate()) {
+                    $isvalid = 0;
+                }
 
-                        $modelImg->save();
-                        //CVarDumper::dump($modelImg->getErrors(), 10, true);
-                        //CVarDumper::dump($modelImg->attributes, 10, true);
-                    }
-
-                    foreach ($model->item_video_front as $modelVid) {
-                        $modelVid->item_id = $model->id;
-
-                        $modelVid->save();
-                    }
-
-                    $item = BspItem::model()->findByPk($model->id);
+                if ($isvalid == 1) {
                     if ($model->discount_price > 0) {
+                        $model->is_public = 0;
+                        $model->iStatus = 0;
+                    }
+                    //because its on discount admin dont wants this offer should be free 
+                    if ($model->discount_price > 0) {
+                        $model->deleted = 1;
+                    }
+                    if ($model->save()) {
+                        //incase of !empty password then the login 
+                        if (!empty($user->password_new)) {
 
-                        $url = PaymentPaypallAdaptive::model()->payDirectToPuzzle($item->id);
+                            $user->password = md5($user->password_new);
+                        } else {
+                            unset($user->password);
+                        }
+                        if ($is_user_update == true) {
+                            $user->save(false);
+                        }
+                        foreach ($model->image_items as $modelImg) {
+                            $modelImg->item_id = $model->id;
 
-                        $this->redirect($url);
-                    } else {
-                        $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
+                            $modelImg->save();
+                            //CVarDumper::dump($modelImg->getErrors(), 10, true);
+                            //CVarDumper::dump($modelImg->attributes, 10, true);
+                        }
+
+                        foreach ($model->item_video_front as $modelVid) {
+                            $modelVid->item_id = $model->id;
+
+                            $modelVid->save();
+                        }
+
+                        $item = BspItem::model()->findByPk($model->id);
+                        if ($model->discount_price > 0 && $action == "create") {
+
+                            $url = PaymentPaypallAdaptive::model()->payDirectToPuzzle($item->id);
+
+                            $this->redirect($url);
+                        } else {
+                            $this->redirect($this->createUrl("/web/offers/detail", array("slug" => $item->slug)));
+                        }
                     }
                 }
             }
-        }
 
-        $this->render("//offers/post", array(
-            "model" => $model,
-            "payPAllSetting" => $payPAllSetting,
-            "user" => $user, "is_user_update" => $is_user_update));
+            $this->render("//offers/post", array(
+                "model" => $model,
+                "payPAllSetting" => $payPAllSetting,
+                "user" => $user, "is_user_update" => $is_user_update));
+        }
+        else {
+             throw new CHttpException(404, 'The requested page does not exist.');
+        }
     }
 
     /**
@@ -418,8 +425,9 @@ class OffersController extends Controller {
         if (isset($_POST['PriceCalculation'])) {
             $model->attributes = $_POST['PriceCalculation'];
         }
+        
         $item = BspItem::model()->findByPk($model->item_id);
-
+        
         $periodmain = BspItem::getPeriod($item->per_price);
 
         $periods = $model->time_since($model->start_date . ' ' . $model->start_time, true, $model->end_date . ' ' . $model->end_time, $periodmain);
@@ -429,7 +437,7 @@ class OffersController extends Controller {
         }
 
 
-        $prices = $item->offerPrices;
+        $prices = $item->getPerPriceOptions($item->per_price);
         $sum = 0;
 
         foreach ($prices as $price) {

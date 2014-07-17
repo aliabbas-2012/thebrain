@@ -455,6 +455,32 @@ class BspItem extends DTActiveRecord {
         }
         return $period;
     }
+    /**
+     * It will need on on price calculation
+     * @param type $per_price
+     * @return type
+     */
+    public  function getPerPriceOptions($per_price) {
+        $price_opiton  = '';
+        switch ($per_price) {
+            case '1' :
+                $price_opiton = $this->item_price_offers_fix;
+                break;
+            case '2' :
+                 $price_opiton = $this->item_price_offers_hour;
+                break;
+            case '3' :
+                $price_opiton = $this->item_price_offers_day;
+                break;
+            case '4' :
+                 $price_opiton = $this->item_price_offers_week;
+                break;
+            case '5' :
+                 $price_opiton = $this->item_price_offers_month;
+                break;
+        }
+        return $price_opiton;
+    }
 
     /**
      * get all periods for some where
