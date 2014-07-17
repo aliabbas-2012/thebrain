@@ -319,20 +319,22 @@ class OffersController extends Controller {
             $criteria = new CDbCriteria();
             $criteria->addCondition("deleted = :deleted AND user_id =:user_id AND language_id = :language_id");
             $criteria->params = array("deleted" => 0, "user_id" => Yii::app()->user->id, "language_id" => Yii::app()->language);
-
+           
             if ($model = BspItemFrontEnd::model()->findByPk($id, $criteria)) {
 
-                $model->saveViewerForLog();
-                //setting one if the present its images;
-                if ($model->num_image_items > 0) {
-                    $model->_offer_images = 1;
-                }
                 
+                if (empty($model->id)) {
+                    throw new CHttpException(404, 'The specified post cannot be found.');
+                    return true;
+                } else {
+                    $model->saveViewerForLog();
+                    //setting one if the present its images;
+                    if ($model->num_image_items > 0) {
+                        $model->_offer_images = 1;
+                    }
+                }
             }
-            else {
-                throw new CHttpException(404, 'The specified post cannot be found.');
-                return true;
-            }
+
 
             if (isset($_POST['BspItemFrontEnd']) && isset($_POST['ChangeUser'])) {
                 $model->attributes = $_POST['BspItemFrontEnd'];
@@ -406,15 +408,11 @@ class OffersController extends Controller {
                     }
                 }
             }
-
-            $this->render("//offers/post", array(
-                "model" => $model,
-                "payPAllSetting" => $payPAllSetting,
-                "user" => $user, "is_user_update" => $is_user_update));
         }
-        else {
-             throw new CHttpException(404, 'The requested page does not exist.');
-        }
+        $this->render("//offers/post", array(
+            "model" => $model,
+            "payPAllSetting" => $payPAllSetting,
+            "user" => $user, "is_user_update" => $is_user_update));
     }
 
     /**
@@ -425,9 +423,9 @@ class OffersController extends Controller {
         if (isset($_POST['PriceCalculation'])) {
             $model->attributes = $_POST['PriceCalculation'];
         }
-        
+
         $item = BspItem::model()->findByPk($model->item_id);
-        
+
         $periodmain = BspItem::getPeriod($item->per_price);
 
         $periods = $model->time_since($model->start_date . ' ' . $model->start_time, true, $model->end_date . ' ' . $model->end_time, $periodmain);
