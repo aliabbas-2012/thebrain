@@ -112,6 +112,7 @@ class OffersController extends Controller {
         $model = new OfferSearch;
         $criteria = new CDbCriteria();
         $dataItem = array();
+
         if (isset($_GET['OfferSearch'])) {
             $model->attributes = $_GET['OfferSearch'];
             if (!empty($model->keyword)) {
@@ -176,6 +177,29 @@ class OffersController extends Controller {
 
             if ($model->lat != "" && $model->lng != "" && $model->distance != "") {
 
+                //curl call here 
+
+                $api_url = "http://zipcodedistanceapi.redline13.com/rest/";
+                $api_url.="7yZxTpGtWCFcsELjbfO1q0btvnjfIsqQ1qoUP5oMH3YaIKtTZhVpi6TOuc4dFu3G/radius-sql.json/";
+                $api_url.=$model->lat . "/" . $model->lng . "/degrees/" . $model->distance . "/km/lat/lng/1";
+
+                $ch = curl_init();
+
+                //set the url, number of POST vars, POST data
+                curl_setopt($ch, CURLOPT_URL, $api_url);
+
+
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                //execute post
+                $result = curl_exec($ch);
+
+                curl_close($ch);
+
+                // Decoding the Data recieved from Web service
+                $data = CJSON::decode($result, true);
+
+
 
                 //$model->lat = 43;
                 //$model->lng = 64;
@@ -204,9 +228,14 @@ class OffersController extends Controller {
         )
         ))) as distance ';
 
-                $criteria->select = '*,' . $select;
-                $criteria->having = $condition;
-                $order_by [] = ' distance ASC';
+
+
+                $criteria->select = '*';
+                if (isset($data['where_clause'])) {
+                    $criteria->addCondition($data['where_clause']);
+                }
+
+                //$order_by [] = ' distance ASC';
                 $criteria->addCondition("lat IS NOT NULL AND lng IS NOT NULL ");
             }
         }
@@ -227,8 +256,9 @@ class OffersController extends Controller {
         $criteria->compare("language_id", Yii::app()->language, false);
         // CVarDumper::dump($criteria,10,true);
         // $criteria->params = array("deleted" => 0);
-
-
+        //CVarDumper::dump($criteria, 10, true);
+        //CVarDumper::dump($_GET['OfferSearch'], 10, true);
+        //die;
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 1000)
@@ -319,10 +349,10 @@ class OffersController extends Controller {
             $criteria = new CDbCriteria();
             $criteria->addCondition("deleted = :deleted AND user_id =:user_id AND language_id = :language_id");
             $criteria->params = array("deleted" => 0, "user_id" => Yii::app()->user->id, "language_id" => Yii::app()->language);
-           
+
             if ($model = BspItemFrontEnd::model()->findByPk($id, $criteria)) {
 
-                
+
                 if (empty($model->id)) {
                     throw new CHttpException(404, 'The specified post cannot be found.');
                     return true;

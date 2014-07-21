@@ -264,7 +264,7 @@
                                     <ul class="dropdown-menu category_head_menu">
                                         <?php
                                         //for language translation
-                                        $cat_var = Yii::app()->language == "en"?"name":"name_de";
+                                        $cat_var = Yii::app()->language == "en" ? "name" : "name_de";
                                         $data = BspCategory::model()->findAll(array('condition' => 'parent_id=0'));
                                         $i = 1;
                                         foreach ($data as $da) {
@@ -500,65 +500,27 @@
         <script src="<?php echo Yii::app()->theme->baseUrl ?>/dist/js/thepuzzleadmin.js"></script>
 
 
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
         <script>
                                             // This example adds a search box to a map, using the Google Place Autocomplete
                                             // feature. People can enter geographical searches. The search box will return a
                                             // pick list containing a mix of places and predicted search terms.
 
                                             function initialize() {
-
-                                                var markers = [];
-                                                var map = new google.maps.Map(document.getElementById('map-canvas'), {
-                                                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                                                });
-                                                //                // Create the search box and link it to the UI element.
-                                                var input = /** @type {HTMLInputElement} */(
-                                                        document.getElementById('OfferSearch_location'));
-                                                map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-                                                var searchBox = new google.maps.places.SearchBox(
-                                                        /** @type {HTMLInputElement} */(input));
-
-
-
-
-                                                // [START region_getplaces]
-                                                // Listen for the event fired when the user selects an item from the
-                                                // pick list. Retrieve the matching places for that item.
-                                                google.maps.event.addListener(searchBox, 'places_changed', function() {
-                                                    var places = searchBox.getPlaces();
-
-                                                    if (typeof(places[0].geometry.location.nb) != "undefined") {
-                                                        jQuery("#OfferSearch_lat").val(places[0].geometry.location.nb);
-                                                    }
-                                                    if (typeof(places[0].geometry.location.ob) != "undefined") {
-                                                        jQuery("#OfferSearch_lng").val(places[0].geometry.location.ob);
-                                                    }
-
-                                                    //settting changed
-                                                    if (typeof(places[0].geometry.location.A) != "undefined") {
-                                                        jQuery("#OfferSearch_lat").val(places[0].geometry.location.A);
-                                                    }
-                                                    if (typeof(places[0].geometry.location.k) != "undefined") {
-                                                        jQuery("#OfferSearch_lng").val(places[0].geometry.location.k);
-                                                    }
-
-                                                    if (typeof(places[0].geometry.location.d) != "undefined") {
-                                                        jQuery("#OfferSearch_lat").val(places[0].geometry.location.d);
-                                                    }
-                                                    if (typeof(places[0].geometry.location.e) != "undefined") {
-                                                        jQuery("#OfferSearch_lng").val(places[0].geometry.location.e);
-                                                    }
-
-
+                                                var input = document.getElementById('OfferSearch_location');
+                                                var autocomplete = new google.maps.places.Autocomplete(input);
+                                                google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                                                    var place = autocomplete.getPlace();
+                                                   
+                                                    document.getElementById('OfferSearch_location').value = place.name;
+                                                    jQuery("#OfferSearch_lat").val(place.geometry.location.lat());
+                                                    jQuery("#OfferSearch_lng").val(place.geometry.location.lng());
 
 
                                                 });
-                                                // [END region_getplaces]
-
-                                                // Bias the SearchBox results towards places that are within the bounds of the
-
                                             }
+
+
                                             if (typeof(google) != "undefined") {
                                                 google.maps.event.addDomListener(window, 'load', initialize);
                                             }
