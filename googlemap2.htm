@@ -129,7 +129,7 @@
                                                 }
                                             },
                                             updateOnSearch: function() {
-                                                // clearMap();
+                                                // g_map_search.clearMap();
                                                 geoSearchMap.clearOverlays();
 
                                                 var apiKey = "";
@@ -160,7 +160,7 @@
                                                                 var MarkerPoint = point;
 
                                                                 //Modified below to remove center point icon, RP, 08/16/10
-                                                                geoSearchMap.addOverlay(createMarkers(MarkerPoint, html, 0, '0'));
+                                                                geoSearchMap.addOverlay(g_map_search.createMarkers(MarkerPoint, html, 0, '0'));
                                                                 MarkerBounds.extend(MarkerPoint);
 
                                                                 g_map_search.doDrawCircle();
@@ -291,71 +291,73 @@
                                                 var area = poly.getArea() / (1000 * 1000);
                                                 geoSearchMap.addOverlay(poly);
 
+                                            },
+                                            clearMap: function()
+                                            {
+                                                geoSearchMap.clearOverlays();
+                                                points.length = 0;
+                                                markers.length = 0;
+                                                count = 0;
+                                                g_map_search.newOverlay();
+                                            },
+                                            newOverlay: function()
+                                            {
+
+                                                var curZoomLevel = geoSearchMap.getZoom();
+                                                var curCoords = geoSearchMap.getCenter()
+                                                geoSearchMap = new GMap2(document.getElementById('geoSearchOver'));
+                                                GEvent.addListener(geoSearchMap, 'click', g_map_search.leftClick);
+                                                geoSearchMap.setCenter(curCoords, curZoomLevel);
+                                                geoSearchMap.addControl(new GLargeMapControl());
+                                                var mapControl = new GHierarchicalMapTypeControl();
+                                                geoSearchMap.addMapType(G_PHYSICAL_MAP);
+                                                mapControl.clearRelationships();
+                                                mapControl.addRelationship(G_SATELLITE_MAP, G_HYBRID_MAP, 'Labels', true);
+                                                geoSearchMap.addControl(mapControl);
+                                                geoSearchMap.addControl(new GOverviewMapControl());
+                                                geoSearchMap.enableDoubleClickZoom();
+                                                geoSearchMap.setMapType(G_NORMAL_MAP);
+                                                //geoSearchMap.enableScrollWheelZoom();
+
+                                            },
+                                            createMarkers: function(point, html, mycount, mymember)
+                                            {
+                                                var icon = new GIcon();
+                                                if (mycount == 0)
+                                                {
+                                                    // centre point
+                                                    icon.image = 'http://chart.apis.google.com/chart?chst=d_map_pin_icon_withshadow&chld=home|FFFF00';
+                                                }
+                                                else
+                                                {
+                                                    myletter = String.fromCharCode(64 + mycount);
+                                                    if (mymember == '1')
+                                                    {
+                                                        // member
+                                                        icon.image = 'http://chart.apis.google.com/chart?chst=d_map_xpin_letter_withshadow&chld=pin_star|' + myletter + '|daeafb|000000|FFFF00';
+                                                    }
+                                                    else
+                                                    {
+                                                        // non-member
+                                                        icon.image = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter_withshadow&chld= ' + myletter + '|daeafb|000000';
+                                                    }
+                                                }
+                                                // icon.iconSize = new GSize( 20, 34 );
+                                                icon.iconAnchor = new GPoint(10, 30);
+                                                icon.infoWindowAnchor = new GPoint(19, 5);
+                                                var marker = new GMarker(point, icon);
+                                                GEvent.addListener(marker, 'click', function() {
+                                                    marker.openInfoWindowHtml('<div class="centrez2CatOverBubble">' + html + '</div>');
+                                                });
+                                                return marker;
                                             }
                                         }
                                         jQuery(document).ready(g_map_search.loadgeoSearchMap);
 
 
-                                        function clearMap()
-                                        {
-                                            geoSearchMap.clearOverlays();
-                                            points.length = 0;
-                                            markers.length = 0;
-                                            count = 0;
-                                            newOverlay();
 
-                                        }
-                                        function newOverlay()
-                                        {
 
-                                            var curZoomLevel = geoSearchMap.getZoom();
-                                            var curCoords = geoSearchMap.getCenter()
-                                            geoSearchMap = new GMap2(document.getElementById('geoSearchOver'));
-                                            GEvent.addListener(geoSearchMap, 'click', g_map_search.leftClick);
-                                            geoSearchMap.setCenter(curCoords, curZoomLevel);
-                                            geoSearchMap.addControl(new GLargeMapControl());
-                                            var mapControl = new GHierarchicalMapTypeControl();
-                                            geoSearchMap.addMapType(G_PHYSICAL_MAP);
-                                            mapControl.clearRelationships();
-                                            mapControl.addRelationship(G_SATELLITE_MAP, G_HYBRID_MAP, 'Labels', true);
-                                            geoSearchMap.addControl(mapControl);
-                                            geoSearchMap.addControl(new GOverviewMapControl());
-                                            geoSearchMap.enableDoubleClickZoom();
-                                            geoSearchMap.setMapType(G_NORMAL_MAP);
-                                            //geoSearchMap.enableScrollWheelZoom();
 
-                                        }
-                                        function createMarkers(point, html, mycount, mymember)
-                                        {
-                                            var icon = new GIcon();
-                                            if (mycount == 0)
-                                            {
-                                                // centre point
-                                                icon.image = 'http://chart.apis.google.com/chart?chst=d_map_pin_icon_withshadow&chld=home|FFFF00';
-                                            }
-                                            else
-                                            {
-                                                myletter = String.fromCharCode(64 + mycount);
-                                                if (mymember == '1')
-                                                {
-                                                    // member
-                                                    icon.image = 'http://chart.apis.google.com/chart?chst=d_map_xpin_letter_withshadow&chld=pin_star|' + myletter + '|daeafb|000000|FFFF00';
-                                                }
-                                                else
-                                                {
-                                                    // non-member
-                                                    icon.image = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter_withshadow&chld= ' + myletter + '|daeafb|000000';
-                                                }
-                                            }
-                                            // icon.iconSize = new GSize( 20, 34 );
-                                            icon.iconAnchor = new GPoint(10, 30);
-                                            icon.infoWindowAnchor = new GPoint(19, 5);
-                                            var marker = new GMarker(point, icon);
-                                            GEvent.addListener(marker, 'click', function() {
-                                                marker.openInfoWindowHtml('<div class="centrez2CatOverBubble">' + html + '</div>');
-                                            });
-                                            return marker;
-                                        }
 
 
 //]]>
