@@ -176,8 +176,8 @@ class OffersController extends Controller {
                 $order_by[] = "t.price DESC";
             }
 
-            $model->lat = 33.7133348;
-            $model->lng = 73.0619261;
+//            $model->lat = 33.7133348;
+//            $model->lng = 73.0619261;
 
             if ($model->lat != "" && $model->lng != "" && $model->distance != "") {
                 $range = $model->distance == "all" ? 5000 : $model->distance;
