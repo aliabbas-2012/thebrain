@@ -108,7 +108,7 @@ class OffersController extends Controller {
     /**
      * search page
      */
-    public function actionSearch() {
+    public function actionSearch($iframe = 0) {
         $model = new OfferSearch;
         $criteria = new CDbCriteria();
         $dataItem = array();
@@ -127,6 +127,7 @@ class OffersController extends Controller {
                 $criteria->compare("seo_title", $model->keyword, true, "OR");
             }
             $order_by = array();
+
 //            $criteria->compare("lat", $model->lat);
 //            $criteria->compare("lng", $model->lng);
             //new attribute
@@ -175,64 +176,35 @@ class OffersController extends Controller {
                 $order_by[] = "t.price DESC";
             }
 
+            $model->lat = 33.7133348;
+            $model->lng = 73.0619261;
+
             if ($model->lat != "" && $model->lng != "" && $model->distance != "") {
+                $range = $model->distance == "all" ? 5000 : $model->distance;
 
-                //curl call here 
+                $lat_range = $range / 69.172;
+                $lon_range = abs($range / (cos($model->lng) * 69.172));
 
-                $api_url = "http://zipcodedistanceapi.redline13.com/rest/";
-                $api_url.="7yZxTpGtWCFcsELjbfO1q0btvnjfIsqQ1qoUP5oMH3YaIKtTZhVpi6TOuc4dFu3G/radius-sql.json/";
-                $api_url.=$model->lat . "/" . $model->lng . "/degrees/" . $model->distance . "/km/lat/lng/1";
+                $min_lat = number_format($model->lat - $lat_range, "4", ".", "");
+                $max_lat = number_format($model->lat + $lat_range, "4", ".", "");
+                $min_lon = number_format($model->lng - $lon_range, "4", ".", "");
+                $max_lon = number_format($model->lng + $lon_range, "4", ".", "");
 
-                $ch = curl_init();
-
-                //set the url, number of POST vars, POST data
-                curl_setopt($ch, CURLOPT_URL, $api_url);
-
-
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-                //execute post
-                $result = curl_exec($ch);
-
-                curl_close($ch);
-
-                // Decoding the Data recieved from Web service
-                $data = CJSON::decode($result, true);
+                $query = "SELECT id FROM bsp_item  WHERE " .
+                        "(lat >= '" . $min_lat . "' AND  lat<= '" . $max_lat . "' ) AND  " .
+                        "(lng >= '" . $min_lon . "' AND lng <= '" . $max_lon . "' ) ";
 
 
+                $command = Yii::app()->db->createCommand($query);
+                $items = $command->queryAll();
 
-                //$model->lat = 43;
-                //$model->lng = 64;
-                $condition = ' distance  <=  ' . ($model->distance) * 1000;
-                if ($model->distance == "all") {
-                    $condition = "";
-                }
-                $select = '((6372.797 * (2 *
-        ATAN2(
-            SQRT(
-                SIN((' . ($model->lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) *
-                SIN((' . ($model->lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) +
-                COS(lat * (PI()/180)) *
-                COS(' . ($model->lat * 1) . ' * (PI()/180)) *
-                SIN((' . ($model->lng * 1) . ' * (PI()/180)-lng*(PI()/180))/2) *
-                SIN((' . ($model->lng * 1) . ' * (PI()/180)-lng*(PI()/180))/2)
-                ),
-            SQRT(1-(
-                SIN((' . ($model->lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) *
-                SIN((' . ($model->lat * 1) . ' * (PI()/180)-lat*(PI()/180))/2) +
-                COS(lat * (PI()/180)) *
-                COS(' . ($model->lat * 1) . ' * (PI()/180)) *
-                SIN((' . ($model->lng * 1) . ' * (PI()/180)-lng*(PI()/180))/2) *
-                SIN((' . ($model->lng * 1) . ' * (PI()/180)-lng*(PI()/180))/2)
-            ))
-        )
-        ))) as distance ';
 
 
 
                 $criteria->select = '*';
-                if (isset($data['where_clause'])) {
-                    $criteria->addCondition($data['where_clause']);
+                if (!empty($items)) {
+                    $items = CHtml::listData($items, "id", "id");
+                    $criteria->addInCondition("id", $items);
                 }
 
                 //$order_by [] = ' distance ASC';
@@ -254,30 +226,43 @@ class OffersController extends Controller {
         $criteria->compare("deleted", 0, false);
         $criteria->compare("admin_status", 1, false);
         $criteria->compare("language_id", Yii::app()->language, false);
-        // CVarDumper::dump($criteria,10,true);
+
         // $criteria->params = array("deleted" => 0);
         //CVarDumper::dump($criteria, 10, true);
         //CVarDumper::dump($_GET['OfferSearch'], 10, true);
-        //die;
+
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 1000)
         ));
 
+
         if (isset($_GET['ajax'])) {
-            $this->renderPartial("//offers/_search_result", array(
+            $data = array(
                 "cat_arr" => array("0" => "", 1 => ""),
                 "dataProvider" => $dataProvider,
                 "radius" => $model->distance,
                 "dataItem" => $dataItem,
-            ));
+                "search_model" => $model,
+            );
+            if ($iframe == 1) {
+                $this->renderPartial("//offers/_search_map", $data);
+            } else {
+                $this->renderPartial("//offers/_search_result", $data);
+            }
         } else {
-            $this->render("//offers/search", array(
+            $data = array(
                 "cat_arr" => array("0" => "", 1 => ""),
                 "dataProvider" => $dataProvider,
                 "radius" => $model->distance,
                 "dataItem" => $dataItem,
-            ));
+                "search_model" => $model,
+            );
+            if ($iframe == 1) {
+                $this->renderPartial("//offers/_search_map", $data);
+            } else {
+                $this->render("//offers/search", $data);
+            }
         }
     }
 

@@ -82,7 +82,21 @@
                 <div id="grid_content" style="display: block">
                     <?php
                     if ($dataProvider->getTotalItemCount() > 0) {
-                        $this->renderPartial("//offers/_search_map", array("dataProvider" => $dataProvider, "radius" => $radius));
+                        ?>
+                        <div class="col-lg-12">
+                            <button  type="button" class="search-collaps btn btn-success btn-lg" onclick="jQuery('#iframe-container').toggle('slow');">
+                                <?php echo Yii::t('button', 'Map') ?>
+                            </button>
+                        </div>
+                        <div class="clear space-blog"></div>
+                        <div id="iframe-container">
+                            <?php
+                            $ifram_url = $this->createUrl('/web/offers/search/', array("iframe" => 1)) . "&" . $_SERVER['QUERY_STRING'];
+                            echo '<iframe src="' . $ifram_url . '" style="position: relative; 
+            height: 500px; width: 100%" scrolling="no" frameborder="0" /></iframe>';
+                            ?>
+                        </div>
+                        <?php
                     }
                     $this->renderPartial("//offers/_search_result", array("dataProvider" => $dataProvider));
                     ?>
@@ -227,3 +241,16 @@
 ', CClientScript::POS_END);
         ?>
     </div>
+
+    <style>
+
+        iframe {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>    

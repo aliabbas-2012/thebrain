@@ -154,6 +154,7 @@
                                                             {
                                                                 var lat = point.lat();
                                                                 var lng = point.lng();
+                                                                console.log(lat);
                                                                 searchLat = lat;
                                                                 searchLong = lng;
                                                                 var html = "Latitude: " + lat + "<br/>" + "Longitude: " + lng;
@@ -165,7 +166,7 @@
                                                                 geoSearchMap.addOverlay(g_map_search.createMarkers(MarkerPoint, html, 0, '0'));
                                                                 MarkerBounds.extend(MarkerPoint);
 
-                                                                g_map_search.doDrawCircle();
+                                                                //g_map_search.doDrawCircle();
                                                                 console.log(html);
                                                             }
                                                         });
@@ -209,6 +210,7 @@
                                                     points = circlePoints;
                                                     geoSearchMap.setZoom(geoSearchMap.getBoundsZoomLevel(bounds));
                                                 }
+                                                newSearch();
                                             },
                                             leftClick: function(overlay, point)
                                             {
@@ -352,9 +354,186 @@
                                                     marker.openInfoWindowHtml('<div class="centrez2CatOverBubble">' + html + '</div>');
                                                 });
                                                 return marker;
-                                            }
+                                            },
                                         }
                                         jQuery(document).ready(g_map_search.loadgeoSearchMap);
+
+
+                                        function newSearch()
+                                        {
+
+                                            var statusDiv = jQuery('#statusMsg');
+
+                                            statusDiv.html('Searching please wait...');
+
+                                            jQuery('#resultsDiv').hide("slow");
+
+                                            jQuery('#progressbar').show();
+
+                                            jQuery('#progressbar').progressbar({value: 10});
+
+                                            var url = '';
+
+                                            var category = jQuery('#categorySelector option:selected').val();
+
+                                            url = 'http://www.globaldialysis.com/index.php?option=com_geosearch&view=geosearch&format=raw&category=' + category;
+
+                                            var cid = category;
+
+                                            var html;
+
+                                            var mapids = '';
+
+                                            var statMsg;
+
+                                            var compLink;
+
+                                            var addressArray = new Array();
+
+                                            var coordsArray = new Array();
+
+                                            var jspoints = JSON.stringify(points);
+
+                                            var searchStreet = jQuery('#addyText').val();
+
+                                            var searchCity = jQuery('#cityText').val();
+
+                                            var searchState = jQuery('#stateText').val();
+
+                                            var searchZip = jQuery('#zipText').val();
+
+                                            var searchCountry = jQuery('#countryText').val();
+
+
+                                            jQuery.post(url, {dat: jspoints, mapLat: searchLat, mapLong: searchLong, street: searchStreet, city: searchCity, state: searchState, zip: searchZip, country: searchCountry}, function(data)
+                                            {
+
+                                                if (data.length > 0)
+                                                {
+
+                                                    statMsg = ' Your search has found the following  ' + data.length + '  closest centres. ';
+
+                                                    statusDiv.html(statMsg);
+
+                                                }
+
+                                                else
+
+                                                {
+
+                                                    statusMsg = 'No dialysis centres found in this area';
+
+                                                    statusDiv.html(statusMsg);
+
+                                                }
+
+                                                var progress = 50 / data.length;
+
+
+                                                jQuery.each(data, function(i, item)
+                                                {
+
+
+
+                                                    html = '';
+
+                                                    /*split item.data into 4 parts */
+
+                                                    addressArray = item.data.split(',');
+
+                                                    compLink = 'http://www.globaldialysis.com/index.php?option=com_centrez2&amp;centrez2Task=centrez2Details&amp;centrez2Id=' + item.itemid;
+
+
+
+                                                    html += '<div id=\"bubbleDiv\"><a href=\"' + compLink + '\">' + item.title + '</a><br/>';
+
+                                                    if (item.member == "1")
+                                                    {
+                                                        html += '<img src=\"' + icoFolder + item.icon + '\" class=\"geoSearchIcon\" alt=\"' + item.title + '\"/>';
+                                                    }
+
+                                                    html += '<br/>' + addressArray[0] + '<br/>' + addressArray[1] + ', ' + addressArray[2] + ' ' + addressArray[3] + '<br/>';
+
+
+                                                    //html2 = vCard(item.itemid, compLink, item.title, icoFolder, item.icon, item.title, addressArray, item.category, item.category_name);
+
+
+                                                    var MarkerBounds = new GLatLngBounds();
+
+                                                    /*split up the string of coords to be parsed into floats*/
+
+                                                    coordsArray = item.geom.split(',');
+
+                                                    /*parse the coords*/
+
+                                                    var MarkerPoint = new GLatLng(parseFloat(coordsArray[0]), parseFloat(coordsArray[1]));
+
+                                                    geoSearchMap.addOverlay(createMarkers(MarkerPoint, html, i + 1, item.member));
+
+                                                    MarkerBounds.extend(MarkerPoint);
+
+                                                    jQuery('#progressbar').progressbar({value: progress * (i + 1)});
+
+                                                });
+
+                                               
+
+                                                // Create a copy of the items and send them as a parameter
+                                                var myitems = encodeURIComponent(JSON.stringify(data));
+
+                                                jQuery('#progressbar').progressbar({value: 60});
+
+                                                // var uri = "index.php?option=com_centrez2&no_html=1&centrez2Task=geoSearchResults&centrez2Cid=" + cid + "&Centrez2CatSelected_0=" + cid + "&Centrez2SearchPage=" + searchPage + "&myitems=" + myitems;
+
+                                                var ajaxdata = "option=com_centrez2&no_html=1&centrez2Task=geoSearchResults&centrez2Cid=&Centrez2CatSelected_0=&Centrez2SearchPage=&myitems=" + myitems;
+                                                var uri = "http://www.globaldialysis.com/index.php";
+
+                                                // Get method doesn't work in ajax in IE7 if the url is longer than x characters
+                                                // jQuery(document).ajaxError(function(e, xhr, settings, exception) {
+                                                // 	jQuery('#statusMsg').html('<pre>'+settings.url+'</pre>');
+                                                // 	alert('error:' + xhr.statusText +'\nexception:'+exception+'\nready state:'+xhr.readyState+'\nstatus'+xhr.status);
+                                                // 	//alert('error in: ' + settings.url + ' \n'+'error:\n' + xhr.responseText );
+                                                // }); 
+
+                                                jQuery.ajax(
+                                                        {
+                                                            url: uri,
+                                                            type: 'POST',
+                                                            data: ajaxdata,
+                                                            success: function(data)
+                                                            {
+
+                                                                jQuery('#resultsDiv').html("");
+
+                                                                jQuery('#progressbar').progressbar({value: 75});
+
+                                                          jQuery('#resultsDiv').append(data);
+
+                                                                jQuery('#progressbar').progressbar({value: 90});
+
+                                                                //jQuery('#resultsDiv').show("slow");
+                                                                jQuery('#resultsDiv').show();
+
+                                                                jQuery('#progressbar').progressbar({value: 100});
+
+                                                                jQuery('#progressbar').hide();
+
+                                                            }
+
+                                                        });
+
+                                            }, "json");
+                                            
+                                             //test
+                                             var MarkerBounds = new GLatLngBounds();
+                                                var MarkerPoint1 = new GLatLng(parseFloat("34.17643738"), parseFloat("73.2278366089"));
+
+                                                geoSearchMap.addOverlay(g_map_search.createMarkers(MarkerPoint1, "test", 2, '0'));
+
+                                                MarkerBounds.extend(MarkerPoint1);
+
+                                        }
+
 
 
 
