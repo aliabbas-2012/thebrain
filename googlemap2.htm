@@ -146,6 +146,7 @@
                                                 geocoder.getLatLng(street + " " + zip + " " + city + " " + state + " " + country,
                                                         function(point)
                                                         {
+                                                            console.log(point);
                                                             if (!point)
                                                             {
                                                                 alert('Cannot get coordinates for this address, please enter a different address');

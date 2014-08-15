@@ -269,7 +269,7 @@ var g_map_search = {
         GEvent.addListener(marker, 'click', function() {
             marker.openInfoWindowHtml('<div class="centrez2CatOverBubble">' + html + '</div>');
         });
-        console.log(marker);
+        
         return marker;
     },
     relatedMarks: function()
@@ -277,7 +277,7 @@ var g_map_search = {
 
         jQuery.each(locations, function(i, item)
         {
-            console.log(item);
+            
             html = '';
 
             //html += '<div id=\"bubbleDiv\">' + item.name + '</div><br/>';

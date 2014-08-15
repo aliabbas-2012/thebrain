@@ -245,8 +245,9 @@ class OffersController extends Controller {
                 "dataItem" => $dataItem,
                 "search_model" => $model,
             );
+         
             if ($iframe == 1) {
-                $this->renderPartial("//offers/_search_map", $data);
+                $this->renderPartial("//offers/_search_iframe", $data);
             } else {
                 $this->renderPartial("//offers/_search_result", $data);
             }

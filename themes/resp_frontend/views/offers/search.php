@@ -91,14 +91,16 @@
                         <div class="clear space-blog"></div>
                         <div id="iframe-container">
                             <?php
-                            $ifram_url = $this->createUrl('/web/offers/search/', array("iframe" => 1)) . "&" . $_SERVER['QUERY_STRING'];
-                            echo '<iframe src="' . $ifram_url . '" style="position: relative; 
-            height: 500px; width: 100%" scrolling="no" frameborder="0" /></iframe>';
+                                //loading iframe
+                                $this->renderPartial("//offers/_search_iframe");
                             ?>
                         </div>
                         <?php
                     }
+                    echo "<div class='clear space-blog'></div>";
+                    echo "<div id='grid_sub_content'>";
                     $this->renderPartial("//offers/_search_result", array("dataProvider" => $dataProvider));
+                    echo "</div>";
                     ?>
                 </div>
 
@@ -153,21 +155,49 @@
                 else {
                     jQuery("#"+elem_target).removeAttr("value")
                 }
-                
+                //loading iframe
+                $.ajax({
+                    type: "GET",
+                    url: jQuery("#search-form").attr("action")+"?ajax=1&iframe=1",
+                    data: jQuery("#search-form").serialize(), 
+                        success: function(data)
+                        {
+                           jQuery("#iframe-container").html(data);
+                           jQuery("#loading").hide();
+                            
+                        }
+                  });
                  $.ajax({
                     type: "GET",
                     url: jQuery("#search-form").attr("action")+"?ajax=1",
                     data: jQuery("#search-form").serialize(), 
                         success: function(data)
                         {
-                           jQuery("#grid_content").html(data);
+                           jQuery("#grid_sub_content").html(data);
                            jQuery("#loading").hide();
                            jQuery(".total span").html(jQuery("#grid_content #recentOrder .review").length) 
                         }
                   });
         })
         jQuery(".tab-header a").click(function(){
-                jQuery("#loading").show();
+        
+                 jQuery("#loading").show();
+                 grp_id = jQuery(this).attr("category_id");
+                 jQuery(".tab-header a").removeClass("active");
+                 jQuery(this).addClass("active");
+                 $.ajax({
+                    type: "GET",
+                    url: jQuery("#search-form").attr("action")+"?ajax=1&&iframe=1&grp_id="+grp_id,
+                    data: jQuery("#search-form").serialize(), 
+                        success: function(data)
+                        {
+                           jQuery("#iframe-container").html(data);
+                           jQuery("#loading").hide();
+                           
+                        }
+                 });
+                  
+                 jQuery("#loading").show();
                  grp_id = jQuery(this).attr("category_id");
                  jQuery(".tab-header a").removeClass("active");
                  jQuery(this).addClass("active");
@@ -177,7 +207,7 @@
                     data: jQuery("#search-form").serialize(), 
                         success: function(data)
                         {
-                           jQuery("#grid_content").html(data);
+                           jQuery("#grid_sub_content").html(data);
                            jQuery("#loading").hide();
                            jQuery(".total span").html(jQuery("#grid_content #recentOrder .review").length) 
                         }
