@@ -49,7 +49,7 @@ class m140814_192821_updatesomeOffers extends DTDbMigration {
         }
 
 
-        $sql = "Select * FROM bsp_item WHERE language_id ='de' AND admin_status = 1 AND deleted = 0 LIMIT 4 ";
+        $sql = "Select * FROM bsp_item WHERE language_id ='de' AND admin_status = 1 AND deleted = 0 LIMIT 7 ";
         $data = $this->getQueryAll($sql);
         $i = 0;
 
