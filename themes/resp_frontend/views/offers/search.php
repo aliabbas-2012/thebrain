@@ -99,7 +99,7 @@
                     }
                     echo "<div class='clear space-blog'></div>";
                     echo "<div id='grid_sub_content'>";
-                    $this->renderPartial("//offers/_search_result", array("dataProvider" => $dataProvider));
+                    $this->renderPartial("//offers/_search_result", array("dataProvider" => $dataProvider,"search_model"=>$search_model));
                     echo "</div>";
                     ?>
                 </div>

@@ -118,13 +118,10 @@ class OffersController extends Controller {
             if (!empty($model->keyword)) {
                 $criteria->compare("name", $model->keyword, true, "OR");
 
-                $criteria->compare("t.id", $model->keyword, true);
-
-
+               
                 $criteria->compare("offer_number", $model->keyword, true, "OR");
                 $criteria->compare("description", $model->keyword, true, "OR");
-                $criteria->compare("seo_keywords", $model->keyword, true, "OR");
-                $criteria->compare("seo_title", $model->keyword, true, "OR");
+            
             }
             $order_by = array();
 
@@ -228,9 +225,9 @@ class OffersController extends Controller {
         $criteria->compare("language_id", Yii::app()->language, false);
 
         // $criteria->params = array("deleted" => 0);
-        //CVarDumper::dump($criteria, 10, true);
-        //CVarDumper::dump($_GET['OfferSearch'], 10, true);
-
+//        CVarDumper::dump($criteria, 10, true);
+//        //CVarDumper::dump($_GET['OfferSearch'], 10, true);
+//        die;
         $dataProvider = new CActiveDataProvider('BspItem', array(
             'criteria' => $criteria,
             'pagination' => array('pageSize' => 1000)
