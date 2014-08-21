@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 
+ * http://zcentric.com/2010/03/11/calculate-distance-in-mysql-with-latitude-and-longitude/
  */
 class OffersController extends Controller {
 
