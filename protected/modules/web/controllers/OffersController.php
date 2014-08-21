@@ -118,10 +118,9 @@ class OffersController extends Controller {
             if (!empty($model->keyword)) {
                 $criteria->compare("name", $model->keyword, true, "OR");
 
-               
+
                 $criteria->compare("offer_number", $model->keyword, true, "OR");
                 $criteria->compare("description", $model->keyword, true, "OR");
-            
             }
             $order_by = array();
 
@@ -177,8 +176,8 @@ class OffersController extends Controller {
 //            $model->lng = 73.0619261;
 
             if ($model->lat != "" && $model->lng != "" && $model->distance != "") {
-                $range = $model->distance == "all" ? 5000 : $model->distance;
-
+                 $range = $model->distance == "all" ? 5000 : $model->distance;
+                
                 $lat_range = $range / 69.172;
                 $lon_range = abs($range / (cos($model->lng) * 69.172));
 
@@ -186,18 +185,61 @@ class OffersController extends Controller {
                 $max_lat = number_format($model->lat + $lat_range, "4", ".", "");
                 $min_lon = number_format($model->lng - $lon_range, "4", ".", "");
                 $max_lon = number_format($model->lng + $lon_range, "4", ".", "");
-
+                //CVarDumper::dump($_GET['OfferSearch'], 10, true);
                 $query = "SELECT id FROM bsp_item  WHERE " .
                         "(lat >= '" . $min_lat . "' AND  lat<= '" . $max_lat . "' ) AND  " .
                         "(lng >= '" . $min_lon . "' AND lng <= '" . $max_lon . "' ) ";
 
+                $lat= $model->lat;
+                $lon= $model->lng;
+                $rad = $range;
+                $R = 6371;  // earth's mean radius, km
+                // first-cut bounding box (in degrees)
+                $maxLat = $lat + rad2deg($rad / $R);
+                $minLat = $lat - rad2deg($rad / $R);
+                // compensate for degrees longitude getting smaller with increasing latitude
+                $maxLon = $lon + rad2deg($rad / $R / cos(deg2rad($lat)));
+                $minLon = $lon - rad2deg($rad / $R / cos(deg2rad($lat)));
+                
+//                echo $maxLon;
+//                echo "<br/>";
+//                
+//                echo $minLon;
+//                echo "<br/>";
+                
 
-                $command = Yii::app()->db->createCommand($query);
+                $query = "Select id, lat, lng,
+                acos(sin(:lat)*sin(radians(lat)) + cos(:lat)*cos(radians(lat))*cos(radians(lng)-:lon)) * :R As D
+            From (
+                Select id, lat, lng
+                From bsp_item
+                Where lat Between :minLat And :maxLat
+                  And lng Between :minLon And :maxLon
+            ) As FirstCut
+            Where acos(sin(:lat)*sin(radians(Lat)) + cos(:lat)*cos(radians(Lat))*cos(radians(lng)-:lon)) * :R < :rad
+            Order by D";
+                $params = array(
+                    'lat' => deg2rad($lat),
+                    'lon' => deg2rad($lon),
+                    'minLat' => $minLat,
+                    'minLon' => $minLon,
+                    'maxLat' => $maxLat,
+                    'maxLon' => $maxLon,
+                    'rad' => $rad,
+                    'R' => $R,
+                );
+                
+                $qry = "SELECT id,name,((ACOS(SIN($lat * PI() / 180) * SIN(lat * PI() / 180) + COS($lat * PI() / 180) * COS(lat * PI() / 180) * COS(($lon - lng) * PI() / 180)) * 180 / PI()) * 60 * 1.1515) AS `distance` FROM `bsp_item` HAVING `distance`<=".$range." ORDER BY `distance` ASC";
+                
+                $command = Yii::app()->db->createCommand($qry);
+                foreach($params as $key=>$val){
+                    //$command->bindParam(":".$key,$val);
+                }    
+                
                 $items = $command->queryAll();
 
-
-
-
+      
+                
                 $criteria->select = '*';
                 if (!empty($items)) {
                     $items = CHtml::listData($items, "id", "id");
@@ -225,7 +267,7 @@ class OffersController extends Controller {
         $criteria->compare("language_id", Yii::app()->language, false);
 
         // $criteria->params = array("deleted" => 0);
-//        CVarDumper::dump($criteria, 10, true);
+//       CVarDumper::dump($criteria, 10, true);
 //        //CVarDumper::dump($_GET['OfferSearch'], 10, true);
 //        die;
         $dataProvider = new CActiveDataProvider('BspItem', array(
@@ -242,7 +284,7 @@ class OffersController extends Controller {
                 "dataItem" => $dataItem,
                 "search_model" => $model,
             );
-         
+
             if ($iframe == 1) {
                 $this->renderPartial("//offers/_search_iframe", $data);
             } else {

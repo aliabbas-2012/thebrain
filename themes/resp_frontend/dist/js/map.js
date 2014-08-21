@@ -23,6 +23,7 @@ var g_map_search = {
     searchLat: 0,
     searchLong: 0,
     loadgeoSearchMap: function() {
+
         if (GBrowserIsCompatible())
         {
             geoSearchMap = new GMap2(document.getElementById('googleMap'));
@@ -53,6 +54,7 @@ var g_map_search = {
     },
     updateOnSearch: function() {
         // g_map_search.clearMap();
+
         geoSearchMap.clearOverlays();
 
         var apiKey = "";
@@ -78,13 +80,13 @@ var g_map_search = {
                         geoSearchMap.setCenter(point, 15);
                         var MarkerBounds = new GLatLngBounds();
                         var MarkerPoint = point;
-
+                       
                         //Modified below to remove center point icon, RP, 08/16/10
                         geoSearchMap.addOverlay(g_map_search.createMarkers(MarkerPoint, html, 0, '0'));
                         MarkerBounds.extend(MarkerPoint);
 
                         g_map_search.doDrawCircle();
-                       
+
                     }
                 });
     },
@@ -126,7 +128,7 @@ var g_map_search = {
             points = circlePoints;
             geoSearchMap.setZoom(geoSearchMap.getBoundsZoomLevel(bounds));
         }
-       g_map_search.relatedMarks();
+        g_map_search.relatedMarks();
     },
     leftClick: function(overlay, point)
     {
@@ -269,28 +271,29 @@ var g_map_search = {
         GEvent.addListener(marker, 'click', function() {
             marker.openInfoWindowHtml('<div class="centrez2CatOverBubble">' + html + '</div>');
         });
-        
+
         return marker;
     },
     relatedMarks: function()
     {
-
+        m = 1
         jQuery.each(locations, function(i, item)
         {
-            
+
             html = '';
 
             //html += '<div id=\"bubbleDiv\">' + item.name + '</div><br/>';
-            html+= item.name + " (Latitude: " + item.lat + "<br/>" + "Longitude: " + item.lng + " )";
+            html += item.name + " (Latitude: " + item.lat + "<br/>" + "Longitude: " + item.lng + " )";
             var MarkerBounds = new GLatLngBounds();
 
-            
+
             /*parse the coords*/
 
             var MarkerPoint = new GLatLng(parseFloat(item.lat), parseFloat(item.lng));
-           
-            geoSearchMap.addOverlay(g_map_search.createMarkers(MarkerPoint, html, i + 1, '1'));
+            
+            geoSearchMap.addOverlay(g_map_search.createMarkers(MarkerPoint, html, m, '2'));
             MarkerBounds.extend(MarkerPoint);
+            m = m + 1;
 
         });
     }
